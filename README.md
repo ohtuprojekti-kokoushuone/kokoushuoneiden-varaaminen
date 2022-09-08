@@ -6,12 +6,13 @@ Sovelluksen avulla käyttäjä voi selata vapaita kokoushuoneita sekä varata ni
 
 ## Käyttöohje
 
-1. kloonaa repositio ja siirry sen juureen
-2. `git pull origin init`
-3. aja `DOCKER_BUILDKIT=1 docker build --tag node-docker .`
-4. `docker run -d --publish 3001:3001 node-docker`
-5. localhost:3001 pitäisi olla hello world
-6. pysäytä ajamalla `docker ps` , kopioi CONTAINER ID, aja `docker stop ***insert id***`
+1. kloonaa repositorio ja siirry mock-backend
+2. aja `npm start`, mock backend pyörii nyt portissa 3003
+3. siirry sample -hakemistoon
+4. aja `docker build -t sample:dev .`
+5. `docker run -it --name kokoushuone-app --rm -v ${PWD}:/app -v /app/node_modules -p 3000:3000 -e CHOKIDAR_USEPOLLING=true sample:dev`
+6. localhost:3000 pitäisi olla käynnissä, ja näkyä otsikko + nappi
+7. pysäytä painamalla CTRL + C
 
 ## Backlog
 
