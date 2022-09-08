@@ -5,7 +5,11 @@ const app = express();
 
 app.use(cors());
 
-const obj = [{ subject: "this is an event", start: "13:00", end: "14:00" }];
+const obj = [
+  { subject: "this is an event", start: "13:00", end: "14:00" },
+  { subject: "work hard", start: "10:00", end: "20:00" },
+];
+
 app.get("/testData", (req, res) => {
   res.json(obj);
 });
