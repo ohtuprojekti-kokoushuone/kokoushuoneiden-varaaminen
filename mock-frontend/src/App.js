@@ -1,6 +1,8 @@
 
 import React from 'react'
 import { useState, useEffect } from 'react'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
 
 import Huone from './components/Huone.js'
 import huoneService from './services/huoneet'
@@ -10,7 +12,8 @@ const App = () => {
 
   const [huoneet, setHuoneet] = useState([])
   const [showAll, setShowAll] = useState(true)
-
+  const [startDate, setStartDate] = useState(new Date());  
+  const [endDate, setEndDate] = useState(new Date());  
 
   useEffect(() => {
     huoneService
@@ -35,14 +38,53 @@ const App = () => {
 
   const huoneetToShow = showAll
     ? huoneet
-    : huoneet.filter(huone => huone.vapaa)
-
+    : huoneet.filter(huone => huone.vapaa) 
+    
 
   return (
+    
+    
     <div className="container">
-      <h1>Huoneiden varausjärjestelmä</h1>
+      <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand mb-0 h1">Huoneen varaus</a>
+      </nav>
+      <h5>Varauksen aihe</h5>
+      <form>
+        <label>
+          Varaus:
+          <input type="text" name="name" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    
+      <div class="row">
+        <div class="col">
+          <h5>Valitse alku</h5>
+          <DatePicker 
+            dateFormat="dd/MM/yyyy h:mm aa"
+            selected={startDate}  
+            onChange={(date) => setStartDate(date)} 
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            timeCaption="time"
+          />
+        </div>
+        <div class="col">
+          <h5>Valitse loppu</h5>
+          <DatePicker 
+            dateFormat="dd/MM/yyyy h:mm aa"
+            selected={endDate}  
+            onChange={(date) => setEndDate(date)} 
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            timeCaption="time"
+          />
+        </div>
+      </div>
       <div>
-        <button onClick={() => setShowAll(!showAll)}>
+        <button type="button" class="btn btn-outline-primary" onClick={() => setShowAll(!showAll)}>
           Näytä {showAll ? 'vapaat' : 'kaikki' }
         </button>
       </div> 
@@ -74,24 +116,7 @@ const App = () => {
       </Table> 
         
     </div>
+    
   )
 }
 export default App
-
-/*
-ilman taulukkoa oleva toteutus, tällöin pitää muokkaa Huone.js 
-<div className="container">
-      <h1>Huoneiden varausjärjestelmä</h1>
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          Näytä {showAll ? 'vapaat' : 'kaikki' }
-        </button>
-      </div>  
-        {huoneetToShow.map(huone =>
-          <Huone 
-            key={huone.id} 
-            huone={huone}
-            toggleReserved={() => toggleReservedRoom(huone.id)}/>
-          )}
-    </div>
-*/
