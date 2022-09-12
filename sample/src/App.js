@@ -18,7 +18,9 @@ function App() {
         {showReservations ? "piilota" : "näytä"}
       </button>
       {showReservations &&
-        reservations.map((r, i) => <h3 key={i}>{r.subject}</h3>)}
+        reservations.map((r, i) => <h3 key={i}>
+          {r.subject}, alku: {r.start}, loppu: {r.end}
+          </h3>)}
     </div>
   );
 }
