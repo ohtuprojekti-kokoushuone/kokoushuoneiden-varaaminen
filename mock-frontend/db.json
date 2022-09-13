@@ -1,0 +1,24 @@
+{
+  "huoneet": [
+    {
+      "id": "A114",
+      "koko": "12",
+      "vapaa": true
+    },
+    {
+      "id": "A144",
+      "koko": "10",
+      "vapaa": false
+    },
+    {
+      "id": "E123",
+      "koko": "5",
+      "vapaa": true
+    },
+    {
+      "id": "E200",
+      "koko": "8",
+      "vapaa": true
+    }
+  ]
+}
