@@ -1,23 +1,21 @@
 h1 {
-    padding-top: 15px;
-    padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 10px;
 }
 h5 {
-    padding-top: 15px;
-    padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 10px;
 }
 
-.huone {
-    padding-top: 15px;
-    font-size: 20px;
+.room {
+  padding-top: 15px;
+  font-size: 20px;
 }
 button {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    
-
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .col {
-    padding-top: 30px;
-    padding-bottom: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

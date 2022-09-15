@@ -1,42 +1,37 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { getRooms } from "./requests.js";
-import Huone from "./components/Huone.js";
+import { getRooms, updateRoom } from "./requests.js";
+import Room from "./components/Room.js";
 import { Table } from "react-bootstrap";
 
 const App = () => {
-  const [huoneet, setHuoneet] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const [showAll, setShowAll] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
   useEffect(() => {
     getRooms().then((res) => {
-      setHuoneet(res);
+      setRooms(res);
     });
   }, []);
 
-  /*const toggleReservedRoom = id => {
-    const huone = huoneet.find(n => n.id === id)
-    const changedHuone = { ...huone, vapaa: !huone.vapaa}
+  const toggleReservedRoom = (id) => {
+    const room = rooms.find((n) => n.id === id);
+    const changedroom = { ...room, available: !room.available };
 
-    huoneService
-    .update(id, changedHuone)
-    .then(response => {
-      setHuoneet(huoneet.map(huone => huone.id !== id ? huone : response.data))
-    })
-    
-  }*/
+    updateRoom(id, changedroom).then((res) => {
+      setRooms(rooms.map((room) => (room.id === id ? changedroom : room)));
+    });
+  };
 
-  const huoneetToShow = showAll
-    ? huoneet
-    : huoneet.filter((huone) => huone.vapaa);
+  const roomsToShow = showAll ? rooms : rooms.filter((room) => room.available);
 
   return (
     <div className="container">
-      <nav class="navbar navbar-dark bg-primary">
-        <a class="navbar-brand mb-0 h1">Huoneen varaus</a>
+      <nav className="navbar navbar-dark bg-primary">
+        <h1>Huoneen varaus</h1>
       </nav>
       <h5>Varauksen aihe</h5>
       <form>
@@ -47,8 +42,8 @@ const App = () => {
         <input type="submit" value="Submit" />
       </form>
 
-      <div class="row">
-        <div class="col">
+      <div className="row">
+        <div className="col">
           <h5>Valitse alku</h5>
           <DatePicker
             dateFormat="dd/MM/yyyy h:mm aa"
@@ -60,7 +55,7 @@ const App = () => {
             timeCaption="time"
           />
         </div>
-        <div class="col">
+        <div className="col">
           <h5>Valitse loppu</h5>
           <DatePicker
             dateFormat="dd/MM/yyyy h:mm aa"
@@ -76,7 +71,7 @@ const App = () => {
       <div>
         <button
           type="button"
-          class="btn btn-outline-primary"
+          className="btn btn-outline-primary"
           onClick={() => setShowAll(!showAll)}
         >
           Näytä {showAll ? "vapaat" : "kaikki"}
@@ -91,17 +86,11 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          {huoneetToShow.map((huone) => (
-            <tr key={huone.id}>
-              <td>{huone.id}</td>
-              <td>{huone.koko}</td>
-              <td>
-                <Huone
-                  huone={huone}
-                  toggleReserved={() => {} /*toggleReservedRoom(huone.id)*/}
-                />
-              </td>
-            </tr>
+          {roomsToShow.map((room) => (
+            <Room
+              room={room}
+              toggleReserved={() => toggleReservedRoom(room.id)}
+            />
           ))}
         </tbody>
       </Table>

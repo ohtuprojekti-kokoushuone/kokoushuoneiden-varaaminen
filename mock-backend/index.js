@@ -4,31 +4,32 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
-const reservations = [
+let reservations = [
   { subject: "this is an event", start: "13:00", end: "14:00" },
   { subject: "work hard", start: "10:00", end: "20:00" },
 ];
-const rooms = [
+let rooms = [
   {
     id: "A114",
-    koko: "12",
-    vapaa: true,
+    size: "12",
+    available: true,
   },
   {
     id: "A144",
-    koko: "10",
-    vapaa: false,
+    size: "10",
+    available: false,
   },
   {
     id: "E123",
-    koko: "5",
-    vapaa: true,
+    size: "5",
+    available: true,
   },
   {
     id: "E200",
-    koko: "8",
-    vapaa: true,
+    size: "8",
+    available: true,
   },
 ];
 
@@ -38,6 +39,14 @@ app.get("/testData", (req, res) => {
 
 app.get("/rooms", (req, res) => {
   res.json(rooms);
+});
+
+app.put("/rooms/:id", (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+  console.log(body);
+  rooms = rooms.map((room) => (room.id === id ? body : room));
+  res.sendStatus(200);
 });
 
 const PORT = 3003;
