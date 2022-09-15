@@ -1,8 +1,16 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe(`${App.name} component`, () => {
+  it("renders", () => {
+    expect(() => render(<App />)).not.toThrow();
+  });
+
+  it("shows header", () => {
+    render(<App />);
+    expect(
+      screen.getByRole("heading", { name: "Kokoushuoneiden varaussovellus" })
+    ).toBeDefined();
+  });
 });
