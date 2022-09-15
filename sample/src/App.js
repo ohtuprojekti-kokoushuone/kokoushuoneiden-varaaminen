@@ -9,8 +9,12 @@ function App() {
   useEffect(() => {
     getTest().then((data) => {
       setReservations(data);
+    }).catch((error) => {
+      // Notify somehow the error message
+      return
     });
   }, []);
+
   return (
     <div className="App">
       <h1>Kokoushuoneiden varaussovellus</h1>
@@ -20,7 +24,7 @@ function App() {
       {showReservations &&
         reservations.map((r, i) => <h3 key={i}>
           {r.subject}, alku: {r.start}, loppu: {r.end}
-          </h3>)}
+        </h3>)}
     </div>
   );
 }
