@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const calendarService = require("./services/calendarService");
 
 const app = express();
 
@@ -47,6 +48,19 @@ app.put("/rooms/:id", (req, res) => {
   console.log(body);
   rooms = rooms.map((room) => (room.id === id ? body : room));
   res.sendStatus(200);
+});
+
+app.get("/reservations/:room", async (req, res) => {
+  const room = req.params.room;
+  console.log("REQUEST BODY:", req.body);
+  const today = req.body.today;
+  try {
+    data = await calendarService.getReservations(room, today);
+  console.log(`found ${data.count} reservations`);
+  res.end(JSON.stringify(data));
+  } catch(error) {
+    res.status(400).end(JSON.stringify({message: error}))
+  }
 });
 
 const PORT = 3003;
