@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { getRooms, updateRoom } from "./requests.js";
-import Room from "./components/Room.js";
-import { Table } from "react-bootstrap";
+import React, { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import {getRooms, updateRoom, getReservations } from './requests.js';
+import Room from './components/Room.js';
+import { Table } from 'react-bootstrap';
 
 const App = () => {
   const [rooms, setRooms] = useState([]);
@@ -33,6 +33,9 @@ const App = () => {
       <nav className="navbar navbar-dark bg-primary">
         <h1>Huoneen varaus</h1>
       </nav>
+      <button onClick={() => getReservations('testirakennus.2001', false).then(res=>console.log(res))}>
+        Test getting reservations
+      </button>
       <h5>Varauksen aihe</h5>
       <form>
         <label>
@@ -74,7 +77,7 @@ const App = () => {
           className="btn btn-outline-primary"
           onClick={() => setShowAll(!showAll)}
         >
-          Näytä {showAll ? "vapaat" : "kaikki"}
+          Näytä {showAll ? 'vapaat' : 'kaikki'}
         </button>
       </div>
 
