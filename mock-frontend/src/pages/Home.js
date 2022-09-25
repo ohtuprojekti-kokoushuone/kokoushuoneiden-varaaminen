@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
+import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import Stack from 'react-bootstrap/Stack';
 import { Link } from "react-router-dom";
 
 
@@ -9,11 +7,11 @@ import { Link } from "react-router-dom";
 const Home = () => {
 
     return (
-      <div>
-        <Stack gap={3} className="col-md-5 mx-auto">
-            <Link to="/choosetime" className="btn btn-primary">Valitse aika</Link>
-            <Link to="/roomlist" className="btn btn-primary">Näytä kokoushuoneet</Link>
-        </Stack>
+      <div className="container text-center">
+        <div className="d-grid gap-3 col-8 mx-auto">
+          <Link to="/choosetime" className="btn btn-primary btn-lg">Valitse aika</Link>
+          <Link to="/roomlist" className="btn btn-primary btn-lg">Näytä vapaat kokoushuoneet</Link>
+        </div>
       </div>
     )
 }

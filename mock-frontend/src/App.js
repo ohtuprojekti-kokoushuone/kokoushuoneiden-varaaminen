@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import { getRooms, updateRoom } from "./requests.js";
 import Roomlist from "./pages/Roomlist.js";
 import Home from "./pages/Home.js";
 import ChooseTime from "./pages/ChooseTime.js";
@@ -15,8 +14,7 @@ import {
 
 
 const App = () => {
-  const [rooms, setRooms] = useState([]);
-
+  
   const padding = {
     padding: 5
   }

@@ -10,50 +10,45 @@ const ChooseTime = () => {
   
 
   return (
-    <div className="container fluid">
-        <nav className="navbar navbar-dark bg-primary">
-            <h1>Huoneen varaus</h1>
-        </nav>
-        <h5>Varauksen aihe</h5>
-        <form>
-            <label>
-                Varaus:
-                <input type="text" name="name" />
-            </label>
-            <input type="submit" value="Submit" />
-        </form>
-
-        <div className="row">
-            <div className="col">
-            <h5>Valitse alku</h5>
-            <DatePicker
-            dateFormat="dd/MM/yyyy h:mm aa"
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            timeCaption="time"
-            />
-            </div>
-
-            <div className="col">
-            <h5>Valitse loppu</h5>
-            <DatePicker
-                dateFormat="dd/MM/yyyy h:mm aa"
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                showTimeSelect
-                timeFormat="HH:mm"
-                timeIntervals={15}
-                timeCaption="time"
-            />
-            </div>
+    <div className="container text-center">
+        <h5>Valitse alku</h5>
+        <DatePicker
+          dateFormat="dd/MM/yyyy HH:mm"
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          showTimeSelect
+          timeFormat="HH:mm"
+          timeIntervals={15}
+          timeCaption="Aika"
+          locale="fi-FI"
+          
+        />     
+        <h5>Valitse loppu</h5>
+        <DatePicker
+          dateFormat="dd/MM/yyyy HH:mm"
+          selected={endDate}
+          onChange={(date) => setEndDate(date)}
+          showTimeSelect
+          timeFormat="HH:mm"
+          timeIntervals={15}
+          timeCaption="Aika"
+          locale="fi-FI"
+          
+        />
+        <h5>Valitse huoneen koko</h5>
+        <div className="row justify-content-center">
+          <select className="form-select w-auto justify-content-center">
+            <option defaultValue>Valitse koko</option>
+            <option value="3">3</option>
+            <option value="6">6</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+          </select> 
         </div>
 
-        <div>
-          <Link to="/roomlist" className="btn btn-primary">Näytä kokoushuoneet</Link>
-        </div>
+        <div className="col align-self-center">
+          <Link to="/roomlist" className="btn btn-primary btn-lg">Näytä vapaat kokoushuoneet</Link>
+        </div>   
     </div>
   )
 }

@@ -27,7 +27,7 @@ const Roomlist = () => {
     const roomsToShow = showAll ? rooms : rooms.filter((room) => room.available);
   
     return(
-      <div>
+      <div className="container">
          <Table striped>
           <thead>
             <tr>
@@ -38,7 +38,7 @@ const Roomlist = () => {
           <tbody>
             {roomsToShow.map((room) => (
               <Room
-                room={room}
+                key={room.id} room={room}
                 toggleReserved={() => toggleReservedRoom(room.id)}
               />
             ))}
