@@ -13,7 +13,7 @@ const Login = () => {
             <input type="text" name="name" />
           </form>
           <div className="col align-self-center">
-            <Link to="/" className="btn btn-primary btn-lg">Kirjaudu</Link>
+            <Link to="/home" className="btn btn-primary btn-lg">Kirjaudu</Link>
           </div>
         </div>
     )

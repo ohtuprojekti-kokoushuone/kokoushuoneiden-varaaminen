@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getRooms, updateRoom } from "../requests.js";
 import Room from "../components/Room.js";
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Roomlist = () => {
 
@@ -15,6 +16,7 @@ const Roomlist = () => {
       });
     }, []);
   
+    /*
     const toggleReservedRoom = (id) => {
       const room = rooms.find((n) => n.id === id);
       const changedroom = { ...room, available: !room.available };
@@ -23,7 +25,8 @@ const Roomlist = () => {
         setRooms(rooms.map((room) => (room.id === id ? changedroom : room)));
       });
     };
-  
+    */
+   
     const roomsToShow = showAll ? rooms : rooms.filter((room) => room.available);
   
     return(
@@ -37,10 +40,11 @@ const Roomlist = () => {
           </thead>
           <tbody>
             {roomsToShow.map((room) => (
-              <Room
-                key={room.id} room={room}
-                toggleReserved={() => toggleReservedRoom(room.id)}
-              />
+              <tr key={room.id}>
+                <td>{room.id}</td>
+                <td>{room.size}</td>
+                <td><Link to="/roominfo" className="btn btn-primary btn">Huoneen tiedot</Link></td>
+              </tr>
             ))}
           </tbody>
         </Table>

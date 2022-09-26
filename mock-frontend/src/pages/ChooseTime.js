@@ -20,7 +20,6 @@ const ChooseTime = () => {
           timeFormat="HH:mm"
           timeIntervals={15}
           timeCaption="Aika"
-          locale="fi-FI"
           
         />     
         <h5>Valitse loppu</h5>
@@ -32,13 +31,12 @@ const ChooseTime = () => {
           timeFormat="HH:mm"
           timeIntervals={15}
           timeCaption="Aika"
-          locale="fi-FI"
           
         />
         <h5>Valitse huoneen koko</h5>
         <div className="row justify-content-center">
           <select className="form-select w-auto justify-content-center">
-            <option defaultValue>Valitse koko</option>
+            <option defaultValue>Huoneen koko</option>
             <option value="3">3</option>
             <option value="6">6</option>
             <option value="10">10</option>
