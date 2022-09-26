@@ -2,8 +2,6 @@ import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 
-
-
 const Home = () => {
 
     return (
@@ -13,6 +11,7 @@ const Home = () => {
           <Link to="/roomlist" className="btn btn-primary btn-lg">Näytä vapaat kokoushuoneet</Link>
         </div>
       </div>
+      
     )
 }
 

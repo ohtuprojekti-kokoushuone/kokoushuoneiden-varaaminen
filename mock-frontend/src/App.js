@@ -4,6 +4,7 @@ import Roomlist from "./pages/Roomlist.js";
 import Home from "./pages/Home.js";
 import ChooseTime from "./pages/ChooseTime.js";
 import Login from "./pages/Login.js";
+import Reservations from "./pages/Reservations.js";
 import { Navbar, Nav } from "react-bootstrap";
 
 import {
@@ -25,13 +26,15 @@ const App = () => {
     <Router>
       <Navbar collapseOnSelect expand="lg" bg="white" variant="light">
         <div className="container">
-        <Navbar.Brand href="/">Home</Navbar.Brand>
+        <Navbar.Brand href="/">Etusivu</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="login">Login</Nav.Link>
+            <Nav.Link href="login">Kirjaudu sisään</Nav.Link>
+            <Nav.Link href="/reservations">Omat varaukset</Nav.Link>
             <Nav.Link href="/choosetime">ChooseTime</Nav.Link>
             <Nav.Link href="/roomlist">Roomlist</Nav.Link>
+            <Nav.Link href="/login">Kirjaudu ulos</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         </div>
@@ -40,6 +43,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reservations" element={<Reservations />} />
         <Route path="/roomlist" element={<Roomlist />} />
         <Route path="/choosetime" element={<ChooseTime />} />
       </Routes>
