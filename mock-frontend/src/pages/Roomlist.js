@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import { getRooms, updateRoom } from "../requests.js";
+import { getRooms, updateRoom } from "../requests";
 import Room from "../components/Room.js";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
