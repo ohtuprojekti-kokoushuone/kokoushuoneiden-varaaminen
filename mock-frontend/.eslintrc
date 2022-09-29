@@ -1,11 +1,17 @@
 {
-  "plugins": ["jest"],
-  "extends": ["react-app", "plugin:jest/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["jest", "@typescript-eslint"],
+  "extends": [
+    "react-app",
+    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "ignorePatterns": ["**/mirage/*.*"],
   "rules": {
     "jest/no-mocks-import": [0],
     "jsx-a11y/anchor-is-valid": [0],
-    "react/jsx-curly-brace-presence": [1]
+    "react/jsx-curly-brace-presence": [1],
     //    "no-console":["error", { "allow": ["warn", "error"] }]
+    "@typescript-eslint/rule-name": "error"
   }
 }
