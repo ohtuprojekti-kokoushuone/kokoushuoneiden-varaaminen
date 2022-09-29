@@ -29,4 +29,3 @@ jobs:
           cd mock-frontend
           npm install
           CI=false npm run build --if-present
-          npm test
