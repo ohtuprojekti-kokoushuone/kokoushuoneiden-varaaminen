@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 const Roomlist = () => {
 
     const [rooms, setRooms] = useState([]);
-    const [showAll, setShowAll] = useState(true);
   
     useEffect(() => {
       getRooms().then((res) => {
@@ -16,32 +15,19 @@ const Roomlist = () => {
       });
     }, []);
   
-    /*
-    const toggleReservedRoom = (id) => {
-      const room = rooms.find((n) => n.id === id);
-      const changedroom = { ...room, available: !room.available };
-  
-      updateRoom(id, changedroom).then((res) => {
-        setRooms(rooms.map((room) => (room.id === id ? changedroom : room)));
-      });
-    };
-    */
-   
-    const roomsToShow = showAll ? rooms : rooms.filter((room) => room.available);
-  
     return(
       <div className="container">
          <Table striped>
           <thead>
             <tr>
-              <th scope="col">Huoneen numero</th>
+              <th scope="col">Huoneen nimi</th>
               <th scope="col">Henkilömäärä</th>
             </tr>
           </thead>
           <tbody>
-            {roomsToShow.map((room) => (
+            {rooms.map((room) => (
               <tr key={room.id}>
-                <td>{room.id}</td>
+                <td>{room.name}</td>
                 <td>{room.size}</td>
                 <td><Link to="/roominfo" className="btn btn-primary btn">Huoneen tiedot</Link></td>
               </tr>
