@@ -7,6 +7,7 @@ import Login from "./pages/Login.js";
 import ChoosePreference from "./pages/ChoosePreference.js"
 import Reservations from "./pages/Reservations.js";
 import RoomInfo from "./pages/RoomInfo.js";
+import TimeOptions from "./pages/TimeOptions.js";
 import { Navbar, Nav } from "react-bootstrap";
 
 import {
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="/choosetime" element={<ChooseTime />} />
         <Route path="/choosepreference" element={<ChoosePreference />} />
         <Route path="/roominfo" element={<RoomInfo />} />
+        <Route path="/timeOptions" element={<TimeOptions />} />
       </Routes>
 
     </Router>

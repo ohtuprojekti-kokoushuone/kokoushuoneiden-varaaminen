@@ -8,8 +8,8 @@ app.use(cors());
 app.use(express.json());
 
 let reservations = [
-  { subject: "this is an event", start: "13:00", end: "14:00" },
-  { subject: "work hard", start: "10:00", end: "20:00" },
+  { id: 1, subject: "this is an event", start: "13:00", end: "14:00" },
+  { id: 2, subject: "work hard", start: "10:00", end: "20:00" },
 ];
 let rooms = [
   {

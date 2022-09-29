@@ -28,6 +28,7 @@ const Roomlist = () => {
     */
    
     const roomsToShow = showAll ? rooms : rooms.filter((room) => room.available);
+	
   
     return(
       <div className="container">
