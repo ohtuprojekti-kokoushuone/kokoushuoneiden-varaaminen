@@ -25,7 +25,7 @@ const Roomlist = () => {
   */
   return (
     <div className="container">
-      <Table striped>
+      <Table striped hover>
         <thead>
           <tr>
             <th scope="col">Huoneen numero</th>
