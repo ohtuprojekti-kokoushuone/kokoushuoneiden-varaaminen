@@ -19,3 +19,9 @@ h5 {
   padding-top: 30px;
   padding-bottom: 30px;
 }
+.roomsAvailable {
+  background-color: green;
+}
+.roomsNotAvailable {
+  background-color: red;
+}
