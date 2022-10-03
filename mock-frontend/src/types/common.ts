@@ -6,7 +6,8 @@ export type Person = {
 export type ReservationObject = {
     subject: string,
     start: Date,
-    end: Date
+    end: Date,
+    attendees?: Person[]
 }
 
 export type ReservationResponse = {
