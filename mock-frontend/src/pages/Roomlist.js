@@ -9,13 +9,13 @@ const Roomlist = () => {
 
     const [rooms, setRooms] = useState([]);
     const [showAll, setShowAll] = useState(true);
-  
+
     useEffect(() => {
       getRooms().then((res) => {
         setRooms(res);
       });
     }, []);
-  
+ 
     /*
     const toggleReservedRoom = (id) => {
       const room = rooms.find((n) => n.id === id);
@@ -26,10 +26,10 @@ const Roomlist = () => {
       });
     };
     */
-   
+  
     const roomsToShow = rooms.filter((room) => room.available === true);
     const roomsNotAvailable = rooms.filter((room) => room.available === false);
-  
+ 
     return(
       <div className="container">
          <Table striped>
@@ -58,6 +58,6 @@ const Roomlist = () => {
         </Table>
       </div>
     )
-  } 
-  
-export default Roomlist;  
+  }
+
+export default Roomlist;
