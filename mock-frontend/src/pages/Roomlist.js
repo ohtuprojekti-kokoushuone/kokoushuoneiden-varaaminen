@@ -26,7 +26,6 @@ const Roomlist = () => {
       });
     };
     */
-
     return(
       <div className="container">
          <Table striped>

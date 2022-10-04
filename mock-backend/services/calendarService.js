@@ -21,7 +21,7 @@ async function getReservations(room, today = false) {
 }
 
 async function reserveRoom(room, reservationObj) {
-  console.log("CREATING RESERVATION:", reservationObj)
+  console.log("CREATING RESERVATION:", room, reservationObj)
   try {
     const response = await axios.default.post(
       `${baseUrl}/calendar/${room}@${domain}/reservations?token=${token}`, reservationObj
