@@ -15,7 +15,8 @@ const CreateReservation = () => {
     const reservation = {
       subject: subject.current.value,
       start: startDate,
-      end: endDate
+      end: endDate,
+	  attendees: []
     }
 
     makeReservation("testirakennus.2001", reservation).then((res) => {
