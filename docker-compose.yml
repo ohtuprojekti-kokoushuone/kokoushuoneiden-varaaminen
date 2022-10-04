@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  mock-backend:
+    image: "ojanenma/kokoushuone-app:mock-backend"
+    ports:
+      - "3003:3003"
+
+  frontend:
+    image: "ojanenma/kokoushuone-app:latest"
+    ports:
+      - "3000:3000"
