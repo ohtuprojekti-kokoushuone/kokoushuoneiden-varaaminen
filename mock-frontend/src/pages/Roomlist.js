@@ -26,8 +26,6 @@ const Roomlist = () => {
       });
     };
     */
-  
-    const roomsToShow = showAll ? rooms : rooms.filter((room) => room.available);
 
     return(
       <div className="container">
@@ -39,7 +37,7 @@ const Roomlist = () => {
             </tr>
           </thead>
           <tbody>
-            {roomsToShow.map((room) => (
+            {rooms.map((room) => (
               <tr class="table-success">
                 <td>{room.id}</td>
                 <td>{room.name}</td>
