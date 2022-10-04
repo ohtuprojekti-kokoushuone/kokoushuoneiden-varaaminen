@@ -22,7 +22,7 @@ export function updateRoom(id: any, updatedObj: any) {
 
 export function makeReservation(room: Room, reservation: ReservationObject) {
   const req = axios.post(`http://localhost:3003/reservations/${room}`, {
-    body: { reservation: JSON.stringify(reservation) }
+    reservation: reservation
   })
   return req.then(res => {
     const data: ReservationResponse = res.data

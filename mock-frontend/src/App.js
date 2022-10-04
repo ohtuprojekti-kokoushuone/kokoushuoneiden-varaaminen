@@ -8,6 +8,7 @@ import ChoosePreference from "./pages/ChoosePreference.js"
 import Reservations from "./pages/Reservations.js";
 import RoomInfo from "./pages/RoomInfo.js";
 import TimeOptions from "./pages/TimeOptions.js";
+import CreateReservation from "./pages/CreateReservation.js";
 import { Navbar, Nav } from "react-bootstrap";
 
 import {
@@ -37,12 +38,13 @@ const App = () => {
             <Nav.Link href="/reservations">Omat varaukset</Nav.Link>
             <Nav.Link href="/choosetime">Valitse aika</Nav.Link>
             <Nav.Link href="/roomlist">Huoneet</Nav.Link>
+            <Nav.Link href="/createReservation">Tee varaus</Nav.Link>
             <Nav.Link href="/login">Kirjaudu ulos</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         </div>
       </Navbar>
-
+	  
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Login />} />
@@ -53,10 +55,10 @@ const App = () => {
         <Route path="/choosepreference" element={<ChoosePreference />} />
         <Route path="/roominfo" element={<RoomInfo />} />
         <Route path="/timeOptions" element={<TimeOptions />} />
+        <Route path="/createReservation" element={<CreateReservation />} />
       </Routes>
-
     </Router>
-  ) 
+  )
   
 }
 
