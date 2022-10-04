@@ -27,8 +27,9 @@ const Roomlist = () => {
     };
     */
    
-    const roomsToShow = showAll ? rooms : rooms.filter((room) => room.available);
-  
+    const roomsToShow = rooms.filter((room) => room.available === true);
+    const roomsNotAvailable = rooms.filter((room) => room.available === false);
+
     return(
       <div className="container">
          <Table striped hover>
@@ -40,7 +41,14 @@ const Roomlist = () => {
           </thead>
           <tbody>
             {roomsToShow.map((room) => (
-              <tr key={room.id}>
+             <tr class="table-success">
+             <td>{room.id}</td>
+             <td>{room.size}</td>
+             <td><Link to="/roominfo" className="btn btn-primary btn">Huoneen tiedot</Link></td>
+           </tr>
+         ))}
+         {roomsNotAvailable.map((room) => (
+           <tr class="table-danger">
                 <td>{room.id}</td>
                 <td>{room.size}</td>
                 <td><Link to="/roominfo" className="btn btn-primary btn">Huoneen tiedot</Link></td>
@@ -53,4 +61,3 @@ const Roomlist = () => {
   } 
   
 export default Roomlist;  
-
