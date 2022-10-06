@@ -13,7 +13,7 @@ export function getReservations(room: Room, today: boolean = false) {
 }
 
 export function makeReservation(room: Room, reservation: ReservationObject) {
-  const req = axios.post(`http://localhost:3003/reservations/${room}`, {reservation: reservation})
+  const req = axios.post(`http://localhost:3003/reservations/${room}`, { reservation: reservation })
   return req.then(res => res.data).catch(error => { throw new Error(error.message) })
 }
 
@@ -28,7 +28,6 @@ export function updateReservation(room: Room, reservationId: string, updatedObj:
 }
 
 export function checkAvailability(room: Room, start: Date, end: Date) {
-  return Promise.resolve('waiting for backend, does not work yet')
   const req = axios.post(`http://localhost:3003/reservations/${room}/availability`, { start: start, end: end })
   return req.then(res => {
     return res.data
