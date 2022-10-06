@@ -9,11 +9,9 @@ var path = require('path');
 var logger = require('morgan');
 const flash = require('connect-flash');
 
-const cors = require("cors");
+const cors = require('cors');
 
 //const { Server } = require("socket.io");
-
-
 
 var indexRouter = require('./src/routes/index');
 var usersRouter = require('./src/routes/users');
@@ -22,7 +20,6 @@ var calendarRouter = require('./src/routes/calendar');
 
 var app = express();
 
-
 /**
  * Get port from environment and store in Express.
  */
@@ -30,8 +27,7 @@ var app = express();
 const port = process.env.PORT || 4000;
 app.set('port', port);
 const socketIOport = process.env.SOCKETIO_PORT || 4001;
-const broker_address = process.env.BROKER_ADDRESS || "";
-
+const broker_address = process.env.BROKER_ADDRESS || '';
 
 /**
  * Create HTTP server.
@@ -39,35 +35,32 @@ const broker_address = process.env.BROKER_ADDRESS || "";
 
 var server = http.createServer(app);
 
-
 //const io = new Server(server);
 
-const ioClient = require("socket.io-client");
-
+const ioClient = require('socket.io-client');
 
 const socket = ioClient(broker_address);
 
-socket.on("connect", () => {
+socket.on('connect', () => {
   console.log('Connected (on connect) to Notification Broker');
 });
 
-socket.on("connection", () => {
+socket.on('connection', () => {
   console.log('Connected (on connection) to Notification Broker');
 });
 
-socket.on("disconnect", () => {
+socket.on('disconnect', () => {
   console.log('Disconnected from Notification Broker');
 });
 
-socket.on("connected_to_notification_broker", (calendarUserId) => {
+socket.on('connected_to_notification_broker', (calendarUserId) => {
   console.log('Connection verified!', calendarUserId);
 });
 
-socket.on("calendar_changed", (calendarUserId) => {
+socket.on('calendar_changed', (calendarUserId) => {
   console.log('Calendar changed!');
   console.log('calendarUserId', calendarUserId);
 });
-
 
 app.use(cors());
 // Flash middleware
@@ -96,11 +89,6 @@ if (req.session.userId) {
   next();
 });
 
-
-
-
-
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -113,7 +101,7 @@ app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-	console.log("errori");
+  console.log('errori');
   next(createError(404));
 });
 
@@ -131,7 +119,6 @@ app.use(function(err, req, res, next) {
 
 */
 
-
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -141,9 +128,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -166,39 +151,30 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
 }
-
 
 server.listen(port);
 server.on('error', onError);
-
-
 
 const connectedCalendarSocketIOClients = {};
 
 const socketServer = require('socket.io')(socketIOport);
 socketServer.on('connection', (socket) => {
-  
   socket.on('client_connected', (calendarUserId) => {
     console.log(calendarUserId, 'connected');
     connectedCalendarSocketIOClients[socket.id] = {
       calendarUserId: calendarUserId,
       socket: socket,
-      connected: true
+      connected: true,
     };
   });
-
 
   socket.on('disconnect', function () {
     const client = connectedCalendarSocketIOClients[socket.id];
     if (client && socket === client.socket) {
       connectedCalendarSocketIOClients[socket.id].connected = false;
-      console.log(connectedCalendarSocketIOClients[socket.id].calendarUserId + " disconnected!");
+      console.log(connectedCalendarSocketIOClients[socket.id].calendarUserId + ' disconnected!');
     }
-
   });
-
 });

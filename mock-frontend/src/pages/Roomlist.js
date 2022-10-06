@@ -25,7 +25,7 @@ const Roomlist = () => {
         </thead>
         <tbody>
           {rooms.map((room) => (
-            <tr className="table-success">
+            <tr className="table-success" key={room.id}>
               <td>{room.id}</td>
               <td>{room.name}</td>
               <td>
