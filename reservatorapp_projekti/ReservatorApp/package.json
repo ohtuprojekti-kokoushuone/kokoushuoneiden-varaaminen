@@ -1,0 +1,37 @@
+{
+  "name": "reservatorapp",
+  "version": "1.0.0",
+  "description": "ReservatorApp acts as a middleware between Reservator client app and Office 365 Cloud calendars.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@azure/msal-node": "^1.0.2",
+    "azure": "^2.3.1-preview",
+    "connect-flash": "^0.1.1",
+    "date-fns": "^2.21.1",
+    "date-fns-tz": "^1.1.4",
+    "debug": "^4.3.1",
+    "dotenv": "^8.6.0",
+    "express": "^4.17.1",
+    "express-promise-router": "^4.1.0",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.10.0",
+    "http-errors": "^1.8.0",
+    "isomorphic-fetch": "^3.0.0",
+    "mongodb": "^4.9.1",
+    "mongoose": "^6.6.1",
+    "morgan": "^1.10.0",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "author": "Niko Mäkitalo",
+  "license": "MIT"
+}
