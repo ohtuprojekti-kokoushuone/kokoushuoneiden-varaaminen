@@ -17,7 +17,7 @@ const Roomlist = () => {
   const toggleReservedRoom = (id) => {
     const room = rooms.find((n) => n.id === id);
     const changedroom = { ...room, available: !room.available };
- 
+
     updateRoom(id, changedroom).then((res) => {
       setRooms(rooms.map((room) => (room.id === id ? changedroom : room)));
     });
@@ -34,7 +34,7 @@ const Roomlist = () => {
         </thead>
         <tbody>
           {rooms.map((room) => (
-            <tr className="table-success">
+            <tr className="table-success" key={room.id}>
               <td>{room.id}</td>
               <td>{room.name}</td>
               <td>
