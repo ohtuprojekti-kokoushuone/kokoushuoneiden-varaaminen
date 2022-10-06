@@ -13,7 +13,7 @@ export function getReservations(room: Room, today: boolean = false) {
 }
 
 export function makeReservation(room: Room, reservation: ReservationObject) {
-  const req = axios.post(`http://localhost:3003/reservations/${room}`, { reservation: reservation })
+  const req = axios.post(`http://localhost:3003/reservations/${room}`, reservation)
   return req.then(res => res.data).catch(error => { throw new Error(error.message) })
 }
 
