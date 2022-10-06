@@ -1,6 +1,10 @@
+body {
+  padding-top: 80px;
+  padding-bottom: 20px;
+}
 h1 {
   padding-top: 15px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 }
 h5 {
   padding-top: 15px;
@@ -19,4 +23,6 @@ h5 {
   padding-top: 30px;
   padding-bottom: 30px;
 }
-
+.table > :not(:first-child) {
+  border-top: 0;
+}

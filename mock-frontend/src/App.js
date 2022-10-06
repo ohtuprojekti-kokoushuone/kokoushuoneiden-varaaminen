@@ -20,13 +20,20 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar collapseOnSelect expand="lg" bg="white" variant="light">
+      
+      <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
         <div className="container">
-          <Navbar.Brand href="/home">Etusivu</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Brand href="/home">
+        <img
+          alt="HY Logo"
+          src="https://www.hy247.fi/img/hy-logo-white.png"
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+        />Kokoushuonevaraus</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/login">Kirjaudu sisään</Nav.Link>
               <Nav.Link href="/reservations">Omat varaukset</Nav.Link>
               <Nav.Link href="/choosetime">Valitse aika</Nav.Link>
               <Nav.Link href="/roomlist">Huoneet</Nav.Link>
@@ -40,7 +47,6 @@ const App = () => {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/reservations" element={<Reservations />} />
         <Route path="/roomlist" element={<Roomlist />} />
         <Route path="/choosetime" element={<ChooseTime />} />
