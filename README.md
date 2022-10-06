@@ -25,7 +25,14 @@ Sovelluksen avulla käyttäjä voi selata vapaita kokoushuoneita sekä varata ni
 4. aja `npm start`
 5. sovellusta voi nyt käyttää osoitteessa localhost:3000
 
-## Backlog
+## Dokumentaatio
+
+[Definition of Done](https://docs.google.com/document/d/15tPTE1_v-ni-WlXxEmTRogPBGrpMMk_8MhwXXvJ0bs8/edit)
+
+[Arkkitehtuuri](linkki)
+
+
+## Projectin eteneminen
 
 [Product Backlog](https://docs.google.com/spreadsheets/d/1FGeKQlvT8PPFWxfDfxmccjPt_a6O4TcFm0E6Ge-Brv8/edit#gid=0)
 

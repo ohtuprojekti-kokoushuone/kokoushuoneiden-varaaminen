@@ -1,0 +1,8 @@
+# Arkkitehtuurikuvaus
+
+## Rakenne
+
+## Käyttöliittymä
+
+## Sovelluslogiikka
+
