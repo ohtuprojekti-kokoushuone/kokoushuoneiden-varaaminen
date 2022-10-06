@@ -26,9 +26,3 @@ h5 {
 .table > :not(:first-child) {
   border-top: 0;
 }
-.roomsAvailable {
-  background-color: green;
-}
-.roomsNotAvailable {
-  background-color: red;
-}
