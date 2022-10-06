@@ -182,6 +182,35 @@ router.get('/:calendarUserId/reservations',
   }
 );
 
+router.get("/:calendarUserId/reservations/:start/:end", async function (req, res) {
+  try {
+    if (!(await isRequestAuthorized(req))) {
+      res.status(401);
+      const errorResponse = {
+        message:
+          "Unauthorized request: Check request_token authorization header.",
+      };
+      res.end(JSON.stringify(errorResponse, null, 4));
+      return;
+    }
+    const { calendarUserId, start, end } = req.params
+    console.log("PARAMS:", req.params)
+    const data = await outlookService.checkAvailability(calendarUserId, start, end)
+    if (data.value.length === 0) {
+      res.json()
+      return
+    }
+    res.json(data.value)
+  } catch (error) {
+    res.status(400);
+    const errorResponse = {
+      message: "" + error,
+    };
+    res.end(JSON.stringify(errorResponse, null, 4));
+    return;
+  }
+})
+
 
 // curl -d '{"subject":"Testivaraus 1", "start": "2022-02-23T15:00:00.0000000", "end": "2022-02-23T16:00:00.0000000"}' -H "Content-Type: application/json" -X POST http://localhost:4000/calendar/reservations/testirakennus.113@ad.helsinki.fi
 

@@ -380,7 +380,29 @@ async function callApi(endpoint, accessToken) {
 };
 
 
+async function checkAvailability(calendarUserId, start, end) {
+  try {
+    const uri = `${ENDPOINT_URI}/users/${calendarUserId}/calendar/calendarView?startDateTime=${start}&endDateTime=${end}&$top=100&$orderby=start/dateTime desc`;
 
+    let response = await axios.default.get(
+      uri,
+      await getOptions(),
+      start,
+      end
+    );
+
+    if (response.status !== 200) {
+      throw new Error("Cannot check availability");
+    }
+
+    console.log("AVAILABILITY RESPONSE", response.data)
+
+    return response.data
+  } catch (error) {
+    console.log("error in checking availability", error);
+    throw error;
+  }
+}
 
 module.exports = {
   callApi: callApi,
@@ -390,7 +412,8 @@ module.exports = {
   updateEvent: updateEvent,
   deleteEvent: deleteEvent,
   createSubscription: createSubscription,
-  notifyNewEvent: notifyNewEvent
+  notifyNewEvent: notifyNewEvent,
+  checkAvailability: checkAvailability
 };
 
 

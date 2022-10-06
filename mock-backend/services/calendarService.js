@@ -66,10 +66,9 @@ async function checkAvailability(room, start, end) {
     const response = await axios.default.get(
       `${baseUrl}/calendar/${room}@${domain}/reservations/${start}/${end}?token=${token}`
     )
-    console.log("GOT RESPONSE:", response.data)
     return response.data
   } catch (error) {
-    console.log("ERROR IN CHECKING AVAILABILITY:", error)
+    console.log("ERROR IN CHECKING AVAILABILITY:", error.response?.data)
     throw error
   }
 }

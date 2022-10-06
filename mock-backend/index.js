@@ -93,13 +93,23 @@ app.post("/reservations/:room/availability", async (req, res) => {
   try {
     const data = await calendarService.checkAvailability(room, start, end)
     if (data.length > 0) {
-      res.status(200).json("NOT AVAILABLE").end()
+      res.status(200).json({
+        roomId: room,
+        start: start,
+        end: end,
+        available:false
+      }).end()
+      return
     }
-    res.status(200).json("AVAILABLE!").end()
+    res.status(200).json({
+      roomId: room,
+        start: start,
+        end: end,
+        available:true
+    }).end()
   } catch (error) {
-    console.log("error")
-    let status = error.response && error.response.status ? error.response.status : 400
-    res.status(status).end(JSON.stringify(error.response.data))
+    let status = error.response?.status ? error.response.status : 400
+    res.status(status).end(JSON.stringify(error.response?.data))
   }
 })
 
