@@ -26,7 +26,6 @@ const App = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/login">Kirjaudu sisään</Nav.Link>
               <Nav.Link href="/reservations">Omat varaukset</Nav.Link>
               <Nav.Link href="/choosetime">Valitse aika</Nav.Link>
               <Nav.Link href="/roomlist">Huoneet</Nav.Link>
@@ -40,7 +39,6 @@ const App = () => {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/reservations" element={<Reservations />} />
         <Route path="/roomlist" element={<Roomlist />} />
         <Route path="/choosetime" element={<ChooseTime />} />
