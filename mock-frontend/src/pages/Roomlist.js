@@ -13,16 +13,7 @@ const Roomlist = () => {
     });
   }, []);
 
-  /*
-  const toggleReservedRoom = (id) => {
-    const room = rooms.find((n) => n.id === id);
-    const changedroom = { ...room, available: !room.available };
- 
-    updateRoom(id, changedroom).then((res) => {
-      setRooms(rooms.map((room) => (room.id === id ? changedroom : room)));
-    });
-  };
-  */
+  
   return (
     <div className="container">
       <Table striped hover>

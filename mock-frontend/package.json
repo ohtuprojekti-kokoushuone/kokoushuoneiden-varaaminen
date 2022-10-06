@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "date-fns": "^2.29.3",
     "mdb-react-ui-kit": "^4.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -17,8 +18,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "json-server -p3001 --watch db.json"

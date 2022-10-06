@@ -1,7 +1,10 @@
 import React, { useState, useRef } from 'react';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
 import { makeReservation } from '../requests.ts';
+
+registerLocale('fi', fi);
 
 const CreateReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -46,6 +49,7 @@ const CreateReservation = () => {
         timeFormat="HH:mm"
         timeIntervals={15}
         timeCaption="Aika"
+        locale="fi"
       />
       <h5>Valitse loppu</h5>
       <DatePicker
@@ -56,6 +60,7 @@ const CreateReservation = () => {
         timeFormat="HH:mm"
         timeIntervals={15}
         timeCaption="Aika"
+        locale="fi"
       />
 
       <div className="col align-self-center">

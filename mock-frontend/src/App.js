@@ -11,7 +11,7 @@ import TimeOptions from './pages/TimeOptions.js';
 import CreateReservation from './pages/CreateReservation.js';
 import { Navbar, Nav } from 'react-bootstrap';
 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   const padding = {
