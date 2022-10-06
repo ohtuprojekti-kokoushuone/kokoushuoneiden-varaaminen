@@ -32,14 +32,14 @@ app.get("/reservations/:room", async (req, res) => {
     console.log(`found ${data.count} reservations`);
     res.end(JSON.stringify(data));
   } catch (error) {
-    res.status(400).end(JSON.stringify({ message: error.message }))
+    res.status(error.response.status).end(JSON.stringify(error.response.data))
   }
 });
 
 app.post("/reservations/:room", async (req, res) => {
   const room = req.params.room
   console.log("BODY:", req.body)
-  const body = req.body.reservation
+  const body = req.body
   let reservationObj
   reservationObj = {
     subject: body.subject,
@@ -59,7 +59,7 @@ app.post("/reservations/:room", async (req, res) => {
     const data = await calendarService.reserveRoom(room, reservationObj)
     res.status(201).end(JSON.stringify(data));
   } catch (error) {
-    res.status(400).end(JSON.stringify({ message: error.message }))
+    res.status(error.response.status).end(JSON.stringify(error.response.data))
   }
 })
 
@@ -70,7 +70,7 @@ app.delete("/reservations/:room/:reservation", async (req, res) => {
     const data = await calendarService.deleteReservation(room, reservation)
     res.status(200).end(JSON.stringify(data))
   } catch (error) {
-    res.status(400).end(JSON.stringify({ message: error.message }))
+    res.status(error.response.status).end(JSON.stringify(error.response.data))
   }
 })
 
@@ -82,7 +82,24 @@ app.patch("/reservations/:room/:reservation", async (req, res) => {
     const data = await calendarService.updateReservation(room, reservation, obj)
     res.status(200).end(JSON.stringify(data))
   } catch (error) {
-    res.status(400).end(JSON.stringify({ message: error.message }))
+    res.status(error.response.status).end(JSON.stringify(error.response.data))
+  }
+})
+
+app.post("/reservations/:room/availability", async (req, res) => {
+  const { room } = req.params
+  console.log("BODY:", req.body)
+  const { start, end } = req.body
+  try {
+    const data = await calendarService.checkAvailability(room, start, end)
+    if (data.length > 0) {
+      res.status(200).json("NOT AVAILABLE").end()
+    }
+    res.status(200).json("AVAILABLE!").end()
+  } catch (error) {
+    console.log("error")
+    let status = error.response && error.response.status ? error.response.status : 400
+    res.status(status).end(JSON.stringify(error.response.data))
   }
 })
 
