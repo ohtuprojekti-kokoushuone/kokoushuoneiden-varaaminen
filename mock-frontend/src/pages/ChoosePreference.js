@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
+import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 
 const ChoosePreference = () => {
   return (
     <div className="container text-center">
-      <h5>Rajaa hakua:</h5>
+      <h5>Valitse rakennus:</h5>
+      <div className="row justify-content-center">
+        <select className="form-select w-auto justify-content-center">
+          <option defaultValue>Rakennus</option>
+          <option value="Exactum">Exactum</option>
+          <option value="Physicum">Physicum</option>
+          <option value="Chemicum">Chemicum</option>      
+        </select>
+      </div>
+      <h5>Huoneen koko:</h5>
       <div className="row justify-content-center">
         <select className="form-select w-auto justify-content-center">
           <option defaultValue>Huoneen koko</option>
