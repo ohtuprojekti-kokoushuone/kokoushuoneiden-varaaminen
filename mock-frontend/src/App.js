@@ -10,8 +10,8 @@ import RoomInfo from './pages/RoomInfo.js';
 import TimeOptions from './pages/TimeOptions.js';
 import CreateReservation from './pages/CreateReservation.js';
 import { Navbar, Nav } from 'react-bootstrap';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import logo from './hy-logo-white.png';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   const padding = {
