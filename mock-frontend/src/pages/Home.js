@@ -5,7 +5,6 @@ import { getRooms } from '../requests';
 import { Table } from 'react-bootstrap';
 
 const Home = () => {
-
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
@@ -14,7 +13,6 @@ const Home = () => {
     });
   }, []);
 
-  
   return (
     <div className="container text-center">
       <h1>Vapaat huoneet</h1>
@@ -31,7 +29,7 @@ const Home = () => {
               <td>{room.id}</td>
               <td>{room.name}</td>
               <td>
-                <Link to="/roominfo" className="btn btn-primary btn">
+                <Link to={`/roomlist/${room.id}`} className="btn btn-primary btn">
                   Huoneen tiedot
                 </Link>
               </td>
@@ -43,7 +41,7 @@ const Home = () => {
       <div className="d-grid gap-3 col-8 mx-auto">
         <Link to="/choosetime" className="btn btn-primary btn-lg">
           Valitse aika
-        </Link> 
+        </Link>
       </div>
     </div>
   );

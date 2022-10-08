@@ -14,30 +14,20 @@ import logo from './hy-logo-white.png';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
-  const padding = {
-    padding: 5
-  };
-
   return (
     <Router>
-      
       <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
         <div className="container">
-        <Navbar.Brand href="/home">
-        <img
-          alt="HY Logo"
-          src={logo}
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />Kokoushuonevaraus</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Brand href="/home">
+            <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
+            Kokoushuonevaraus
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link href="/reservations">Omat varaukset</Nav.Link>
               <Nav.Link href="/choosetime">Valitse aika</Nav.Link>
               <Nav.Link href="/roomlist">Huoneet</Nav.Link>
-              <Nav.Link href="/createReservation">Tee varaus</Nav.Link>
               <Nav.Link href="/login">Kirjaudu ulos</Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -51,9 +41,9 @@ const App = () => {
         <Route path="/roomlist" element={<Roomlist />} />
         <Route path="/choosetime" element={<ChooseTime />} />
         <Route path="/choosepreference" element={<ChoosePreference />} />
-        <Route path="/roominfo" element={<RoomInfo />} />
+        <Route path="/roomlist/:id" element={<RoomInfo />} />
         <Route path="/timeOptions" element={<TimeOptions />} />
-        <Route path="/createReservation" element={<CreateReservation />} />
+        <Route path="/createReservation/:id" element={<CreateReservation />} />
       </Routes>
     </Router>
   );

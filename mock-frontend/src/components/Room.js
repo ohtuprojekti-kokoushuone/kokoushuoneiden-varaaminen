@@ -1,22 +1,13 @@
-import React from "react";
+import React from 'react';
 
-const Room = ({ room, toggleReserved }) => {
-  const label = room.available ? "varaa" : "varattu";
-
+const Room = ({ room }) => {
   return (
-    <tr key={room.id}>
-      <td>{room.id}</td>
-      <td>{room.size}</td>
-      <td>
-        <button
-          type="button"
-          className="btn btn-outline-primary"
-          onClick={toggleReserved}
-        >
-          {label}
-        </button>
-      </td>
-    </tr>
+    <div>
+      <h1>{room.name}</h1>
+      <p>email: {room.address}</p>
+      <p>Huoneen koko</p>
+      <p>Seuraava varaus</p>
+    </div>
   );
 };
 
