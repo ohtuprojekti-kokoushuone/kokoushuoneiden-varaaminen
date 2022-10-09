@@ -1,16 +1,54 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["jest", "@typescript-eslint"],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
   "extends": [
-    "react-app",
-    "plugin:jest/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
-  "ignorePatterns": ["**/mirage/*.*"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
   "rules": {
+<<<<<<< HEAD
     "jest/no-mocks-import": [0],
     "jsx-a11y/anchor-is-valid": [0],
     "react/jsx-curly-brace-presence": [1]
     //    "no-console":["error", { "allow": ["warn", "error"] }]
   }
+=======
+    "indent": ["warn", 2],
+    "linebreak-style": ["warn", "unix"],
+    "quotes": ["warn", "single"],
+    "semi": ["warn", "always"],
+    "eqeqeq": "warn",
+    "no-trailing-spaces": "warn",
+    "object-curly-spacing": ["warn", "always"],
+    "arrow-spacing": ["warn", { "before": true, "after": true }],
+    "no-console": "off",
+    "no-unused-vars": "warn",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "prettier/prettier": "warn",
+    "react/display-name": "off",
+    "react/no-children-prop": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "warn",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "ignorePatterns": ["node_modules", "build", "dist", "public"]
+>>>>>>> c4570ea5c5d68bfd96d7381c3bad6f2a95d74e0c
 }
