@@ -13,7 +13,6 @@ const Roomlist = () => {
     });
   }, []);
 
-  
   return (
     <div className="container">
       <Table striped hover>
@@ -29,7 +28,7 @@ const Roomlist = () => {
               <td>{room.id}</td>
               <td>{room.name}</td>
               <td>
-                <Link to="/roominfo" className="btn btn-primary btn">
+                <Link to={`/roomlist/${room.id}`} className="btn btn-primary btn">
                   Huoneen tiedot
                 </Link>
               </td>

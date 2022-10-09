@@ -36,3 +36,10 @@ export function checkAvailability(room: Room, start: Date, end: Date) {
     return res.data;
   });
 }
+
+export function getRoomById(id: Room) {
+  const req = axios.get(`http://localhost:3003/rooms/${id}`);
+  return req.then((res) => {
+    return res.data;
+  });
+}

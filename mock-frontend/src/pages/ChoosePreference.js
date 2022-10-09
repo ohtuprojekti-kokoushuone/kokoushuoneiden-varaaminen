@@ -11,7 +11,7 @@ const ChoosePreference = () => {
           <option defaultValue>Rakennus</option>
           <option value="Exactum">Exactum</option>
           <option value="Physicum">Physicum</option>
-          <option value="Chemicum">Chemicum</option>      
+          <option value="Chemicum">Chemicum</option>
         </select>
       </div>
       <h5>Huoneen koko:</h5>
