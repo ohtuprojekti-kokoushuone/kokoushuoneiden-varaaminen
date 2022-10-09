@@ -20,13 +20,6 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
   "rules": {
-<<<<<<< HEAD
-    "jest/no-mocks-import": [0],
-    "jsx-a11y/anchor-is-valid": [0],
-    "react/jsx-curly-brace-presence": [1]
-    //    "no-console":["error", { "allow": ["warn", "error"] }]
-  }
-=======
     "indent": ["warn", 2],
     "linebreak-style": ["warn", "unix"],
     "quotes": ["warn", "single"],
@@ -50,5 +43,4 @@
     "react-hooks/exhaustive-deps": "warn"
   },
   "ignorePatterns": ["node_modules", "build", "dist", "public"]
->>>>>>> c4570ea5c5d68bfd96d7381c3bad6f2a95d74e0c
 }
