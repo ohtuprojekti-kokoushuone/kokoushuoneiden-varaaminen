@@ -16,12 +16,12 @@ async function getReservations(room, today = false) {
     return response.data;
   } catch (error) {
     console.log("ERROR IN GETTING RESERVATIONS:", error.response.status, error.code);
-    throw new Error(error.response.data.message);
+    throw error
   }
 }
 
 async function reserveRoom(room, reservationObj) {
-  console.log("CREATING RESERVATION:", reservationObj)
+  console.log("CREATING RESERVATION:", room, reservationObj)
   try {
     const response = await axios.default.post(
       `${baseUrl}/calendar/${room}@${domain}/reservations?token=${token}`, reservationObj
@@ -30,7 +30,7 @@ async function reserveRoom(room, reservationObj) {
     return response.data
   } catch (error) {
     console.log("ERROR IN MAKING RESERVATION:", error.response.status, error.code)
-    throw new Error(error.response.data.message)
+    throw error
   }
 }
 
@@ -44,7 +44,7 @@ async function deleteReservation(room, id) {
     return response.data
   } catch (error) {
     console.log("ERROR IN DELETING RESERVATION:", error.response.status, error.code)
-    throw new Error(error.response.data.message)
+    throw error
   }
 }
 
@@ -54,9 +54,22 @@ async function updateReservation(room, reservationId, updatedObj) {
     const response = await axios.default.patch(`${baseUrl}/calendar/${room}@${domain}/reservations/${reservationId}?token=${token}`, updatedObj)
     console.log("UPDATED!", response.data)
     return response.data
-  } catch(error) {
+  } catch (error) {
     console.log("ERROR IN UPDATING RESERVATION:", error.response.status, error.code)
-    throw new Error(error.response.data.message)
+    throw error
+  }
+}
+
+async function checkAvailability(room, start, end) {
+  console.log(`CHECKING AVAILABILITY FOR: ${start} - ${end}`)
+  try {
+    const response = await axios.default.get(
+      `${baseUrl}/calendar/${room}@${domain}/reservations/${start}/${end}?token=${token}`
+    )
+    return response.data
+  } catch (error) {
+    console.log("ERROR IN CHECKING AVAILABILITY:", error.response?.data)
+    throw error
   }
 }
 
@@ -64,5 +77,6 @@ module.exports = {
   getReservations: getReservations,
   reserveRoom: reserveRoom,
   deleteReservation: deleteReservation,
-  updateReservation: updateReservation
+  updateReservation: updateReservation,
+  checkAvailability: checkAvailability
 };
