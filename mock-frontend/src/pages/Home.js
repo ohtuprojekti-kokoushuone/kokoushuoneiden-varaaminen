@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { getRooms } from '../requests';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -14,28 +13,27 @@ const Home = () => {
       setRooms(res);
     });
   }, []);
-/*TO DO: jakaa huoneet parametrein: success, warning, danger => bg*/
+  /*TO DO: jakaa huoneet parametrein: success, warning, danger => bg*/
+  const linkStyle = {
+    textDecoration: 'none',
+    color: 'white'
+  };
+
   return (
     <Container text-center>
-    <>
-    {rooms.map((room) => (
-      <Card
-       bg={'Success'.toLowerCase()}
-       key={'Success'}
-       text={'white'}
-       style={{ width: '80vh' }}
-       className="mb-2"
-      >
-       <Card.Header>{room.id}</Card.Header>
-       <Card.Body>
-         <Card.Title>Vapaa</Card.Title>
-         <Card.Text>{room.name}</Card.Text>
-         <Card.Link href="/roomlist/${room.id}"><Button variant="primary">Huoneen tiedot</Button></Card.Link>
-       </Card.Body>
-     </Card>
-    
-    ))}
-  </>
+      <>
+        {rooms.map((room) => (
+          <Card bg={'Success'.toLowerCase()} key={'Success'} text={'white'} style={{ width: '80vh' }} className="mb-2">
+            <Link to={`/roomlist/${room.id}`} key={room.id} style={linkStyle}>
+              <Card.Header>{room.id}</Card.Header>
+              <Card.Body>
+                <Card.Title>Vapaa</Card.Title>
+                <Card.Text>{room.name}</Card.Text>
+              </Card.Body>
+            </Link>
+          </Card>
+        ))}
+      </>
 
       <div className="d-grid gap-3 col-5 mb-2">
         <Link to="/choosetime" className="btn btn-primary btn-lg">
