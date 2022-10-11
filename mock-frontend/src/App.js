@@ -28,7 +28,7 @@ const App = () => {
               <Nav.Link href="/reservations">Omat varaukset</Nav.Link>
               <Nav.Link href="/choosetime">Valitse aika</Nav.Link>
               <Nav.Link href="/roomlist">Huoneet</Nav.Link>
-              <Nav.Link href="/login">Kirjaudu ulos</Nav.Link>
+              <Nav.Link href="/">Kirjaudu ulos</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </div>

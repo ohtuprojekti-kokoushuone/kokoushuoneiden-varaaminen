@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import { getRooms } from '../requests';
-import { Table } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -12,38 +14,35 @@ const Home = () => {
       setRooms(res);
     });
   }, []);
-
+/*TO DO: jakaa huoneet parametrein: success, warning, danger => bg*/
   return (
-    <div className="container text-center">
-      <h1>Vapaat huoneet</h1>
-      <Table striped hover>
-        <thead>
-          <tr>
-            <th scope="col">Huoneen numero</th>
-            <th scope="col">Huoneen nimi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rooms.map((room) => (
-            <tr className="table-success" key={room.id}>
-              <td>{room.id}</td>
-              <td>{room.name}</td>
-              <td>
-                <Link to={`/roomlist/${room.id}`} className="btn btn-primary btn">
-                  Huoneen tiedot
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+    <Container text-center>
+    <>
+    {rooms.map((room) => (
+      <Card
+       bg={'Success'.toLowerCase()}
+       key={'Success'}
+       text={'white'}
+       style={{ width: '80vh' }}
+       className="mb-2"
+      >
+       <Card.Header>{room.id}</Card.Header>
+       <Card.Body>
+         <Card.Title>Vapaa</Card.Title>
+         <Card.Text>{room.name}</Card.Text>
+         <Card.Link href="/roomlist/${room.id}"><Button variant="primary">Huoneen tiedot</Button></Card.Link>
+       </Card.Body>
+     </Card>
+    
+    ))}
+  </>
 
-      <div className="d-grid gap-3 col-8 mx-auto">
+      <div className="d-grid gap-3 col-5 mb-2">
         <Link to="/choosetime" className="btn btn-primary btn-lg">
           Valitse aika
         </Link>
       </div>
-    </div>
+    </Container>
   );
 };
 
