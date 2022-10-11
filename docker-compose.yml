@@ -1,12 +1,20 @@
 version: "3.9"
 
 services:
+  mongo:
+    image: "mongo:latest"
+    network_mode: host
+
+  backend:
+    image: "ojanenma/kokoushuone-app:backend"
+    network_mode: host
+
   mock-backend:
     image: "ojanenma/kokoushuone-app:mock-backend"
     ports:
       - "3003:3003"
 
   frontend:
-    image: "ojanenma/kokoushuone-app:latest"
+    image: "ojanenma/kokoushuone-app:frontend"
     ports:
       - "3000:3000"
