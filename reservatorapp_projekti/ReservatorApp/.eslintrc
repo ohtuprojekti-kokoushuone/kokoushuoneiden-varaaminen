@@ -17,7 +17,8 @@
     "semi": ["warn", "always"],
     "prettier/prettier": "warn",
     "eqeqeq": "warn",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "no-useless-catch": 0
   },
   "ignorePatterns": ["node_modules", "build", "dist", "public"]
 }
