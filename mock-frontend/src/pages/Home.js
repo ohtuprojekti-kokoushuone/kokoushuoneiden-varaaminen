@@ -3,7 +3,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import { getRooms } from '../requests';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Filter from './Filter';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -21,12 +23,20 @@ const Home = () => {
 
   return (
     <Container text-center>
+      <div>
+        <Filter />
+      </div>
       <>
         {rooms.map((room) => (
           <Card bg={'Success'.toLowerCase()} key={'Success'} text={'white'} style={{ width: '80vh' }} className="mb-2">
             <Link to={`/roomlist/${room.id}`} key={room.id} style={linkStyle}>
               <Card.Header>{room.id}</Card.Header>
               <Card.Body>
+                <div style={{ float: 'right' }}>
+                  <Link to={'/reservations'} style={linkStyle}>
+                    <Button variant="primary">Varaa nyt</Button>
+                  </Link>
+                </div>
                 <Card.Title>Vapaa</Card.Title>
                 <Card.Text>{room.name}</Card.Text>
               </Card.Body>
@@ -34,12 +44,6 @@ const Home = () => {
           </Card>
         ))}
       </>
-
-      <div className="d-grid gap-3 col-5 mb-2">
-        <Link to="/choosetime" className="btn btn-primary btn-lg">
-          Valitse aika
-        </Link>
-      </div>
     </Container>
   );
 };
