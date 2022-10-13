@@ -5,7 +5,7 @@ import { getRooms } from '../requests';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Filter from './Filter.js';
+import Filter from './Filter';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -24,20 +24,19 @@ const Home = () => {
   return (
     <Container text-center>
       <div>
-      <Filter />
+        <Filter />
       </div>
       <>
         {rooms.map((room) => (
           <Card bg={'Success'.toLowerCase()} key={'Success'} text={'white'} style={{ width: '80vh' }} className="mb-2">
             <Link to={`/roomlist/${room.id}`} key={room.id} style={linkStyle}>
-              <Card.Header>{room.id}
-              </Card.Header>
+              <Card.Header>{room.id}</Card.Header>
               <Card.Body>
-              <div style={{float: 'right'}}>
-                <Link to={`/reservations`} style={linkStyle}>
-                <Button variant="primary">Varaa nyt</Button>
-                </Link>
-              </div>
+                <div style={{ float: 'right' }}>
+                  <Link to={'/reservations'} style={linkStyle}>
+                    <Button variant="primary">Varaa nyt</Button>
+                  </Link>
+                </div>
                 <Card.Title>Vapaa</Card.Title>
                 <Card.Text>{room.name}</Card.Text>
               </Card.Body>
