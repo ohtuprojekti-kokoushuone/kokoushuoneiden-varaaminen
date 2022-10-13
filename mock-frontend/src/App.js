@@ -15,12 +15,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { setToken } from './requests.ts';
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const localStoredUser = window.localStorage.getItem('loggedReservationsAppUser');
+  const [user, setUser] = useState(localStoredUser);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedReservationsAppUser');
-    if (loggedUserJSON) {
-      const storedUser = JSON.parse(loggedUserJSON);
+    if (localStoredUser) {
+      const storedUser = JSON.parse(localStoredUser);
       setUser(storedUser);
       setToken(storedUser.token);
     }
@@ -54,23 +54,17 @@ const App = () => {
         </div>
       </Navbar>
 
-      {user === null ? (
-        <Routes>
-          <Route path="/" element={<Login setUser={setUser} />} />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Login />} />
-          <Route path="/reservations" element={<Reservations />} />
-          <Route path="/roomlist" element={<Roomlist />} />
-          <Route path="/choosetime" element={<ChooseTime />} />
-          <Route path="/choosepreference" element={<ChoosePreference />} />
-          <Route path="/roomlist/:id" element={<RoomInfo />} />
-          <Route path="/timeOptions" element={<TimeOptions />} />
-          <Route path="/createReservation/:id" element={<CreateReservation />} />
-        </Routes>
-      )}
+      <Routes>
+        <Route path="/home" element={<Home user={user} />} />
+        <Route path="/" element={<Login setUser={setUser} user={user} />} />
+        <Route path="/reservations" element={<Reservations user={user} />} />
+        <Route path="/roomlist" element={<Roomlist user={user} />} />
+        <Route path="/choosetime" element={<ChooseTime user={user} />} />
+        <Route path="/choosepreference" element={<ChoosePreference user={user} />} />
+        <Route path="/roomlist/:id" element={<RoomInfo user={user} />} />
+        <Route path="/timeOptions" element={<TimeOptions user={user} />} />
+        <Route path="/createReservation/:id" element={<CreateReservation user={user} />} />
+      </Routes>
     </Router>
   );
 };

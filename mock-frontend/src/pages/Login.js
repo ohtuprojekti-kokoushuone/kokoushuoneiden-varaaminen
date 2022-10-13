@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { login, setToken } from '../requests.ts';
 
-const Login = ({ setUser }) => {
+const Login = ({ setUser, user }) => {
+  if (user) {
+    return <Navigate to="/home" />;
+  }
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

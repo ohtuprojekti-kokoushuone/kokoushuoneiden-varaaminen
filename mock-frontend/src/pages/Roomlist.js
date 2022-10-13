@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { getRooms } from '../requests';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 
-const Roomlist = () => {
+const Roomlist = ({ user }) => {
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {

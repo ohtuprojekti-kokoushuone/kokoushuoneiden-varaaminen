@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getRoomById } from '../requests.ts';
 import Room from '../components/Room.js';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, Navigate } from 'react-router-dom';
 
-const RoomInfo = () => {
+const RoomInfo = ({ user }) => {
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   const [room, setValue] = useState('');
   const id = useParams().id;
 

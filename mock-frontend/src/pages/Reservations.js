@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { getReservations } from '../requests.ts';
 import Reservation from '../components/Reservation.js';
 import { Table } from 'react-bootstrap';
+import { Navigate } from 'react-router-dom';
 
-const Reservations = () => {
+const Reservations = ({ user }) => {
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
