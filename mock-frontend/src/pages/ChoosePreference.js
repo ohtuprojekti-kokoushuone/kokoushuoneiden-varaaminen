@@ -1,8 +1,11 @@
 import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
-const ChoosePreference = () => {
+const ChoosePreference = ({ user }) => {
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="container text-center">
       <h5>Valitse rakennus:</h5>
