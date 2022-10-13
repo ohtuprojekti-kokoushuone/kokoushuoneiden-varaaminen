@@ -4,7 +4,6 @@ import Roomlist from './pages/Roomlist.js';
 import Home from './pages/Home.js';
 import ChooseTime from './pages/ChooseTime.js';
 import Login from './pages/Login.js';
-import ChoosePreference from './pages/ChoosePreference.js';
 import Reservations from './pages/Reservations.js';
 import RoomInfo from './pages/RoomInfo.js';
 import TimeOptions from './pages/TimeOptions.js';
@@ -40,7 +39,6 @@ const App = () => {
         <Route path="/reservations" element={<Reservations />} />
         <Route path="/roomlist" element={<Roomlist />} />
         <Route path="/choosetime" element={<ChooseTime />} />
-        <Route path="/choosepreference" element={<ChoosePreference />} />
         <Route path="/roomlist/:id" element={<RoomInfo />} />
         <Route path="/timeOptions" element={<TimeOptions />} />
         <Route path="/createReservation/:id" element={<CreateReservation />} />
