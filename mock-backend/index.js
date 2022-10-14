@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const calendarService = require('./services/calendarService');
+const { checkAvailability } = require('./services/calendarService');
+const { getAvailableTimeAfter } = require('./services/functions');
 
 const app = express();
 
@@ -22,6 +24,30 @@ let rooms = [
 
 app.get('/rooms', (req, res) => {
   res.json(rooms);
+});
+
+app.get('/roomsInfo', async (req, res) => {
+  const start = new Date();
+  const end = new Date(start.getTime());
+  end.setDate(start.getDate() + 1);
+
+  const result = await Promise.all(
+    rooms.map(async (room) => {
+      const data = await checkAvailability(room.id, start.toISOString(), end.toISOString());
+      room.available = true;
+
+      if (data) {
+        const available = getAvailableTimeAfter(start, data);
+        room.availableTime = available.earliestTime;
+        room.available = available.isAvailable;
+      }
+      return room;
+    })
+  );
+
+  //console.log('DATA: ', result);
+
+  res.json(result);
 });
 
 app.get('/rooms/:id', async (req, res) => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import Roomlist from './pages/Roomlist.js';
 import Home from './pages/Home.js';
 import ChooseTime from './pages/ChooseTime.js';
 import Login from './pages/Login.js';
@@ -26,7 +25,6 @@ const App = () => {
             <Nav className="mr-auto">
               <Nav.Link href="/reservations">Omat varaukset</Nav.Link>
               <Nav.Link href="/choosetime">Valitse aika</Nav.Link>
-              <Nav.Link href="/roomlist">Huoneet</Nav.Link>
               <Nav.Link href="/">Kirjaudu ulos</Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -37,7 +35,6 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Login />} />
         <Route path="/reservations" element={<Reservations />} />
-        <Route path="/roomlist" element={<Roomlist />} />
         <Route path="/choosetime" element={<ChooseTime />} />
         <Route path="/roomlist/:id" element={<RoomInfo />} />
         <Route path="/timeOptions" element={<TimeOptions />} />
