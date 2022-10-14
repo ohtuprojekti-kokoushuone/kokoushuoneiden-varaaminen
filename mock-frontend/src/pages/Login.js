@@ -3,11 +3,12 @@ import { Link, Navigate } from 'react-router-dom';
 import { login, setToken } from '../requests.ts';
 
 const Login = ({ setUser, user }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   if (user) {
     return <Navigate to="/home" />;
   }
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
   const handleLogin = async (event) => {
     event.preventDefault();

@@ -16,15 +16,14 @@ import { setToken } from './requests.ts';
 
 const App = () => {
   const localStoredUser = window.localStorage.getItem('loggedReservationsAppUser');
-  const [user, setUser] = useState(localStoredUser);
+  const [user, setUser] = useState(JSON.parse(localStoredUser));
 
   useEffect(() => {
-    if (localStoredUser) {
-      const storedUser = JSON.parse(localStoredUser);
-      setUser(storedUser);
-      setToken(storedUser.token);
+    if (user) {
+      setUser(user);
+      setToken(user.token);
     }
-  }, []);
+  }, [user]);
 
   const handleLogout = () => {
     window.localStorage.removeItem('loggedReservationsAppUser');

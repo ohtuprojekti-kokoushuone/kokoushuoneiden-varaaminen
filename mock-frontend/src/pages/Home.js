@@ -6,9 +6,6 @@ import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 
 const Home = ({ user }) => {
-  if (!user) {
-    return <Navigate to="/" />;
-  }
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
@@ -16,7 +13,12 @@ const Home = ({ user }) => {
       setRooms(res);
     });
   }, []);
-  /*TO DO: jakaa huoneet parametrein: success, warning, danger => bg*/
+
+  if (!user) {
+    return <Navigate to="/" />;
+  }
+
+  /*TODO: jakaa huoneet parametrein: success, warning, danger => bg*/
   const linkStyle = {
     textDecoration: 'none',
     color: 'white'

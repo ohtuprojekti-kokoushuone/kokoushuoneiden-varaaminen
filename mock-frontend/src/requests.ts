@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ReservationObject, Room } from './types/common';
 
-let token = null
+let token = null;
 
 export function setToken(newToken: any) {
   token = `bearer ${newToken}`;
