@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getRoomById } from '../requests.ts';
 import Room from '../components/Room.js';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 const RoomInfo = () => {
   const [room, setValue] = useState('');
   const id = useParams().id;
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     getRoomById(id).then((res) => {
@@ -17,12 +20,12 @@ const RoomInfo = () => {
     <div className="container text-center">
       <div className="d-grid gap-3 col-8 mx-auto">
         <Room room={room} key={room.id}></Room>
-        <Link to={`/CreateReservation/${room.id}`} className="btn btn-primary btn">
+        <Button aria-label="Siirry varaussivulle" onClick={() => navigate(`/CreateReservation/${room.id}`)}>
           Varaa huone
-        </Link>
-        <Link to="/roomlist" className="btn btn-primary btn">
+        </Button>
+        <Button aria-label="palaa hakutuloksiin" onClick={() => navigate('/home')}>
           Palaa hakutuloksiin
-        </Link>
+        </Button>
       </div>
     </div>
   );
