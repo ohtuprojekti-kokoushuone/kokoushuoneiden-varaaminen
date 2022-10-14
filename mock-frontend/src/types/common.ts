@@ -33,4 +33,10 @@ export type GetReservationsResponse = {
   reservations: ReservationResponse[];
 };
 
-export type Room = 'testirakennus.2001' | 'testirakennus.2002';
+export type Room = {
+  name: string;
+  address: string;
+  id: string;
+  building: string;
+  roomId: number;
+};

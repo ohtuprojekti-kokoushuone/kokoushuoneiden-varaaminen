@@ -14,11 +14,15 @@ let rooms = [
     name: 'Testirakennus, 2001, Kokoushuone 1',
     address: 'testirakennus.2001@helsinki.fi',
     id: 'testirakennus.2001',
+    building: 'Testirakennus',
+    roomId: 2001,
   },
   {
     name: 'Testirakennus, 2002, Kokoushuone 2',
     address: 'testirakennus.2002@helsinki.fi',
     id: 'testirakennus.2002',
+    building: 'Testirakennus',
+    roomId: 2002,
   },
 ];
 
