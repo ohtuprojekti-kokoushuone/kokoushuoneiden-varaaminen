@@ -3,11 +3,14 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
 import { makeReservation } from '../requests.ts';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 
 registerLocale('fi', fi);
 
-const CreateReservation = () => {
+const CreateReservation = ({ user }) => {
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const subject = useRef();

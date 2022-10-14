@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
-const ChooseTime = () => {
+const ChooseTime = ({ user }) => {
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="container text-center">
       <h4>Valitse kesto</h4>

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { getRoomsInfo } from '../requests';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Filter from './Filter';
 
-const Home = () => {
+const Home = ({ user }) => {
   const [rooms, setRooms] = useState([]);
 
   let navigate = useNavigate();
@@ -17,7 +17,11 @@ const Home = () => {
       setRooms(res);
     });
   }, []);
-  /*TO DO: jakaa huoneet parametrein: success, warning, danger => bg*/
+
+  if (!user) {
+    return <Navigate to="/" />;
+  }
+
   const linkStyle = {
     textDecoration: 'none',
     color: 'white'

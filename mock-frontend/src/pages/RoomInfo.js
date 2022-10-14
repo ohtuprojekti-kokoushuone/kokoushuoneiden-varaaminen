@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getRoomById } from '../requests.ts';
 import Room from '../components/Room.js';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
-const RoomInfo = () => {
+const RoomInfo = ({ user }) => {
   const [room, setValue] = useState('');
   const id = useParams().id;
 
@@ -15,6 +15,10 @@ const RoomInfo = () => {
       setValue(res);
     });
   }, [id]);
+
+  if (!user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="container text-center">
