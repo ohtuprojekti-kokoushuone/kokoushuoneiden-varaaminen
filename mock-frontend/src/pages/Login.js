@@ -37,7 +37,7 @@ const Login = ({ setUser, user }) => {
         <h5>Käyttäjätunnus</h5>
         <input type="text" name="name" onChange={({ target }) => setUsername(target.value)} />
         <h5>Salasana</h5>
-        <input type="text" name="name" onChange={({ target }) => setPassword(target.value)} />
+        <input type="text" name="password" onChange={({ target }) => setPassword(target.value)} />
       </form>
       <div className="col align-self-center">
         <Link to="/home" className="btn btn-primary btn-lg" onClick={handleLogin}>

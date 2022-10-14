@@ -17,6 +17,11 @@ export function getRooms() {
   return req.then((res) => res.data);
 }
 
+export function getRoomsInfo() {
+  const req = axios.get('http://localhost:3003/roomsInfo');
+  return req.then((res) => res.data);
+}
+
 export function getReservations(room: Room, today = false) {
   const req = axios.get(`http://localhost:3003/reservations/${room}?today=${today}`);
   return req.then((res) => res.data);

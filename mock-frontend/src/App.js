@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import Roomlist from './pages/Roomlist.js';
 import Home from './pages/Home.js';
 import ChooseTime from './pages/ChooseTime.js';
 import Login from './pages/Login.js';
-import ChoosePreference from './pages/ChoosePreference.js';
 import Reservations from './pages/Reservations.js';
 import RoomInfo from './pages/RoomInfo.js';
 import TimeOptions from './pages/TimeOptions.js';
@@ -43,7 +41,6 @@ const App = () => {
               <Nav className="mr-auto">
                 <Nav.Link href="/reservations">Omat varaukset</Nav.Link>
                 <Nav.Link href="/choosetime">Valitse aika</Nav.Link>
-                <Nav.Link href="/roomlist">Huoneet</Nav.Link>
                 <Nav.Link href="/" onClick={handleLogout}>
                   Kirjaudu ulos
                 </Nav.Link>
@@ -57,9 +54,7 @@ const App = () => {
         <Route path="/home" element={<Home user={user} />} />
         <Route path="/" element={<Login setUser={setUser} user={user} />} />
         <Route path="/reservations" element={<Reservations user={user} />} />
-        <Route path="/roomlist" element={<Roomlist user={user} />} />
         <Route path="/choosetime" element={<ChooseTime user={user} />} />
-        <Route path="/choosepreference" element={<ChoosePreference user={user} />} />
         <Route path="/roomlist/:id" element={<RoomInfo user={user} />} />
         <Route path="/timeOptions" element={<TimeOptions user={user} />} />
         <Route path="/createReservation/:id" element={<CreateReservation user={user} />} />

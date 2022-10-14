@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const cors = require('cors');
 const calendarService = require('./services/calendarService');
+const { checkAvailability } = require('./services/calendarService');
+const { getAvailableTimeAfter } = require('./services/functions');
 
 const app = express();
 
@@ -14,11 +16,15 @@ let rooms = [
     name: 'Testirakennus, 2001, Kokoushuone 1',
     address: 'testirakennus.2001@helsinki.fi',
     id: 'testirakennus.2001',
+    building: 'Testirakennus',
+    roomId: 2001,
   },
   {
     name: 'Testirakennus, 2002, Kokoushuone 2',
     address: 'testirakennus.2002@helsinki.fi',
     id: 'testirakennus.2002',
+    building: 'Testirakennus',
+    roomId: 2002,
   },
 ];
 
@@ -37,6 +43,30 @@ let users = [
 
 app.get('/rooms', (req, res) => {
   res.json(rooms);
+});
+
+app.get('/roomsInfo', async (req, res) => {
+  const start = new Date();
+  const end = new Date(start.getTime());
+  end.setDate(start.getDate() + 1);
+
+  const result = await Promise.all(
+    rooms.map(async (room) => {
+      const data = await checkAvailability(room.id, start.toISOString(), end.toISOString());
+      room.available = true;
+
+      if (data) {
+        const available = getAvailableTimeAfter(start, data);
+        room.availableTime = available.earliestTime;
+        room.available = available.isAvailable;
+      }
+      return room;
+    })
+  );
+
+  //console.log('DATA: ', result);
+
+  res.json(result);
 });
 
 app.get('/rooms/:id', async (req, res) => {
