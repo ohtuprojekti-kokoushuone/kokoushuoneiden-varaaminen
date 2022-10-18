@@ -1,5 +1,3 @@
-//import mongoose from 'mongoose';
-
 const mongoose = require('mongoose');
 
 const db = mongoose.connection;
@@ -290,6 +288,7 @@ console.log('IFFI');
   },
 };
 
+/*
 async function test() {
   const testObject = {
     calendarEventId: 'testiid1',
@@ -331,13 +330,13 @@ async function test() {
     console.log('r', r.subject);
   }
 
-  /*
+
   r = await ReservationHandler.findAllReservations();
   console.log('r', r);
 
   r = await ReservationHandler.deleteReservation('testiid8');
   console.log('r', r);
-  */
+
 
   const testObject2 = {
     calendarEventId: 'testiid8',
@@ -359,10 +358,10 @@ async function test() {
   let overlapping = await ReservationHandler.findOverlappingReservations(testObject2.start, testObject2.end);
   console.log('overlapping', overlapping);
 }
-
+*/
 //test();
 module.exports = ReservationHandler;
-
+/*
 const clendarEvent = {
   '@odata.etag': 'W/"sPUszM11nUeM4SoSVWTf7wAC7gmQxQ=="',
   id: 'AAMkADljZWQ0YTcyLTk2MTMtNGQyNy1iODkyLWJlNzdhM2QyOTYxYwBGAAAAAAAVJbGLLYkZSZ6DNG0OxtqxBwDY1HQvVZgvSbcoVU76nQLnAAAAAAENAACw9SzMzXWdR4zhKhJVZN-vAALuC40rAAA=',
@@ -450,3 +449,4 @@ const clendarEvent = {
   'calendar@odata.navigationLink':
     "https://graph.microsoft.com/v1.0/users('testirakennus.113@ad.helsinki.fi')/calendars('AAMkADljZWQ0YTcyLTk2MTMtNGQyNy1iODkyLWJlNzdhM2QyOTYxYwBGAAAAAAAVJbGLLYkZSZ6DNG0OxtqxBwDY1HQvVZgvSbcoVU76nQLnAAAAAAEGAACw9SzMzXWdR4zhKhJVZN-vAAKuQ-AFAAA=')",
 };
+*/

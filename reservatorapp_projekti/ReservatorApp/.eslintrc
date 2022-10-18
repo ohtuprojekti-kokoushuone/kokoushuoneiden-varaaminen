@@ -11,7 +11,7 @@
     "ecmaVersion": "latest"
   },
   "rules": {
-    "indent": ["warn", 2],
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
     "linebreak-style": 0,
     "quotes": ["warn", "single"],
     "semi": ["warn", "always"],
