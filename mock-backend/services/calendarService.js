@@ -9,7 +9,6 @@ const token = process.env.REQUEST_TOKEN;
 
 async function getReservations(room, today = false) {
   console.log("GETTING RESERVATIONS FOR ROOM", room);
-  console.log("url", `${baseUrl}/calendar/${room}@${domain}/reservations?today=${today}&token=${token}`)
   try {
     const response = await axios.default.get(
       `${baseUrl}/calendar/${room}@${domain}/reservations?today=${today}&token=${token}`
@@ -25,7 +24,6 @@ async function getReservations(room, today = false) {
 
 async function reserveRoom(room, reservationObj) {
   console.log("CREATING RESERVATION:", room, reservationObj)
-  
   try {
     const response = await axios.default.post(
       `${baseUrl}/calendar/${room}@${domain}/reservations?token=${token}`, reservationObj
