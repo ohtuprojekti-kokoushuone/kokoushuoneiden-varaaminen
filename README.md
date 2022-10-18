@@ -1,5 +1,7 @@
 # Helsingin Yliopiston Ohjelmistotuotantoprojekti 
 
+![main](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/actions/workflows/main.yml/badge.svg)
+
 Sovellus Helsingin Yliopiston tietojenkäsittelytieteen osaston kokoushuoneiden varaamiseen (Web/Mobiili)
 
 Sovelluksen avulla käyttäjä voi selata vapaita kokoushuoneita sekä varata niitä 
