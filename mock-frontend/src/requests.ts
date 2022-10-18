@@ -11,6 +11,8 @@ export async function login(credentials: any) {
   return res.data;
 }
 
+const test = 'test';
+
 export function getRooms() {
   const req = axios.get('http://localhost:3003/rooms');
   return req.then((res) => res.data);
