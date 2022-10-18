@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -15,6 +15,7 @@ const ChooseTime = ({ user }) => {
   const [rooms, setRooms] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const subject = useRef();
 
   useEffect(() => {
     getRooms().then((res) => setRooms(res));
@@ -27,6 +28,8 @@ const ChooseTime = ({ user }) => {
         <button className="btn-dark text-white p-1 px-2 mx-4 btn fw-bold mb-2">Physicum</button>
         <button className="btn-dark text-white p-1 px-2 mx-4 btn fw-bold mb-2">Chemicum</button>
       </div>
+      <h5>Aihe</h5>
+      <input ref={subject} type="text" name="subject" placeholder="Syötä aihe" required />
       <h5>Valitse alku</h5>
       <DatePicker
         dateFormat="dd/MM/yyyy HH:mm"
