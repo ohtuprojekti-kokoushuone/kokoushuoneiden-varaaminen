@@ -40,7 +40,7 @@ jobs:
       - name: Install packages
         run: npm i
       - name: Run ESLint
-        run: eslint .
+        run: npx eslint .
 
   lint_frontend:
     runs-on: ubuntu-latest
@@ -56,4 +56,4 @@ jobs:
       - name: Install packages
         run: npm i
       - name: Run ESLint
-        run: eslint .
+        run: npx eslint .
