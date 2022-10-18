@@ -89,6 +89,18 @@ app.get('/reservations/:room', async (req, res) => {
   }
 });
 
+app.get('/reservations/:room/:reservationId', async (req, res) => {
+  const { room, reservationId } = req.params;
+  try {
+    const data = await calendarService.getReservationById(room, reservationId);
+    res.end(JSON.stringify(data));
+  } catch (error) {
+    const message = error.response.data.message || 'Error: Error in getting event';
+    const status = error.response.status || 400;
+    res.status(status).end(JSON.stringify(message));
+  }
+});
+
 app.post('/reservations/:room', async (req, res) => {
   const room = req.params.room;
   console.log('BODY:', req.body);
