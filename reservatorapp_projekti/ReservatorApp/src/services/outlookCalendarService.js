@@ -381,7 +381,6 @@ async function getDateTimesInUTC(reservation) {
 
     let startDate = formatISO9075(adjustedStart);
     let endDate = formatISO9075(adjustedEnd);
-    console.log('TULI');
 
     //let startDate = adjustedStart;
     //let endDate = adjustedEnd;

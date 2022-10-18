@@ -1,49 +1,82 @@
 import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Link } from 'react-router-dom';
-import { getRooms } from '../requests';
-import { Table } from 'react-bootstrap';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { getRoomsInfo } from '../requests';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Filter from './Filter';
 
-const Home = () => {
+const Home = ({ user }) => {
   const [rooms, setRooms] = useState([]);
 
+  let navigate = useNavigate();
+
   useEffect(() => {
-    getRooms().then((res) => {
+    getRoomsInfo().then((res) => {
       setRooms(res);
     });
   }, []);
 
-  return (
-    <div className="container text-center">
-      <h1>Vapaat huoneet</h1>
-      <Table striped hover>
-        <thead>
-          <tr>
-            <th scope="col">Huoneen numero</th>
-            <th scope="col">Huoneen nimi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rooms.map((room) => (
-            <tr className="table-success" key={room.id}>
-              <td>{room.id}</td>
-              <td>{room.name}</td>
-              <td>
-                <Link to={`/roomlist/${room.id}`} className="btn btn-primary btn">
-                  Huoneen tiedot
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+  if (!user) {
+    return <Navigate to="/" />;
+  }
 
-      <div className="d-grid gap-3 col-8 mx-auto">
-        <Link to="/choosetime" className="btn btn-primary btn-lg">
-          Valitse aika
-        </Link>
+  const linkStyle = {
+    textDecoration: 'none',
+    color: 'white'
+  };
+
+  return (
+    <Container>
+      <div>
+        <Filter />
       </div>
-    </div>
+      <>
+        {rooms.map((room) => {
+          let availableText = '';
+          let roomInfo = room.available
+            ? { availability: 'Vapaa', cardType: 'success' }
+            : { availability: 'Varattu', cardType: 'danger' };
+
+          if (room.availableTime) {
+            const now = new Date();
+            const availableTime = new Date(room.availableTime);
+            const time = availableTime.toLocaleString('fi-FI');
+            availableText = room.available ? 'Huone on vapaa ' + time + ' asti' : 'Huone vapautuu ' + time;
+
+            let diffInMinutes = Math.trunc((availableTime.getTime() - now.getTime()) / 1000 / 60);
+
+            if (!room.available) {
+              if (diffInMinutes < 30) {
+                roomInfo = { availability: 'Vapautumassa', cardType: 'warning' };
+                availableText += ' (' + diffInMinutes + ' min)';
+              }
+            }
+          }
+
+          return (
+            <Card bg={roomInfo.cardType} key={room.id} text={'white'} style={{ width: '28rem' }} className="mb-2">
+              <Link to={`/roomlist/${room.id}`} key={room.id} style={linkStyle}>
+                <Card.Header>{room.id}</Card.Header>
+                <Card.Body>
+                  <Card.Title>{roomInfo.availability}</Card.Title>
+                  <Card.Text>{room.name}</Card.Text>
+                  <Card.Text>{availableText}</Card.Text>
+                </Card.Body>
+              </Link>
+              <Button
+                aria-label="Siirry varaussivulle"
+                variant="primary"
+                onClick={() => navigate(`/CreateReservation/${room.id}`)}
+              >
+                Varaa huone
+              </Button>
+            </Card>
+          );
+        })}
+      </>
+    </Container>
   );
 };
 

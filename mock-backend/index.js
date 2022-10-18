@@ -1,6 +1,10 @@
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const cors = require('cors');
 const calendarService = require('./services/calendarService');
+const { checkAvailability } = require('./services/calendarService');
+const { getAvailableTimeAfter } = require('./services/functions');
 
 const app = express();
 
@@ -12,16 +16,57 @@ let rooms = [
     name: 'Testirakennus, 2001, Kokoushuone 1',
     address: 'testirakennus.2001@helsinki.fi',
     id: 'testirakennus.2001',
+    building: 'Testirakennus',
+    roomId: 2001,
   },
   {
     name: 'Testirakennus, 2002, Kokoushuone 2',
     address: 'testirakennus.2002@helsinki.fi',
     id: 'testirakennus.2002',
+    building: 'Testirakennus',
+    roomId: 2002,
+  },
+];
+
+let users = [
+  {
+    id: '1',
+    username: 'user1',
+    password: '000',
+  },
+  {
+    id: '2',
+    username: 'user2',
+    password: '111',
   },
 ];
 
 app.get('/rooms', (req, res) => {
   res.json(rooms);
+});
+
+app.get('/roomsInfo', async (req, res) => {
+  const start = new Date();
+  const end = new Date(start.getTime());
+  end.setDate(start.getDate() + 1);
+
+  const result = await Promise.all(
+    rooms.map(async (room) => {
+      const data = await checkAvailability(room.id, start.toISOString(), end.toISOString());
+      room.available = true;
+
+      if (data) {
+        const available = getAvailableTimeAfter(start, data);
+        room.availableTime = available.earliestTime;
+        room.available = available.isAvailable;
+      }
+      return room;
+    })
+  );
+
+  //console.log('DATA: ', result);
+
+  res.json(result);
 });
 
 app.get('/rooms/:id', async (req, res) => {
@@ -123,6 +168,57 @@ app.post('/reservations/:room/availability', async (req, res) => {
     let status = error.response?.status ? error.response.status : 400;
     res.status(status).end(JSON.stringify(error.response?.data));
   }
+});
+
+app.get('/users', (req, res) => {
+  res.json(users);
+});
+
+app.post('/users', (req, res) => {
+  const { username, password } = req.body;
+
+  if (!password || password.length < 3) {
+    return res.status(400).json({
+      error: 'invalid password',
+    });
+  }
+
+  const existingUser = users.find((u) => u.username === username);
+  if (existingUser) {
+    return res.status(400).json({
+      error: 'username is already in use',
+    });
+  }
+
+  const user = {
+    username: username,
+    password: password,
+  };
+
+  users = users.concat(user);
+
+  res.status(201).json(user);
+});
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  const user = users.find((u) => u.username === username);
+
+  if (!(user && user.password === password)) {
+    return res.status(401).json({
+      error: 'invalid username or password',
+    });
+  }
+
+  const userForToken = {
+    username: user.username,
+    id: user.id,
+  };
+
+  const token = jwt.sign(userForToken, process.env.SECRET);
+
+  res.status(200).send({ token, username: user.username });
 });
 
 const PORT = 3003;

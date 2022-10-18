@@ -1,8 +1,24 @@
 import axios from 'axios';
 import { ReservationObject, Room } from './types/common';
 
+let token = null;
+
+export function setToken(newToken: any) {
+  token = `bearer ${newToken}`;
+}
+
+export async function login(credentials: any) {
+  const res = await axios.post("http://localhost:3003/login", credentials);
+  return res.data;
+}
+
 export function getRooms() {
   const req = axios.get('http://localhost:3003/rooms');
+  return req.then((res) => res.data);
+}
+
+export function getRoomsInfo() {
+  const req = axios.get('http://localhost:3003/roomsInfo');
   return req.then((res) => res.data);
 }
 

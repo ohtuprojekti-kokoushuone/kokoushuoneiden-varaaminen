@@ -1,42 +1,68 @@
 import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { getRooms } from '../requests';
-import { Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { getRoomsInfo } from '../requests';
+import { Link, Navigate } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 
-const Roomlist = () => {
+const Roomlist = ({ user }) => {
+  if (!user) {
+    return <Navigate to="/" />;
+  }
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    getRooms().then((res) => {
+    getRoomsInfo().then((res) => {
       setRooms(res);
     });
   }, []);
 
+  const linkStyle = {
+    textDecoration: 'none',
+    color: 'white'
+  };
+
+  function colorToCard(color) {
+    if (color === 'green') {
+      return 'success';
+    } else if (color === 'yellow') {
+      return 'warning';
+    }
+    return 'danger';
+  }
+
   return (
-    <div className="container">
-      <Table striped hover>
-        <thead>
-          <tr>
-            <th scope="col">Huoneen numero</th>
-            <th scope="col">Huoneen nimi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rooms.map((room) => (
-            <tr className="table-success" key={room.id}>
-              <td>{room.id}</td>
-              <td>{room.name}</td>
-              <td>
-                <Link to={`/roomlist/${room.id}`} className="btn btn-primary btn">
-                  Huoneen tiedot
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+    <Container text-center>
+      <>
+        {rooms.map((room) => {
+          let availableText = '';
+          if (room.earliestTime) {
+            const time = new Date(room.earliestTime).toLocaleString('fi-FI');
+            availableText =
+              room.availableColor === 'green' ? 'Huone on vapaa ' + time + ' asti' : 'Huone vapautuu ' + time;
+          }
+
+          return (
+            <Card
+              bg={colorToCard(room.availableColor)}
+              key={room.id}
+              text={'white'}
+              style={{ width: '80vh' }}
+              className="mb-2"
+            >
+              <Link to={`/roomlist/${room.id}`} key={room.id} style={linkStyle}>
+                <Card.Header>{room.id}</Card.Header>
+                <Card.Body>
+                  <Card.Title>Vapaa</Card.Title>
+                  <Card.Text>{room.name}</Card.Text>
+                  <Card.Text>{availableText}</Card.Text>
+                </Card.Body>
+              </Link>
+            </Card>
+          );
+        })}
+      </>
+    </Container>
   );
 };
 
