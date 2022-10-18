@@ -1,10 +1,6 @@
 name: Node.js CI
 
-on:
-  push:
-    branches: ["main", "fixed_github_actions"]
-  pull_request:
-    branches: ["main", "fixed_github_actions"]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -29,3 +25,35 @@ jobs:
           cd mock-frontend
           npm install
           CI=false npm run build --if-present
+
+  lint_channel:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: mock-backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install packages
+        run: npm i
+      - name: Run ESLint
+        run: npx eslint . --max-warnings=0
+
+  lint_frontend:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: mock-frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install packages
+        run: npm i
+      - name: Run ESLint
+        run: npx eslint . --max-warnings=0

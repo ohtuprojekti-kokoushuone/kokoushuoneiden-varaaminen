@@ -1,7 +1,6 @@
 // Copyright (c) Niko Mäkitalo
 // Licensed under the MIT License.
 
-
 const router = require('express-promise-router')();
 
 /*

@@ -151,11 +151,34 @@ router.get('/:calendarUserId/reservations/:start/:end', async function (req, res
     const { calendarUserId, start, end } = req.params;
     console.log('PARAMS:', req.params);
     const data = await outlookService.checkAvailability(calendarUserId, start, end);
-    if (data.value.length === 0) {
+    if (data.length === 0) {
       res.json();
       return;
     }
-    res.json(data.value);
+    res.json(data);
+  } catch (error) {
+    res.status(400);
+    const errorResponse = {
+      message: '' + error,
+    };
+    res.end(JSON.stringify(errorResponse, null, 4));
+    return;
+  }
+});
+
+router.get('/:calendarUserId/reservations/:id', async function (req, res) {
+  try {
+    if (!(await isRequestAuthorized(req))) {
+      res.status(401);
+      const errorResponse = {
+        message: 'Unauthorized request: Check request_token authorization header.',
+      };
+      res.end(JSON.stringify(errorResponse, null, 4));
+      return;
+    }
+    const { calendarUserId, id } = req.params;
+    const data = await outlookService.getEventById(calendarUserId, id);
+    res.json(data);
   } catch (error) {
     res.status(400);
     const errorResponse = {
@@ -181,16 +204,17 @@ router.post('/:calendarUserId/reservations', async function (req, res) {
       return;
     }
 
-    console.log('BODY', req.body);
+    console.log('BODY', req.body); // give organizer as an email address
     if (req.body.subject && req.body.start && req.body.end) {
       // TODO check that exist and valid
       let reservation = {
         subject: req.body.subject,
         start: req.body.start,
         end: req.body.end,
-        organizer: req.body.organizer ? req.body.organizer : req.params.calendarUserId,
+        organizer: req.params.calendarUserId,
         roomCalendarId: req.params.calendarUserId,
-        attendees: emailsToAttendees(req.body.attendees) || [],
+        attendees: getAttendees(req.body, req.params.calendarUserId),
+        body: req.body.body,
       };
 
       console.log('RESERVATION IN calendar.js', reservation);
@@ -332,6 +356,23 @@ const emailsToAttendees = (emails) => {
       type: 'required',
     };
   });
+};
+
+const getAttendees = (body, calendarUserId) => {
+  let attendees = [];
+  if (body.organizer !== calendarUserId) {
+    attendees.push({
+      emailAddress: {
+        address: body.organizer,
+        name: body.organizer,
+      },
+      type: 'required',
+    });
+  }
+  if (body.attendees && body.attendees.length > 0) {
+    attendees = attendees.concat(emailsToAttendees(body.attendees));
+  }
+  return attendees;
 };
 
 module.exports = router;
