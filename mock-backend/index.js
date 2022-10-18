@@ -52,19 +52,21 @@ app.get('/roomsInfo', async (req, res) => {
 
   const result = await Promise.all(
     rooms.map(async (room) => {
-      const data = await checkAvailability(room.id, start.toISOString(), end.toISOString());
-      room.available = true;
+      const copied = Object.assign({}, room);
+      const data = await checkAvailability(copied.id, start.toISOString(), end.toISOString());
+      copied.available = true;
 
       if (data) {
         const available = getAvailableTimeAfter(start, data);
-        room.availableTime = available.earliestTime;
-        room.available = available.isAvailable;
+        copied.availableTime = available.earliestTime;
+        copied.available = available.isAvailable;
       }
-      return room;
+
+      return copied;
     })
   );
 
-  //console.log('DATA: ', result);
+  //console.log('RESULT: ', result);
 
   res.json(result);
 });

@@ -7,10 +7,9 @@ import Reservations from './pages/Reservations.js';
 import RoomInfo from './pages/RoomInfo.js';
 import TimeOptions from './pages/TimeOptions.js';
 import CreateReservation from './pages/CreateReservation.js';
-import { Navbar, Nav } from 'react-bootstrap';
-import logo from './hy-logo-white.png';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { setToken } from './requests.ts';
+import NavigationBar from './components/NavigationBar.js';
 
 const App = () => {
   const localStoredUser = window.localStorage.getItem('loggedReservationsAppUser');
@@ -23,41 +22,30 @@ const App = () => {
     }
   }, [user]);
 
-  const handleLogout = () => {
-    window.localStorage.removeItem('loggedReservationsAppUser');
-  };
+  if (!user) {
+    return (
+      <Router>
+        <NavigationBar user={user} />
+        <Routes>
+          <Route path="/" element={<Login setUser={setUser} />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Router>
+    );
+  }
 
   return (
     <Router>
-      <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
-        <div className="container">
-          <Navbar.Brand href="/home">
-            <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
-            Kokoushuonevaraus
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            {user === null ? null : (
-              <Nav className="mr-auto">
-                <Nav.Link href="/reservations">Omat varaukset</Nav.Link>
-                <Nav.Link href="/choosetime">Valitse aika</Nav.Link>
-                <Nav.Link href="/" onClick={handleLogout}>
-                  Kirjaudu ulos
-                </Nav.Link>
-              </Nav>
-            )}
-          </Navbar.Collapse>
-        </div>
-      </Navbar>
+      <NavigationBar user={user} />
 
       <Routes>
-        <Route path="/home" element={<Home user={user} />} />
-        <Route path="/" element={<Login setUser={setUser} user={user} />} />
-        <Route path="/reservations" element={<Reservations user={user} />} />
-        <Route path="/choosetime" element={<ChooseTime user={user} />} />
-        <Route path="/roomlist/:id" element={<RoomInfo user={user} />} />
-        <Route path="/timeOptions" element={<TimeOptions user={user} />} />
-        <Route path="/createReservation/:id" element={<CreateReservation user={user} />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/reservations" element={<Reservations />} />
+        <Route path="/choosetime" element={<ChooseTime />} />
+        <Route path="/roomlist/:id" element={<RoomInfo />} />
+        <Route path="/timeOptions" element={<TimeOptions />} />
+        <Route path="/createReservation/:id" element={<CreateReservation />} />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </Router>
   );
