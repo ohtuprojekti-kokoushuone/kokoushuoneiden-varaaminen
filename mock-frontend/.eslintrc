@@ -4,6 +4,7 @@
     "es2021": true,
     "jest": true
   },
+
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -19,6 +20,11 @@
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     "indent": ["warn", 2],
     "linebreak-style": 0,
@@ -34,6 +40,7 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/ban-ts-comment": "off",
     "prettier/prettier": "warn",
     "react/display-name": "off",
     "react/no-children-prop": "off",
