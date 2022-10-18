@@ -21,6 +21,11 @@ const ChooseTime = ({ user }) => {
 
   return (
     <div className="container text-center">
+      <div>
+        <button className="btn-dark text-white p-1 px-2 mx-4 btn fw-bold mb-2">Exactum</button>
+        <button className="btn-dark text-white p-1 px-2 mx-4 btn fw-bold mb-2">Physicum</button>
+        <button className="btn-dark text-white p-1 px-2 mx-4 btn fw-bold mb-2">Chemicum</button>
+      </div>
       <h5>Valitse alku</h5>
       <DatePicker
         dateFormat="dd/MM/yyyy HH:mm"
