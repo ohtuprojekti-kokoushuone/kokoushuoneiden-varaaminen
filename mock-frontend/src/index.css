@@ -26,3 +26,9 @@ h5 {
 .table > :not(:first-child) {
   border-top: 0;
 }
+
+.react-datepicker-popper {
+  inset: auto !important;
+  transform: translate(-50%, 0) !important;
+  left: 50% !important;
+}

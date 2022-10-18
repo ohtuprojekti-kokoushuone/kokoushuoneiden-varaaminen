@@ -19,6 +19,7 @@ const Reservation = ({ res }) => {
               <Button
                 variant="primary"
                 style={{ marginRight: '10px' }}
+                autoFocus
                 onClick={() => {
                   const email = reservation.organizer.email;
                   deleteReservation(email.substr(0, email.indexOf('@')), reservation.id).then((result) => {
