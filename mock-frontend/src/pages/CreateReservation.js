@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 
 registerLocale('fi', fi);
 
-const defaultDuration = 30;
+const defaultDuration = 60;
 
 const CreateReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
