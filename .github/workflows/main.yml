@@ -29,3 +29,31 @@ jobs:
           cd mock-frontend
           npm install
           CI=false npm run build --if-present
+
+  lint_channel:
+    defaults:
+      run:
+        working-directory: mock-backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install packages
+        run: npm i
+      - name: Run ESLint
+        run: eslint .
+
+  lint_frontend:
+    defaults:
+      run:
+        working-directory: mock-frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install packages
+        run: npm i
+      - name: Run ESLint
+        run: eslint .
