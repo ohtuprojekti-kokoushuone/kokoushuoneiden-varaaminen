@@ -27,6 +27,8 @@ jobs:
           CI=false npm run build --if-present
 
   lint_channel:
+    runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: mock-backend
@@ -41,6 +43,8 @@ jobs:
         run: eslint .
 
   lint_frontend:
+    runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: mock-frontend
