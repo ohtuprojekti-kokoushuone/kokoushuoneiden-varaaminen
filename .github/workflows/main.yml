@@ -1,4 +1,6 @@
-name: Node.js CI
+name: CI Pipeline
+
+run-name: ${{ github.event_name }} by @${{ github.actor }}
 
 on: [push, pull_request]
 
@@ -11,7 +13,8 @@ jobs:
         node-version: [14.x, 16.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -40,7 +43,7 @@ jobs:
       - name: Install packages
         run: npm i
       - name: Run ESLint
-        run: npx eslint . --max-warnings=0
+        run: npm run lint
 
   lint_frontend:
     runs-on: ubuntu-latest
@@ -56,4 +59,20 @@ jobs:
       - name: Install packages
         run: npm i
       - name: Run ESLint
-        run: npx eslint . --max-warnings=0
+        run: npm run lint
+
+  lint_reservatorapp:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: reservatorapp_projekti/ReservatorApp
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install packages
+        run: npm i
+      - name: Run ESLint
+        run: npm run lint
