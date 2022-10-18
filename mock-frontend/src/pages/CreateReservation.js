@@ -3,21 +3,29 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
 import { makeReservation } from '../requests.ts';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 registerLocale('fi', fi);
 
-const CreateReservation = ({ user }) => {
-  if (!user) {
-    return <Navigate to="/" />;
-  }
+const defaultDuration = 30;
+
+const CreateReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const end = new Date();
+  end.setMinutes(end.getMinutes() + defaultDuration);
+  const [endDate, setEndDate] = useState(end);
+
   const subject = useRef();
+  const datePickerEnd = useRef();
   const id = useParams().id;
 
   function handleClick() {
+    console.log(startDate, endDate);
     if (!subject.current.reportValidity()) return;
+
+    if (endDate <= startDate) {
+      return;
+    }
 
     const reservation = {
       subject: subject.current.value,
@@ -34,6 +42,15 @@ const CreateReservation = ({ user }) => {
     });
   }
 
+  function handleStartDateChange(date) {
+    setStartDate(date);
+    if (endDate <= date) {
+      let newDate = new Date(date.getTime());
+      newDate.setMinutes(date.getMinutes() + defaultDuration);
+      setEndDate(newDate);
+    }
+  }
+
   return (
     <div className="container text-center">
       <h5>Aihe</h5>
@@ -42,7 +59,7 @@ const CreateReservation = ({ user }) => {
       <DatePicker
         dateFormat="dd/MM/yyyy HH:mm"
         selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        onChange={(date) => handleStartDateChange(date)}
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
@@ -51,6 +68,7 @@ const CreateReservation = ({ user }) => {
       />
       <h5>Valitse loppu</h5>
       <DatePicker
+        ref={datePickerEnd}
         dateFormat="dd/MM/yyyy HH:mm"
         selected={endDate}
         onChange={(date) => setEndDate(date)}

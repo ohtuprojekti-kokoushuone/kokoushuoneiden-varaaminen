@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { login, setToken } from '../requests.ts';
+import Button from 'react-bootstrap/Button';
 
-const Login = ({ setUser, user }) => {
+const Login = ({ setUser }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  if (user) {
-    return <Navigate to="/home" />;
-  }
+  const errorMessage = useRef();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -24,27 +22,28 @@ const Login = ({ setUser, user }) => {
       setToken(user.token);
       setUsername('');
       setPassword('');
-      window.location.href = 'http://localhost:3000/home';
+      return <Navigate to="/home" />;
     } catch (exception) {
-      console.log('wrong crdentials');
+      console.log('wrong credentials');
+      errorMessage.current.innerText = 'Wrong credentials!';
     }
   };
 
   return (
     <div className="container text-center">
       <h1>Kirjaudu sisään</h1>
-      <form>
+      <p ref={errorMessage} style={{ color: 'red' }}></p>
+      <form onSubmit={handleLogin}>
         <h5>Käyttäjätunnus</h5>
-        <input type="text" name="name" onChange={({ target }) => setUsername(target.value)} />
+        <input type="text" name="name" required onChange={({ target }) => setUsername(target.value)} />
         <h5>Salasana</h5>
-        <input type="text" name="password" onChange={({ target }) => setPassword(target.value)} />
+        <input type="password" name="password" required onChange={({ target }) => setPassword(target.value)} />
+        <div className="col align-self-center">
+          <Button type="submit">Kirjaudu</Button>
+        </div>
       </form>
-      <div className="col align-self-center">
-        <Link to="/home" className="btn btn-primary btn-lg" onClick={handleLogin}>
-          Kirjaudu
-        </Link>
-      </div>
     </div>
   );
 };
+
 export default Login;
