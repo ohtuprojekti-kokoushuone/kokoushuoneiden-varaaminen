@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
-import { checkAvailability, getRooms } from '../requests';
+import { checkAvailability, getRoomsInfo } from '../requests';
 import Filter from './Filter';
+import RoomCard from '../components/RoomCard.js';
 
 registerLocale('fi', fi);
 
@@ -13,7 +14,7 @@ const ChooseTime = () => {
   const [endDate, setEndDate] = useState(new Date());
 
   useEffect(() => {
-    getRooms().then((res) => setRooms(res));
+    getRoomsInfo().then((res) => setRooms(res));
   }, []);
 
   return (
