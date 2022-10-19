@@ -21,8 +21,8 @@ const Filter = () => {
     filterRooms();
   }
 
-  const filterRooms = () => {
-    let cardList = document.getElementsByClassName('card');
+  function filterRooms() {
+    const cardList = document.querySelectorAll('div[data-name]');
     for (const card of cardList) {
       card.classList.remove('hidden');
     }
@@ -36,24 +36,22 @@ const Filter = () => {
         card.classList.add('hidden');
       }
     }
-  };
+  }
+
+  const buttonClass = 'filter fw-bold mb-2 mx-2';
 
   return (
     <div>
-      <Button
-        variant="dark"
-        className="filter fw-bold mb-2 mx-2"
-        onClick={(el) => toggleFilter(el.target, 'testirakennus')}
-      >
+      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'testirakennus')}>
         Testirakennus
       </Button>
-      <Button variant="dark" className="filter fw-bold mb-2 mx-2" onClick={(el) => toggleFilter(el.target, 'Exactum')}>
+      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Exactum')}>
         Exactum
       </Button>
-      <Button variant="dark" className="filter fw-bold mb-2 mx-2" onClick={(el) => toggleFilter(el.target, 'Physicum')}>
+      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Physicum')}>
         Physicum
       </Button>
-      <Button variant="dark" className="filter fw-bold mb-2 mx-2" onClick={(el) => toggleFilter(el.target, 'Chemicum')}>
+      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Chemicum')}>
         Chemicum
       </Button>
       <Link to="/choosetime" className="btn btn-primary btn-sm mb-2">

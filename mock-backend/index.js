@@ -38,7 +38,7 @@ let mockRooms = [
     available: true,
   },
   {
-    name: 'Exactum, A304, Kokoushuone 3',
+    name: 'Exactum, A304, Kokoushuone 4',
     address: 'Exactum.A304@ad.helsinki.fi',
     id: 'Exactum.A304',
     building: 'Exactum',
@@ -46,7 +46,7 @@ let mockRooms = [
     available: true,
   },
   {
-    name: 'Physicum, B202, Kokoushuone 3',
+    name: 'Physicum, B202, Kokoushuone 5',
     address: 'Physicum.B202@ad.helsinki.fi',
     id: 'Physicum.B202',
     building: 'Physicum',
@@ -54,7 +54,7 @@ let mockRooms = [
     available: false,
   },
   {
-    name: 'Chemicum, A102, Kokoushuone 3',
+    name: 'Chemicum, A102, Kokoushuone 6',
     address: 'Chemicum.A102@ad.helsinki.fi',
     id: 'Chemicum.A102',
     building: 'Chemicum',
@@ -62,7 +62,7 @@ let mockRooms = [
     available: true,
   },
   {
-    name: 'Chemicum, C101, Kokoushuone 3',
+    name: 'Chemicum, C101, Kokoushuone 7',
     address: 'Chemicum.C101@ad.helsinki.fi',
     id: 'Chemicum.C101',
     building: 'Chemicum',
