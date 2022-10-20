@@ -1,9 +1,7 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const baseUrl = process.env.NODE_ENV === 'development'
-  ? process.env.DEV_BASE_URL
-  : process.env.BASE_URL
+const baseUrl = process.env.NODE_ENV === 'development' ? process.env.DEV_BASE_URL : process.env.BASE_URL;
 const domain = process.env.DOMAIN;
 const token = process.env.REQUEST_TOKEN;
 
