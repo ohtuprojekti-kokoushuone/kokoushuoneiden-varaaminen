@@ -2,4 +2,4 @@
 **/build/
 **/requests/
 .env
-
+mongo_data

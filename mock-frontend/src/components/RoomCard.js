@@ -35,7 +35,14 @@ const RoomCard = ({ room }) => {
   };
 
   return (
-    <Card bg={roomInfo.cardType} key={room.id} text={'white'} style={{ width: '28rem' }} className="mb-2">
+    <Card
+      bg={roomInfo.cardType}
+      key={room.id}
+      text={'white'}
+      style={{ width: '28rem' }}
+      className="mb-2"
+      data-name={room.building}
+    >
       <Link to={`/roomlist/${room.id}`} key={room.id} style={linkStyle}>
         <Card.Header>{room.id}</Card.Header>
         <Card.Body>
