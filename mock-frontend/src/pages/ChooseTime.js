@@ -61,16 +61,3 @@ const ChooseTime = () => {
 };
 
 export default ChooseTime;
-
-//<button
-//onClick={() =>
-//  rooms.map((room) =>
-//    checkAvailability(room.id, startDate, endDate).then((res) => {
-//      console.log(res);
-//    })
-//  )
-//}
-//className="btn btn-primary btn-lg"
-//>
-//Näytä vapaat kokoushuoneet
-//</button>
