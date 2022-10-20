@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
-import { checkAvailability, getRoomsInfo } from '../requests';
+import { checkAvailability, getRoomsInfo, getReservations } from '../requests';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
 
@@ -12,10 +12,15 @@ const ChooseTime = () => {
   const [rooms, setRooms] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
     getRoomsInfo().then((res) => setRooms(res));
   }, []);
+
+  const roomsToShow = showAll
+    ? rooms
+    : rooms.filter(room => room.available)
 
   return (
     <div className="container text-center">
@@ -45,17 +50,14 @@ const ChooseTime = () => {
 
       <div className="col align-self-center">
         <button
-          onClick={() =>
-            rooms.map((room) =>
-              checkAvailability(room.id, startDate, endDate).then((res) => {
-                console.log(res);
-              })
-            )
-          }
-          className="btn btn-primary btn-lg"
-        >
-          Näytä vapaat kokoushuoneet
+          onClick={() => setShowAll(!showAll)}>
+            Näytä {showAll ? 'vapaat kokoushuoneet' : ' kaikki'}
         </button>
+      </div>
+      <div>
+        {roomsToShow.map((room) => (
+          <RoomCard room={room} key={room.id} />
+        ))}
       </div>
     </div>
   );
