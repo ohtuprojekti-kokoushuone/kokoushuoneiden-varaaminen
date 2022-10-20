@@ -43,7 +43,7 @@ const ChooseTime = () => {
       })
     );
 
-    roomstest = roomstest.filter((room) => room != false);
+    roomstest = roomstest.filter((room) => room !== false);
 
     setRoomsToShow(roomstest);
   };
