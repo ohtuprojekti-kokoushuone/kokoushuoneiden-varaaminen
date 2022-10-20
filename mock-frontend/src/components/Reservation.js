@@ -47,6 +47,7 @@ const Reservation = ({ res }) => {
   return (
     <tr>
       <td>{res.subject}</td>
+      <td>{res.organizer.name}</td>
       <td>{start.toLocaleString('fi-FI')}</td>
       <td>{end.toLocaleString('fi-FI')}</td>
       <td>
