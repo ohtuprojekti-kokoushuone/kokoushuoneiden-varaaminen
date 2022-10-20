@@ -1,10 +1,10 @@
-require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const cors = require('cors');
 const calendarService = require('./services/calendarService');
 const { checkAvailability } = require('./services/calendarService');
 const { getAvailableTimeAfter } = require('./services/functions');
+const config = require('./utils/config');
 
 const app = express();
 
@@ -129,7 +129,7 @@ app.get('/reservations/:room', async (req, res) => {
     console.log(`found ${data.count} reservations`);
     res.end(JSON.stringify(data));
   } catch (error) {
-    res.status(error.response.status).end(JSON.stringify(error.response.data));
+    res.status(error.response?.status || 400).end(JSON.stringify(error.response?.data));
   }
 });
 
@@ -274,11 +274,10 @@ app.post('/login', (req, res) => {
     id: user.id,
   };
 
-  const token = jwt.sign(userForToken, process.env.SECRET);
+  const token = jwt.sign(userForToken, config.SECRET);
 
   res.status(200).send({ token, username: user.username });
 });
 
-const PORT = 3003;
-app.listen(PORT);
-console.log(`Server running on port ${PORT}`);
+app.listen(config.PORT);
+console.log(`Server running on port ${config.PORT}`);
