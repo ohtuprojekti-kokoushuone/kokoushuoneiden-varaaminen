@@ -42,7 +42,7 @@ async function getEvents(calendarUserId, todayOnly) {
   let syncedReservations = [];
 
   try {
-    let nowDate = getUTCNowDate(); //new Date();
+    let nowDate = getUTCNowDate();
 
     let startDate = addDays(nowDate, -1).toISOString();
     let endDate = addDays(nowDate, 1).toISOString();
@@ -87,8 +87,6 @@ async function getEvents(calendarUserId, todayOnly) {
       }
 
       existingReservations = await ReservationHandler.findAllReservationWithCalendarUserId(calendarUserId);
-      //console.log('existingReservations', existingReservations, 'count', existingReservations.length);
-      console.log('existingReservations count', existingReservations.length);
 
       const msCalendarEventsIDs = msCalendarEvents.map((o) => {
         return o.id;
@@ -113,6 +111,69 @@ async function getEvents(calendarUserId, todayOnly) {
   }
 }
 
+async function getEventById(calendarUserId, reservationId) {
+  console.log(`GETTING EVENT: ${reservationId} FROM ${calendarUserId}`);
+  try {
+    const uri = `${ENDPOINT_URI}/users/${calendarUserId}/events/${reservationId}`;
+    console.log('URI:', uri);
+    const response = await axios.default.get(uri, await getOptions());
+    console.log('GOT RESPONSE:', response.data);
+    const dbEvent = ReservationHandler.findReservationWithId(reservationId);
+    return dbEvent;
+  } catch (error) {
+    console.log('error in getting event', error.response.data.error);
+    throw Error('Error in getting event: ' + error.response.data.error.message);
+  }
+}
+
+async function checkAvailability(calendarUserId, start, end) {
+  let existingReservations = [];
+  let syncedReservations = [];
+  try {
+    const uri = `${ENDPOINT_URI}/users/${calendarUserId}/calendar/calendarView?startDateTime=${start}&endDateTime=${end}&$top=100&$orderby=start/dateTime desc`;
+
+    let response = await axios.default.get(uri, await getOptions(), start, end);
+
+    if (response.status !== 200) {
+      throw new Error('Cannot check availability');
+    }
+
+    if (response.data && response.data.value) {
+      const msCalendarEvents = response.data.value;
+
+      for (let clendarEvent of msCalendarEvents) {
+        try {
+          await ReservationHandler.upsertReservation(calendarUserId, clendarEvent);
+        } catch (error) {
+          console.log('Possible duplicate');
+        }
+      }
+
+      existingReservations = await ReservationHandler.findAllReservationWithCalendarUserId(calendarUserId);
+
+      const msCalendarEventsIDs = msCalendarEvents.map((o) => {
+        return o.id;
+      });
+      for (let dbEvent of existingReservations) {
+        if (msCalendarEventsIDs.includes(dbEvent.calendarEventId)) {
+          syncedReservations.push(dbEvent);
+        } else {
+          // mark deleted
+          dbEvent.isDeleted = true;
+          dbEvent.save();
+        }
+      }
+    }
+
+    console.log('AVAILABILITY RESPONSE', response.data);
+
+    return syncedReservations;
+  } catch (error) {
+    console.log('error in checking availability', error.response.data.error);
+    throw Error('Error in checking availability: ' + error.response.data.error.message);
+  }
+}
+
 // CREATE
 // curl -d '{"subject":"Testivaraus 01", "start": "2022-04-05T15:00:00.0000000", "end": "2022-04-05T16:00:00.0000000"}' -H "Content-Type: application/json" -X POST http://localhost:4000/calendar/testirakennus.113@ad.helsinki.fi/reservations
 async function createEvent(calendarUserId, reservation) {
@@ -134,8 +195,8 @@ async function createEvent(calendarUserId, reservation) {
   const event = {
     subject: reservation.subject,
     body: {
-      contentType: 'HTML',
-      content: 'Created from ReservatorApp',
+      contentType: 'text',
+      content: reservation.body,
     },
     start: {
       dateTime: reservation.start,
@@ -252,6 +313,7 @@ async function getOptions() {
   const options = {
     headers: {
       Authorization: `Bearer ${await getAuthToken()}`,
+      Prefer: 'outlook.body-content-type="text"',
     },
   };
   return options;
@@ -324,25 +386,6 @@ async function callApi(endpoint, accessToken) {
   }
 }
 
-async function checkAvailability(calendarUserId, start, end) {
-  try {
-    const uri = `${ENDPOINT_URI}/users/${calendarUserId}/calendar/calendarView?startDateTime=${start}&endDateTime=${end}&$top=100&$orderby=start/dateTime desc`;
-
-    let response = await axios.default.get(uri, await getOptions(), start, end);
-
-    if (response.status !== 200) {
-      throw new Error('Cannot check availability');
-    }
-
-    console.log('AVAILABILITY RESPONSE', response.data);
-
-    return response.data;
-  } catch (error) {
-    console.log('error in checking availability', error);
-    throw error;
-  }
-}
-
 module.exports = {
   callApi: callApi,
   getCalendar: getCalendar,
@@ -353,6 +396,7 @@ module.exports = {
   createSubscription: createSubscription,
   notifyNewEvent: notifyNewEvent,
   checkAvailability: checkAvailability,
+  getEventById: getEventById,
 };
 
 // Returns: { start: <time in UTC>, end: <time in UTC> }

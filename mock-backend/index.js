@@ -14,17 +14,60 @@ app.use(express.json());
 let rooms = [
   {
     name: 'Testirakennus, 2001, Kokoushuone 1',
-    address: 'testirakennus.2001@helsinki.fi',
+    address: 'testirakennus.2001@ad.helsinki.fi',
     id: 'testirakennus.2001',
     building: 'Testirakennus',
-    roomId: 2001,
+    roomId: '2001',
   },
   {
     name: 'Testirakennus, 2002, Kokoushuone 2',
-    address: 'testirakennus.2002@helsinki.fi',
+    address: 'testirakennus.2002@ad.helsinki.fi',
     id: 'testirakennus.2002',
     building: 'Testirakennus',
-    roomId: 2002,
+    roomId: '2002',
+  },
+];
+
+let mockRooms = [
+  {
+    name: 'Exactum, A101, Kokoushuone 3',
+    address: 'Exactum.A101@ad.helsinki.fi',
+    id: 'Exactum.A101',
+    building: 'Exactum',
+    roomId: 'A101',
+    available: true,
+  },
+  {
+    name: 'Exactum, A304, Kokoushuone 4',
+    address: 'Exactum.A304@ad.helsinki.fi',
+    id: 'Exactum.A304',
+    building: 'Exactum',
+    roomId: 'A304',
+    available: true,
+  },
+  {
+    name: 'Physicum, B202, Kokoushuone 5',
+    address: 'Physicum.B202@ad.helsinki.fi',
+    id: 'Physicum.B202',
+    building: 'Physicum',
+    roomId: 'B202',
+    available: false,
+  },
+  {
+    name: 'Chemicum, A102, Kokoushuone 6',
+    address: 'Chemicum.A102@ad.helsinki.fi',
+    id: 'Chemicum.A102',
+    building: 'Chemicum',
+    roomId: 'A102',
+    available: true,
+  },
+  {
+    name: 'Chemicum, C101, Kokoushuone 7',
+    address: 'Chemicum.C101@ad.helsinki.fi',
+    id: 'Chemicum.C101',
+    building: 'Chemicum',
+    roomId: 'C101',
+    available: false,
   },
 ];
 
@@ -68,7 +111,8 @@ app.get('/roomsInfo', async (req, res) => {
 
   //console.log('RESULT: ', result);
 
-  res.json(result);
+  const mockResult = result.concat(mockRooms); //TODO: remove for production
+  res.json(mockResult);
 });
 
 app.get('/rooms/:id', async (req, res) => {
@@ -86,6 +130,18 @@ app.get('/reservations/:room', async (req, res) => {
     res.end(JSON.stringify(data));
   } catch (error) {
     res.status(error.response.status).end(JSON.stringify(error.response.data));
+  }
+});
+
+app.get('/reservations/:room/:reservationId', async (req, res) => {
+  const { room, reservationId } = req.params;
+  try {
+    const data = await calendarService.getReservationById(room, reservationId);
+    res.end(JSON.stringify(data));
+  } catch (error) {
+    const message = error.response.data.message || 'Error: Error in getting event';
+    const status = error.response.status || 400;
+    res.status(status).end(JSON.stringify(message));
   }
 });
 
