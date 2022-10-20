@@ -4,11 +4,9 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Cannot connect to mongodb:'));
 //mongoose.connect('mongodb://localhost/' + config.database);
 
-require('dotenv').config()
+require('dotenv').config();
 
-const MONGODB_URI = process.env.NODE_ENV === 'development'
-  ? process.env.DEV_MONGODB_URI
-  : process.env.MONGODB_URI
+const MONGODB_URI = process.env.NODE_ENV === 'development' ? process.env.DEV_MONGODB_URI : process.env.MONGODB_URI;
 mongoose.connect(MONGODB_URI);
 
 const ReservationSchema = new mongoose.Schema(
