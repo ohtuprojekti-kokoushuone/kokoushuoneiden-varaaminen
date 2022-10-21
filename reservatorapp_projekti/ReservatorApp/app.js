@@ -147,12 +147,13 @@ function onError(error) {
 
 /**
  * Event listener for HTTP server "listening" event.
+ * not in use at this moment
  */
-
+/*
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-}
+}*/
 
 server.listen(port);
 server.on('error', onError);
