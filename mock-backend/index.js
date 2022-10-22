@@ -5,71 +5,12 @@ const calendarService = require('./services/calendarService');
 const { checkAvailability } = require('./services/calendarService');
 const { getAvailableTimeAfter } = require('./services/functions');
 const config = require('./utils/config');
+const rooms = require('./resources/rooms.json').rooms;
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-let rooms = [
-  {
-    name: 'Testirakennus, 2001, Kokoushuone 1',
-    address: 'testirakennus.2001@ad.helsinki.fi',
-    id: 'testirakennus.2001',
-    building: 'Testirakennus',
-    roomId: '2001',
-  },
-  {
-    name: 'Testirakennus, 2002, Kokoushuone 2',
-    address: 'testirakennus.2002@ad.helsinki.fi',
-    id: 'testirakennus.2002',
-    building: 'Testirakennus',
-    roomId: '2002',
-  },
-];
-
-let mockRooms = [
-  {
-    name: 'Exactum, A101, Kokoushuone 3',
-    address: 'Exactum.A101@ad.helsinki.fi',
-    id: 'Exactum.A101',
-    building: 'Exactum',
-    roomId: 'A101',
-    available: true,
-  },
-  {
-    name: 'Exactum, A304, Kokoushuone 4',
-    address: 'Exactum.A304@ad.helsinki.fi',
-    id: 'Exactum.A304',
-    building: 'Exactum',
-    roomId: 'A304',
-    available: true,
-  },
-  {
-    name: 'Physicum, B202, Kokoushuone 5',
-    address: 'Physicum.B202@ad.helsinki.fi',
-    id: 'Physicum.B202',
-    building: 'Physicum',
-    roomId: 'B202',
-    available: false,
-  },
-  {
-    name: 'Chemicum, A102, Kokoushuone 6',
-    address: 'Chemicum.A102@ad.helsinki.fi',
-    id: 'Chemicum.A102',
-    building: 'Chemicum',
-    roomId: 'A102',
-    available: true,
-  },
-  {
-    name: 'Chemicum, C101, Kokoushuone 7',
-    address: 'Chemicum.C101@ad.helsinki.fi',
-    id: 'Chemicum.C101',
-    building: 'Chemicum',
-    roomId: 'C101',
-    available: false,
-  },
-];
 
 let users = [
   {
@@ -92,9 +33,14 @@ app.get('/roomsInfo', async (req, res) => {
   const start = new Date();
   const end = new Date(start.getTime());
   end.setDate(start.getDate() + 1);
+  let available;
 
   const result = await Promise.all(
     rooms.map(async (room) => {
+      if (room.building !== 'Testirakennus') {
+        available = Math.random() < 0.7;
+        return { ...room, available: available };
+      }
       const copied = Object.assign({}, room);
       const data = await checkAvailability(copied.id, start.toISOString(), end.toISOString());
       copied.available = true;
@@ -111,8 +57,7 @@ app.get('/roomsInfo', async (req, res) => {
 
   //console.log('RESULT: ', result);
 
-  const mockResult = result.concat(mockRooms); //TODO: remove for production
-  res.json(mockResult);
+  res.json(result);
 });
 
 app.get('/rooms/:id', async (req, res) => {
