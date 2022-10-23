@@ -4,6 +4,8 @@ import { getRoomsInfo } from '../requests';
 import Container from 'react-bootstrap/Container';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -17,11 +19,15 @@ const Home = () => {
   return (
     <Container>
       <Filter />
-      <div>
-        {rooms.map((room) => (
-          <RoomCard room={room} key={room.id} />
-        ))}
-      </div>
+      <Row xs={1} md={2} className="g-2">
+        {rooms
+          .sort((a, b) => b.available - a.available)
+          .map((room) => (
+            <Col key={room.id}>
+              <RoomCard room={room} />
+            </Col>
+          ))}
+      </Row>
     </Container>
   );
 };
