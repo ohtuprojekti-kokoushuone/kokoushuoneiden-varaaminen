@@ -5,8 +5,7 @@ const Room = ({ room }) => {
     <div>
       <h1>{room.name}</h1>
       <p>email: {room.address}</p>
-      <p>Huoneen koko</p>
-      <p>Seuraava varaus</p>
+      <p>Huoneen koko {room.size}</p>
     </div>
   );
 };
