@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
-import { checkAvailability, getRoomsInfo, getReservations } from '../requests';
+import { checkAvailability, getRoomsInfo } from '../requests';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
 
