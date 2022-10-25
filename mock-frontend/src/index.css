@@ -20,8 +20,10 @@ h5 {
   padding-bottom: 10px;
 }
 .col {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .table > :not(:first-child) {
   border-top: 0;
