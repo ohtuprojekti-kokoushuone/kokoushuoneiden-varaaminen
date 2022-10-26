@@ -5,6 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { checkAvailability, getRoomsInfo } from '../requests';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 registerLocale('fi', fi);
 
@@ -52,9 +54,13 @@ const ChooseTime = () => {
         </button>
       </div>
       <div>
-        {roomsToShow.map((room) => (
-          <RoomCard room={room} key={room.id} />
-        ))}
+        <Row xs={1} lg={2} className="g-1">
+          {roomsToShow.map((room) => (
+            <Col key={room.id}>
+              <RoomCard room={room} key={room.id} />
+            </Col>
+          ))}
+        </Row>
       </div>
     </div>
   );
