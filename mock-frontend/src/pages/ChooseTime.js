@@ -25,7 +25,7 @@ const ChooseTime = () => {
       <Filter />
       <h5>Valitse alku</h5>
       <DatePicker
-        dateFormat="dd/MM/yyyy HH:mm"
+        dateFormat="dd.MM.yyyy HH:mm"
         selected={startDate}
         onChange={(date) => setStartDate(date)}
         showTimeSelect
@@ -36,7 +36,7 @@ const ChooseTime = () => {
       />
       <h5>Valitse loppu</h5>
       <DatePicker
-        dateFormat="dd/MM/yyyy HH:mm"
+        dateFormat="dd.MM.yyyy HH:mm"
         selected={endDate}
         onChange={(date) => setEndDate(date)}
         showTimeSelect

@@ -23,14 +23,12 @@ const Home = () => {
       <Link to="/choosetime" className="btn btn-primary btn-sm mb-2">
         Rajaa tarkemmin
       </Link>
-      <Row xs={1} md={2} className="g-2">
-        {rooms
-          .sort((a, b) => b.available - a.available)
-          .map((room) => (
-            <Col key={room.id}>
-              <RoomCard room={room} />
-            </Col>
-          ))}
+      <Row xs={1} lg={2} className="g-1">
+        {rooms.map((room) => (
+          <Col key={room.id}>
+            <RoomCard room={room} />
+          </Col>
+        ))}
       </Row>
     </Container>
   );
