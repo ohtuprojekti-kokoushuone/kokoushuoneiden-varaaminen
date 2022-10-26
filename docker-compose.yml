@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: "mongo:latest"
+    restart: "always"
+    ports:
+      - "27017:27017"
+    container_name: mongo
+    volumes:
+      - ./mongo_data:/data/db
+
+  backend:
+    image: "ojanenma/kokoushuone-app:backend"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+
+  mock-backend:
+    image: "ojanenma/kokoushuone-app:mock-backend"
+    ports:
+      - "3003:3003"
+
+  frontend:
+    image: "ojanenma/kokoushuone-app:frontend"
+    ports:
+      - "3000:3000"
+
+volumes:
+  mongo_data:

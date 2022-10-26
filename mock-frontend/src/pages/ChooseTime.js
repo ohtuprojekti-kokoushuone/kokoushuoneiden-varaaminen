@@ -10,6 +10,7 @@ registerLocale('fi', fi);
 
 const ChooseTime = () => {
   const [rooms, setRooms] = useState([]);
+  const [roomsToShow, setRoomsToShow] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [showAll, setShowAll] = useState(false);

@@ -1,16 +1,14 @@
 const axios = require('axios');
-require('dotenv').config();
+const config = require('../utils/config');
 
-const baseUrl = process.env.DEV_BASE_URL;
-const domain = process.env.DOMAIN;
-const token = process.env.REQUEST_TOKEN;
+const { BASE_URL, DOMAIN, TOKEN } = config;
 
 async function getReservations(room, today = false) {
   console.log('GETTING RESERVATIONS FOR ROOM', room);
   try {
-    const response = await axios.default.get(`${baseUrl}/calendar/${room}@${domain}/reservations?today=${today}`, {
+    const response = await axios.default.get(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations?today=${today}`, {
       headers: {
-        Authorization: token,
+        Authorization: TOKEN,
       },
     });
 
@@ -25,9 +23,9 @@ async function getReservations(room, today = false) {
 async function getReservationById(room, reservationId) {
   console.log('GETTING RESERVATION BY ID', reservationId);
   try {
-    const response = await axios.default.get(`${baseUrl}/calendar/${room}@${domain}/reservations/${reservationId}`, {
+    const response = await axios.default.get(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations/${reservationId}`, {
       headers: {
-        Authorization: token,
+        Authorization: TOKEN,
       },
     });
     console.log('GOT RESPONSE', response.data);
@@ -41,9 +39,9 @@ async function getReservationById(room, reservationId) {
 async function reserveRoom(room, reservationObj) {
   console.log('CREATING RESERVATION:', room, reservationObj);
   try {
-    const response = await axios.default.post(`${baseUrl}/calendar/${room}@${domain}/reservations`, reservationObj, {
+    const response = await axios.default.post(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations`, reservationObj, {
       headers: {
-        Authorization: token,
+        Authorization: TOKEN,
       },
     });
     console.log('RESERVATION SUCCESSFUL', response.data);
@@ -57,9 +55,9 @@ async function reserveRoom(room, reservationObj) {
 async function deleteReservation(room, id) {
   console.log('DELETING RESERVATION:', id);
   try {
-    const response = await axios.default.delete(`${baseUrl}/calendar/${room}@${domain}/reservations/${id}`, {
+    const response = await axios.default.delete(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations/${id}`, {
       headers: {
-        Authorization: token,
+        Authorization: TOKEN,
       },
     });
     console.log('DELETED!', response.data);
@@ -74,11 +72,11 @@ async function updateReservation(room, reservationId, updatedObj) {
   console.log('UPDATING RESERVATION:', reservationId);
   try {
     const response = await axios.default.patch(
-      `${baseUrl}/calendar/${room}@${domain}/reservations/${reservationId}`,
+      `${BASE_URL}/calendar/${room}@${DOMAIN}/reservations/${reservationId}`,
       updatedObj,
       {
         headers: {
-          Authorization: token,
+          Authorization: TOKEN,
         },
       }
     );
@@ -93,9 +91,9 @@ async function updateReservation(room, reservationId, updatedObj) {
 async function checkAvailability(room, start, end) {
   console.log(`CHECKING AVAILABILITY FOR: ${room} ${start} - ${end}`);
   try {
-    const response = await axios.default.get(`${baseUrl}/calendar/${room}@${domain}/reservations/${start}/${end}`, {
+    const response = await axios.default.get(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations/${start}/${end}`, {
       headers: {
-        Authorization: token,
+        Authorization: TOKEN,
       },
     });
     return response.data;

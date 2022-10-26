@@ -20,6 +20,7 @@ const Reservations = () => {
           <thead>
             <tr>
               <th scope="col">Varauksen nimi</th>
+              <th scope="col">Huone</th>
               <th scope="col">Aloitusaika</th>
               <th scope="col">Lopetusaika</th>
               <th scope="col">Poista varaus</th>

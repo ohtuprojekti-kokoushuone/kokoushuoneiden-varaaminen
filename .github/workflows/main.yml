@@ -1,30 +1,38 @@
-name: Node.js CI
+name: CI Pipeline
+
+run-name: ${{ github.event_name }} by @${{ github.actor }}
 
 on: [push, pull_request]
 
 jobs:
-  build:
+  build_frontend:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: mock-frontend
 
     strategy:
       matrix:
         node-version: [14.x, 16.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: mock-frontend/package-lock.json
 
-      - name: Build and run tests in the sample project
-        run: |
-          cd mock-frontend
-          npm install
-          CI=false npm run build --if-present
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: CI=true npm test
+
+      - name: Build
+        run: npm run build
 
   lint_channel:
     runs-on: ubuntu-latest
@@ -40,7 +48,7 @@ jobs:
       - name: Install packages
         run: npm i
       - name: Run ESLint
-        run: npx eslint . --max-warnings=0
+        run: npm run lint
 
   lint_frontend:
     runs-on: ubuntu-latest
@@ -56,4 +64,20 @@ jobs:
       - name: Install packages
         run: npm i
       - name: Run ESLint
-        run: npx eslint . --max-warnings=0
+        run: npm run lint
+
+  lint_reservatorapp:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: reservatorapp_projekti/ReservatorApp
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install packages
+        run: npm i
+      - name: Run ESLint
+        run: npm run lint

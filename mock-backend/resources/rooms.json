@@ -1,0 +1,151 @@
+{
+  "rooms": [
+    {
+      "name": "Testirakennus, 2001, Kokoushuone 1",
+      "id": "testirakennus.2001",
+      "building": "Testirakennus",
+      "groups": [],
+      "size": null
+    },
+    {
+      "name": "Testirakennus, 2002, Kokoushuone 2",
+      "id": "testirakennus.2002",
+      "building": "Testirakennus",
+      "groups": [],
+      "size": null
+    },
+    {
+      "name": "Physicum, G237, Meeting room Ada (6)",
+      "id": "physicum.g237",
+      "building": "Physicum",
+      "groups": ["allstaff"],
+      "size": 6
+    },
+    {
+      "name": "Physicum, G238, Meeting room Basic (6)",
+      "id": "physicum.g238",
+      "building": "Physicum",
+      "groups": ["allstaff"],
+      "size": 6
+    },
+    {
+      "name": "Physicum, G239, Meeting room Cobol (6)",
+      "id": "physicum.g239",
+      "building": "Physicum",
+      "groups": ["allstaff"],
+      "size": 6
+    },
+    {
+      "name": "Physicum, G241, Group work room Dart (2)",
+      "id": "physicum.g241",
+      "building": "Physicum",
+      "groups": ["allstaff"],
+      "size": 2
+    },
+    {
+      "name": "Physicum, G243, Group work room Erlang (2)",
+      "id": "physicum.g243",
+      "building": "Physicum",
+      "groups": ["allstaff"],
+      "size": 2
+    },
+    {
+      "name": "Physicum, G247, Group work room Fortran (2)",
+      "id": "physicum.g247",
+      "building": "Physicum",
+      "groups": ["allstaff"],
+      "size": 2
+    },
+    {
+      "name": "Physicum, G226, Group work room Lisp (6)",
+      "id": "physicum.g226",
+      "building": "Physicum",
+      "groups": ["students"],
+      "size": 6
+    },
+    {
+      "name": "Physicum, G227, Group work room Modula (5)",
+      "id": "physicum.g227",
+      "building": "Physicum",
+      "groups": ["students"],
+      "size": 5
+    },
+    {
+      "name": "Physicum, G228, Group work room Neko (5)",
+      "id": "physicum.g228",
+      "building": "Physicum",
+      "groups": ["students"],
+      "size": 5
+    },
+    {
+      "name": "Physicum, G229, Group work room Octave (5)",
+      "id": "physicum.g229",
+      "building": "Physicum",
+      "groups": ["students"],
+      "size": 5
+    },
+    {
+      "name": "Physicum, G230, Group work room Python (4)",
+      "id": "physicum.g230",
+      "building": "Physicum",
+      "groups": ["students"],
+      "size": 4
+    },
+    {
+      "name": "Physicum, G231, Group work room Q (4)",
+      "id": "physicum.g231",
+      "building": "Physicum",
+      "groups": ["students"],
+      "size": 4
+    },
+    {
+      "name": "Physicum, G240, Group work room Idris (2)",
+      "id": "physicum.g240",
+      "building": "Physicum",
+      "groups": ["students"],
+      "size": 2
+    },
+    {
+      "name": "Physicum, G242, Group work room Haskell (2)",
+      "id": "physicum.g242",
+      "building": "Physicum",
+      "groups": ["students"],
+      "size": 2
+    },
+    {
+      "name": "Physicum, G244, Group work room Go (2)",
+      "id": "physicum.g244",
+      "building": "Physicum",
+      "groups": ["students"],
+      "size": 2
+    },
+    {
+      "name": "Kumpula Campus Library, G103c, Group Study Room 1 Castor",
+      "id": "G103c",
+      "building": "Kumpula Campus Library",
+      "groups": [],
+      "size": 3
+    },
+    {
+      "name": "Kumpula Campus Library, G103e, Group Study Room 2 Enif",
+      "id": "G103e",
+      "building": "Kumpula Campus Library",
+      "groups": [],
+      "size": 3
+    },
+    {
+      "name": "Kumpula Campus Library, G103g, Group Study Room 3 Hadar",
+      "id": "G103g",
+      "building": "Kumpula Campus Library",
+      "groups": [],
+      "size": 4
+    },
+    {
+      "name": "Kumpula Campus Library, G108a, Group Study Room 4 Polaris",
+      "id": "G108a",
+      "building": "Kumpula Campus Library",
+      "groups": [],
+      "size": 12
+    }
+  ]
+}

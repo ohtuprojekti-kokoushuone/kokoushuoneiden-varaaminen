@@ -4,9 +4,10 @@
   "description": "ReservatorApp acts as a middleware between Reservator client app and Office 365 Cloud calendars.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cross-env NODE_ENV=production node app.js",
+    "dev": "cross-env NODE_ENV=development nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint . --max-warnings=0"
   },
   "dependencies": {
     "@azure/msal-node": "^1.0.2",
@@ -16,7 +17,7 @@
     "date-fns": "^2.21.1",
     "date-fns-tz": "^1.1.4",
     "debug": "^4.3.1",
-    "dotenv": "^8.6.0",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
     "express-session": "^1.17.1",
@@ -31,6 +32,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
