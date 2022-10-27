@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const formatISO9075 = require('date-fns/formatISO9075');
 const addDays = require('date-fns/addDays');
+const { differenceInMinutes } = require('date-fns');
 
 require('dotenv').config();
 const auth = require('../config/outlookAuthConfig');
@@ -177,6 +178,11 @@ async function checkAvailability(calendarUserId, start, end) {
 // CREATE
 // curl -d '{"subject":"Testivaraus 01", "start": "2022-04-05T15:00:00.0000000", "end": "2022-04-05T16:00:00.0000000"}' -H "Content-Type: application/json" -X POST http://localhost:4000/calendar/testirakennus.113@ad.helsinki.fi/reservations
 async function createEvent(calendarUserId, reservation) {
+  // Check that reservation isn't over two hours
+  if (differenceInMinutes(new Date(reservation.end), new Date(reservation.start)) > 120) {
+    throw new Error('Maximum time for a reservation is two hours');
+  }
+
   // Gets the times in UTC
   const adjustedDatetimes = await getDateTimesInUTC(reservation);
   reservation.start = adjustedDatetimes.start;

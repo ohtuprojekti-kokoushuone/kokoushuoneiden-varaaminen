@@ -4,6 +4,7 @@ const cors = require('cors');
 const calendarService = require('./services/calendarService');
 const { checkAvailability } = require('./services/calendarService');
 const { getAvailableTimeAfter } = require('./services/functions');
+const { differenceInMinutes } = require('date-fns');
 const config = require('./utils/config');
 const rooms = require('./resources/rooms.json').rooms;
 
@@ -99,7 +100,7 @@ app.post('/reservations/:room', async (req, res) => {
     subject: body.subject,
     start: body.start,
     end: body.end,
-    attendees: body.attendees.map((person) => {
+    attendees: body.attendees?.map((person) => {
       return {
         emailAddress: {
           address: person.email,
@@ -108,6 +109,13 @@ app.post('/reservations/:room', async (req, res) => {
       };
     }),
   };
+  if (differenceInMinutes(new Date(reservationObj.end), new Date(reservationObj.start)) > 120) {
+    res.status(400).end(
+      JSON.stringify({
+        message: 'Error: Maximum time for a reservation is 2 hours',
+      })
+    );
+  }
 
   try {
     const data = await calendarService.reserveRoom(room, reservationObj);
