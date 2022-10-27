@@ -1,0 +1,59 @@
+{
+  "count": 2,
+  "reservations": [
+    {
+      "id": "AAMkAGE0ZTY3M2ZhLWVlMjgtNDMxYi05Yjk5LTliNGI5MDdkNGFjMwBGAAAAAADBOEI4RLWjQ4VKI-ie4gEWBwDNuPS2xj-PRrxQ2y3Qtx11AAAAAAENAACFJBRn6qdfTJ_D3365i1cDAAAcUKv2AAA=",
+      "subject": "varaus",
+      "body": {
+        "contentType": "text",
+        "content": ""
+      },
+      "start": {
+        "dateTime": "2022-10-27T06:45:23.000Z",
+        "timeZone": "UTC"
+      },
+      "end": {
+        "dateTime": "2022-10-27T07:45:23.000Z",
+        "timeZone": "UTC"
+      },
+      "organizer": {
+        "email": "testirakennus.2001@helsinki.fi",
+        "name": "Testirakennus, 2001, Kokoushuone 1"
+      },
+      "attendees": [
+        {
+          "email": "testirakennus.2001@helsinki.fi",
+          "name": "Testirakennus, 2001, Kokoushuone 1"
+        }
+      ],
+      "isCancelled": false
+    },
+    {
+      "id": "AAMkAGE0ZTY3M2ZhLWVlMjgtNDMxYi05Yjk5LTliNGI5MDdkNGFjMwBGAAAAAADBOEI4RLWjQ4VKI-ie4gEWBwDNuPS2xj-PRrxQ2y3Qtx11AAAAAAENAACFJBRn6qdfTJ_D3365i1cDAAAcUKv3AAA=",
+      "subject": "Postman reservation",
+      "body": {
+        "contentType": "text",
+        "content": ""
+      },
+      "start": {
+        "dateTime": "2022-10-27T15:27:56.000Z",
+        "timeZone": "UTC"
+      },
+      "end": {
+        "dateTime": "2022-10-27T18:27:56.000Z",
+        "timeZone": "UTC"
+      },
+      "organizer": {
+        "email": "testirakennus.2001@helsinki.fi",
+        "name": "Testirakennus, 2001, Kokoushuone 1"
+      },
+      "attendees": [
+        {
+          "email": "testirakennus.2001@helsinki.fi",
+          "name": "Testirakennus, 2001, Kokoushuone 1"
+        }
+      ],
+      "isCancelled": false
+    }
+  ]
+}
