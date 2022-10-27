@@ -12,6 +12,9 @@ services:
 
   backend:
     image: "ojanenma/kokoushuone-app:backend"
+    build:
+      context: ./reservatorapp_projekti/ReservatorApp
+      dockerfile: Dockerfile
     ports:
       - "4000:4000"
     depends_on:
@@ -19,11 +22,17 @@ services:
 
   mock-backend:
     image: "ojanenma/kokoushuone-app:mock-backend"
+    build:
+      context: ./mock-backend
+      dockerfile: Dockerfile
     ports:
       - "3003:3003"
 
   frontend:
     image: "ojanenma/kokoushuone-app:frontend"
+    build:
+      context: ./mock-frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
 
