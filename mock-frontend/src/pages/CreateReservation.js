@@ -57,7 +57,7 @@ const CreateReservation = () => {
       <input ref={subject} type="text" name="subject" placeholder="Syötä aihe" required />
       <h5>Valitse alku</h5>
       <DatePicker
-        dateFormat="dd/MM/yyyy HH:mm"
+        dateFormat="dd.MM.yyyy HH:mm"
         selected={startDate}
         onChange={(date) => handleStartDateChange(date)}
         showTimeSelect
@@ -69,7 +69,7 @@ const CreateReservation = () => {
       <h5>Valitse loppu</h5>
       <DatePicker
         ref={datePickerEnd}
-        dateFormat="dd/MM/yyyy HH:mm"
+        dateFormat="dd.MM.yyyy HH:mm"
         selected={endDate}
         onChange={(date) => setEndDate(date)}
         showTimeSelect

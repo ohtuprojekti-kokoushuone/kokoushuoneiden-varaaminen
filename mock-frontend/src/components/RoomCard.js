@@ -2,8 +2,9 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { format } from 'date-fns';
 
-const yellowDurationMin = 30;
+const yellowDurationMin = 5;
 
 const RoomCard = ({ room }) => {
   let navigate = useNavigate();
@@ -16,7 +17,7 @@ const RoomCard = ({ room }) => {
   if (room.availableTime) {
     const now = new Date();
     const availableTime = new Date(room.availableTime);
-    const time = availableTime.toLocaleString('fi-FI');
+    const time = format(availableTime, 'dd.MM.yyyy kk:mm');
     availableText = room.available ? 'Huone on vapaa ' + time + ' asti' : 'Huone vapautuu ' + time;
 
     let diffInMinutes = Math.trunc((availableTime.getTime() - now.getTime()) / 1000 / 60);
