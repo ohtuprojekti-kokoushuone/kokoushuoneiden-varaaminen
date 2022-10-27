@@ -12,16 +12,43 @@ registerLocale('fi', fi);
 
 const ChooseTime = () => {
   const [rooms, setRooms] = useState([]);
+  const [roomsToShow, setRoomsToShow] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     getRoomsInfo().then((res) => setRooms(res));
   }, []);
 
-  const roomsToShow = showAll ? rooms : rooms.filter((room) => checkAvailability(room.id, startDate, endDate));
+  const handleFilter = async () => {
+    /*  setRoomsToShow(
+      rooms.map((room) => {
+        checkAvailability(room.id, startDate, endDate).then((res) => {
+          if (res.available) {
+            return room;
+          }
+        });
+      })
+    );
+  */
+    let roomstest = rooms.filter((room) => {
+      return room.building === 'Testirakennus';
+    });
 
+    roomstest = await Promise.all(
+      roomstest.map(async (room) => {
+        const huone = await checkAvailability(room.id, startDate, endDate);
+        if (huone.available) {
+          return room;
+        }
+        return false;
+      })
+    );
+
+    roomstest = roomstest.filter((room) => room !== false);
+
+    setRoomsToShow(roomstest);
+  };
   return (
     <div className="container text-center">
       <Filter />
@@ -47,10 +74,18 @@ const ChooseTime = () => {
         timeCaption="Aika"
         locale="fi"
       />
-
+      <div className="row justify-content-center">
+        <select className="form-select w-auto justify-content-center">
+          <option defaultValue>Huoneen koko</option>
+          <option value="3">3</option>
+          <option value="6">6</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+        </select>
+      </div>
       <div className="col align-self-center">
-        <button onClick={() => setShowAll(!showAll)} className="btn btn-primary btn-lg">
-          Näytä {showAll ? 'vapaat kokoushuoneet' : ' kaikki'}
+        <button onClick={handleFilter} className="btn btn-primary btn-lg">
+          Näytä vapaat kokoushuoneet
         </button>
       </div>
       <div>
