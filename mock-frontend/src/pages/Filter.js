@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 const Filter = () => {
@@ -54,9 +53,6 @@ const Filter = () => {
       <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Chemicum')}>
         Chemicum
       </Button>
-      <Link to="/choosetime" className="btn btn-primary btn-sm mb-2">
-        Rajaa tarkemmin
-      </Link>
     </div>
   );
 };

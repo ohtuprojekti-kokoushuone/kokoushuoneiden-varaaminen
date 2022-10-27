@@ -1,10 +1,10 @@
-# Helsingin Yliopiston Ohjelmistotuotantoprojekti 
+# Helsingin Yliopiston Ohjelmistotuotantoprojekti
 
 ![main](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/actions/workflows/main.yml/badge.svg)
 
 Sovellus Helsingin Yliopiston tietojenkäsittelytieteen osaston kokoushuoneiden varaamiseen (Web/Mobiili)
 
-Sovelluksen avulla käyttäjä voi selata vapaita kokoushuoneita sekä varata niitä 
+Sovelluksen avulla käyttäjä voi selata vapaita kokoushuoneita sekä varata niitä
 
 ## Dokumentaatio
 
@@ -16,8 +16,6 @@ Sovelluksen avulla käyttäjä voi selata vapaita kokoushuoneita sekä varata ni
 
 [Arkkitehtuuri](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/arkkitehtuuri.md)
 
-
 ## Projectin eteneminen
 
 [Product Backlog](https://docs.google.com/spreadsheets/d/1FGeKQlvT8PPFWxfDfxmccjPt_a6O4TcFm0E6Ge-Brv8/edit#gid=0)
-

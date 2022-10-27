@@ -3,8 +3,10 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
 import { checkAvailability, getRoomsInfo } from '../requests';
+import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
-import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 registerLocale('fi', fi);
 
@@ -47,9 +49,9 @@ const ChooseTime = () => {
 
     setRoomsToShow(roomstest);
   };
-
   return (
     <div className="container text-center">
+      <Filter />
       <h5>Valitse alku</h5>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
@@ -72,15 +74,6 @@ const ChooseTime = () => {
         timeCaption="Aika"
         locale="fi"
       />
-      <h5>Rajaa hakua</h5>
-      <div className="row justify-content-center">
-        <select className="form-select w-auto justify-content-center">
-          <option defaultValue>Rakennus</option>
-          <option value="Exactum">Exactum</option>
-          <option value="Physicum">Physicum</option>
-          <option value="Chemicum">Chemicum</option>
-        </select>
-      </div>
       <div className="row justify-content-center">
         <select className="form-select w-auto justify-content-center">
           <option defaultValue>Huoneen koko</option>
@@ -90,20 +83,20 @@ const ChooseTime = () => {
           <option value="12">12</option>
         </select>
       </div>
-
       <div className="col align-self-center">
         <button onClick={handleFilter} className="btn btn-primary btn-lg">
           Näytä vapaat kokoushuoneet
         </button>
       </div>
-
-      <Container>
-        <div>
+      <div>
+        <Row xs={1} lg={2} className="g-1">
           {roomsToShow.map((room) => (
-            <RoomCard room={room} key={room.id} />
+            <Col key={room.id}>
+              <RoomCard room={room} key={room.id} />
+            </Col>
           ))}
-        </div>
-      </Container>
+        </Row>
+      </div>
     </div>
   );
 };
