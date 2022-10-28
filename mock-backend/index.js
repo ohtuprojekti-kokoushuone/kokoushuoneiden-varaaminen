@@ -6,7 +6,7 @@ const loginRouter = require('./controllers/loginRouter');
 const reservationsRouter = require('./controllers/reservationsRouter');
 const usersRouter = require('./controllers/usersRouter');
 const { errorHandler } = require('./utils/middleware');
-const { log } = require('../utils/logger');
+const { log } = require('./utils/logger');
 
 const app = express();
 
