@@ -16,8 +16,7 @@ async function getReservations(room, today = false) {
     log('GOT RESPONSE', response.data);
     return response.data;
   } catch (error) {
-    log(error);
-    log('ERROR IN GETTING RESERVATIONS:', error.response.status, error.code);
+    log('ERROR IN GETTING RESERVATIONS:', error?.response?.status, error?.code);
     throw error;
   }
 }

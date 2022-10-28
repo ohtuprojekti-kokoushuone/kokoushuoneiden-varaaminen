@@ -1,0 +1,27 @@
+{
+  "id": 123,
+  "subject": "Test reservation",
+  "body": {
+    "contentType": "text",
+    "content": "Text body"
+  },
+  "start": {
+    "dateTime": "2022-10-27T06:45:00.000Z",
+    "timeZone": "UTC"
+  },
+  "end": {
+    "dateTime": "2022-10-27T07:45:00.000Z",
+    "timeZone": "UTC"
+  },
+  "organizer": {
+    "email": "testirakennus.2001@helsinki.fi",
+    "name": "Testirakennus, 2001, Kokoushuone 1"
+  },
+  "attendees": [
+    {
+      "email": "testirakennus.2001@helsinki.fi",
+      "name": "Testirakennus, 2001, Kokoushuone 1"
+    }
+  ],
+  "isCancelled": false
+}
