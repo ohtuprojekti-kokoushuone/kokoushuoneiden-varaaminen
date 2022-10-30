@@ -31,7 +31,7 @@ export function makeReservation(room: Room, reservation: ReservationObject) {
   return req
     .then((res) => res.data)
     .catch((error) => {
-      throw new Error(error.message);
+      throw new Error(error.response.data.message);
     });
 }
 

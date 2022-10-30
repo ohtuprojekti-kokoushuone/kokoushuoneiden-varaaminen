@@ -4,6 +4,7 @@ import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
 import { makeReservation } from '../requests.ts';
 import { useParams } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 
 registerLocale('fi', fi);
 
@@ -14,6 +15,8 @@ const CreateReservation = () => {
   const end = new Date();
   end.setMinutes(end.getMinutes() + defaultDuration);
   const [endDate, setEndDate] = useState(end);
+  const [show, setShow] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const subject = useRef();
   const datePickerEnd = useRef();
@@ -24,6 +27,8 @@ const CreateReservation = () => {
     if (!subject.current.reportValidity()) return;
 
     if (endDate <= startDate) {
+      setShow(true);
+      setErrorMessage('Error: Start date must be before end date');
       return;
     }
 
@@ -34,12 +39,16 @@ const CreateReservation = () => {
       attendees: []
     };
 
-    makeReservation(id, reservation).then((res) => {
-      console.log(res); //prints reservation info
-      /*if () { //error checking
-      }*/
-      window.location.href = '/reservations';
-    });
+    makeReservation(id, reservation)
+      .then((res) => {
+        console.log(res);
+        window.location.href = '/reservations';
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setErrorMessage(error.message);
+        setShow(true);
+      });
   }
 
   function handleStartDateChange(date) {
@@ -53,6 +62,13 @@ const CreateReservation = () => {
 
   return (
     <div className="container text-center">
+      {show ? (
+        <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+          {errorMessage}
+        </Alert>
+      ) : (
+        <></>
+      )}
       <h5>Aihe</h5>
       <input ref={subject} type="text" name="subject" placeholder="Syötä aihe" required />
       <h5>Valitse alku</h5>
