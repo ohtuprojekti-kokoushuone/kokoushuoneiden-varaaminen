@@ -22,18 +22,17 @@ const Home = () => {
       return true;
     }
   }
-
+  const arrTestAvailable = [];
   const arrAvailable = rooms.filter(filterAvailable);
-  console.log(arrAvailable);
 
   function filterUnavailable(room) {
     if (room.available === false) {
       return true;
     }
+    arrTestAvailable.concat(room);
   }
 
   const arrUnavailable = rooms.filter(filterUnavailable);
-  console.log(arrUnavailable);
 
   return (
     <Container>
