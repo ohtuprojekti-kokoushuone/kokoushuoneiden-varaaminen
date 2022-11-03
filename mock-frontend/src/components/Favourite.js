@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import Button from 'react-bootstrap/Button';
 
 const fontStyles = { color: 'red', fontSize: '25px', borderRadius: '5px', padding: '1px 1px' };
 
@@ -29,9 +30,9 @@ const SetStateAndToggle = ({ room }) => {
   };
 
   return (
-    <button className={fontStyles} onClick={toggleFavourite}>
+    <Button className="btn btn-light btn-small" onClick={toggleFavourite}>
       {favourite === true ? isFavourite : isNotFavourite}
-    </button>
+    </Button>
   );
 };
 
