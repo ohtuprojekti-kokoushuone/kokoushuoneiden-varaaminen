@@ -64,3 +64,4 @@ const RoomCard = ({ room }) => {
 };
 
 export default RoomCard;
+export const YellowDurationMin = yellowDurationMin;

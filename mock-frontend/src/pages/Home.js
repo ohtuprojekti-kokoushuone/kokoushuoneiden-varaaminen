@@ -7,6 +7,8 @@ import RoomCard from '../components/RoomCard.js';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
+import { YellowDurationMin } from '../components/RoomCard.js';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -17,22 +19,43 @@ const Home = () => {
     });
   }, []);
 
+  const arrayNotAvailable = [];
+  function filterSoonAvailable(room) {
+    const now = new Date();
+    let availableText = '';
+    let roomInfo = room.available
+      ? { availability: 'Vapaa', cardType: 'success' }
+      : { availability: 'Varattu', cardType: 'danger' };
+
+    if (room.availableTime) {
+      const now = new Date();
+      const availableTime = new Date(room.availableTime);
+      const time = format(availableTime, 'dd.MM.yyyy kk:mm');
+      let diffInMinutes = Math.trunc((availableTime.getTime() - now.getTime()) / 1000 / 60);
+
+      if (!room.available) {
+        if (diffInMinutes < YellowDurationMin) {
+          return true;
+        }
+      }
+    }
+    if (!room.available) {
+      arrayNotAvailable.push(room);
+      return false;
+    }
+  }
+
   function filterAvailable(room) {
     if (room.available === true) {
       return true;
     }
-  }
-  const arrTestAvailable = [];
-  const arrAvailable = rooms.filter(filterAvailable);
-
-  function filterUnavailable(room) {
-    if (room.available === false) {
-      return true;
-    }
-    arrTestAvailable.concat(room);
+    return false;
   }
 
-  const arrUnavailable = rooms.filter(filterUnavailable);
+  const arrayAvailable = rooms.filter(filterAvailable);
+  const arraySoonAvailable = rooms.filter(filterSoonAvailable);
+
+  console.log(arraySoonAvailable);
 
   return (
     <Container>
@@ -41,12 +64,17 @@ const Home = () => {
         Rajaa tarkemmin
       </Link>
       <Row xs={1} lg={2} className="g-1">
-        {arrAvailable.map((room) => (
+        {arrayAvailable.map((room) => (
           <Col key={room.id}>
             <RoomCard room={room} />
           </Col>
         ))}
-        {arrUnavailable.map((room) => (
+        {arraySoonAvailable.map((room) => (
+          <Col key={room.id}>
+            <RoomCard room={room} />
+          </Col>
+        ))}
+        {arrayNotAvailable.map((room) => (
           <Col key={room.id}>
             <RoomCard room={room} />
           </Col>
