@@ -39,7 +39,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: mock-backend
+        working-directory: channel
 
     strategy:
       matrix:
@@ -60,7 +60,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: mock-backend
+        working-directory: channel
 
     steps:
       - name: Checkout code

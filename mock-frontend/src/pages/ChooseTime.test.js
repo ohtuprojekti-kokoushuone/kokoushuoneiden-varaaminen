@@ -1,13 +1,11 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import ChooseTime from './ChooseTime';
 
 describe('<ChooseTime />', () => {
-  let component;
-
   beforeEach(() => {
-    component = render(<ChooseTime />);
+    render(<ChooseTime />);
   });
 
   test('Starting time is set to current time', () => {
