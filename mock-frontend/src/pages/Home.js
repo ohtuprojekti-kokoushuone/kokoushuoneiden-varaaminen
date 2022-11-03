@@ -17,6 +17,24 @@ const Home = () => {
     });
   }, []);
 
+  function filterAvailable(room) {
+    if (room.available === true) {
+      return true;
+    }
+  }
+
+  const arrAvailable = rooms.filter(filterAvailable);
+  console.log(arrAvailable);
+
+  function filterUnavailable(room) {
+    if (room.available === false) {
+      return true;
+    }
+  }
+
+  const arrUnavailable = rooms.filter(filterUnavailable);
+  console.log(arrUnavailable);
+
   return (
     <Container>
       <Filter />
@@ -24,7 +42,12 @@ const Home = () => {
         Rajaa tarkemmin
       </Link>
       <Row xs={1} lg={2} className="g-1">
-        {rooms.map((room) => (
+        {arrAvailable.map((room) => (
+          <Col key={room.id}>
+            <RoomCard room={room} />
+          </Col>
+        ))}
+        {arrUnavailable.map((room) => (
           <Col key={room.id}>
             <RoomCard room={room} />
           </Col>
