@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { format } from 'date-fns';
 import Favourite from './Favourite';
 
-const yellowDurationMin = 5;
+export const yellowDurationMin = 5;
 
 const RoomCard = ({ room }) => {
   let navigate = useNavigate();
@@ -70,4 +70,3 @@ const RoomCard = ({ room }) => {
 };
 
 export default RoomCard;
-export const YellowDurationMin = yellowDurationMin;
