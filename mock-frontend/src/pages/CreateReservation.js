@@ -81,6 +81,7 @@ const CreateReservation = () => {
         timeIntervals={15}
         timeCaption="Aika"
         locale="fi"
+        customInput={<input data-testid="start-date-reservation" type="text" />}
       />
       <h5>Valitse loppu</h5>
       <DatePicker
@@ -93,6 +94,7 @@ const CreateReservation = () => {
         timeIntervals={15}
         timeCaption="Aika"
         locale="fi"
+        customInput={<input data-testid="end-date-reservation" type="text" />}
       />
 
       <div className="col align-self-center">

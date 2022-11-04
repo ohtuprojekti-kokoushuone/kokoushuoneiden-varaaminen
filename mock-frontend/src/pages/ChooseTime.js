@@ -62,6 +62,7 @@ const ChooseTime = () => {
         timeIntervals={15}
         timeCaption="Aika"
         locale="fi"
+        customInput={<input data-testid="start-date" type="text" />}
       />
       <h5>Valitse loppu</h5>
       <DatePicker
@@ -73,6 +74,7 @@ const ChooseTime = () => {
         timeIntervals={15}
         timeCaption="Aika"
         locale="fi"
+        customInput={<input data-testid="end-date" type="text" />}
       />
       <div className="row justify-content-center">
         <select className="form-select w-auto justify-content-center">
