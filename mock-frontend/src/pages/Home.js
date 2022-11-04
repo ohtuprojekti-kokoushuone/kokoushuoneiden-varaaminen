@@ -7,7 +7,7 @@ import RoomCard from '../components/RoomCard.js';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
-import { YellowDurationMin } from '../components/RoomCard.js';
+import { yellowDurationMin } from '../components/RoomCard.js';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -27,7 +27,7 @@ const Home = () => {
       let diffInMinutes = Math.trunc((availableTime.getTime() - now.getTime()) / 1000 / 60);
 
       if (!room.available) {
-        if (diffInMinutes < YellowDurationMin) {
+        if (diffInMinutes < yellowDurationMin) {
           return true;
         }
       }
