@@ -20,17 +20,11 @@ const Home = () => {
   }, []);
 
   const arrayNotAvailable = [];
-  function filterSoonAvailable(room) {
-    const now = new Date();
-    let availableText = '';
-    let roomInfo = room.available
-      ? { availability: 'Vapaa', cardType: 'success' }
-      : { availability: 'Varattu', cardType: 'danger' };
 
+  function filterSoonAvailable(room) {
     if (room.availableTime) {
       const now = new Date();
       const availableTime = new Date(room.availableTime);
-      const time = format(availableTime, 'dd.MM.yyyy kk:mm');
       let diffInMinutes = Math.trunc((availableTime.getTime() - now.getTime()) / 1000 / 60);
 
       if (!room.available) {
