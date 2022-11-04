@@ -41,9 +41,9 @@ const RoomCard = ({ room }) => {
       bg={roomInfo.cardType}
       key={room.id}
       text={'white'}
-      style={{ width: '28rem' }}
+      style={{ width: '28rem', margin: 'auto' }}
       className="mb-2"
-      data-name={room.building}
+      data-building={room.building}
     >
       <Card.Header>
         {room.id}

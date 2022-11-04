@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
+import { getBuildings } from '../requests';
 
 const Filter = () => {
   const [filterList, setFilter] = useState([]);
+  const [buildings, setBuildings] = useState([]);
+
+  useEffect(() => {
+    getBuildings().then((res) => setBuildings(res));
+  }, []);
 
   function toggleFilter(el, name) {
+    el.blur();
     el.classList.toggle('filter-selected');
 
     if (filterList.includes(name.toLowerCase())) {
@@ -21,9 +28,9 @@ const Filter = () => {
   }
 
   function filterRooms() {
-    const cardList = document.querySelectorAll('div[data-name]');
+    const cardList = document.querySelectorAll('div[data-building]');
     for (const card of cardList) {
-      card.classList.remove('hidden');
+      card.parentElement.classList.remove('hidden');
     }
 
     if (filterList.length === 0) {
@@ -31,8 +38,9 @@ const Filter = () => {
     }
 
     for (const card of cardList) {
-      if (!filterList.includes(card.getAttribute('data-name').toLowerCase())) {
-        card.classList.add('hidden');
+      const building = card.getAttribute('data-building').toLowerCase();
+      if (!filterList.includes(building)) {
+        card.parentElement.classList.add('hidden');
       }
     }
   }
@@ -41,18 +49,16 @@ const Filter = () => {
 
   return (
     <div>
-      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'testirakennus')}>
-        Testirakennus
-      </Button>
-      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Exactum')}>
-        Exactum
-      </Button>
-      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Physicum')}>
-        Physicum
-      </Button>
-      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Chemicum')}>
-        Chemicum
-      </Button>
+      {buildings.map((building) => (
+        <Button
+          key={building.name}
+          variant="dark"
+          className={buttonClass}
+          onClick={(el) => toggleFilter(el.target, building.name)}
+        >
+          {building.name}
+        </Button>
+      ))}
     </div>
   );
 };

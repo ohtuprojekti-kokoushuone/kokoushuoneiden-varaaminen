@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <Container>
       <Filter />
-      <Link to="/choosetime" className="btn btn-primary btn-sm mb-2">
+      <Link to="/choosetime" className="btn btn-primary btn-sm mb-2 mx-2">
         Rajaa tarkemmin
       </Link>
       <Row xs={1} lg={2} className="g-1">
