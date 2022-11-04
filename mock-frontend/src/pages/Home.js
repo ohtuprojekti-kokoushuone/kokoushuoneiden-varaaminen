@@ -7,7 +7,6 @@ import RoomCard from '../components/RoomCard.js';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
-import { format } from 'date-fns';
 import { YellowDurationMin } from '../components/RoomCard.js';
 
 const Home = () => {
