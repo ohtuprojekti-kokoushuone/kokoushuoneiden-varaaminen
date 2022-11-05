@@ -22,7 +22,7 @@ const Reservation = ({ res }) => {
                 autoFocus
                 onClick={() => {
                   const email = reservation.organizer.email;
-                  deleteReservation(email.substr(0, email.indexOf('@')), reservation.id).then((result) => {
+                  deleteReservation(email.substr(0, email.indexOf('@')), reservation.id).then(() => {
                     window.location.reload(true);
                   });
                   onClose();

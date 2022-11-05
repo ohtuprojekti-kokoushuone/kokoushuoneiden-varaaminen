@@ -39,7 +39,7 @@ const CreateReservation = () => {
     };
 
     makeReservation(id, reservation)
-      .then((res) => {
+      .then(() => {
         window.location.href = '/reservations';
       })
       .catch((error) => {
