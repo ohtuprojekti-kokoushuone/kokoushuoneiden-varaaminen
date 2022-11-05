@@ -33,16 +33,15 @@ const RoomCard = ({ room }) => {
   }
 
   return (
-    <Card color={roomInfo.cardType}>
+    <Card color={roomInfo.cardType} key={room.id} data-name={room.building}>
       <Card.Content>
-        <Card.Header href={`/roomlist/${room.id}`}>
+        <Card.Header>
           {room.name}
           <div style={{ float: 'right' }}>
             <Favourite room={room} />
           </div>
         </Card.Header>
-
-        <Card.Meta>{roomInfo.availability}</Card.Meta>
+        <Card.Meta href={`/roomlist/${room.id}`}>{roomInfo.availability}</Card.Meta>
         <Card.Description>{availableText}</Card.Description>
       </Card.Content>
 

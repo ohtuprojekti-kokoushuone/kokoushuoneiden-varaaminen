@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import { login, setToken } from '../requests.ts';
-import Button from 'react-bootstrap/Button';
+import { Button } from 'semantic-ui-react';
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState('');
@@ -39,7 +39,9 @@ const Login = ({ setUser }) => {
         <h5>Salasana</h5>
         <input type="password" name="password" required onChange={({ target }) => setPassword(target.value)} />
         <div className="col align-self-center">
-          <Button type="submit">Kirjaudu</Button>
+          <Button color="blue" type="submit">
+            Kirjaudu
+          </Button>
         </div>
       </form>
     </div>
