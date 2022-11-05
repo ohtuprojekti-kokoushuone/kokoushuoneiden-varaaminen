@@ -24,7 +24,6 @@ const Login = ({ setUser }) => {
       setPassword('');
       return <Navigate to="/home" />;
     } catch (exception) {
-      console.log('wrong credentials');
       errorMessage.current.innerText = 'Wrong credentials!';
     }
   };

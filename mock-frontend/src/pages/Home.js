@@ -48,8 +48,6 @@ const Home = () => {
   const arrayAvailable = rooms.filter(filterAvailable);
   const arraySoonAvailable = rooms.filter(filterSoonAvailable);
 
-  console.log(arraySoonAvailable);
-
   return (
     <Container>
       <Filter />

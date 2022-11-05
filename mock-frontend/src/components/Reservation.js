@@ -23,7 +23,6 @@ const Reservation = ({ res }) => {
                 onClick={() => {
                   const email = reservation.organizer.email;
                   deleteReservation(email.substr(0, email.indexOf('@')), reservation.id).then((result) => {
-                    console.log(result, reservation);
                     window.location.reload(true);
                   });
                   onClose();

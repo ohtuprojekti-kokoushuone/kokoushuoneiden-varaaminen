@@ -23,7 +23,6 @@ const CreateReservation = () => {
   const id = useParams().id;
 
   function handleClick() {
-    console.log(startDate, endDate);
     if (!subject.current.reportValidity()) return;
 
     if (endDate <= startDate) {
@@ -41,11 +40,9 @@ const CreateReservation = () => {
 
     makeReservation(id, reservation)
       .then((res) => {
-        console.log(res);
         window.location.href = '/reservations';
       })
       .catch((error) => {
-        console.log(error.message);
         setErrorMessage(error.message);
         setShow(true);
       });
