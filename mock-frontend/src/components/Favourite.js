@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/Button';
 
 const fontStyles = { color: 'red', fontSize: '25px', borderRadius: '5px', padding: '1px 1px' };
 
-const Favourite = ({ room }) => {
-  return <SetStateAndToggle room={room} />;
+const Favourite = () => {
+  return <SetStateAndToggle />;
 };
 
-const SetStateAndToggle = ({ room }) => {
+const SetStateAndToggle = () => {
   const [favourite, setFavourite] = useState(false);
 
   const isNotFavourite = <FaRegHeart style={fontStyles} />;
