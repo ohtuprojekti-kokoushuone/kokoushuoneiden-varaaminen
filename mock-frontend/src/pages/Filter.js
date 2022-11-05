@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
+import { Button } from 'semantic-ui-react';
 
 const Filter = () => {
   const [filterList, setFilter] = useState([]);
@@ -41,16 +42,16 @@ const Filter = () => {
 
   return (
     <div>
-      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'testirakennus')}>
+      <Button color="black" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'testirakennus')}>
         Testirakennus
       </Button>
-      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Exactum')}>
+      <Button color="black" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Exactum')}>
         Exactum
       </Button>
-      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Physicum')}>
+      <Button color="black" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Physicum')}>
         Physicum
       </Button>
-      <Button variant="dark" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Chemicum')}>
+      <Button color="black" className={buttonClass} onClick={(el) => toggleFilter(el.target, 'Chemicum')}>
         Chemicum
       </Button>
     </div>

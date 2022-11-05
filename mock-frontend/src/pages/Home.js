@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { getRoomsInfo } from '../requests';
-import Container from 'react-bootstrap/Container';
+import { Container } from 'semantic-ui-react';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { yellowDurationMin } from '../components/RoomCard.js';
+import 'semantic-ui-css/semantic.min.css';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -56,23 +56,23 @@ const Home = () => {
       <Link to="/choosetime" className="btn btn-primary btn-sm mb-2">
         Rajaa tarkemmin
       </Link>
-      <Row xs={1} lg={2} className="g-1">
+      <Grid stackable columns={2}>
         {arrayAvailable.map((room) => (
-          <Col key={room.id}>
+          <Grid.Column key={room.id}>
             <RoomCard room={room} />
-          </Col>
+          </Grid.Column>
         ))}
         {arraySoonAvailable.map((room) => (
-          <Col key={room.id}>
+          <Grid.Column key={room.id}>
             <RoomCard room={room} />
-          </Col>
+          </Grid.Column>
         ))}
         {arrayNotAvailable.map((room) => (
-          <Col key={room.id}>
+          <Grid.Column key={room.id}>
             <RoomCard room={room} />
-          </Col>
+          </Grid.Column>
         ))}
-      </Row>
+      </Grid>
     </Container>
   );
 };

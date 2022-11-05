@@ -15,15 +15,15 @@ h5 {
   padding-top: 15px;
   font-size: 20px;
 }
-.btn {
+ui.btn {
   padding-top: 10px;
   padding-bottom: 10px;
 }
 .col {
   padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .table > :not(:first-child) {
   border-top: 0;
@@ -43,4 +43,16 @@ h5 {
 }
 .hidden {
   display: none;
+}
+
+.ui.card,
+.ui.cards > .card {
+  margin: 20px;
+}
+
+.ui.col {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
