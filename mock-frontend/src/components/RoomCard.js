@@ -48,7 +48,7 @@ const RoomCard = ({ room }) => {
       <Card.Header>
         {room.id}
         <div style={{ float: 'right' }}>
-          <Favourite room={room} />
+          <Favourite />
         </div>
       </Card.Header>
       <Link to={`/roomlist/${room.id}`} key={room.id} style={linkStyle}>

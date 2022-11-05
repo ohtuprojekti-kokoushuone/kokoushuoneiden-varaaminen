@@ -35,7 +35,7 @@
     "no-trailing-spaces": "warn",
     "object-curly-spacing": ["warn", "always"],
     "arrow-spacing": ["warn", { "before": true, "after": true }],
-    "no-console": "off",
+    "no-console": "warn",
     "no-unused-vars": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",

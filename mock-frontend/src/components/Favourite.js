@@ -4,14 +4,12 @@ import Button from 'react-bootstrap/Button';
 
 const fontStyles = { color: 'red', fontSize: '25px', borderRadius: '5px', padding: '1px 1px' };
 
-const Favourite = ({ room }) => {
-  return <SetStateAndToggle room={room} />;
+const Favourite = () => {
+  return <SetStateAndToggle />;
 };
 
-const SetStateAndToggle = ({ room }) => {
-  console.log(room);
+const SetStateAndToggle = () => {
   const [favourite, setFavourite] = useState(false);
-  console.log('favourite on ' + favourite);
 
   const isNotFavourite = <FaRegHeart style={fontStyles} />;
   const isFavourite = <FaHeart style={fontStyles} />;
@@ -19,12 +17,12 @@ const SetStateAndToggle = ({ room }) => {
   const toggleFavourite = () => {
     setFavourite((favourite) => {
       if (favourite === true) {
-        console.log('Poistettu suosikeista');
-      }
-      if (favourite === false) {
-        console.log('Lisätty suosikkeihin');
+        /* TODO: update the change*/
       }
 
+      if (favourite === false) {
+        /* TODO: update the change*/
+      }
       return !favourite;
     });
   };
