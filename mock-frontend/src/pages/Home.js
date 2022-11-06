@@ -4,10 +4,8 @@ import { getRoomsInfo } from '../requests';
 import { Container } from 'semantic-ui-react';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
-import { Grid } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Grid, Button } from 'semantic-ui-react';
 import { yellowDurationMin } from '../components/RoomCard.js';
-import 'semantic-ui-css/semantic.min.css';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -48,14 +46,12 @@ const Home = () => {
   const arrayAvailable = rooms.filter(filterAvailable);
   const arraySoonAvailable = rooms.filter(filterSoonAvailable);
 
-  console.log(arraySoonAvailable);
-
   return (
     <Container>
       <Filter />
-      <Link to="/choosetime" className="btn btn-primary btn-sm mb-2">
+      <Button className="btn-choose" aria-label="Rajaa tarkemmin" color="blue" href="/choosetime">
         Rajaa tarkemmin
-      </Link>
+      </Button>
       <Grid stackable columns={2}>
         {arrayAvailable.map((room) => (
           <Grid.Column key={room.id}>

@@ -37,7 +37,7 @@ const Filter = () => {
     }
   }
 
-  const buttonClass = 'filter fw-bold mb-2 mx-2';
+  const buttonClass = 'filter mb-2 mx-2';
 
   return (
     <div>

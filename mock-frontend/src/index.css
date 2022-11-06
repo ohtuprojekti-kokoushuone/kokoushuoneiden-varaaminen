@@ -2,11 +2,11 @@ body {
   padding-top: 80px;
   padding-bottom: 20px;
 }
-h1 {
+.ui.h1 {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-h5 {
+.ui.h3 {
   padding-top: 15px;
   padding-bottom: 10px;
 }
@@ -15,7 +15,7 @@ h5 {
   padding-top: 15px;
   font-size: 20px;
 }
-.ui.btn {
+.ui.button.btn {
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -35,11 +35,16 @@ h5 {
   left: 50% !important;
 }
 
-.ui.btn.filter-selected {
+.ui.button.filter-selected {
   box-shadow: 0 0 0 0.25rem rgb(255 216 0 / 65%) !important;
 }
-.ui.filter:focus {
+.ui.button.btn-choose {
+  margin: 20px;
+}
+
+.ui.button.filter:focus {
   box-shadow: 0 0 0 0;
+  font-weight: bold;
 }
 .ui.hidden {
   display: none;
@@ -47,4 +52,33 @@ h5 {
 .ui.card,
 .ui.cards > .card {
   margin: 20px;
+  text-align: left;
+}
+.ui.cards > .card .meta,
+.ui.card .meta {
+  color: white;
+  font-weight: bold;
+  font-size: medium;
+}
+.ui.cards > .card > .content > .header,
+.ui.card > .content > .header {
+  color: black;
+  font-family: sans-serif;
+}
+
+.ui.favourite {
+  color: black;
+  background-color: transparent;
+  font-size: 25px;
+  border-radius: 5px;
+  padding: 10px 10px;
+}
+.ui.green {
+  background-color: forestgreen;
+}
+.ui.yellow {
+  background-color: gold;
+}
+.ui.red {
+  background-color: crimson;
 }

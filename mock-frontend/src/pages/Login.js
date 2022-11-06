@@ -34,9 +34,9 @@ const Login = ({ setUser }) => {
       <h1>Kirjaudu sisään</h1>
       <p ref={errorMessage} style={{ color: 'red' }}></p>
       <form onSubmit={handleLogin}>
-        <h5>Käyttäjätunnus</h5>
+        <h3>Käyttäjätunnus</h3>
         <input type="text" name="name" required onChange={({ target }) => setUsername(target.value)} />
-        <h5>Salasana</h5>
+        <h3>Salasana</h3>
         <input type="password" name="password" required onChange={({ target }) => setPassword(target.value)} />
         <div className="col align-self-center">
           <Button color="blue" type="submit">

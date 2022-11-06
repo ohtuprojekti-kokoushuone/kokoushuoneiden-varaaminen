@@ -33,7 +33,7 @@ const RoomCard = ({ room }) => {
   }
 
   return (
-    <Card color={roomInfo.cardType} key={room.id} data-name={room.building}>
+    <Card className={roomInfo.cardType} key={room.id} data-name={room.building}>
       <Card.Content>
         <Card.Header>
           {room.name}
@@ -44,7 +44,6 @@ const RoomCard = ({ room }) => {
         <Card.Meta href={`/roomlist/${room.id}`}>{roomInfo.availability}</Card.Meta>
         <Card.Description>{availableText}</Card.Description>
       </Card.Content>
-
       <Button aria-label="Siirry varaussivulle" color="blue" onClick={() => navigate(`/CreateReservation/${room.id}`)}>
         Varaa huone
       </Button>
