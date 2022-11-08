@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getReservations } from '../requests.ts';
 import Reservation from '../components/Reservation.js';
-import { Table } from 'react-bootstrap';
+
+import { Table } from 'semantic-ui-react';
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
@@ -16,21 +17,21 @@ const Reservations = () => {
     <div className="container text-center">
       <div className="d-grid gap-3 col-8 mx-auto">
         <h1>Omat varaukset:</h1>
-        <Table striped>
-          <thead>
-            <tr>
-              <th scope="col">Varauksen nimi</th>
-              <th scope="col">Huone</th>
-              <th scope="col">Aloitusaika</th>
-              <th scope="col">Lopetusaika</th>
-              <th scope="col">Poista varaus</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table celled striped>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Varauksen nimi</Table.HeaderCell>
+              <Table.HeaderCell>Huone</Table.HeaderCell>
+              <Table.HeaderCell>Aloitusaika</Table.HeaderCell>
+              <Table.HeaderCell>Lopetusaika</Table.HeaderCell>
+              <Table.HeaderCell>Poista varaus</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             {reservations.map((res) => (
               <Reservation res={res} key={res.id} />
             ))}
-          </tbody>
+          </Table.Body>
         </Table>
       </div>
     </div>

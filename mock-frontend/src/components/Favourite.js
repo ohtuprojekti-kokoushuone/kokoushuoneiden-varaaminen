@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
-import Button from 'react-bootstrap/Button';
+import { Button } from 'semantic-ui-react';
 
-const fontStyles = { color: 'red', fontSize: '25px', borderRadius: '5px', padding: '1px 1px' };
-
-const Favourite = () => {
-  return <SetStateAndToggle />;
+const Favourite = ({ room }) => {
+  return <SetStateAndToggle room={room} />;
 };
 
 const SetStateAndToggle = () => {
   const [favourite, setFavourite] = useState(false);
 
-  const isNotFavourite = <FaRegHeart style={fontStyles} />;
-  const isFavourite = <FaHeart style={fontStyles} />;
+  const favouriteClass = 'favourite';
+
+  const isNotFavourite = <FaRegHeart className={favouriteClass} />;
+  const isFavourite = <FaHeart className={favouriteClass} />;
 
   const toggleFavourite = () => {
     setFavourite((favourite) => {
@@ -28,7 +28,7 @@ const SetStateAndToggle = () => {
   };
 
   return (
-    <Button className="btn btn-light btn-small" onClick={toggleFavourite}>
+    <Button size="medium" onClick={toggleFavourite} className={favouriteClass}>
       {favourite === true ? isFavourite : isNotFavourite}
     </Button>
   );
