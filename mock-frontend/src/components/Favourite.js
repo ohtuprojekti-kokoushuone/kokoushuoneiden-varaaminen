@@ -11,8 +11,8 @@ const SetStateAndToggle = () => {
 
   const favouriteClass = 'favourite';
 
-  const isNotFavourite = <FaRegHeart className={favouriteClass}/>;
-  const isFavourite = <FaHeart className={favouriteClass}/>;
+  const isNotFavourite = <FaRegHeart className={favouriteClass} />;
+  const isFavourite = <FaHeart className={favouriteClass} />;
 
   const toggleFavourite = () => {
     setFavourite((favourite) => {

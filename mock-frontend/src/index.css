@@ -65,12 +65,7 @@ body {
   color: black;
   font-family: sans-serif;
 }
-.ui.cards > .card > .content extra,
-.ui.card > .content extra {
-  color: black;
-  font-family: sans-serif;
-  font-size: larger;
-}
+
 .ui.favourite {
   color: whitesmoke;
   background-color: transparent;
