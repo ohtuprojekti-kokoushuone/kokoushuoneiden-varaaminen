@@ -3,8 +3,9 @@ import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { format } from 'date-fns';
+import Favourite from './Favourite';
 
-const yellowDurationMin = 5;
+export const yellowDurationMin = 5;
 
 const RoomCard = ({ room }) => {
   let navigate = useNavigate();
@@ -44,8 +45,13 @@ const RoomCard = ({ room }) => {
       className="mb-2"
       data-name={room.building}
     >
+      <Card.Header>
+        {room.id}
+        <div style={{ float: 'right' }}>
+          <Favourite />
+        </div>
+      </Card.Header>
       <Link to={`/roomlist/${room.id}`} key={room.id} style={linkStyle}>
-        <Card.Header>{room.id}</Card.Header>
         <Card.Body>
           <Card.Title>{roomInfo.availability}</Card.Title>
           <Card.Text>{room.name}</Card.Text>
