@@ -24,9 +24,9 @@ describe('<RoomCard />', () => {
     );
   });
 
-  test('renders roomId, roomName and "Varaa huone" button', () => {
-    expect(container.container).toHaveTextContent('physicum.g237');
+  test('renders roomName, availability and "Varaa huone" button', () => {
     expect(container.container).toHaveTextContent('Physicum, G237, Meeting room Ada (6)');
+    expect(container.container).toHaveTextContent('Vapaa');
     expect(container.container).toHaveTextContent('Varaa huone');
   });
 

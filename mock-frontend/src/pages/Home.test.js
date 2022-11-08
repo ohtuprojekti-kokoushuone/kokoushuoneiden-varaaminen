@@ -29,7 +29,7 @@ describe('<Home />', () => {
         render(<Home />, { wrapper: BrowserRouter });
       });
 
-      button = screen.getByRole('link', { name: /Rajaa tarkemmin/i });
+      button = screen.getByRole('button', { name: /Rajaa tarkemmin/i });
     });
 
     test('Link button to /choosetime is rendered', async () => {

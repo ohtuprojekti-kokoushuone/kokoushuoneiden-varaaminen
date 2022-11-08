@@ -1,9 +1,10 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
-import { Link, useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { Card } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
 import { format } from 'date-fns';
 import Favourite from './Favourite';
+import 'semantic-ui-css/semantic.min.css';
 
 export const yellowDurationMin = 5;
 
@@ -12,8 +13,8 @@ const RoomCard = ({ room }) => {
 
   let availableText = '';
   let roomInfo = room.available
-    ? { availability: 'Vapaa', cardType: 'success' }
-    : { availability: 'Varattu', cardType: 'danger' };
+    ? { availability: 'Vapaa', cardType: 'green' }
+    : { availability: 'Varattu', cardType: 'red' };
 
   if (room.availableTime) {
     const now = new Date();
@@ -25,16 +26,11 @@ const RoomCard = ({ room }) => {
 
     if (!room.available) {
       if (diffInMinutes < yellowDurationMin) {
-        roomInfo = { availability: 'Vapautumassa', cardType: 'warning' };
+        roomInfo = { availability: 'Vapautumassa', cardType: 'yellow' };
         availableText += ' (' + diffInMinutes + ' min)';
       }
     }
   }
-
-  const linkStyle = {
-    textDecoration: 'none',
-    color: 'white'
-  };
 
   return (
     <Card
@@ -48,7 +44,7 @@ const RoomCard = ({ room }) => {
       <Card.Header>
         {room.id}
         <div style={{ float: 'right' }}>
-          <Favourite />
+          <Favourite room={room} />
         </div>
       </Card.Header>
       <Link to={`/roomlist/${room.id}`} key={room.id} style={linkStyle}>
