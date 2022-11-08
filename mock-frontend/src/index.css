@@ -65,14 +65,20 @@ body {
   color: black;
   font-family: sans-serif;
 }
-
-.ui.favourite {
+.ui.cards > .card > .content extra,
+.ui.card > .content extra {
   color: black;
+  font-family: sans-serif;
+  font-size: larger;
+}
+.ui.favourite {
+  color: whitesmoke;
   background-color: transparent;
-  font-size: 25px;
+  font-size: 30px;
   border-radius: 5px;
   padding: 10px 10px;
 }
+
 .ui.green {
   background-color: forestgreen;
 }

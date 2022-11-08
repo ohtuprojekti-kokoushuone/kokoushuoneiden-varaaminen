@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { Button } from 'semantic-ui-react';
 
-const Favourite = () => {
-  return <SetStateAndToggle />;
+const Favourite = ({ room }) => {
+  return <SetStateAndToggle room={room} />;
 };
 
 const SetStateAndToggle = () => {
@@ -11,8 +11,8 @@ const SetStateAndToggle = () => {
 
   const favouriteClass = 'favourite';
 
-  const isNotFavourite = <FaRegHeart className={favouriteClass} />;
-  const isFavourite = <FaHeart className={favouriteClass} />;
+  const isNotFavourite = <FaRegHeart className={favouriteClass}/>;
+  const isFavourite = <FaHeart className={favouriteClass}/>;
 
   const toggleFavourite = () => {
     setFavourite((favourite) => {
