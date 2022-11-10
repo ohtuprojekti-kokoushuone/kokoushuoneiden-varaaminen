@@ -34,7 +34,7 @@ const RoomCard = ({ room }) => {
   }
 
   return (
-    <Card className={roomInfo.cardType} key={room.id} data-name={room.building}>
+    <Card className={roomInfo.cardType} key={room.id} data-building={room.building}>
       <Card.Content>
         <div className="content">
           <span className="right floated">

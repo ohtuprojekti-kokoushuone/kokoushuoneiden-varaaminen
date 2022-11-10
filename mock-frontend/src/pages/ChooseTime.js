@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -15,6 +15,7 @@ const ChooseTime = () => {
   const [roomsToShow, setRoomsToShow] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const minSize = useRef();
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
@@ -22,16 +23,6 @@ const ChooseTime = () => {
   }, []);
 
   const handleFilter = async () => {
-    /*  setRoomsToShow(
-      rooms.map((room) => {
-        checkAvailability(room.id, startDate, endDate).then((res) => {
-          if (res.available) {
-            return room;
-          }
-        });
-      })
-    );
-  */
     let roomstest = rooms.filter((room) => {
       return room.building === 'Testirakennus';
     });
@@ -39,7 +30,7 @@ const ChooseTime = () => {
     roomstest = await Promise.all(
       roomstest.map(async (room) => {
         const huone = await checkAvailability(room.id, startDate, endDate);
-        if (huone.available) {
+        if (huone.available && room.size >= minSize.current.value) {
           return room;
         }
         return false;
@@ -50,6 +41,7 @@ const ChooseTime = () => {
 
     setRoomsToShow(roomstest);
   };
+
   return (
     <div className="container text-center">
       <Filter />
@@ -77,9 +69,9 @@ const ChooseTime = () => {
         locale={i18n.language}
         customInput={<input data-testid="end-date" type="text" />}
       />
+      <h3>{t('label.size')}</h3>
       <div className="row justify-content-center">
-        <select className="form-select w-auto justify-content-center">
-          <option defaultValue>{t('label.size')}</option>
+        <select ref={minSize} className="form-select w-auto justify-content-center">
           <option value="3">3</option>
           <option value="6">6</option>
           <option value="10">10</option>

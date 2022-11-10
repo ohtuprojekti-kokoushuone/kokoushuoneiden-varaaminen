@@ -5,14 +5,14 @@
       "id": "testirakennus.2001",
       "building": "Testirakennus",
       "groups": [],
-      "size": null
+      "size": 6
     },
     {
       "name": "Testirakennus, 2002, Kokoushuone 2",
       "id": "testirakennus.2002",
       "building": "Testirakennus",
       "groups": [],
-      "size": null
+      "size": 6
     },
     {
       "name": "Physicum, G237, Meeting room Ada",
