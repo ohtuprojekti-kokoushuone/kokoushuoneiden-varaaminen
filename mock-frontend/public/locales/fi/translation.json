@@ -2,7 +2,8 @@
   "example": "Esimerkkiteksti",
   "button": {
     "filter": "Rajaa tarkemmin",
-    "logout": "Kirjaudu ulos"
+    "logout": "Kirjaudu ulos",
+    "show": "Näytä vapaat kokoushuoneet"
   },
   "label": {
     "language": "Kieli",
@@ -11,8 +12,12 @@
     "startTime": "Aloitusaika",
     "endTime": "Lopetusaika",
     "yes": "Kyllä",
-    "no": "Ei"
+    "no": "Ei",
+    "time": "Aika",
+    "size": "Huoneen koko"
   },
   "deleteConfirmation": "Haluatko varmasti poistaa varauksen?",
-  "deleteReservation": "Poista varaus"
+  "deleteReservation": "Poista varaus",
+  "chooseStart": "Valitse alku",
+  "chooseEnd": "Valitse loppu"
 }
