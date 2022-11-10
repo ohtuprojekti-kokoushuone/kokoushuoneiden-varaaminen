@@ -1,17 +1,37 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Filter from './Filter';
+import * as Requests from '../requests';
 
 describe('<Filter />', () => {
-  let component;
+  const obj = [
+    {
+      name: 'Testirakennus'
+    },
+    {
+      name: 'Exactum'
+    },
+    {
+      name: 'Physicum'
+    },
+    {
+      name: 'Chemicum'
+    }
+  ];
 
-  component = render(<Filter />);
+  jest.spyOn(Requests, 'getBuildings').mockResolvedValue(obj);
 
-  test('Filtering buttons are rendered', () => {
-    expect(component.container).toHaveTextContent('Testirakennus');
-    expect(component.container).toHaveTextContent('Exactum');
-    expect(component.container).toHaveTextContent('Physicum');
-    expect(component.container).toHaveTextContent('Chemicum');
+  render(<Filter />);
+
+  test('Filtering buttons are rendered', async () => {
+    await waitFor(() => screen.getAllByRole('button'));
+
+    const buttons = screen.getAllByRole('button');
+
+    expect(buttons[0]).toHaveTextContent('Testirakennus');
+    expect(buttons[1]).toHaveTextContent('Exactum');
+    expect(buttons[2]).toHaveTextContent('Physicum');
+    expect(buttons[3]).toHaveTextContent('Chemicum');
   });
 });

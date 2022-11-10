@@ -18,7 +18,7 @@ export function getRooms() {
 }
 
 export function getBuildings() {
-  const req = axios.get('http://localhost:3003/api/rooms/buildings');
+  const req = axios.get(`${baseUrl}/rooms/buildings`);
   return req.then((res) => res.data);
 }
 
