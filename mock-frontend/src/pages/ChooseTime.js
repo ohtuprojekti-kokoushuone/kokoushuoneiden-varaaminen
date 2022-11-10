@@ -6,6 +6,7 @@ import { checkAvailability, getRoomsInfo } from '../requests';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
 import { Grid, Button } from 'semantic-ui-react';
+import { useTranslation } from 'react-i18next';
 
 registerLocale('fi', fi);
 
@@ -15,6 +16,7 @@ const ChooseTime = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const minSize = useRef();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     getRoomsInfo().then((res) => setRooms(res));
@@ -43,7 +45,7 @@ const ChooseTime = () => {
   return (
     <div className="container text-center">
       <Filter />
-      <h3>Valitse alku</h3>
+      <h3>{t('chooseStart')}</h3>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
         selected={startDate}
@@ -51,11 +53,11 @@ const ChooseTime = () => {
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
-        timeCaption="Aika"
-        locale="fi"
+        timeCaption={t('label.time')}
+        locale={i18n.language}
         customInput={<input data-testid="start-date" type="text" />}
       />
-      <h3>Valitse loppu</h3>
+      <h3>{t('chooseEnd')}</h3>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
         selected={endDate}
@@ -63,12 +65,12 @@ const ChooseTime = () => {
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
-        timeCaption="Aika"
-        locale="fi"
+        timeCaption={t('label.time')}
+        locale={i18n.language}
         customInput={<input data-testid="end-date" type="text" />}
       />
+      <h3>{t('label.size')}</h3>
       <div className="row justify-content-center">
-        <h5>Huoneen koko</h5>
         <select ref={minSize} className="form-select w-auto justify-content-center">
           <option value="3">3</option>
           <option value="6">6</option>
@@ -78,7 +80,7 @@ const ChooseTime = () => {
       </div>
       <div className="col align-self-center">
         <Button color="blue" onClick={handleFilter}>
-          Näytä vapaat kokoushuoneet
+          {t('button.show')}
         </Button>
       </div>
       <div>

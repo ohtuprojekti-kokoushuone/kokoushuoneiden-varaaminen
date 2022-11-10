@@ -6,9 +6,11 @@ import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
 import { Grid, Button } from 'semantic-ui-react';
 import { yellowDurationMin } from '../components/RoomCard.js';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     getRoomsInfo().then((res) => {
@@ -53,8 +55,8 @@ const Home = () => {
   return (
     <Container>
       <Filter />
-      <Button className="btn-choose" aria-label="Rajaa tarkemmin" color="blue" href="/choosetime">
-        Rajaa tarkemmin
+      <Button className="btn-choose" color="blue" href="/choosetime">
+        {t('button.filter')}
       </Button>
       <Grid stackable columns={2}>
         {arrayAvailable.map((room) => (
