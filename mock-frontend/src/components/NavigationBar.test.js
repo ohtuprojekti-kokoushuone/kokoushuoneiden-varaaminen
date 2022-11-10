@@ -7,9 +7,9 @@ describe('<Navigationbar />', () => {
   test('does not render tabs when user is not logged in', () => {
     const container = render(<NavigationBar user={null} />);
 
-    expect(container.container).not.toHaveTextContent('Omat varaukset');
-    expect(container.container).not.toHaveTextContent('Valitse aika');
-    expect(container.container).not.toHaveTextContent('Kirjaudu ulos');
+    expect(container.container).not.toHaveTextContent('label.reservations');
+    expect(container.container).not.toHaveTextContent('label.chooseTime');
+    expect(container.container).not.toHaveTextContent('button.logout');
   });
 
   test('render tabs when user is logged in', () => {
@@ -17,8 +17,8 @@ describe('<Navigationbar />', () => {
 
     const container2 = render(<NavigationBar user={user} />);
 
-    expect(container2.container).toHaveTextContent('Omat varaukset');
-    expect(container2.container).toHaveTextContent('Valitse aika');
-    expect(container2.container).toHaveTextContent('Kirjaudu ulos');
+    expect(container2.container).toHaveTextContent('label.reservations');
+    expect(container2.container).toHaveTextContent('label.chooseTime');
+    expect(container2.container).toHaveTextContent('button.logout');
   });
 });

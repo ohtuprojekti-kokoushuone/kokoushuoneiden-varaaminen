@@ -1,0 +1,18 @@
+{
+  "example": "Esimerkkiteksti",
+  "button": {
+    "filter": "Rajaa tarkemmin",
+    "logout": "Kirjaudu ulos"
+  },
+  "label": {
+    "language": "Kieli",
+    "reservations": "Omat varaukset",
+    "chooseTime": "Valitse aika",
+    "startTime": "Aloitusaika",
+    "endTime": "Lopetusaika",
+    "yes": "Kyllä",
+    "no": "Ei"
+  },
+  "deleteConfirmation": "Haluatko varmasti poistaa varauksen?",
+  "deleteReservation": "Poista varaus"
+}
