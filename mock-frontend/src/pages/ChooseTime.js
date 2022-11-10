@@ -5,8 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { checkAvailability, getRoomsInfo } from '../requests';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Grid, Button } from 'semantic-ui-react';
+import { useTranslation } from 'react-i18next';
 
 registerLocale('fi', fi);
 
@@ -15,6 +15,7 @@ const ChooseTime = () => {
   const [roomsToShow, setRoomsToShow] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     getRoomsInfo().then((res) => setRooms(res));
@@ -52,7 +53,7 @@ const ChooseTime = () => {
   return (
     <div className="container text-center">
       <Filter />
-      <h5>Valitse alku</h5>
+      <h3>{t('chooseStart')}</h3>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
         selected={startDate}
@@ -60,11 +61,11 @@ const ChooseTime = () => {
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
-        timeCaption="Aika"
-        locale="fi"
+        timeCaption={t('label.time')}
+        locale={i18n.language}
         customInput={<input data-testid="start-date" type="text" />}
       />
-      <h5>Valitse loppu</h5>
+      <h3>{t('chooseEnd')}</h3>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
         selected={endDate}
@@ -72,13 +73,13 @@ const ChooseTime = () => {
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
-        timeCaption="Aika"
-        locale="fi"
+        timeCaption={t('label.time')}
+        locale={i18n.language}
         customInput={<input data-testid="end-date" type="text" />}
       />
       <div className="row justify-content-center">
         <select className="form-select w-auto justify-content-center">
-          <option defaultValue>Huoneen koko</option>
+          <option defaultValue>{t('label.size')}</option>
           <option value="3">3</option>
           <option value="6">6</option>
           <option value="10">10</option>
@@ -86,18 +87,18 @@ const ChooseTime = () => {
         </select>
       </div>
       <div className="col align-self-center">
-        <button onClick={handleFilter} className="btn btn-primary btn-lg">
-          Näytä vapaat kokoushuoneet
-        </button>
+        <Button color="blue" onClick={handleFilter}>
+          {t('button.show')}
+        </Button>
       </div>
       <div>
-        <Row xs={1} lg={2} className="g-1">
+        <Grid stackable columns={2}>
           {roomsToShow.map((room) => (
-            <Col key={room.id}>
-              <RoomCard room={room} key={room.id} />
-            </Col>
+            <Grid.Column key={room.id}>
+              <RoomCard room={room} />
+            </Grid.Column>
           ))}
-        </Row>
+        </Grid>
       </div>
     </div>
   );

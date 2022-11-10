@@ -1,8 +1,9 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button, Icon } from 'semantic-ui-react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteReservation } from '../requests.ts';
+import { t } from 'i18next';
 
 const Reservation = ({ res }) => {
   function handleDeleteReservation(reservation) {
@@ -10,14 +11,18 @@ const Reservation = ({ res }) => {
       customUI: ({ onClose }) => {
         return (
           <div className="react-confirm-alert-body" style={{ width: '500px' }}>
-            <h1>Haluatko varmasti poistaa varauksen?</h1>
-            <p style={{ fontWeight: 'bold' }}>Varauksen nimi: {reservation.subject}</p>
-            <p>Aloitusaika: {new Date(reservation.start.dateTime).toLocaleString('fi-FI')}</p>
-            <p>Lopetusaika: {new Date(reservation.end.dateTime).toLocaleString('fi-FI')}</p>
+            <h1>{t('deleteConfirmation')}</h1>
+            <p style={{ fontWeight: 'bold' }}>{reservation.subject}</p>
+            <p>
+              {t('label.startTime')}: {new Date(reservation.start.dateTime).toLocaleString('fi-FI')}
+            </p>
+            <p>
+              {t('label.endTime')}: {new Date(reservation.end.dateTime).toLocaleString('fi-FI')}
+            </p>
 
             <div>
               <Button
-                variant="primary"
+                color="blue"
                 style={{ marginRight: '10px' }}
                 autoFocus
                 onClick={() => {
@@ -28,10 +33,10 @@ const Reservation = ({ res }) => {
                   onClose();
                 }}
               >
-                Kyllä
+                {t('label.yes')}
               </Button>
-              <Button variant="danger" onClick={onClose}>
-                Ei
+              <Button color="red" onClick={onClose}>
+                {t('label.no')}
               </Button>
             </div>
           </div>
@@ -50,8 +55,8 @@ const Reservation = ({ res }) => {
       <td>{start.toLocaleString('fi-FI')}</td>
       <td>{end.toLocaleString('fi-FI')}</td>
       <td>
-        <Button variant="danger" onClick={() => handleDeleteReservation(res)}>
-          X
+        <Button color="red" onClick={() => handleDeleteReservation(res)} icon>
+          <Icon name="trash" aria-label={t('deleteReservation')} />
         </Button>
       </td>
     </tr>

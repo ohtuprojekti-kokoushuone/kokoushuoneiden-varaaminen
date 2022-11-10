@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 jest.mock('axios');
 
 describe('<Home />', () => {
-  describe('"Rajaa tarkemmin" button', () => {
+  describe('filter button', () => {
     let button;
 
     beforeEach(async () => {
@@ -29,7 +29,7 @@ describe('<Home />', () => {
         render(<Home />, { wrapper: BrowserRouter });
       });
 
-      button = screen.getByRole('link', { name: /Rajaa tarkemmin/i });
+      button = screen.getByRole('button', { name: 'button.filter' });
     });
 
     test('Link button to /choosetime is rendered', async () => {

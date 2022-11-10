@@ -4,7 +4,9 @@ import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
 import { makeReservation } from '../requests.ts';
 import { useParams } from 'react-router-dom';
-import Alert from 'react-bootstrap/Alert';
+import { Message, Button } from 'semantic-ui-react';
+import { Slider } from 'react-semantic-ui-range';
+import { formatMinutes } from '../utils/formatDateUtil';
 
 registerLocale('fi', fi);
 
@@ -13,10 +15,10 @@ const defaultDuration = 60;
 const CreateReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
   const end = new Date();
-  end.setMinutes(end.getMinutes() + defaultDuration);
-  const [endDate, setEndDate] = useState(end);
+  const [endDate, setEndDate] = useState(end.getTime() + defaultDuration * 60 * 1000);
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [duration, setDuration] = useState(defaultDuration);
 
   const subject = useRef();
   const datePickerEnd = useRef();
@@ -54,21 +56,31 @@ const CreateReservation = () => {
       let newDate = new Date(date.getTime());
       newDate.setMinutes(date.getMinutes() + defaultDuration);
       setEndDate(newDate);
+    } else {
+      let newDate = new Date(date.getTime());
+      newDate.setMinutes(date.getMinutes() + duration);
+      setEndDate(newDate);
     }
+  }
+
+  function changeEndDate(minutes) {
+    setDuration(minutes);
+    setEndDate(end.setMinutes(startDate.getMinutes() + minutes));
   }
 
   return (
     <div className="container text-center">
       {show ? (
-        <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+        <Message negative onDismiss={() => setShow(false)}>
+          {' '}
           {errorMessage}
-        </Alert>
+        </Message>
       ) : (
         <></>
       )}
-      <h5>Aihe</h5>
+      <h3>Aihe</h3>
       <input ref={subject} type="text" name="subject" placeholder="Syötä aihe" required />
-      <h5>Valitse alku</h5>
+      <h3>Valitse alku</h3>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
         selected={startDate}
@@ -80,12 +92,24 @@ const CreateReservation = () => {
         locale="fi"
         customInput={<input data-testid="start-date-reservation" type="text" />}
       />
-      <h5>Valitse loppu</h5>
+      <h3>Valitse kesto</h3>
+      <Slider
+        inverted={false}
+        settings={{
+          start: defaultDuration,
+          min: 15,
+          max: 120,
+          step: 15,
+          onChange: changeEndDate
+        }}
+      />
+      <h4>{formatMinutes(duration)}</h4>
+      <h3>Varauksen loppuaika</h3>
       <DatePicker
         ref={datePickerEnd}
         dateFormat="dd.MM.yyyy HH:mm"
         selected={endDate}
-        onChange={(date) => setEndDate(date)}
+        disabled
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
@@ -95,9 +119,9 @@ const CreateReservation = () => {
       />
 
       <div className="col align-self-center">
-        <button className="btn btn-primary btn-lg" onClick={handleClick}>
+        <Button color="blue" onClick={handleClick}>
           Tee varaus
-        </button>
+        </Button>
       </div>
     </div>
   );
