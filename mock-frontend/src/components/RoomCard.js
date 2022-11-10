@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
 import { Icon } from 'semantic-ui-react';
-import { Link } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { format } from 'date-fns';
