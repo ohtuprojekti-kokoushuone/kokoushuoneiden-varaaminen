@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button } from 'semantic-ui-react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteReservation } from '../requests.ts';
@@ -17,13 +17,12 @@ const Reservation = ({ res }) => {
 
             <div>
               <Button
-                variant="primary"
+                color="blue"
                 style={{ marginRight: '10px' }}
                 autoFocus
                 onClick={() => {
                   const email = reservation.organizer.email;
-                  deleteReservation(email.substr(0, email.indexOf('@')), reservation.id).then((result) => {
-                    console.log(result, reservation);
+                  deleteReservation(email.substr(0, email.indexOf('@')), reservation.id).then(() => {
                     window.location.reload(true);
                   });
                   onClose();
@@ -31,7 +30,7 @@ const Reservation = ({ res }) => {
               >
                 Kyllä
               </Button>
-              <Button variant="danger" onClick={onClose}>
+              <Button color="red" onClick={onClose}>
                 Ei
               </Button>
             </div>
@@ -51,7 +50,7 @@ const Reservation = ({ res }) => {
       <td>{start.toLocaleString('fi-FI')}</td>
       <td>{end.toLocaleString('fi-FI')}</td>
       <td>
-        <Button variant="danger" onClick={() => handleDeleteReservation(res)}>
+        <Button color="red" onClick={() => handleDeleteReservation(res)}>
           X
         </Button>
       </td>

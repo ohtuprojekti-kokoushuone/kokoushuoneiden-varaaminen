@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import { login, setToken } from '../requests.ts';
-import Button from 'react-bootstrap/Button';
+import { Button } from 'semantic-ui-react';
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState('');
@@ -24,7 +24,6 @@ const Login = ({ setUser }) => {
       setPassword('');
       return <Navigate to="/home" />;
     } catch (exception) {
-      console.log('wrong credentials');
       errorMessage.current.innerText = 'Wrong credentials!';
     }
   };
@@ -34,12 +33,14 @@ const Login = ({ setUser }) => {
       <h1>Kirjaudu sisään</h1>
       <p ref={errorMessage} style={{ color: 'red' }}></p>
       <form onSubmit={handleLogin}>
-        <h5>Käyttäjätunnus</h5>
+        <h3>Käyttäjätunnus</h3>
         <input type="text" name="name" required onChange={({ target }) => setUsername(target.value)} />
-        <h5>Salasana</h5>
+        <h3>Salasana</h3>
         <input type="password" name="password" required onChange={({ target }) => setPassword(target.value)} />
         <div className="col align-self-center">
-          <Button type="submit">Kirjaudu</Button>
+          <Button color="blue" type="submit">
+            Kirjaudu
+          </Button>
         </div>
       </form>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button } from 'semantic-ui-react';
 import { getBuildings } from '../requests';
 
 const Filter = () => {
@@ -45,14 +45,14 @@ const Filter = () => {
     }
   }
 
-  const buttonClass = 'filter fw-bold mb-2 mx-2';
+  const buttonClass = 'ui filter mb-2 mx-2';
 
   return (
     <div>
       {buildings.map((building) => (
         <Button
           key={building.name}
-          variant="dark"
+          color="black"
           className={buttonClass}
           onClick={(el) => toggleFilter(el.target, building.name)}
         >

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { getRoomsInfo } from '../requests';
-import Container from 'react-bootstrap/Container';
+import { Container } from 'semantic-ui-react';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { Link } from 'react-router-dom';
+import { Grid, Button } from 'semantic-ui-react';
+import { yellowDurationMin } from '../components/RoomCard.js';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -17,19 +16,59 @@ const Home = () => {
     });
   }, []);
 
+  const arrayNotAvailable = [];
+
+  function filterSoonAvailable(room) {
+    if (room.availableTime) {
+      const now = new Date();
+      const availableTime = new Date(room.availableTime);
+      let diffInMinutes = Math.trunc((availableTime.getTime() - now.getTime()) / 1000 / 60);
+
+      if (!room.available) {
+        if (diffInMinutes < yellowDurationMin) {
+          return true;
+        }
+      }
+    }
+    if (!room.available) {
+      arrayNotAvailable.push(room);
+      return false;
+    }
+  }
+
+  function filterAvailable(room) {
+    if (room.available === true) {
+      return true;
+    }
+    return false;
+  }
+
+  const arrayAvailable = rooms.filter(filterAvailable);
+  const arraySoonAvailable = rooms.filter(filterSoonAvailable);
+
   return (
     <Container>
       <Filter />
-      <Link to="/choosetime" className="btn btn-primary btn-sm mb-2 mx-2">
+      <Button className="btn-choose" aria-label="Rajaa tarkemmin" color="blue" href="/choosetime">
         Rajaa tarkemmin
-      </Link>
-      <Row xs={1} lg={2} className="g-1">
-        {rooms.map((room) => (
-          <Col key={room.id}>
+      </Button>
+      <Grid stackable columns={2}>
+        {arrayAvailable.map((room) => (
+          <Grid.Column key={room.id}>
             <RoomCard room={room} />
-          </Col>
+          </Grid.Column>
         ))}
-      </Row>
+        {arraySoonAvailable.map((room) => (
+          <Grid.Column key={room.id}>
+            <RoomCard room={room} />
+          </Grid.Column>
+        ))}
+        {arrayNotAvailable.map((room) => (
+          <Grid.Column key={room.id}>
+            <RoomCard room={room} />
+          </Grid.Column>
+        ))}
+      </Grid>
     </Container>
   );
 };

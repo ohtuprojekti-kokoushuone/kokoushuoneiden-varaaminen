@@ -5,8 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { checkAvailability, getRoomsInfo } from '../requests';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Grid, Button } from 'semantic-ui-react';
 
 registerLocale('fi', fi);
 
@@ -44,7 +43,7 @@ const ChooseTime = () => {
   return (
     <div className="container text-center">
       <Filter />
-      <h5>Valitse alku</h5>
+      <h3>Valitse alku</h3>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
         selected={startDate}
@@ -54,8 +53,9 @@ const ChooseTime = () => {
         timeIntervals={15}
         timeCaption="Aika"
         locale="fi"
+        customInput={<input data-testid="start-date" type="text" />}
       />
-      <h5>Valitse loppu</h5>
+      <h3>Valitse loppu</h3>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
         selected={endDate}
@@ -65,6 +65,7 @@ const ChooseTime = () => {
         timeIntervals={15}
         timeCaption="Aika"
         locale="fi"
+        customInput={<input data-testid="end-date" type="text" />}
       />
       <div className="row justify-content-center">
         <h5>Huoneen koko</h5>
@@ -76,18 +77,18 @@ const ChooseTime = () => {
         </select>
       </div>
       <div className="col align-self-center">
-        <button onClick={handleFilter} className="btn btn-primary btn-lg">
+        <Button color="blue" onClick={handleFilter}>
           Näytä vapaat kokoushuoneet
-        </button>
+        </Button>
       </div>
       <div>
-        <Row xs={1} lg={2} className="g-1">
+        <Grid stackable columns={2}>
           {roomsToShow.map((room) => (
-            <Col key={room.id}>
-              <RoomCard room={room} key={room.id} />
-            </Col>
+            <Grid.Column key={room.id}>
+              <RoomCard room={room} />
+            </Grid.Column>
           ))}
-        </Row>
+        </Grid>
       </div>
     </div>
   );

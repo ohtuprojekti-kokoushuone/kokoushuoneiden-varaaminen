@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getRoomById } from '../requests.ts';
 import Room from '../components/Room.js';
 import { useParams, useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { Button } from 'semantic-ui-react';
 
 const RoomInfo = () => {
   const [room, setValue] = useState('');
@@ -20,10 +20,14 @@ const RoomInfo = () => {
     <div className="container text-center">
       <div className="d-grid gap-3 col-8 mx-auto">
         <Room room={room} key={room.id}></Room>
-        <Button aria-label="Siirry varaussivulle" onClick={() => navigate(`/CreateReservation/${room.id}`)}>
+        <Button
+          aria-label="Siirry varaussivulle"
+          color="blue"
+          onClick={() => navigate(`/CreateReservation/${room.id}`)}
+        >
           Varaa huone
         </Button>
-        <Button aria-label="palaa hakutuloksiin" onClick={() => navigate('/home')}>
+        <Button aria-label="palaa hakutuloksiin" color="blue" onClick={() => navigate('/home')}>
           Palaa hakutuloksiin
         </Button>
       </div>
