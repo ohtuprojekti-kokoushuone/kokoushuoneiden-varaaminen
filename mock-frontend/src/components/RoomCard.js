@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
 import { Icon } from 'semantic-ui-react';
+import { Link } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { format } from 'date-fns';
@@ -42,19 +43,18 @@ const RoomCard = ({ room }) => {
           </span>
         </div>
         <Card.Header>{room.name}</Card.Header>
-        <Card.Meta href={`/roomlist/${room.id}`}>{roomInfo.availability}</Card.Meta>
+        <Card.Meta>{roomInfo.availability}</Card.Meta>
         <Card.Description>{availableText}</Card.Description>
+        <Card.Content extra href={`/roomlist/${room.id}`}>
+          <Icon link name="info circle" color="black" />
+        </Card.Content>
         <Card.Content extra>
-          <span className="left floated">
-            <Icon link name="info circle" />
-          </span>
           <span className="right floated">
             <Icon name="users" />
             {room.size} hlö
           </span>
         </Card.Content>
       </Card.Content>
-      .
       <Button aria-label="Siirry varaussivulle" color="blue" onClick={() => navigate(`/CreateReservation/${room.id}`)}>
         Varaa huone
       </Button>
