@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Responsive, Dropdown, DropdownMenu } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import logo from '../hy-logo-white.png';
