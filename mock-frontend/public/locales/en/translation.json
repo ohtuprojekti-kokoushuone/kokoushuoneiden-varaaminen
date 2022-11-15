@@ -6,6 +6,7 @@
   },
   "label": {
     "language": "Language",
+    "activeLanguage": "EN",
     "reservations": "Your reservations",
     "chooseTime": "Choose time",
     "startTime": "Start time",

@@ -6,6 +6,7 @@
   },
   "label": {
     "language": "Kieli",
+    "activeLanguage": "FI",
     "reservations": "Omat varaukset",
     "chooseTime": "Valitse aika",
     "startTime": "Aloitusaika",
