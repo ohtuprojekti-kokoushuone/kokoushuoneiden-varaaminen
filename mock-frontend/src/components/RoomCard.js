@@ -6,22 +6,24 @@ import { Button } from 'semantic-ui-react';
 import { format } from 'date-fns';
 import Favourite from './Favourite';
 import 'semantic-ui-css/semantic.min.css';
+import { useTranslation } from 'react-i18next';
 
 export const yellowDurationMin = 5;
 
 const RoomCard = ({ room }) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   let availableText = '';
   let roomInfo = room.available
-    ? { availability: 'Vapaa', cardType: 'green' }
-    : { availability: 'Varattu', cardType: 'red' };
+    ? { availability: t('label.available'), cardType: 'green' }
+    : { availability: t('label.notAvailable'), cardType: 'red' };
 
   if (room.availableTime) {
     const now = new Date();
     const availableTime = new Date(room.availableTime);
     const time = format(availableTime, 'dd.MM.yyyy kk:mm');
-    availableText = room.available ? 'Huone on vapaa ' + time + ' asti' : 'Huone vapautuu ' + time;
+    availableText = room.available ? t('availableUntil', { time: time }) : t('reservedUntil', { time: time });
 
     let diffInMinutes = Math.trunc((availableTime.getTime() - now.getTime()) / 1000 / 60);
 
@@ -34,7 +36,7 @@ const RoomCard = ({ room }) => {
   }
 
   return (
-    <Card className={roomInfo.cardType} key={room.id} data-name={room.building}>
+    <Card className={roomInfo.cardType} key={room.id} data-building={room.building}>
       <Card.Content>
         <div className="content">
           <span className="right floated">
@@ -42,21 +44,20 @@ const RoomCard = ({ room }) => {
           </span>
         </div>
         <Card.Header>{room.name}</Card.Header>
-        <Card.Meta href={`/roomlist/${room.id}`}>{roomInfo.availability}</Card.Meta>
+        <Card.Meta>{roomInfo.availability}</Card.Meta>
         <Card.Description>{availableText}</Card.Description>
+        <Card.Content extra href={`/roomlist/${room.id}`}>
+          <Icon link name="info circle" color="black" />
+        </Card.Content>
         <Card.Content extra>
-          <span className="left floated">
-            <Icon link name="info circle" />
-          </span>
           <span className="right floated">
             <Icon name="users" />
-            {room.size} hlö
+            {room.size} {t('unit.people')}
           </span>
         </Card.Content>
       </Card.Content>
-      .
       <Button aria-label="Siirry varaussivulle" color="blue" onClick={() => navigate(`/CreateReservation/${room.id}`)}>
-        Varaa huone
+        {t('button.reserveRoom')}
       </Button>
     </Card>
   );

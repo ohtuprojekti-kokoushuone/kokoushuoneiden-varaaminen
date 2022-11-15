@@ -2,7 +2,12 @@
   "example": "Esimerkkiteksti",
   "button": {
     "filter": "Rajaa tarkemmin",
-    "logout": "Kirjaudu ulos"
+    "logout": "Kirjaudu ulos",
+    "show": "Näytä vapaat kokoushuoneet",
+    "reserveRoom": "Varaa huone",
+    "returnToSearch": "Palaa hakutuloksiin",
+    "login": "Kirjaudu",
+    "reserve": "Tee varaus"
   },
   "label": {
     "language": "Kieli",
@@ -12,8 +17,31 @@
     "startTime": "Aloitusaika",
     "endTime": "Lopetusaika",
     "yes": "Kyllä",
-    "no": "Ei"
+    "no": "Ei",
+    "time": "Aika",
+    "size": "Huoneen koko",
+    "subject": "Aihe",
+    "room": "Huone",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana",
+    "available": "Vapaa",
+    "notAvailable": "Varattu"
+  },
+  "error": {
+    "endBeforeStart": "Virhe: Varauksen alkamisajan tulee olla ennen loppumisaikaa"
+  },
+  "unit": {
+    "people": "henkilöä",
+    "minutes": "min"
   },
   "deleteConfirmation": "Haluatko varmasti poistaa varauksen?",
-  "deleteReservation": "Poista varaus"
+  "deleteReservation": "Poista varaus",
+  "chooseStart": "Valitse alku",
+  "chooseEnd": "Valitse loppu",
+  "chooseDuration": "Valitse kesto",
+  "loginTitle": "Kirjaudu sisään",
+  "inputSubject": "Syötä aihe",
+  "reservationEnd": "Varauksen loppuaika",
+  "availableUntil": "Huone on vapaa {{time}} asti",
+  "reservedUntil": "Huone vapautuu {{time}}"
 }

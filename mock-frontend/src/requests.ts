@@ -17,6 +17,11 @@ export function getRooms() {
   return req.then((res) => res.data);
 }
 
+export function getBuildings() {
+  const req = axios.get(`${baseUrl}/rooms/buildings`);
+  return req.then((res) => res.data);
+}
+
 export function getRoomsInfo() {
   const req = axios.get(`${baseUrl}/rooms/info`);
   return req.then((res) => res.data);

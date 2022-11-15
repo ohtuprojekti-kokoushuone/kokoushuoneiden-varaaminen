@@ -4,13 +4,14 @@ import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
 import { makeReservation } from '../requests.ts';
 import { useParams } from 'react-router-dom';
-import { Message, Button } from 'semantic-ui-react';
-import { Slider } from 'react-semantic-ui-range';
-import { formatMinutes } from '../utils/formatDateUtil';
+import { Message, Button, Dropdown } from 'semantic-ui-react';
+import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
+import { useTranslation } from 'react-i18next';
 
 registerLocale('fi', fi);
 
 const defaultDuration = 60;
+const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
 const CreateReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -24,12 +25,14 @@ const CreateReservation = () => {
   const datePickerEnd = useRef();
   const id = useParams().id;
 
+  const { t } = useTranslation();
+
   function handleClick() {
     if (!subject.current.reportValidity()) return;
 
     if (endDate <= startDate) {
       setShow(true);
-      setErrorMessage('Error: Start date must be before end date');
+      setErrorMessage('error.endBeforeStart');
       return;
     }
 
@@ -63,9 +66,10 @@ const CreateReservation = () => {
     }
   }
 
-  function changeEndDate(minutes) {
-    setDuration(minutes);
-    setEndDate(end.setMinutes(startDate.getMinutes() + minutes));
+  function changeEndDate(event, data) {
+    setDuration(data.value);
+    const newDate = new Date(startDate.getTime());
+    setEndDate(newDate.setMinutes(startDate.getMinutes() + data.value));
   }
 
   return (
@@ -73,14 +77,14 @@ const CreateReservation = () => {
       {show ? (
         <Message negative onDismiss={() => setShow(false)}>
           {' '}
-          {errorMessage}
+          {t(errorMessage)}
         </Message>
       ) : (
         <></>
       )}
-      <h3>Aihe</h3>
-      <input ref={subject} type="text" name="subject" placeholder="Syötä aihe" required />
-      <h3>Valitse alku</h3>
+      <h3>{t('label.subject')}</h3>
+      <input ref={subject} type="text" name="subject" placeholder={t('inputSubject')} required />
+      <h3>{t('chooseStart')}</h3>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
         selected={startDate}
@@ -88,23 +92,19 @@ const CreateReservation = () => {
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
-        timeCaption="Aika"
+        timeCaption={t('label.time')}
         locale="fi"
         customInput={<input data-testid="start-date-reservation" type="text" />}
       />
-      <h3>Valitse kesto</h3>
-      <Slider
-        inverted={false}
-        settings={{
-          start: defaultDuration,
-          min: 15,
-          max: 120,
-          step: 15,
-          onChange: changeEndDate
-        }}
+      <h3>{t('chooseDuration')}</h3>
+      <Dropdown
+        placeholder="Aseta aika"
+        selection
+        options={createDropdownDurationObject(durations)}
+        onChange={changeEndDate}
+        defaultValue={defaultDuration}
       />
-      <h4>{formatMinutes(duration)}</h4>
-      <h3>Varauksen loppuaika</h3>
+      <h3>{t('reservationEnd')}</h3>
       <DatePicker
         ref={datePickerEnd}
         dateFormat="dd.MM.yyyy HH:mm"
@@ -120,7 +120,7 @@ const CreateReservation = () => {
 
       <div className="col align-self-center">
         <Button color="blue" onClick={handleClick}>
-          Tee varaus
+          {t('button.reserve')}
         </Button>
       </div>
     </div>

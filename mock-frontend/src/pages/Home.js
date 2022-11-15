@@ -48,6 +48,10 @@ const Home = () => {
   const arrayAvailable = rooms.filter(filterAvailable);
   const arraySoonAvailable = rooms.filter(filterSoonAvailable);
 
+  arrayAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
+  arraySoonAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
+  arrayNotAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
+
   return (
     <Container>
       <Filter />

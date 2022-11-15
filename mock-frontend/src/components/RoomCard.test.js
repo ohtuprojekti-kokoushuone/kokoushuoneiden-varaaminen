@@ -26,12 +26,12 @@ describe('<RoomCard />', () => {
 
   test('renders roomName, availability and "Varaa huone" button', () => {
     expect(container.container).toHaveTextContent('Physicum, G237, Meeting room Ada (6)');
-    expect(container.container).toHaveTextContent('Vapaa');
-    expect(container.container).toHaveTextContent('Varaa huone');
+    expect(container.container).toHaveTextContent('label.available');
+    expect(container.container).toHaveTextContent('button.reserveRoom');
   });
 
   test('renders "Vapaa" if available', () => {
-    expect(container.container).toHaveTextContent('Vapaa');
+    expect(container.container).toHaveTextContent('label.available');
   });
 
   test('renders Varattu if not available', () => {
@@ -50,6 +50,6 @@ describe('<RoomCard />', () => {
       </BrowserRouter>
     );
 
-    expect(container2.container).toHaveTextContent('Varattu');
+    expect(container2.container).toHaveTextContent('label.notAvailable');
   });
 });
