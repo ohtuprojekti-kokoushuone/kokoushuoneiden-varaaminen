@@ -3,10 +3,13 @@ import { getRoomById } from '../requests.ts';
 import Room from '../components/Room.js';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
+import { useTranslation } from 'react-i18next';
 
 const RoomInfo = () => {
   const [room, setValue] = useState('');
   const id = useParams().id;
+
+  const { t } = useTranslation();
 
   let navigate = useNavigate();
 
@@ -25,10 +28,10 @@ const RoomInfo = () => {
           color="blue"
           onClick={() => navigate(`/CreateReservation/${room.id}`)}
         >
-          Varaa huone
+          {t('button.reserve')}
         </Button>
         <Button aria-label="palaa hakutuloksiin" color="blue" onClick={() => navigate('/home')}>
-          Palaa hakutuloksiin
+          {t('button.returnToSearch')}
         </Button>
       </div>
     </div>
