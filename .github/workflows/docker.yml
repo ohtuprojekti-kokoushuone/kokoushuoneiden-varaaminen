@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./reservatorapp_projekti/ReservatorApp
-          file: resrevatorapp_projekti/ReservatorApp/Dockerfile
+          file: reservatorapp_projekti/ReservatorApp/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/kokoushuone-app:backend
 
