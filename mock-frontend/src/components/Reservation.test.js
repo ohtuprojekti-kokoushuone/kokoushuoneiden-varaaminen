@@ -25,6 +25,13 @@ describe('<Reservation />', () => {
 
   test('Render subject, organizer name, start date and end date', () => {
     const cells = screen.getAllByRole('cell');
+    const dateFormatOption = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
 
     const subject = cells[0];
     expect(subject.textContent).toBe('test');
@@ -33,9 +40,9 @@ describe('<Reservation />', () => {
     expect(organizer.textContent).toBe('Testirakennus, 2001, Kokoushuone 1');
 
     const startDate = cells[2];
-    expect(startDate.textContent).toBe(new Date(res.start.dateTime).toLocaleString('fi-FI'));
+    expect(startDate.textContent).toBe(new Date(res.start.dateTime).toLocaleString('fi-FI', dateFormatOption));
 
     const endDate = cells[3];
-    expect(endDate.textContent).toBe(new Date(res.end.dateTime).toLocaleString('fi-FI'));
+    expect(endDate.textContent).toBe(new Date(res.end.dateTime).toLocaleString('fi-FI', dateFormatOption));
   });
 });

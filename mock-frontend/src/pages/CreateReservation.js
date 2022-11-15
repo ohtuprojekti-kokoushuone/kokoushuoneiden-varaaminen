@@ -4,13 +4,13 @@ import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
 import { makeReservation } from '../requests.ts';
 import { useParams } from 'react-router-dom';
-import { Message, Button } from 'semantic-ui-react';
-import { Slider } from 'react-semantic-ui-range';
-import { formatMinutes } from '../utils/formatDateUtil';
+import { Message, Button, Dropdown } from 'semantic-ui-react';
+import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
 
 registerLocale('fi', fi);
 
 const defaultDuration = 60;
+const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
 const CreateReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -63,9 +63,10 @@ const CreateReservation = () => {
     }
   }
 
-  function changeEndDate(minutes) {
-    setDuration(minutes);
-    setEndDate(end.setMinutes(startDate.getMinutes() + minutes));
+  function changeEndDate(event, data) {
+    setDuration(data.value);
+    const newDate = new Date(startDate.getTime());
+    setEndDate(newDate.setMinutes(startDate.getMinutes() + data.value));
   }
 
   return (
@@ -93,17 +94,13 @@ const CreateReservation = () => {
         customInput={<input data-testid="start-date-reservation" type="text" />}
       />
       <h3>Valitse kesto</h3>
-      <Slider
-        inverted={false}
-        settings={{
-          start: defaultDuration,
-          min: 15,
-          max: 120,
-          step: 15,
-          onChange: changeEndDate
-        }}
+      <Dropdown
+        placeholder="Aseta aika"
+        selection
+        options={createDropdownDurationObject(durations)}
+        onChange={changeEndDate}
+        defaultValue={defaultDuration}
       />
-      <h4>{formatMinutes(duration)}</h4>
       <h3>Varauksen loppuaika</h3>
       <DatePicker
         ref={datePickerEnd}
