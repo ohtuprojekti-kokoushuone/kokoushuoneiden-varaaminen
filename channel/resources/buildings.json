@@ -1,0 +1,19 @@
+{
+  "buildings": [
+    {
+    "name": "Testirakennus"
+    },
+    {
+    "name": "Exactum"
+    },
+    {
+    "name": "Physicum"
+    },
+    {
+    "name": "Chemicum"
+    },
+    {
+    "name": "Kumpula Campus Library"
+    }
+  ]
+}
