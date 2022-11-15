@@ -22,7 +22,9 @@
     "subject": "Aihe",
     "room": "Huone",
     "username": "Käyttäjätunnus",
-    "password": "Salasana"
+    "password": "Salasana",
+    "available": "Vapaa",
+    "notAvailable": "Varattu"
   },
   "error": {
     "endBeforeStart": "Virhe: Varauksen alkamisajan tulee olla ennen loppumisaikaa"
@@ -38,5 +40,7 @@
   "chooseDuration": "Valitse kesto",
   "loginTitle": "Kirjaudu sisään",
   "inputSubject": "Syötä aihe",
-  "reservationEnd": "Varauksen loppuaika"
+  "reservationEnd": "Varauksen loppuaika",
+  "availableUntil": "Huone on vapaa {{time}} asti",
+  "reservedUntil": "Huone vapautuu {{time}}"
 }

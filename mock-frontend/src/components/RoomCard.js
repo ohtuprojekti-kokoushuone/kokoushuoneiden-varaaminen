@@ -16,14 +16,14 @@ const RoomCard = ({ room }) => {
 
   let availableText = '';
   let roomInfo = room.available
-    ? { availability: 'Vapaa', cardType: 'green' }
-    : { availability: 'Varattu', cardType: 'red' };
+    ? { availability: t('label.available'), cardType: 'green' }
+    : { availability: t('label.notAvailable'), cardType: 'red' };
 
   if (room.availableTime) {
     const now = new Date();
     const availableTime = new Date(room.availableTime);
     const time = format(availableTime, 'dd.MM.yyyy kk:mm');
-    availableText = room.available ? 'Huone on vapaa ' + time + ' asti' : 'Huone vapautuu ' + time;
+    availableText = room.available ? t('availableUntil', { time: time }) : t('reservedUntil', { time: time });
 
     let diffInMinutes = Math.trunc((availableTime.getTime() - now.getTime()) / 1000 / 60);
 
