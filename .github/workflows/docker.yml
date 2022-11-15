@@ -4,27 +4,30 @@ on:
   push:
     branches:
       - "staging"
+      - "main"
 
 jobs:
-  build:
+  docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Login to Docker Hub
+      - 
+        name: Check out code
+        uses: actions/checkout@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
       - name: Build and push backend
         uses: docker/build-push-action@v3
         with:
           context: ./reservatorapp_projekti/ReservatorApp
-          file: Dockerfile
+          file: resrevatorapp_projekti/ReservatorApp/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/kokoushuone-app:backend
 
@@ -32,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./channel
-          file: Dockerfile
+          file: channel/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/kokoushuone-app:channel
 
@@ -40,7 +43,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./mock-frontend
-          file: Dockerfile
+          file: mock-frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/kokoushuone-app:frontend
   
