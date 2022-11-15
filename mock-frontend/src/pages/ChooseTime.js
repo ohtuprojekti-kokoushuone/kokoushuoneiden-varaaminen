@@ -5,10 +5,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { checkAvailability, getRoomsInfo } from '../requests';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
-import { Grid, Button } from 'semantic-ui-react';
+import { Grid, Button, Dropdown } from 'semantic-ui-react';
+import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
 import { useTranslation } from 'react-i18next';
 
 registerLocale('fi', fi);
+const defaultDuration = 60;
+const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
 const ChooseTime = () => {
   const [rooms, setRooms] = useState([]);
@@ -42,6 +45,11 @@ const ChooseTime = () => {
     setRoomsToShow(roomstest);
   };
 
+  function changeEndDate(event, data) {
+    const newDate = new Date(startDate.getTime());
+    setEndDate(newDate.setMinutes(startDate.getMinutes() + data.value));
+  }
+
   return (
     <div className="container text-center">
       <Filter />
@@ -56,6 +64,14 @@ const ChooseTime = () => {
         timeCaption={t('label.time')}
         locale={i18n.language}
         customInput={<input data-testid="start-date" type="text" />}
+      />
+      <h3>{t('chooseDuration')}</h3>
+      <Dropdown
+        placeholder="Aseta aika"
+        selection
+        options={createDropdownDurationObject(durations)}
+        onChange={changeEndDate}
+        defaultValue={defaultDuration}
       />
       <h3>{t('chooseEnd')}</h3>
       <DatePicker
