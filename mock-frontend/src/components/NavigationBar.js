@@ -80,7 +80,7 @@ const NavigationBar = ({ user }) => {
           </Menu.Menu>
         </Menu>
       </div>
-      <div className="computer large screen only row">
+      <div className="computer only row">
         <Menu inverted fixed="top">
           <Menu.Item href="/home">
             <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
