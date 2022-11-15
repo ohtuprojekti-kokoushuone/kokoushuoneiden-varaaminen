@@ -6,11 +6,13 @@ import { Button } from 'semantic-ui-react';
 import { format } from 'date-fns';
 import Favourite from './Favourite';
 import 'semantic-ui-css/semantic.min.css';
+import { useTranslation } from 'react-i18next';
 
 export const yellowDurationMin = 5;
 
 const RoomCard = ({ room }) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   let availableText = '';
   let roomInfo = room.available
@@ -50,12 +52,12 @@ const RoomCard = ({ room }) => {
         <Card.Content extra>
           <span className="right floated">
             <Icon name="users" />
-            {room.size} hlö
+            {room.size} {t('unit.people')}
           </span>
         </Card.Content>
       </Card.Content>
       <Button aria-label="Siirry varaussivulle" color="blue" onClick={() => navigate(`/CreateReservation/${room.id}`)}>
-        Varaa huone
+        {t('button.reserveRoom')}
       </Button>
     </Card>
   );
