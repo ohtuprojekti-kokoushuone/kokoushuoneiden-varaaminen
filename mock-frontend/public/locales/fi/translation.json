@@ -3,7 +3,10 @@
   "button": {
     "filter": "Rajaa tarkemmin",
     "logout": "Kirjaudu ulos",
-    "show": "Näytä vapaat kokoushuoneet"
+    "show": "Näytä vapaat kokoushuoneet",
+    "reserve": "Varaa huone",
+    "returnToSearch": "Palaa hakutuloksiin",
+    "login": "Kirjaudu"
   },
   "label": {
     "language": "Kieli",
@@ -14,10 +17,16 @@
     "yes": "Kyllä",
     "no": "Ei",
     "time": "Aika",
-    "size": "Huoneen koko"
+    "size": "Huoneen koko",
+    "subject": "Aihe",
+    "room": "Huone",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana"
   },
   "deleteConfirmation": "Haluatko varmasti poistaa varauksen?",
   "deleteReservation": "Poista varaus",
   "chooseStart": "Valitse alku",
-  "chooseEnd": "Valitse loppu"
+  "chooseEnd": "Valitse loppu",
+  "chooseDuration": "Valitse kesto",
+  "loginTitle": "Kirjaudu sisään"
 }
