@@ -65,7 +65,8 @@ const CreateReservation = () => {
 
   function changeEndDate(event, data) {
     setDuration(data.value);
-    setEndDate(end.setMinutes(startDate.getMinutes() + data.value));
+    const newDate = new Date(startDate.getTime());
+    setEndDate(newDate.setMinutes(startDate.getMinutes() + data.value));
   }
 
   return (

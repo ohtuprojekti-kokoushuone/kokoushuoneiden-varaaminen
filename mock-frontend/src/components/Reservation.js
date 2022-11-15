@@ -47,13 +47,20 @@ const Reservation = ({ res }) => {
 
   let start = new Date(res.start.dateTime);
   let end = new Date(res.end.dateTime);
+  const dateFormatOption = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  };
 
   return (
     <tr>
       <td>{res.subject}</td>
       <td>{res.organizer.name}</td>
-      <td>{start.toLocaleString('fi-FI')}</td>
-      <td>{end.toLocaleString('fi-FI')}</td>
+      <td>{start.toLocaleString('fi-FI', dateFormatOption)}</td>
+      <td>{end.toLocaleString('fi-FI', dateFormatOption)}</td>
       <td>
         <Button color="red" onClick={() => handleDeleteReservation(res)} icon>
           <Icon name="trash" aria-label={t('deleteReservation')} />
