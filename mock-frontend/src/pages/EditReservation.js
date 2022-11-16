@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { getReservations } from '../requests.ts';
+import { getReservationById } from '../requests.ts';
 import Reservation from '../components/Reservation.js';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
 
 import { Table } from 'semantic-ui-react';
 
-const Reservations = () => {
-  const [reservations, setReservations] = useState([]);
+const EditReservation = () => {
+  const [reservation, setValue] = useState([]);
+  const id = useParams().id;
+
+  let navigate = useNavigate();
 
   useEffect(() => {
-    getReservations('testirakennus.2001', false).then((res) => {
-      setReservations(res.reservations);
+    getReservationById(id).then((res) => {
+      setValue(res.reservation);
     });
-  }, []);
+  }, [id]);
 
   return (
     <div className="container text-center">
       <div className="d-grid gap-3 col-8 mx-auto">
-        <h1>Omat varaukset:</h1>
+        <h1>Muokkaa varausta:</h1>
         <Table celled striped>
           <Table.Header>
             <Table.Row>
@@ -24,12 +29,10 @@ const Reservations = () => {
               <Table.HeaderCell>Huone</Table.HeaderCell>
               <Table.HeaderCell>Aloitusaika</Table.HeaderCell>
               <Table.HeaderCell>Lopetusaika</Table.HeaderCell>
-              <Table.HeaderCell>Muokkaa varausta</Table.HeaderCell>
-              <Table.HeaderCell>Poista varaus</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {reservations.map((res) => (
+            {reservation.map((res) => (
               <Reservation res={res} key={res.id} />
             ))}
           </Table.Body>
@@ -39,4 +42,4 @@ const Reservations = () => {
   );
 };
 
-export default Reservations;
+export default EditReservation;

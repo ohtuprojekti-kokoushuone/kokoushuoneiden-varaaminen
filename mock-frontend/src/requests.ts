@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ReservationObject, Room } from './types/common';
+import { ReservationObject, ReservationResponse, Room } from './types/common';
 import { baseUrl } from './config';
 
 export function setToken(newToken: any) {
@@ -64,3 +64,9 @@ export function getRoomById(id: Room) {
     return res.data;
   });
 }
+export function getReservationById(room: Room, reservationId: string) {
+  const req = axios.get(`${baseUrl}/reservations/${room}/${reservationId}`);
+  return req.then((res) => {
+    return res.data;
+  });
+}  

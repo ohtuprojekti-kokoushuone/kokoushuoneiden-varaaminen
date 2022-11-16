@@ -3,9 +3,12 @@ import { Button, Icon } from 'semantic-ui-react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteReservation } from '../requests.ts';
+import { useNavigate } from 'react-router-dom';
 import { t } from 'i18next';
 
 const Reservation = ({ res }) => {
+  let navigate = useNavigate();
+
   function handleDeleteReservation(reservation) {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -44,6 +47,9 @@ const Reservation = ({ res }) => {
       }
     });
   }
+  function handleEditReservation(reservation) {
+    navigate(`/EditReservation/${reservation.id}`);
+  }
 
   let start = new Date(res.start.dateTime);
   let end = new Date(res.end.dateTime);
@@ -54,6 +60,11 @@ const Reservation = ({ res }) => {
       <td>{res.organizer.name}</td>
       <td>{start.toLocaleString('fi-FI')}</td>
       <td>{end.toLocaleString('fi-FI')}</td>
+      <td>
+        <Button color="black" onClick={() => handleEditReservation(res)} icon>
+          <Icon name="edit outline" aria-label={t('editReservation')} />
+        </Button>
+      </td>
       <td>
         <Button color="red" onClick={() => handleDeleteReservation(res)} icon>
           <Icon name="trash" aria-label={t('deleteReservation')} />
