@@ -7,7 +7,7 @@ import Reservations from './pages/Reservations.js';
 import RoomInfo from './pages/RoomInfo.js';
 import TimeOptions from './pages/TimeOptions.js';
 import CreateReservation from './pages/CreateReservation.js';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { setToken } from './requests.ts';
 import NavigationBar from './components/NavigationBar.js';
 import { basePath } from './config';

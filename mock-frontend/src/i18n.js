@@ -16,7 +16,7 @@ i18n
     },
     supportedLngs: ['fi', 'en'],
     backend: {
-      loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json?lng={{lng}}&{{ns}}`
+      loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json?lng={{lng}}&{{ns}}` // eslint-disable-line
     }
   });
 
