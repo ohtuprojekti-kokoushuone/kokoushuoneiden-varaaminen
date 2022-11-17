@@ -15,7 +15,7 @@ const Reservation = ({ res }) => {
   const [startDate, setStartDate] = useState(new Date());
   const endtest = new Date();
   const [endDate, setEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
-  const [duration, setDuration] = useState(defaultDuration);
+  const [setDuration] = useState(defaultDuration);
 
   function changeEndDate(event, data) {
     setDuration(data.value);

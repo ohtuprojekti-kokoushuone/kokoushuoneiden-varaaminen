@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ReservationObject, ReservationResponse, Room } from './types/common';
+import { ReservationObject, Room } from './types/common';
 import { baseUrl } from './config';
 
 export function setToken(newToken: any) {
