@@ -16,7 +16,6 @@ describe('<Room />', () => {
   const container = render(<Room room={testRoom} />);
   test('renders roomName, roomEmail and roomSize', () => {
     expect(container.container).toHaveTextContent('Physicum, G237, Meeting room Ada (6)');
-    expect(container.container).toHaveTextContent('email: ');
-    expect(container.container).toHaveTextContent('Huoneen koko 6');
+    expect(container.container).toHaveTextContent('label.size 6');
   });
 });

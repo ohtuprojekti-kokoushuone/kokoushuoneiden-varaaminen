@@ -2,7 +2,8 @@
   "example": "Example text",
   "button": {
     "filter": "Filter options",
-    "logout": "Log out"
+    "logout": "Log out",
+    "show": "Show available rooms"
   },
   "label": {
     "language": "Language",
@@ -11,8 +12,22 @@
     "startTime": "Start time",
     "endTime": "End time",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "time": "Time",
+    "size": "Room size",
+    "save": "Save changes",
+    "cancel": "Cancel changes",
+    "currentStartTime": "Current start time"
   },
   "deleteConfirmation": "Are you sure you want to delete this reservation?",
-  "deleteReservation": "Delete reservation"
+  "editConfirmation": "Edit this reservation?",
+  "deleteReservation": "Delete reservation",
+  "editReservation": "Edit reservation", 
+  "chooseStart": "Choose start",
+  "chooseEnd": "Choose end",
+  "chooseDuration": "Choose duration",
+  "InputNewSubject": "Choose new subject", 
+  "editDuration": "Edit duration",
+  "editStartTime": "Edit start time",
+  "currentSubject": "Current subject"
 }

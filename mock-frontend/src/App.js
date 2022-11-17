@@ -7,7 +7,6 @@ import Reservations from './pages/Reservations.js';
 import RoomInfo from './pages/RoomInfo.js';
 import TimeOptions from './pages/TimeOptions.js';
 import CreateReservation from './pages/CreateReservation.js';
-import EditReservation from './pages/EditReservation.js';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { setToken } from './requests.ts';
 import NavigationBar from './components/NavigationBar.js';
@@ -46,7 +45,6 @@ const App = () => {
         <Route path="/roomlist/:id" element={<RoomInfo />} />
         <Route path="/timeOptions" element={<TimeOptions />} />
         <Route path="/createReservation/:id" element={<CreateReservation />} />
-        <Route path="/editReservation/:id" element={<EditReservation />} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </Router>

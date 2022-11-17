@@ -3,7 +3,11 @@
   "button": {
     "filter": "Rajaa tarkemmin",
     "logout": "Kirjaudu ulos",
-    "show": "Näytä vapaat kokoushuoneet"
+    "show": "Näytä vapaat kokoushuoneet",
+    "reserveRoom": "Varaa huone",
+    "returnToSearch": "Palaa hakutuloksiin",
+    "login": "Kirjaudu",
+    "reserve": "Tee varaus"
   },
   "label": {
     "language": "Kieli",
@@ -14,10 +18,38 @@
     "yes": "Kyllä",
     "no": "Ei",
     "time": "Aika",
-    "size": "Huoneen koko"
+    "size": "Huoneen koko",
+    "subject": "Aihe",
+    "room": "Huone",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana",
+    "available": "Vapaa",
+    "notAvailable": "Varattu",
+    "save": "Tallenna muutokset",
+    "cancel": "Peruuta muutokset",
+    "currentStartTime": "Tämän hetkinen aloitusaika"
+  },
+  "error": {
+    "endBeforeStart": "Virhe: Varauksen alkamisajan tulee olla ennen loppumisaikaa"
+  },
+  "unit": {
+    "people": "henkilöä",
+    "minutes": "min"
   },
   "deleteConfirmation": "Haluatko varmasti poistaa varauksen?",
+  "editConfirmation": "Muokkaa varausta",
   "deleteReservation": "Poista varaus",
+  "editReservation": "Muokkaa varausta",
   "chooseStart": "Valitse alku",
-  "chooseEnd": "Valitse loppu"
+  "chooseEnd": "Valitse loppu",
+  "chooseDuration": "Valitse kesto",
+  "loginTitle": "Kirjaudu sisään",
+  "inputSubject": "Syötä aihe",
+  "inputNewSubject": "Syötä uusi aihe",
+  "reservationEnd": "Varauksen loppuaika",
+  "availableUntil": "Huone on vapaa {{time}} asti",
+  "reservedUntil": "Huone vapautuu {{time}}",
+  "editDuration": "Muokkaa kestoa",
+  "editStartTime": "Muokkaa aloitusta",
+  "currentSubject": "Nykyinen aihe"
 }

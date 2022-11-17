@@ -64,9 +64,3 @@ export function getRoomById(id: Room) {
     return res.data;
   });
 }
-export function getReservationById(room: Room, reservationId: string) {
-  const req = axios.get(`${baseUrl}/reservations/${room}/${reservationId}`);
-  return req.then((res) => {
-    return res.data;
-  });
-}  
