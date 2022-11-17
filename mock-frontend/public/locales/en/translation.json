@@ -25,23 +25,30 @@
     "username": "Username",
     "password": "Password",
     "available": "Available",
-    "notAvailable": "Unavailable"
+    "notAvailable": "Unavailable",
+    "save": "Save changes",
+    "cancel": "Cancel changes",
+    "currentStartTime": "Current starting time"
   },
   "error": {
     "endBeforeStart": "Error: Starting time must be before ending time"
   },
   "unit": {
     "people": "people",
-    "minutes": "min"
+    "minutes": "min",
+    "save": "Save changes",
+    "cancel": "Cancel changes",
+    "currentStartTime": "Current start time"
   },
   "deleteConfirmation": "Are you sure you want to delete this reservation?",
+  "editConfirmation": "Edit this reservation?",
   "deleteReservation": "Delete reservation",
+  "editReservation": "Edit reservation", 
   "chooseStart": "Choose start",
   "chooseEnd": "Choose end",
   "chooseDuration": "Choose duration",
-  "loginTitle": "Log in",
-  "inputSubject": "Set subject",
-  "reservationEnd": "Ending time",
-  "availableUntil": "Room is available until {{time}}",
-  "reservedUntil": "Room will be available at {{time}}"
+  "editDuration": "Edit duration",
+  "editStartTime": "Edit start",
+  "currentSubject": "Current subject",
+  "inputNewSubject": "Choose new subject"
 }

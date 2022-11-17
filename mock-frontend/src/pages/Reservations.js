@@ -26,6 +26,7 @@ const Reservations = () => {
               <Table.HeaderCell>{t('label.room')}</Table.HeaderCell>
               <Table.HeaderCell>{t('label.startTime')}</Table.HeaderCell>
               <Table.HeaderCell>{t('label.endTime')}</Table.HeaderCell>
+              <Table.HeaderCell>{t('editReservation')}</Table.HeaderCell>
               <Table.HeaderCell>{t('deleteReservation')}</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
