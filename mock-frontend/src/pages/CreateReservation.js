@@ -13,6 +13,13 @@ registerLocale('fi', fi);
 const defaultDuration = 60;
 const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
+const userDetails = JSON.parse(window.localStorage.getItem('loggedReservationsAppUser'));
+let defaultSubject = ' varaus';
+
+if (userDetails !== null) {
+  defaultSubject = userDetails.username + ' varaus';
+}
+
 const CreateReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
   const end = new Date();
@@ -20,15 +27,19 @@ const CreateReservation = () => {
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [duration, setDuration] = useState(defaultDuration);
+  const [subject, setSubject] = useState(defaultSubject);
 
-  const subject = useRef();
   const datePickerEnd = useRef();
   const id = useParams().id;
 
   const { t } = useTranslation();
 
   function handleClick() {
-    if (!subject.current.reportValidity()) return;
+    if (!subject) {
+      setShow(true);
+      setErrorMessage('Error: Give subject for reservation');
+      return;
+    }
 
     if (endDate <= startDate) {
       setShow(true);
@@ -37,7 +48,7 @@ const CreateReservation = () => {
     }
 
     const reservation = {
-      subject: subject.current.value,
+      subject: subject,
       start: startDate,
       end: endDate,
       attendees: []
@@ -71,6 +82,10 @@ const CreateReservation = () => {
     const newDate = new Date(startDate.getTime());
     setEndDate(newDate.setMinutes(startDate.getMinutes() + data.value));
   }
+  function handleSubjectChange(event) {
+    event.preventDefault();
+    setSubject(event.target.value);
+  }
 
   return (
     <div className="container text-center">
@@ -83,7 +98,7 @@ const CreateReservation = () => {
         <></>
       )}
       <h3>{t('label.subject')}</h3>
-      <input ref={subject} type="text" name="subject" placeholder={t('inputSubject')} required />
+      <input type="text" name="subject" onChange={handleSubjectChange} value={subject} />
       <h3>{t('chooseStart')}</h3>
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
