@@ -6,22 +6,24 @@ import { Button } from 'semantic-ui-react';
 import { format } from 'date-fns';
 import Favourite from './Favourite';
 import 'semantic-ui-css/semantic.min.css';
+import { useTranslation } from 'react-i18next';
 
 export const yellowDurationMin = 5;
 
 const RoomCard = ({ room }) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   let availableText = '';
   let roomInfo = room.available
-    ? { availability: 'Vapaa', cardType: 'green' }
-    : { availability: 'Varattu', cardType: 'red' };
+    ? { availability: t('label.available'), cardType: 'green' }
+    : { availability: t('label.notAvailable'), cardType: 'red' };
 
   if (room.availableTime) {
     const now = new Date();
     const availableTime = new Date(room.availableTime);
     const time = format(availableTime, 'dd.MM.yyyy kk:mm');
-    availableText = room.available ? 'Huone on vapaa ' + time + ' asti' : 'Huone vapautuu ' + time;
+    availableText = room.available ? t('availableUntil', { time: time }) : t('reservedUntil', { time: time });
 
     let diffInMinutes = Math.trunc((availableTime.getTime() - now.getTime()) / 1000 / 60);
 
@@ -50,12 +52,12 @@ const RoomCard = ({ room }) => {
         <Card.Content extra>
           <span className="right floated">
             <Icon name="users" />
-            {room.size} hlö
+            {room.size} {t('unit.people')}
           </span>
         </Card.Content>
       </Card.Content>
       <Button aria-label="Siirry varaussivulle" color="blue" onClick={() => navigate(`/CreateReservation/${room.id}`)}>
-        Varaa huone
+        {t('button.reserveRoom')}
       </Button>
     </Card>
   );

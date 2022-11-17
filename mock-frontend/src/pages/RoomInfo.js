@@ -29,7 +29,7 @@ const RoomInfo = () => {
           color="blue"
           onClick={() => navigate(`${basePath}/CreateReservation/${room.id}`)}
         >
-          {t('button.reserve')}
+          {t('button.reserveRoom')}
         </Button>
         <Button aria-label="palaa hakutuloksiin" color="blue" onClick={() => navigate(`${basePath}/home`)}>
           {t('button.returnToSearch')}
