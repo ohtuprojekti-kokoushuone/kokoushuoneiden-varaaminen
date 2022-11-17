@@ -3,10 +3,15 @@
   "button": {
     "filter": "Filter options",
     "logout": "Log out",
-    "show": "Show available rooms"
+    "show": "Show available rooms",
+    "reserveRoom": "Reserve room",
+    "returnToSearch": "Return to search",
+    "login": "Log in",
+    "reserve": "Make a reservation"
   },
   "label": {
     "language": "Language",
+    "activeLanguage": "EN",
     "reservations": "Your reservations",
     "chooseTime": "Choose time",
     "startTime": "Start time",
@@ -15,6 +20,22 @@
     "no": "No",
     "time": "Time",
     "size": "Room size",
+    "subject": "Subject",
+    "room": "Room",
+    "username": "Username",
+    "password": "Password",
+    "available": "Available",
+    "notAvailable": "Unavailable",
+    "save": "Save changes",
+    "cancel": "Cancel changes",
+    "currentStartTime": "Current starting time"
+  },
+  "error": {
+    "endBeforeStart": "Error: Starting time must be before ending time"
+  },
+  "unit": {
+    "people": "people",
+    "minutes": "min",
     "save": "Save changes",
     "cancel": "Cancel changes",
     "currentStartTime": "Current start time"
@@ -26,8 +47,8 @@
   "chooseStart": "Choose start",
   "chooseEnd": "Choose end",
   "chooseDuration": "Choose duration",
-  "InputNewSubject": "Choose new subject", 
   "editDuration": "Edit duration",
-  "editStartTime": "Edit start time",
-  "currentSubject": "Current subject"
+  "editStartTime": "Edit start",
+  "currentSubject": "Current subject",
+  "inputNewSubject": "Choose new subject"
 }
