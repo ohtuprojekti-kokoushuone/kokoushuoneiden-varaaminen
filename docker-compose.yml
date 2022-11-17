@@ -30,14 +30,5 @@ services:
     ports:
       - "3003:3003"
 
-  kokoushuone-frontend:
-    image: "ojanenma/kokoushuone-app:frontend"
-    build:
-      context: ./mock-frontend
-      dockerfile: Dockerfile
-    container_name: kokoushuone-frontend
-    ports:
-      - "3000:3000"
-
 volumes:
   mongo_data:
