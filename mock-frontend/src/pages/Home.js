@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 const Home = () => {
   const [rooms, setRooms] = useState([]);
   const { t } = useTranslation();
+  rooms.sort((a, b) => (a.size > b.size ? 1 : -1));
 
   useEffect(() => {
     getRoomsInfo().then((res) => {
@@ -19,8 +20,12 @@ const Home = () => {
   }, []);
 
   const arrayNotAvailable = [];
+  const arraySoonAvailable = [];
 
-  function filterSoonAvailable(room) {
+  function filterAvailable(room) {
+    if (room.available === true) {
+      return true;
+    }
     if (room.availableTime) {
       const now = new Date();
       const availableTime = new Date(room.availableTime);
@@ -28,7 +33,8 @@ const Home = () => {
 
       if (!room.available) {
         if (diffInMinutes < yellowDurationMin) {
-          return true;
+          arraySoonAvailable.push(room);
+          return false;
         }
       }
     }
@@ -36,21 +42,10 @@ const Home = () => {
       arrayNotAvailable.push(room);
       return false;
     }
-  }
-
-  function filterAvailable(room) {
-    if (room.available === true) {
-      return true;
-    }
     return false;
   }
 
   const arrayAvailable = rooms.filter(filterAvailable);
-  const arraySoonAvailable = rooms.filter(filterSoonAvailable);
-
-  arrayAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
-  arraySoonAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
-  arrayNotAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
 
   return (
     <Container>
@@ -58,7 +53,7 @@ const Home = () => {
       <Button className="btn-choose" color="blue" href="/choosetime">
         {t('button.filter')}
       </Button>
-      <Grid stackable columns={2}>
+      <Grid stackable columns={3}>
         {arrayAvailable.map((room) => (
           <Grid.Column key={room.id}>
             <RoomCard room={room} />
