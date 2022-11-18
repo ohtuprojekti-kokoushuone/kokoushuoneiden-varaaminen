@@ -38,12 +38,3 @@ jobs:
           file: channel/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/kokoushuone-app:channel
-
-      - name: Build and push frontend
-        uses: docker/build-push-action@v3
-        with:
-          context: ./mock-frontend
-          file: mock-frontend/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/kokoushuone-app:frontend
-  
