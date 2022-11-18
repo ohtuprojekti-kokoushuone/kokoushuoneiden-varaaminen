@@ -65,6 +65,9 @@ body {
   color: black;
   font-family: sans-serif;
 }
+.ui.grid {
+  margin-bottom: 0;
+}
 
 .ui.favourite {
   color: whitesmoke;

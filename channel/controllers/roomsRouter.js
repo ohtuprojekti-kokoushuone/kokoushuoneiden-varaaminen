@@ -16,22 +16,23 @@ roomsRouter.get('/buildings', (req, res) => {
 roomsRouter.get('/info', async (req, res) => {
   const start = new Date();
   const end = new Date(start.getTime());
-  end.setDate(start.getDate() + 1);
-  let available;
+  end.setHours(start.getHours() + 4);
 
   const result = await Promise.all(
     rooms.map(async (room) => {
       if (room.building !== 'Testirakennus') {
-        available = Math.random() < 0.7;
+        const available = Math.random() < 0.7;
         return { ...room, available: available };
       }
       const copied = Object.assign({}, room);
       const data = await checkAvailability(copied.id, start.toISOString(), end.toISOString());
       copied.available = true;
 
-      if (data) {
-        const available = getAvailableTimeAfter(start, data);
-        copied.availableTime = available.earliestTime;
+      if (data && data.length !== 0) {
+        const available = getAvailableTimeAfter(start, end, data);
+        if (available.earliestTime !== null) {
+          copied.availableTime = available.earliestTime;
+        }
         copied.available = available.isAvailable;
       }
 
