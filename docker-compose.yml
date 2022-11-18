@@ -3,7 +3,7 @@ version: "3.9"
 services:
   kokoushuone-mongo:
     image: "mongo:latest"
-    restart: "always"
+    restart: "unless-stopped"
     ports:
       - "27017:27017"
     container_name: kokoushuone-mongo
@@ -12,6 +12,7 @@ services:
 
   kokoushuone-backend:
     image: "ojanenma/kokoushuone-app:backend"
+    restart: "unless-stopped"
     build:
       context: ./reservatorapp_projekti/ReservatorApp
       dockerfile: Dockerfile
@@ -23,6 +24,7 @@ services:
 
   kokoushuone-channel:
     image: "ojanenma/kokoushuone-app:channel"
+    restart: "unless-stopped"
     build:
       context: ./channel
       dockerfile: Dockerfile

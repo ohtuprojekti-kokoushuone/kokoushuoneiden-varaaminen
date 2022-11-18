@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import Favourite from './Favourite';
 import 'semantic-ui-css/semantic.min.css';
 import { useTranslation } from 'react-i18next';
+import { basePath } from '../config';
 
 export const yellowDurationMin = 5;
 
@@ -46,7 +47,7 @@ const RoomCard = ({ room }) => {
         <Card.Header>{room.name}</Card.Header>
         <Card.Meta>{roomInfo.availability}</Card.Meta>
         <Card.Description>{availableText}</Card.Description>
-        <Card.Content extra href={`/roomlist/${room.id}`}>
+        <Card.Content extra href={`${basePath}/roomlist/${room.id}`}>
           <Icon link name="info circle" color="black" />
         </Card.Content>
         <Card.Content extra>
@@ -56,7 +57,11 @@ const RoomCard = ({ room }) => {
           </span>
         </Card.Content>
       </Card.Content>
-      <Button aria-label="Siirry varaussivulle" color="blue" onClick={() => navigate(`/CreateReservation/${room.id}`)}>
+      <Button
+        aria-label="Siirry varaussivulle"
+        color="blue"
+        onClick={() => navigate(`${basePath}/CreateReservation/${room.id}`)}
+      >
         {t('button.reserveRoom')}
       </Button>
     </Card>
