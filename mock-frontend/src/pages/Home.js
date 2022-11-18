@@ -7,6 +7,7 @@ import RoomCard from '../components/RoomCard.js';
 import { Grid, Button } from 'semantic-ui-react';
 import { yellowDurationMin } from '../components/RoomCard.js';
 import { useTranslation } from 'react-i18next';
+import { basePath } from '../config';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -55,7 +56,7 @@ const Home = () => {
   return (
     <Container>
       <Filter />
-      <Button className="btn-choose" color="blue" href="/choosetime">
+      <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`}>
         {t('button.filter')}
       </Button>
       <Grid stackable columns={2}>

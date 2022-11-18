@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { Message, Button, Dropdown } from 'semantic-ui-react';
 import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
 import { useTranslation } from 'react-i18next';
+import { basePath } from '../config';
 
 registerLocale('fi', fi);
 
@@ -56,7 +57,7 @@ const CreateReservation = () => {
 
     makeReservation(id, reservation)
       .then(() => {
-        window.location.href = '/reservations';
+        window.location.href = `${basePath}/reservations`;
       })
       .catch((error) => {
         setErrorMessage(error.message);
