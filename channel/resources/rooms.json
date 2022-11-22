@@ -5,147 +5,168 @@
       "id": "testirakennus.2001",
       "building": "Testirakennus",
       "groups": [],
-      "size": 6
+      "size": 6,
+      "maxTime": 2
     },
     {
       "name": "Testirakennus, 2002, Kokoushuone 2",
       "id": "testirakennus.2002",
       "building": "Testirakennus",
       "groups": [],
-      "size": 6
+      "size": 6,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G237, Meeting room Ada",
       "id": "physicum.g237",
       "building": "Physicum",
       "groups": ["allstaff"],
-      "size": 6
+      "size": 6,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G238, Meeting room Basic",
       "id": "physicum.g238",
       "building": "Physicum",
       "groups": ["allstaff"],
-      "size": 6
+      "size": 6,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G239, Meeting room Cobol",
       "id": "physicum.g239",
       "building": "Physicum",
       "groups": ["allstaff"],
-      "size": 6
+      "size": 6,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G241, Group work room Dart",
       "id": "physicum.g241",
       "building": "Physicum",
       "groups": ["allstaff"],
-      "size": 2
+      "size": 2,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G243, Group work room Erlang",
       "id": "physicum.g243",
       "building": "Physicum",
       "groups": ["allstaff"],
-      "size": 2
+      "size": 2,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G247, Group work room Fortran",
       "id": "physicum.g247",
       "building": "Physicum",
       "groups": ["allstaff"],
-      "size": 2
+      "size": 2,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G226, Group work room Lisp",
       "id": "physicum.g226",
       "building": "Physicum",
       "groups": ["students"],
-      "size": 6
+      "size": 6,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G227, Group work room Modula",
       "id": "physicum.g227",
       "building": "Physicum",
       "groups": ["students"],
-      "size": 5
+      "size": 5,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G228, Group work room Neko",
       "id": "physicum.g228",
       "building": "Physicum",
       "groups": ["students"],
-      "size": 5
+      "size": 5,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G229, Group work room Octave",
       "id": "physicum.g229",
       "building": "Physicum",
       "groups": ["students"],
-      "size": 5
+      "size": 5,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G230, Group work room Python",
       "id": "physicum.g230",
       "building": "Physicum",
       "groups": ["students"],
-      "size": 4
+      "size": 4,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G231, Group work room Q",
       "id": "physicum.g231",
       "building": "Physicum",
       "groups": ["students"],
-      "size": 4
+      "size": 4,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G240, Group work room Idris",
       "id": "physicum.g240",
       "building": "Physicum",
       "groups": ["students"],
-      "size": 2
+      "size": 2,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G242, Group work room Haskell",
       "id": "physicum.g242",
       "building": "Physicum",
       "groups": ["students"],
-      "size": 2
+      "size": 2,
+      "maxTime": 2
     },
     {
       "name": "Physicum, G244, Group work room Go",
       "id": "physicum.g244",
       "building": "Physicum",
       "groups": ["students"],
-      "size": 2
+      "size": 2,
+      "maxTime": 2
     },
     {
       "name": "Kumpula Campus Library, G103c, Group Study Room 1 Castor",
       "id": "G103c",
       "building": "Kumpula Campus Library",
       "groups": [],
-      "size": 3
+      "size": 3,
+      "maxTime": 2
     },
     {
       "name": "Kumpula Campus Library, G103e, Group Study Room 2 Enif",
       "id": "G103e",
       "building": "Kumpula Campus Library",
       "groups": [],
-      "size": 3
+      "size": 3,
+      "maxTime": 2
     },
     {
       "name": "Kumpula Campus Library, G103g, Group Study Room 3 Hadar",
       "id": "G103g",
       "building": "Kumpula Campus Library",
       "groups": [],
-      "size": 4
+      "size": 4,
+      "maxTime": 2
     },
     {
       "name": "Kumpula Campus Library, G108a, Group Study Room 4 Polaris",
       "id": "G108a",
       "building": "Kumpula Campus Library",
       "groups": [],
-      "size": 12
+      "size": 12,
+      "maxTime": 2
     }
   ]
 }
