@@ -36,7 +36,6 @@ jobs:
       - name: Build and copy frontend
         working-directory: ./mock-frontend
         run: |
-          cp .env.frontend .env
           npm ci
           npm run build
 
