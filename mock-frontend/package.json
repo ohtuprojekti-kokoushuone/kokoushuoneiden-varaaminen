@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "date-fns": "^2.29.3",
+    "env-cmd": "^10.1.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -28,8 +29,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env.frontend react-scripts start",
+    "build": "env-cmd -f .env.frontend react-scripts build",
     "postbuild": "rm -rf ../channel/build && mv build ../channel/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
