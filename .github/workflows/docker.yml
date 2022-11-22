@@ -31,8 +31,12 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/kokoushuone-app:backend
 
       - name: Build and copy frontend
+        uses: actions/setup-node@v3
         working-directory: ./mock-frontend
-        run: npm run build
+        run: |
+          cp .env.frontend .env
+          npm ci
+          npm run build
 
       - name: Build and push channel
         uses: docker/build-push-action@v3
