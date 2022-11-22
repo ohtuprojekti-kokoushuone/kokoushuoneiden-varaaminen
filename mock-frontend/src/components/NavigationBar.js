@@ -68,16 +68,21 @@ const NavigationBar = ({ user }) => {
                   <Menu.Item href="/" onClick={handleLogout}>
                     {t('button.logout')}
                   </Menu.Item>
+                  <Menu.Item>
+                    <button
+                      className="ui labeled icon button"
+                      color="transparent"
+                      onClick={() => handleChangeLanguage()}
+                      icon
+                    >
+                      <i className="world icon"></i>
+                      {t('label.activeLanguage')}
+                    </button>
+                  </Menu.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Menu.Menu>
           )}
-          <Menu.Menu>
-            <button className="ui labeled icon button" color="transparent" onClick={() => handleChangeLanguage()} icon>
-              <i className="world icon"></i>
-              {t('label.activeLanguage')}
-            </button>
-          </Menu.Menu>
         </Menu>
       </div>
       <div className="computer only row">
