@@ -25,7 +25,10 @@
     "username": "Käyttäjätunnus",
     "password": "Salasana",
     "available": "Vapaa",
-    "notAvailable": "Varattu"
+    "notAvailable": "Varattu",
+    "save": "Tallenna muutokset",
+    "cancel": "Peruuta muutokset",
+    "currentStartTime": "Tämän hetkinen aloitusaika"
   },
   "error": {
     "endBeforeStart": "Virhe: Varauksen alkamisajan tulee olla ennen loppumisaikaa"
@@ -35,13 +38,19 @@
     "minutes": "min"
   },
   "deleteConfirmation": "Haluatko varmasti poistaa varauksen?",
+  "editConfirmation": "Muokkaa varausta",
   "deleteReservation": "Poista varaus",
+  "editReservation": "Muokkaa varausta",
   "chooseStart": "Valitse alku",
   "chooseEnd": "Valitse loppu",
   "chooseDuration": "Valitse kesto",
   "loginTitle": "Kirjaudu sisään",
   "inputSubject": "Syötä aihe",
+  "inputNewSubject": "Syötä uusi aihe",
   "reservationEnd": "Varauksen loppuaika",
   "availableUntil": "Huone on vapaa {{time}} asti",
-  "reservedUntil": "Huone vapautuu {{time}}"
+  "reservedUntil": "Huone vapautuu {{time}}",
+  "editDuration": "Muokkaa kestoa",
+  "editStartTime": "Muokkaa aloitusta",
+  "currentSubject": "Nykyinen aihe"
 }
