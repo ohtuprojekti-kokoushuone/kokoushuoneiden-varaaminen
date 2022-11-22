@@ -57,9 +57,13 @@ const NavigationBar = ({ user }) => {
       <div className="tablet mobile only row">
         <Menu inverted fixed="top">
           <Menu.Item href="/home">
-            <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
+            <div className="Item">
+              <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
+            </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img alt="RESERVATOR" src={reservator} width="165" height="30" className="d-inline-block align-top" />
+            <div className="Item">
+              <img alt="RESERVATOR" src={reservator} height="30" className="d-inline-block align-top" />
+            </div>
           </Menu.Item>
           {user === null ? null : (
             <Menu.Menu position="right">
@@ -75,7 +79,6 @@ const NavigationBar = ({ user }) => {
                       className="ui labeled icon button"
                       color="transparent"
                       onClick={() => handleChangeLanguage()}
-                      icon
                     >
                       <i className="world icon"></i>
                       {t('label.activeLanguage')}
@@ -90,8 +93,13 @@ const NavigationBar = ({ user }) => {
       <div className="computer only row">
         <Menu inverted fixed="top">
           <Menu.Item href="/home">
-            <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kokoushuonevaraus
+            <div className="Item">
+              <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div className="Item">
+              <img alt="RESERVATOR" src={reservator} height="30" className="d-inline-block align-top" />
+            </div>
           </Menu.Item>
           {user === null ? null : (
             <Menu.Menu position="right">
@@ -103,7 +111,7 @@ const NavigationBar = ({ user }) => {
             </Menu.Menu>
           )}
           <Menu.Menu>
-            <button className="ui labeled icon button" color="black" onClick={() => handleChangeLanguage()} icon>
+            <button className="ui labeled icon button" color="black" onClick={() => handleChangeLanguage()}>
               <i className="world icon"></i>
               {t('label.activeLanguage')}
             </button>
