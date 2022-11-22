@@ -30,8 +30,10 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/kokoushuone-app:backend
 
-      - name: Build and copy frontend
+      - name: Setup node
         uses: actions/setup-node@v3
+
+      - name: Build and copy frontend
         working-directory: ./mock-frontend
         run: |
           cp .env.frontend .env
