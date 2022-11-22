@@ -3,6 +3,7 @@ import { Menu, Dropdown } from 'semantic-ui-react';
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import logo from '../hy-logo-white.png';
+import reservator from '../reservator.png';
 import { confirmAlert } from 'react-confirm-alert';
 
 const NavigationBar = ({ user }) => {
@@ -57,7 +58,8 @@ const NavigationBar = ({ user }) => {
         <Menu inverted fixed="top">
           <Menu.Item href="/home">
             <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kokoushuonevaraus
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img alt="RESERVATOR" src={reservator} width="165" height="30" className="d-inline-block align-top" />
           </Menu.Item>
           {user === null ? null : (
             <Menu.Menu position="right">
