@@ -119,7 +119,7 @@ const Reservation = ({ res }) => {
             <h3>{t('editStartTime')}</h3>
             <DatePicker
               dateFormat="dd.MM.yyyy HH:mm"
-              selected={startDate}
+              selected={new Date(reservation.start.dateTime)}
               onChange={(date) => handleStartDateChange(date)}
               showTimeSelect
               timeFormat="HH:mm"
