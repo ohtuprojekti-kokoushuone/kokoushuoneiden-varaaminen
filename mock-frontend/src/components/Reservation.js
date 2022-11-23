@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useParams, useRef } from 'react';
 import { Button, Icon, Dropdown } from 'semantic-ui-react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -14,8 +14,12 @@ const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 const Reservation = ({ res }) => {
   const [startDate, setStartDate] = useState(new Date());
   const endtest = new Date();
+  const [show, setShow] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [endDate, setEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
-  const [setDuration] = useState(defaultDuration);
+  const [duration, setDuration] = useState(defaultDuration);
+
+  const datePickerEnd = useRef();
 
   function changeEndDate(event, data) {
     setDuration(data.value);
@@ -34,6 +38,30 @@ const Reservation = ({ res }) => {
       newDate.setMinutes(date.getMinutes() + durations);
       setEndDate(newDate);
     }
+  }
+  function handleClick(reservation) {
+    if (endDate <= startDate) {
+      setShow(true);
+      setErrorMessage('error.endBeforeStart');
+      return;
+    }
+    const id = reservation.id;
+
+    const updatedReservation = {
+      subject: reservation.subject,
+      start: reservation.startDate,
+      end: reservation.endDate,
+      attendees: []
+    };
+
+    updateReservation(id, updatedReservation)
+      .then(() => {
+        window.location.href = '/reservations';
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+        setShow(true);
+      });
   }
 
   function handleDeleteReservation(reservation) {
@@ -74,6 +102,7 @@ const Reservation = ({ res }) => {
       }
     });
   }
+
   function handleEditReservation(reservation) {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -108,18 +137,7 @@ const Reservation = ({ res }) => {
               defaultValue={defaultDuration}
             />
             <div>
-              <Button
-                color="blue"
-                style={{ marginRight: '10px' }}
-                autoFocus
-                onClick={() => {
-                  const email = reservation.organizer.email;
-                  updateReservation(email.substr(0, email.indexOf('@')), reservation.id).then(() => {
-                    window.location.reload(true);
-                  });
-                  onClose();
-                }}
-              >
+              <Button color="blue" style={{ marginRight: '10px' }} autoFocus onClick={handleClick(reservation)}>
                 {t('label.save')}
               </Button>
               <Button color="red" onClick={onClose}>
