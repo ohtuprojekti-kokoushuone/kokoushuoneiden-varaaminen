@@ -21,9 +21,8 @@ app.use('/api/reservations', reservationsRouter);
 app.use('/api/users', usersRouter);
 
 app.get('/*', function (req, res) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  console.log('HEADERS: ', req.headers);
 });
 
 app.use(errorHandler);
