@@ -12,35 +12,41 @@ const defaultDuration = 60;
 const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
 const Reservation = ({ res }) => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [newStartDate, setNewStartDate] = useState(new Date());
   const endtest = new Date();
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [endDate, setEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
+  const [newEndDate, setNewEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
   const [duration, setDuration] = useState(defaultDuration);
+  const [newSubject, setNewSubject] = useState();
 
   const datePickerEnd = useRef();
 
+  function handleSubjectChange(event) {
+    event.preventDefault();
+    setNewSubject(event.target.value);
+  }
+
   function changeEndDate(event, data) {
     setDuration(data.value);
-    const newDate = new Date(startDate.getTime());
-    setEndDate(newDate.setMinutes(startDate.getMinutes() + data.value));
+    const newDate = new Date(newStartDate.getTime());
+    setNewEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
   }
 
   function handleStartDateChange(date) {
-    setStartDate(date);
-    if (endDate <= date) {
+    setNewStartDate(date);
+    if (newEndDate <= date) {
       let newDate = new Date(date.getTime());
       newDate.setMinutes(date.getMinutes() + defaultDuration);
-      setEndDate(newDate);
+      setNewEndDate(newDate);
     } else {
       let newDate = new Date(date.getTime());
       newDate.setMinutes(date.getMinutes() + durations);
-      setEndDate(newDate);
+      setNewEndDate(newDate);
     }
   }
   function handleClick(reservation) {
-    if (endDate <= startDate) {
+    if (newEndDate <= newStartDate) {
       setShow(true);
       setErrorMessage('error.endBeforeStart');
       return;
@@ -48,20 +54,13 @@ const Reservation = ({ res }) => {
     const id = reservation.id;
 
     const updatedReservation = {
-      subject: reservation.subject,
-      start: reservation.startDate,
-      end: reservation.endDate,
+      subject: newSubject,
+      start: newStartDate,
+      end: newEndDate,
       attendees: []
     };
 
-    updateReservation(id, updatedReservation)
-      .then(() => {
-        window.location.href = '/reservations';
-      })
-      .catch((error) => {
-        setErrorMessage(error.message);
-        setShow(true);
-      });
+    updateReservation(id, updatedReservation).then(() => alert('Varaus on päivitetty'));
   }
 
   function handleDeleteReservation(reservation) {
@@ -112,7 +111,13 @@ const Reservation = ({ res }) => {
             <h3 style={{ fontWeight: 'bold' }}>
               {t('currentSubject')}: {reservation.subject}
             </h3>{' '}
-            <input ref={reservation.subject} type="text" name="subject" placeholder={t('inputNewSubject')} />
+            <input
+              type="text"
+              name="newSubject"
+              placeholder={t('inputNewSubject')}
+              onChange={handleSubjectChange}
+              value={newSubject}
+            />
             <p>
               {t('label.currentStartTime')}: {new Date(reservation.start.dateTime).toLocaleString('fi-FI')}
             </p>
