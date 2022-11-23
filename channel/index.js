@@ -22,7 +22,15 @@ app.use('/api/users', usersRouter);
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  console.log('HEADERS: ', req.headers);
+  const userInfo = {
+    uid: req.uid,
+    mail: req.mail,
+    givenname: req.givenname,
+    sn: req.sn,
+    studentID: req.hypersonstudentid,
+    employeenumber: req.employeenumber,
+  };
+  console.log('USER INFO: ', userInfo);
 });
 
 app.use(errorHandler);
