@@ -2,5 +2,6 @@
 **/build/
 **/requests/
 .env
+!mock-frontend/.env
 mongo_data
 **/coverage
