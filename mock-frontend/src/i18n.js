@@ -15,7 +15,10 @@ i18n
     interpolation: {
       escapeValue: false
     },
-    supportedLngs: ['fi', 'en']
+    supportedLngs: ['fi', 'en'],
+    backend: {
+      loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json?lng={{lng}}&{{ns}}` // eslint-disable-line
+    }
   });
 
 export default i18n;

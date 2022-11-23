@@ -10,6 +10,7 @@ import CreateReservation from './pages/CreateReservation.js';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { setToken } from './requests.ts';
 import NavigationBar from './components/NavigationBar.js';
+import { basePath } from './config';
 
 const App = () => {
   const localStoredUser = window.localStorage.getItem('loggedReservationsAppUser');
@@ -27,8 +28,8 @@ const App = () => {
       <Router>
         <NavigationBar user={user} />
         <Routes>
-          <Route path="/" element={<Login setUser={setUser} />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path={`${basePath}/`} element={<Login setUser={setUser} />} />
+          <Route path="*" element={<Navigate to={`${basePath}/`} />} />
         </Routes>
       </Router>
     );
@@ -39,13 +40,13 @@ const App = () => {
       <NavigationBar user={user} />
 
       <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/reservations" element={<Reservations />} />
-        <Route path="/choosetime" element={<ChooseTime />} />
-        <Route path="/roomlist/:id" element={<RoomInfo />} />
-        <Route path="/timeOptions" element={<TimeOptions />} />
-        <Route path="/createReservation/:id" element={<CreateReservation />} />
-        <Route path="*" element={<Navigate to="/home" />} />
+        <Route path={`${basePath}/home`} element={<Home />} />
+        <Route path={`${basePath}/reservations`} element={<Reservations />} />
+        <Route path={`${basePath}/choosetime`} element={<ChooseTime />} />
+        <Route path={`${basePath}/roomlist/:id`} element={<RoomInfo />} />
+        <Route path={`${basePath}/timeOptions`} element={<TimeOptions />} />
+        <Route path={`${basePath}/createReservation/:id`} element={<CreateReservation />} />
+        <Route path="*" element={<Navigate to={`${basePath}/home`} />} />
       </Routes>
     </Router>
   );

@@ -1,40 +1,36 @@
 version: "3.9"
 
 services:
-  mongo:
+  kokoushuone-mongo:
     image: "mongo:latest"
-    restart: "always"
+    restart: "unless-stopped"
     ports:
       - "27017:27017"
-    container_name: mongo
+    container_name: kokoushuone-mongo
     volumes:
       - ./mongo_data:/data/db
 
-  backend:
+  kokoushuone-backend:
     image: "ojanenma/kokoushuone-app:backend"
+    restart: "unless-stopped"
     build:
       context: ./reservatorapp_projekti/ReservatorApp
       dockerfile: Dockerfile
+    container_name: kokoushuone-backend
     ports:
       - "4000:4000"
     depends_on:
-      - mongo
+      - kokoushuone-mongo
 
-  mock-backend:
-    image: "ojanenma/kokoushuone-app:mock-backend"
+  kokoushuone-channel:
+    image: "ojanenma/kokoushuone-app:channel"
+    restart: "unless-stopped"
     build:
-      context: ./mock-backend
+      context: ./channel
       dockerfile: Dockerfile
+    container_name: kokoushuone-channel
     ports:
       - "3003:3003"
-
-  frontend:
-    image: "ojanenma/kokoushuone-app:frontend"
-    build:
-      context: ./mock-frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
 
 volumes:
   mongo_data:
