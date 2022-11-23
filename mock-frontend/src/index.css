@@ -86,3 +86,8 @@ body {
 .ui.red {
   background-color: crimson;
 }
+
+.filter-component {
+  overflow: auto;
+  white-space: nowrap;
+}

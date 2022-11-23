@@ -48,7 +48,7 @@ const Filter = () => {
   const buttonClass = 'ui filter mb-2 mx-2';
 
   return (
-    <div>
+    <div className="filter-component">
       {buildings.map((building) => (
         <Button
           key={building.name}
