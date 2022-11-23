@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { login, setToken } from '../requests.ts';
 import { Button } from 'semantic-ui-react';
 import { useTranslation } from 'react-i18next';
+import { basePath } from '../config';
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState('');
@@ -25,7 +26,7 @@ const Login = ({ setUser }) => {
       setToken(user.token);
       setUsername('');
       setPassword('');
-      return <Navigate to="/home" />;
+      return <Navigate to={`${basePath}/home`} />;
     } catch (exception) {
       errorMessage.current.innerText = 'Wrong credentials!';
     }

@@ -6,7 +6,7 @@ const users = require('../resources/users');
 loginRouter.post('/', (req, res) => {
   const { username, password } = req.body;
 
-  const user = users.find((u) => u.username === username);
+  const user = users.find((u) => u.uid === username);
 
   if (!(user && user.password === password)) {
     return res.status(401).json({
@@ -15,13 +15,13 @@ loginRouter.post('/', (req, res) => {
   }
 
   const userForToken = {
-    username: user.username,
-    id: user.id,
+    username: user.uid,
+    id: user.uid,
   };
 
   const token = jwt.sign(userForToken, SECRET);
 
-  res.status(200).send({ token, username: user.username });
+  res.status(200).send({ token, username: user.uid });
 });
 
 module.exports = loginRouter;

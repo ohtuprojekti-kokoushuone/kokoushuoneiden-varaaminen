@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { basePath } from '../config';
 
 const ChooseTime = () => {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ const ChooseTime = () => {
       <h4>{t('chooseDuration')}</h4>
       <div className="d-grid gap-3 col-8 mx-auto">
         {mins.map((i) => (
-          <Link to="/reservations" className="btn btn-primary btn-lg" key={i}>
+          <Link to={`${basePath}/reservations`} className="btn btn-primary btn-lg" key={i}>
             {i} {t('unit.minutes')}
           </Link>
         ))}

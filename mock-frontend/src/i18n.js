@@ -10,11 +10,15 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    debug: true,
+    // eslint-disable-next-line no-undef
+    debug: process.env.NODE_ENV === 'development',
     interpolation: {
       escapeValue: false
     },
-    supportedLngs: ['fi', 'en']
+    supportedLngs: ['fi', 'en'],
+    backend: {
+      loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/{{ns}}.json?lng={{lng}}&{{ns}}` // eslint-disable-line
+    }
   });
 
 export default i18n;
