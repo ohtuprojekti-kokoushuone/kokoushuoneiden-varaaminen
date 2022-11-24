@@ -16,7 +16,7 @@ roomsRouter.get('/buildings', (req, res) => {
 roomsRouter.get('/info', async (req, res) => {
   const start = new Date();
   const end = new Date(start.getTime());
-  end.setHours(start.getHours() + 4);
+  end.setHours(start.getHours() + 2);
 
   const result = await Promise.all(
     rooms.map(async (room) => {
