@@ -14,7 +14,6 @@ const cors = require('cors');
 //const { Server } = require("socket.io");
 
 var indexRouter = require('./src/routes/index');
-var usersRouter = require('./src/routes/users');
 var authRouter = require('./src/routes/auth');
 var calendarRouter = require('./src/routes/calendar');
 
@@ -97,7 +96,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/calendar', calendarRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
