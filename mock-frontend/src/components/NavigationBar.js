@@ -7,11 +7,7 @@ import reservator from '../reservator.png';
 import { confirmAlert } from 'react-confirm-alert';
 import { basePath } from '../config';
 
-const NavigationBar = ({ user }) => {
-  const handleLogout = () => {
-    window.localStorage.removeItem('loggedReservationsAppUser');
-  };
-
+const NavigationBar = () => {
   const handleChangeLanguage = () => {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -66,29 +62,21 @@ const NavigationBar = ({ user }) => {
               <img alt="RESERVATOR" src={reservator} height="30" className="d-inline-block align-top" />
             </div>
           </Menu.Item>
-          {user === null ? null : (
-            <Menu.Menu position="right">
-              <Dropdown item icon="bars">
-                <Dropdown.Menu>
-                  <Menu.Item href={`${basePath}/reservations`}>{t('label.reservations')}</Menu.Item>
-                  <Menu.Item href={`${basePath}/choosetime`}>{t('label.chooseTime')}</Menu.Item>
-                  <Menu.Item href={`${basePath}/`} onClick={handleLogout}>
-                    {t('button.logout')}
-                  </Menu.Item>
-                  <Menu.Item>
-                    <button
-                      className="ui labeled icon button"
-                      color="transparent"
-                      onClick={() => handleChangeLanguage()}
-                    >
-                      <i className="world icon"></i>
-                      {t('label.activeLanguage')}
-                    </button>
-                  </Menu.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </Menu.Menu>
-          )}
+          <Menu.Menu position="right">
+            <Dropdown item icon="bars">
+              <Dropdown.Menu>
+                <Menu.Item href={`${basePath}/reservations`}>{t('label.reservations')}</Menu.Item>
+                <Menu.Item href={`${basePath}/choosetime`}>{t('label.chooseTime')}</Menu.Item>
+                <Menu.Item href={'Shibboleth.sso/Logout'}>{t('button.logout')}</Menu.Item>
+                <Menu.Item>
+                  <button className="ui labeled icon button" color="transparent" onClick={() => handleChangeLanguage()}>
+                    <i className="world icon"></i>
+                    {t('label.activeLanguage')}
+                  </button>
+                </Menu.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
         </Menu>
       </div>
       <div className="computer only row">
@@ -102,15 +90,13 @@ const NavigationBar = ({ user }) => {
               <img alt="RESERVATOR" src={reservator} height="30" className="d-inline-block align-top" />
             </div>
           </Menu.Item>
-          {user === null ? null : (
-            <Menu.Menu position="right">
-              <Menu.Item href={`${basePath}/reservations`}>{t('label.reservations')}</Menu.Item>
-              <Menu.Item href={`${basePath}/choosetime`}>{t('label.chooseTime')}</Menu.Item>
-              <Menu.Item href={`${basePath}/`} onClick={handleLogout}>
-                {t('button.logout')}
-              </Menu.Item>
-            </Menu.Menu>
-          )}
+
+          <Menu.Menu position="right">
+            <Menu.Item href={`${basePath}/reservations`}>{t('label.reservations')}</Menu.Item>
+            <Menu.Item href={`${basePath}/choosetime`}>{t('label.chooseTime')}</Menu.Item>
+            <Menu.Item href={'Shibboleth.sso/Logout'}>{t('button.logout')}</Menu.Item>
+          </Menu.Menu>
+
           <Menu.Menu>
             <button className="ui labeled icon button" color="black" onClick={() => handleChangeLanguage()}>
               <i className="world icon"></i>
