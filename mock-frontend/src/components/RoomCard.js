@@ -31,7 +31,7 @@ const RoomCard = ({ room }) => {
 
     if (!room.available) {
       if (diffInMinutes < yellowDurationMin) {
-        roomInfo = { availability: t('label.availabeSoon'), cardType: 'yellow' };
+        roomInfo = { availability: t('label.availableSoon'), cardType: 'yellow' };
         availableText += ' (' + diffInMinutes + ' min)';
       }
     } else if (room.available && diffInMinutes <= yellowDurationReservedSoon) {
