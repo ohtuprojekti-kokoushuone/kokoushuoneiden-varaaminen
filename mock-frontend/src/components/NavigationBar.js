@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import logo from '../hy-logo-white.png';
 import reservator from '../reservator.png';
 import { confirmAlert } from 'react-confirm-alert';
+import { basePath } from '../config';
 
 const NavigationBar = ({ user }) => {
   const handleLogout = () => {
@@ -69,9 +70,9 @@ const NavigationBar = ({ user }) => {
             <Menu.Menu position="right">
               <Dropdown item icon="bars">
                 <Dropdown.Menu>
-                  <Menu.Item href="/reservations">{t('label.reservations')}</Menu.Item>
-                  <Menu.Item href="/choosetime">{t('label.chooseTime')}</Menu.Item>
-                  <Menu.Item href="/" onClick={handleLogout}>
+                  <Menu.Item href={`${basePath}/reservations`}>{t('label.reservations')}</Menu.Item>
+                  <Menu.Item href={`${basePath}/choosetime`}>{t('label.chooseTime')}</Menu.Item>
+                  <Menu.Item href={`${basePath}/`} onClick={handleLogout}>
                     {t('button.logout')}
                   </Menu.Item>
                   <Menu.Item>
@@ -92,7 +93,7 @@ const NavigationBar = ({ user }) => {
       </div>
       <div className="computer only row">
         <Menu inverted fixed="top">
-          <Menu.Item href="/home">
+          <Menu.Item href={`${basePath}/home`}>
             <div className="Item">
               <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
             </div>
@@ -103,9 +104,9 @@ const NavigationBar = ({ user }) => {
           </Menu.Item>
           {user === null ? null : (
             <Menu.Menu position="right">
-              <Menu.Item href="/reservations">{t('label.reservations')}</Menu.Item>
-              <Menu.Item href="/choosetime">{t('label.chooseTime')}</Menu.Item>
-              <Menu.Item href="/" onClick={handleLogout}>
+              <Menu.Item href={`${basePath}/reservations`}>{t('label.reservations')}</Menu.Item>
+              <Menu.Item href={`${basePath}/choosetime`}>{t('label.chooseTime')}</Menu.Item>
+              <Menu.Item href={`${basePath}/`} onClick={handleLogout}>
                 {t('button.logout')}
               </Menu.Item>
             </Menu.Menu>

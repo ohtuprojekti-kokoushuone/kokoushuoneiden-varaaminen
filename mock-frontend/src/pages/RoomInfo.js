@@ -4,6 +4,7 @@ import Room from '../components/Room.js';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { useTranslation } from 'react-i18next';
+import { basePath } from '../config';
 
 const RoomInfo = () => {
   const [room, setValue] = useState('');
@@ -26,11 +27,11 @@ const RoomInfo = () => {
         <Button
           aria-label="Siirry varaussivulle"
           color="blue"
-          onClick={() => navigate(`/CreateReservation/${room.id}`)}
+          onClick={() => navigate(`${basePath}/CreateReservation/${room.id}`)}
         >
           {t('button.reserveRoom')}
         </Button>
-        <Button aria-label="palaa hakutuloksiin" color="blue" onClick={() => navigate('/home')}>
+        <Button aria-label="palaa hakutuloksiin" color="blue" onClick={() => navigate(`${basePath}/home`)}>
           {t('button.returnToSearch')}
         </Button>
       </div>
