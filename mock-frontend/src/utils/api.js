@@ -1,22 +1,23 @@
 import axios from 'axios';
-import { baseUrl, inProduction } from '../config';
+import { baseUrl, inProduction, testRun } from '../config';
 import { getMockUserHeaders } from './mockUser';
-
-const mockUserHeaders = inProduction ? {} : getMockUserHeaders();
 
 const api = axios.create({
   baseURL: baseUrl
 });
 
-api.interceptors.request.use((config) => {
-  const headers = {
-    ...config.headers,
-    ...mockUserHeaders
-  };
+if (!testRun) {
+  const mockUserHeaders = inProduction ? {} : getMockUserHeaders();
+  api.interceptors.request.use((config) => {
+    const headers = {
+      ...config.headers,
+      ...mockUserHeaders
+    };
 
-  const newConfig = { ...config, headers };
+    const newConfig = { ...config, headers };
 
-  return newConfig;
-});
+    return newConfig;
+  });
+}
 
 export default api;

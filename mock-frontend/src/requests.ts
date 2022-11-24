@@ -23,7 +23,9 @@ export function getBuildings() {
 
 export function getRoomsInfo() {
   const req = api.get('/rooms/info');
-  return req.then((res) => res.data);
+  return req.then((res) => {
+    return res.data;
+  });
 }
 
 export function getReservations(room: Room, today = false) {

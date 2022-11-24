@@ -8,3 +8,6 @@ export const basePath =
 
 // eslint-disable-next-line no-undef
 export const inProduction = process.env.NODE_ENV === 'production';
+
+// eslint-disable-next-line no-undef
+export const testRun = process.env.NODE_ENV === 'test';
