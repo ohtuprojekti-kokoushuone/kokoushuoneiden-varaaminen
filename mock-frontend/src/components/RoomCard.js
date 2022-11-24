@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { basePath } from '../config';
 
 export const yellowDurationMin = 5;
+const yellowDurationReservedSoon = 15;
 
 const RoomCard = ({ room }) => {
   const navigate = useNavigate();
@@ -30,9 +31,12 @@ const RoomCard = ({ room }) => {
 
     if (!room.available) {
       if (diffInMinutes < yellowDurationMin) {
-        roomInfo = { availability: 'Vapautumassa', cardType: 'yellow' };
+        roomInfo = { availability: t('label.availableSoon'), cardType: 'yellow' };
         availableText += ' (' + diffInMinutes + ' min)';
       }
+    } else if (room.available && diffInMinutes <= yellowDurationReservedSoon) {
+      roomInfo = { availability: t('label.reservedSoon'), cardType: 'yellow' };
+      availableText += ' (' + diffInMinutes + ' min)';
     }
   }
 

@@ -28,7 +28,9 @@
     "notAvailable": "Varattu",
     "save": "Tallenna muutokset",
     "cancel": "Peruuta muutokset",
-    "currentStartTime": "Tämän hetkinen aloitusaika"
+    "currentStartTime": "Tämän hetkinen aloitusaika",
+    "availableSoon": "Vapautuu pian",
+    "reservedSoon": "Seuraava varaus pian"
   },
   "error": {
     "endBeforeStart": "Virhe: Varauksen alkamisajan tulee olla ennen loppumisaikaa"
