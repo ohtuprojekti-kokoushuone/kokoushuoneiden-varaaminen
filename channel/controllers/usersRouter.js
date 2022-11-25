@@ -1,35 +1,15 @@
 const usersRouter = require('express').Router();
-const users = require('../resources/users');
+const calendarService = require('../services/calendarService');
 
-usersRouter.get('/', (req, res) => {
-  res.json(users);
+usersRouter.post('/reservations', async (req, res, next) => {
+  const { email } = req.body;
+
+  try {
+    const data = await calendarService.getReservationsByOrganizer(email);
+    res.status(200).end(JSON.stringify(data));
+  } catch (error) {
+    next(error);
+  }
 });
-
-// not needed
-/*usersRouter.post('/', (req, res) => {
-  const { username, password } = req.body;
-
-  if (!password || password.length < 3) {
-    return res.status(400).json({
-      error: 'invalid password',
-    });
-  }
-
-  const existingUser = users.find((u) => u.username === username);
-  if (existingUser) {
-    return res.status(400).json({
-      error: 'username is already in use',
-    });
-  }
-
-  const user = {
-    username: username,
-    password: password,
-  };
-
-  users = users.concat(user);
-
-  res.status(201).json(user);
-});*/
 
 module.exports = usersRouter;

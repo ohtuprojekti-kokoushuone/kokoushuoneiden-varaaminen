@@ -14,12 +14,7 @@ registerLocale('fi', fi);
 const defaultDuration = 60;
 const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
-const userDetails = JSON.parse(window.localStorage.getItem('loggedReservationsAppUser'));
-let defaultSubject = ' varaus';
-
-if (userDetails !== null) {
-  defaultSubject = userDetails.username + ' varaus';
-}
+let defaultSubject = 'varaus';
 
 const CreateReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
