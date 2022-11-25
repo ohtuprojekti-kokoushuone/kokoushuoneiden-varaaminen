@@ -1,5 +1,5 @@
-import React, { useState, useParams, useRef } from 'react';
-import { Button, Icon, Dropdown } from 'semantic-ui-react';
+import React, { useState, useRef } from 'react';
+import { Message, Button, Icon, Dropdown } from 'semantic-ui-react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteReservation } from '../requests.ts';
@@ -12,55 +12,60 @@ const defaultDuration = 60;
 const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
 const Reservation = ({ res }) => {
-  const [newStartDate, setNewStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+  const [updatedReservation, setUpdatedReservation] = useState();
   const endtest = new Date();
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [newEndDate, setNewEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
+  const [endDate, setEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
   const [duration, setDuration] = useState(defaultDuration);
-  const [newSubject, setNewSubject] = useState();
+  const [subject, setSubject] = useState();
 
   const datePickerEnd = useRef();
 
   function handleSubjectChange(event) {
     event.preventDefault();
-    setNewSubject(event.target.value);
+    setSubject(event.target.value);
   }
 
   function changeEndDate(event, data) {
     setDuration(data.value);
-    const newDate = new Date(newStartDate.getTime());
-    setNewEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
+    const newDate = new Date(startDate.getTime());
+    setEndDate(newDate.setMinutes(startDate.getMinutes() + data.value));
   }
 
   function handleStartDateChange(date) {
-    setNewStartDate(date);
-    if (newEndDate <= date) {
+    setStartDate(date);
+    if (endDate <= date) {
       let newDate = new Date(date.getTime());
       newDate.setMinutes(date.getMinutes() + defaultDuration);
-      setNewEndDate(newDate);
+      setEndDate(newDate);
     } else {
       let newDate = new Date(date.getTime());
-      newDate.setMinutes(date.getMinutes() + durations);
-      setNewEndDate(newDate);
+      newDate.setMinutes(date.getMinutes() + duration);
+      setEndDate(newDate);
     }
   }
   function handleClick(reservation) {
-    if (newEndDate <= newStartDate) {
+    if (endDate <= startDate) {
       setShow(true);
       setErrorMessage('error.endBeforeStart');
       return;
     }
-    const id = reservation.id;
 
     const updatedReservation = {
-      subject: newSubject,
-      start: newStartDate,
-      end: newEndDate,
+      subject: subject,
+      start: startDate,
+      end: endDate,
       attendees: []
     };
 
-    updateReservation(id, updatedReservation).then(() => alert('Varaus on päivitetty'));
+    const updateCurrentReservation = (reservation) =>
+      reservation.id === updatedReservation.id ? updatedReservation : reservation;
+
+    setUpdatedReservation(updateCurrentReservation);
+
+    updateReservation(reservation.id, updatedReservation).then(() => alert('Varaus on päivitetty'));
   }
 
   function handleDeleteReservation(reservation) {
@@ -107,16 +112,24 @@ const Reservation = ({ res }) => {
       customUI: ({ onClose }) => {
         return (
           <div className="react-confirm-alert-body" style={{ width: '500px' }}>
+            {show ? (
+              <Message negative onDismiss={() => setShow(false)}>
+                {' '}
+                {t(errorMessage)}
+              </Message>
+            ) : (
+              <></>
+            )}
             <h1>{t('editConfirmation')}</h1>
             <h3 style={{ fontWeight: 'bold' }}>
               {t('currentSubject')}: {reservation.subject}
             </h3>{' '}
             <input
               type="text"
-              name="newSubject"
+              name="subject"
               placeholder={t('inputNewSubject')}
               onChange={handleSubjectChange}
-              value={newSubject}
+              value={subject}
             />
             <p>
               {t('label.currentStartTime')}: {new Date(reservation.start.dateTime).toLocaleString('fi-FI')}
@@ -140,6 +153,19 @@ const Reservation = ({ res }) => {
               options={createDropdownDurationObject(durations)}
               onChange={changeEndDate}
               defaultValue={defaultDuration}
+            />
+            <h3>{t('reservationEnd')}</h3>
+            <DatePicker
+              ref={datePickerEnd}
+              dateFormat="dd.MM.yyyy HH:mm"
+              selected={endDate}
+              disabled
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              timeCaption="Aika"
+              locale="fi"
+              customInput={<input data-testid="end-date-reservation" type="text" />}
             />
             <div>
               <Button color="blue" style={{ marginRight: '10px' }} autoFocus onClick={handleClick(reservation)}>
