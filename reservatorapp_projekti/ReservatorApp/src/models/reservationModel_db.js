@@ -62,6 +62,11 @@ const ReservationSchema = new mongoose.Schema(
       },
     ],
 
+    location: {
+      name: String,
+      email: String,
+    },
+
     // If the event was not received from the Outlook anymore, mark it deleted
     isDeleted: Boolean,
 
@@ -72,6 +77,8 @@ const ReservationSchema = new mongoose.Schema(
 
 ReservationSchema.methods.toJSON = function () {
   const reservationObject = this.toObject();
+
+  var organizer = reservationObject.attendees[0] || reservationObject.organizer;
 
   var response = {
     id: reservationObject.calendarEventId,
@@ -85,13 +92,14 @@ ReservationSchema.methods.toJSON = function () {
       dateTime: new Date(reservationObject.end),
       timeZone: 'UTC',
     },
-    organizer: reservationObject.organizer,
+    organizer: organizer,
     attendees: reservationObject.attendees.map((o) => {
       return {
         email: o.email,
         name: o.name,
       };
     }),
+    location: reservationObject.location,
     isCancelled: reservationObject.isCancelled,
     //isDeleted: reservationObject.isDeleted ? reservationObject.isDeleted : false
   };
@@ -111,6 +119,12 @@ const ReservationHandler = {
   findAllReservationWithCalendarUserId: async function (calendarUserId) {
     return reservationModel.find({
       calendarUserId: calendarUserId,
+    });
+  },
+
+  findAllReservationsWithOrganizer: async function (organizerEmail) {
+    return reservationModel.find({
+      'organizer.email': organizerEmail,
     });
   },
 
@@ -168,6 +182,8 @@ const ReservationHandler = {
       calendarEventId: reservationObject.id,
     };
 
+    var organizer = reservationObject.attendees[0] || reservationObject.organizer;
+
     return reservationModel.findOneAndUpdate(
       query,
       {
@@ -186,8 +202,8 @@ const ReservationHandler = {
               ? reservationObject.end.dateTime + 'Z'
               : reservationObject.end.dateTime,
           organizer: {
-            email: reservationObject.organizer.emailAddress.address,
-            name: reservationObject.organizer.emailAddress.name,
+            email: organizer.emailAddress.address,
+            name: organizer.emailAddress.name,
           },
           attendees: reservationObject.attendees.map((o) => {
             return {
@@ -196,6 +212,10 @@ const ReservationHandler = {
               requiredAttendee: o.required,
             };
           }),
+          location: {
+            email: reservationObject.organizer.emailAddress.address,
+            name: reservationObject.organizer.emailAddress.name,
+          },
           isCancelled: reservationObject.isCancelled,
           lastSeen: lastSeen,
         },

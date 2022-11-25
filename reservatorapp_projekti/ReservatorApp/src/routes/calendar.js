@@ -211,9 +211,8 @@ router.post('/:calendarUserId/reservations', async function (req, res) {
         subject: req.body.subject,
         start: req.body.start,
         end: req.body.end,
-        organizer: req.params.calendarUserId,
+        organizer: req.body.organizer,
         roomCalendarId: req.params.calendarUserId,
-        attendees: getAttendees(req.body, req.params.calendarUserId),
         body: req.body.body,
       };
 
@@ -346,6 +345,8 @@ async function isRequestAuthorized(request) {
   }
 }
 
+/*
+not needed at the moment
 const emailsToAttendees = (emails) => {
   return emails?.map((e) => {
     return {
@@ -374,5 +375,6 @@ const getAttendees = (body, calendarUserId) => {
   }
   return attendees;
 };
+*/
 
 module.exports = router;

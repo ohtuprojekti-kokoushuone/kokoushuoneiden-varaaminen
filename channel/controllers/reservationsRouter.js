@@ -33,14 +33,12 @@ reservationsRouter.post('/:room', async (req, res, next) => {
     subject: body.subject,
     start: body.start,
     end: body.end,
-    attendees: body.attendees?.map((person) => {
-      return {
-        emailAddress: {
-          address: person.email,
-          name: person.name,
-        },
-      };
-    }),
+    organizer: {
+      emailAddress: {
+        address: req.headers.mail,
+        name: `${req.headers.givenname} ${req.headers.sn}`,
+      },
+    },
   };
 
   try {
