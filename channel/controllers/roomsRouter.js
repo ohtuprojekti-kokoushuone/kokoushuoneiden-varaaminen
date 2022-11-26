@@ -3,7 +3,6 @@ const rooms = require('../resources/rooms.json').rooms;
 const buildings = require('../resources/buildings.json').buildings;
 const { checkAvailability } = require('../services/calendarService');
 const { getAvailableTimeAfter } = require('../services/functions');
-const { log } = require('../utils/logger');
 
 roomsRouter.get('/', (req, res) => {
   res.json(rooms);
@@ -39,8 +38,6 @@ roomsRouter.get('/info', async (req, res) => {
       return copied;
     })
   );
-
-  log('RESULT: ', result);
 
   res.json(result);
 });

@@ -1,18 +1,18 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen, act } from '@testing-library/react';
-import axios from 'axios';
+import { render, screen } from '@testing-library/react';
 import Home from './Home';
 import { BrowserRouter } from 'react-router-dom';
+import { getBuildings, getRoomsInfo } from '../requests';
 
-jest.mock('axios');
+jest.mock('../requests');
 
 describe('<Home />', () => {
   describe('filter button', () => {
     let button;
 
     beforeEach(async () => {
-      axios.get.mockResolvedValue({
+      getRoomsInfo.mockResolvedValue({
         data: [
           {
             available: true,
@@ -25,11 +25,29 @@ describe('<Home />', () => {
         ]
       });
 
-      await act(async () => {
-        render(<Home />, { wrapper: BrowserRouter });
+      getBuildings.mockResolvedValue({
+        data: [
+          {
+            name: 'Testirakennus'
+          },
+          {
+            name: 'Exactum'
+          },
+          {
+            name: 'Physicum'
+          },
+          {
+            name: 'Chemicum'
+          },
+          {
+            name: 'Kumpula Campus Library'
+          }
+        ]
       });
 
-      button = screen.getByRole('button', { name: 'button.filter' });
+      render(<Home />, { wrapper: BrowserRouter });
+
+      button = await screen.findByRole('button', { name: 'button.filter' });
     });
 
     test('Link button to /choosetime is rendered', async () => {
