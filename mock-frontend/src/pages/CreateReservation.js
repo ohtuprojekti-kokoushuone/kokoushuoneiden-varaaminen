@@ -67,15 +67,9 @@ const CreateReservation = () => {
 
   function handleStartDateChange(date) {
     setStartDate(date);
-    if (endDate <= date) {
-      let newDate = new Date(date.getTime());
-      newDate.setMinutes(date.getMinutes() + defaultDuration);
-      setEndDate(newDate);
-    } else {
-      let newDate = new Date(date.getTime());
-      newDate.setMinutes(date.getMinutes() + duration);
-      setEndDate(newDate);
-    }
+    let newDate = new Date(date.getTime());
+    newDate.setMinutes(date.getMinutes() + duration);
+    setEndDate(newDate);
   }
 
   function changeEndDate(event, data) {
@@ -125,7 +119,7 @@ const CreateReservation = () => {
         ref={datePickerEnd}
         dateFormat="dd.MM.yyyy HH:mm"
         selected={endDate}
-        disabled
+        onChange={(date) => setEndDate(date)}
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
