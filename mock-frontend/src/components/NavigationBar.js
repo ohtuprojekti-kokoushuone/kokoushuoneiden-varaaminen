@@ -57,7 +57,7 @@ const NavigationBar = ({ user }) => {
     <div className="ui grid">
       <div className="tablet mobile only row">
         <Menu inverted fixed="top">
-          <Menu.Item href="/home">
+          <Menu.Item href={`${basePath}/home`}>
             <div className="Item">
               <img alt="HY Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
             </div>
