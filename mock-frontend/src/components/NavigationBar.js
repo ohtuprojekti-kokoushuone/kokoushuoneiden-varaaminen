@@ -7,7 +7,7 @@ import reservator from '../reservator.png';
 import { confirmAlert } from 'react-confirm-alert';
 import { basePath } from '../config';
 
-const NavigationBar = ({ user }) => {
+const NavigationBar = () => {
   const handleChangeLanguage = () => {
     confirmAlert({
       customUI: ({ onClose }) => {
