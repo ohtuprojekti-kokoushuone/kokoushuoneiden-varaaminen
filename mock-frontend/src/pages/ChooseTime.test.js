@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
-import { getCurrentDateStr } from '../tests/test_helper';
+import { getCurrentDateStr, getDateStrInNMin } from '../tests/test_helper';
 import ChooseTime from './ChooseTime';
 import { getBuildings, getRoomsInfo } from '../requests';
 
@@ -54,6 +54,6 @@ describe('<ChooseTime />', () => {
 
   test('Ending time is set to current time', () => {
     const endDate = screen.getByTestId('end-date');
-    expect(endDate.value).toBe(getCurrentDateStr());
+    expect(endDate.value).toBe(getDateStrInNMin(60));
   });
 });
