@@ -53,7 +53,7 @@
   "editStartTime": "Edit start",
   "currentSubject": "Current subject",
   "inputNewSubject": "Choose new subject",
-  "reservationEnd": "End time of the reservation",
+  "reservationEnd": "End time",
   "availableUntil": "Available until {{time}}",
   "reservedUntil": "Reserved until {{time}}"
 }

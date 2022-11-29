@@ -13,7 +13,6 @@ async function getReservations(room, today = false) {
       },
     });
 
-    log('GOT RESPONSE', response.data);
     return response.data;
   } catch (error) {
     log('ERROR IN GETTING RESERVATIONS:', error?.response?.status, error?.code);

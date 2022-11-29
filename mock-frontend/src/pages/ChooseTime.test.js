@@ -1,15 +1,15 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen, act } from '@testing-library/react';
-import axios from 'axios';
-import { getCurrentDateStr } from '../tests/test_helper';
+import { render, screen } from '@testing-library/react';
+import { getCurrentDateStr, getDateStrInNMin } from '../tests/test_helper';
 import ChooseTime from './ChooseTime';
+import { getBuildings, getRoomsInfo } from '../requests';
 
-jest.mock('axios');
+jest.mock('../requests');
 
 describe('<ChooseTime />', () => {
   beforeEach(async () => {
-    axios.get.mockResolvedValue({
+    getRoomsInfo.mockResolvedValue({
       data: [
         {
           available: true,
@@ -22,9 +22,29 @@ describe('<ChooseTime />', () => {
       ]
     });
 
-    await act(async () => {
-      render(<ChooseTime />);
+    getBuildings.mockResolvedValue({
+      data: [
+        {
+          name: 'Testirakennus'
+        },
+        {
+          name: 'Exactum'
+        },
+        {
+          name: 'Physicum'
+        },
+        {
+          name: 'Chemicum'
+        },
+        {
+          name: 'Kumpula Campus Library'
+        }
+      ]
     });
+
+    render(<ChooseTime />);
+
+    await screen.findByText('chooseStart');
   });
 
   test('Starting time is set to current time', () => {
@@ -34,6 +54,6 @@ describe('<ChooseTime />', () => {
 
   test('Ending time is set to current time', () => {
     const endDate = screen.getByTestId('end-date');
-    expect(endDate.value).toBe(getCurrentDateStr());
+    expect(endDate.value).toBe(getDateStrInNMin(60));
   });
 });

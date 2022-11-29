@@ -96,9 +96,8 @@ async function getEvents(calendarUserId, todayOnly) {
         if (msCalendarEventsIDs.includes(dbEvent.calendarEventId)) {
           syncedReservations.push(dbEvent);
         } else {
-          // mark deleted
-          dbEvent.isDeleted = true;
-          dbEvent.save();
+          // delete
+          dbEvent.delete();
         }
       }
     }
@@ -124,6 +123,18 @@ async function getEventById(calendarUserId, reservationId) {
   } catch (error) {
     console.log('error in getting event', error.response.data.error);
     throw Error('Error in getting event: ' + error.response.data.error.message);
+  }
+}
+
+async function getEventsByOrganizerEmail(organizerEmail) {
+  console.log(`GETTING EVENTS WHERE ORGANIZER IS ${organizerEmail}`);
+  try {
+    const response = await ReservationHandler.findAllReservationsWithOrganizer(organizerEmail);
+    console.log('LIST OF EVENTS:', response);
+    return response;
+  } catch (error) {
+    console.log('error in getting events', error);
+    throw Error('Error in getting events: ' + error);
   }
 }
 
@@ -160,8 +171,7 @@ async function checkAvailability(calendarUserId, start, end) {
           syncedReservations.push(dbEvent);
         } else {
           // mark deleted
-          dbEvent.isDeleted = true;
-          dbEvent.save();
+          dbEvent.delete();
         }
       }
     }
@@ -196,7 +206,7 @@ async function createEvent(calendarUserId, reservation) {
   const timeZone = 'UTC';
   console.log('timeZone', timeZone);
 
-  console.log('reservation in service', reservation);
+  console.debug('reservation in service', reservation);
 
   const event = {
     subject: reservation.subject,
@@ -215,22 +225,12 @@ async function createEvent(calendarUserId, reservation) {
     location: {
       displayName: reservation.roomCalendarId,
     },
-    attendees: [
-      {
-        emailAddress: {
-          address: reservation.organizer,
-          name: reservation.organizer,
-        },
-        type: 'required',
-      },
-      ...reservation.attendees,
-    ],
-    //organizer: { emailAddress: { address: reservation.organizer, name: reservation.organizer } },
+    attendees: [reservation.organizer],
     allowNewTimeProposals: true,
     transactionId: uuidv4(),
   };
 
-  console.log('event is:', event);
+  console.debug('event is:', event);
 
   const uri = `${ENDPOINT_URI}/users/${reservation.roomCalendarId}/events`;
 
@@ -239,6 +239,7 @@ async function createEvent(calendarUserId, reservation) {
     console.debug('Event Create RESPONSE', response.data);
 
     let localReservation = await ReservationHandler.upsertReservation(calendarUserId, response.data);
+    console.debug('mongo reservation:', localReservation);
     return localReservation;
   } catch (error) {
     console.log('Error in creating calendar event', error.response.data.error);
@@ -403,6 +404,7 @@ module.exports = {
   notifyNewEvent: notifyNewEvent,
   checkAvailability: checkAvailability,
   getEventById: getEventById,
+  getEventsByOrganizerEmail: getEventsByOrganizerEmail,
 };
 
 // Returns: { start: <time in UTC>, end: <time in UTC> }
