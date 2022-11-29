@@ -67,7 +67,7 @@ const NavigationBar = () => {
               <div className="ui buttons">
                 <Button
                   className="ui inverted basic labeled icon button"
-                  aria-label="Change language to English" ///vaihda kielet napeiksi ja/tai katso "menu item aria labels"
+                  aria-label="Change language to English"
                   onClick={() => {
                     i18next.changeLanguage('en');
                   }}
@@ -77,7 +77,7 @@ const NavigationBar = () => {
                 </Button>
                 <Button
                   className="ui inverted basic labeled icon button"
-                  aria-label="Vaihda kieleksi suomi" ///vaihda kielet napeiksi ja/tai katso "menu item aria labels"
+                  aria-label="Vaihda kieleksi suomi"
                   onClick={() => {
                     i18next.changeLanguage('fi');
                   }}
