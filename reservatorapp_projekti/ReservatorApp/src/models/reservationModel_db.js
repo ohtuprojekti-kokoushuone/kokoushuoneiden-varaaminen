@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { DOMAIN } = require('../../../../channel/utils/config');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Cannot connect to mongodb:'));
@@ -32,11 +33,6 @@ const ReservationSchema = new mongoose.Schema(
       type: String,
     },
 
-    body: {
-      contentType: String,
-      content: String,
-    },
-
     start: {
       type: Date,
       required: [true, 'Please enter start date'],
@@ -65,6 +61,7 @@ const ReservationSchema = new mongoose.Schema(
     location: {
       name: String,
       email: String,
+      id: String,
     },
 
     // If the event was not received from the Outlook anymore, mark it deleted
@@ -83,7 +80,6 @@ ReservationSchema.methods.toJSON = function () {
   var response = {
     id: reservationObject.calendarEventId,
     subject: reservationObject.subject,
-    body: reservationObject.body,
     start: {
       dateTime: new Date(reservationObject.start),
       timeZone: 'UTC',
@@ -92,7 +88,10 @@ ReservationSchema.methods.toJSON = function () {
       dateTime: new Date(reservationObject.end),
       timeZone: 'UTC',
     },
-    organizer: organizer,
+    organizer: {
+      email: organizer.email,
+      name: organizer.name,
+    },
     attendees: reservationObject.attendees.map((o) => {
       return {
         email: o.email,
@@ -184,41 +183,43 @@ const ReservationHandler = {
 
     var organizer = reservationObject.attendees[0] || reservationObject.organizer;
 
+    var obj = {
+      _id: reservationObject.id,
+      calendarEventId: reservationObject.id,
+      calendarUserId: `${calendarUserId}@${DOMAIN}`,
+      subject: reservationObject.subject,
+      start:
+        reservationObject.start.timeZone === 'UTC'
+          ? reservationObject.start.dateTime + 'Z'
+          : reservationObject.start.dateTime,
+      end:
+        reservationObject.end.timeZone === 'UTC'
+          ? reservationObject.end.dateTime + 'Z'
+          : reservationObject.end.dateTime,
+      organizer: {
+        email: organizer.emailAddress.address,
+        name: organizer.emailAddress.name,
+      },
+      attendees: reservationObject.attendees.map((o) => {
+        return {
+          name: o.emailAddress.name,
+          email: o.emailAddress.address,
+          requiredAttendee: o.required,
+        };
+      }),
+      location: {
+        email: reservationObject.organizer.emailAddress.address,
+        name: reservationObject.organizer.emailAddress.name,
+        id: calendarUserId,
+      },
+      isCancelled: reservationObject.isCancelled,
+      lastSeen: lastSeen,
+    };
+
     return reservationModel.findOneAndUpdate(
       query,
       {
-        $set: {
-          _id: reservationObject.id,
-          calendarEventId: reservationObject.id,
-          calendarUserId: calendarUserId,
-          subject: reservationObject.subject,
-          body: reservationObject.body,
-          start:
-            reservationObject.start.timeZone === 'UTC'
-              ? reservationObject.start.dateTime + 'Z'
-              : reservationObject.start.dateTime,
-          end:
-            reservationObject.end.timeZone === 'UTC'
-              ? reservationObject.end.dateTime + 'Z'
-              : reservationObject.end.dateTime,
-          organizer: {
-            email: organizer.emailAddress.address,
-            name: organizer.emailAddress.name,
-          },
-          attendees: reservationObject.attendees.map((o) => {
-            return {
-              name: o.emailAddress.name,
-              email: o.emailAddress.address,
-              requiredAttendee: o.required,
-            };
-          }),
-          location: {
-            email: reservationObject.organizer.emailAddress.address,
-            name: reservationObject.organizer.emailAddress.name,
-          },
-          isCancelled: reservationObject.isCancelled,
-          lastSeen: lastSeen,
-        },
+        $set: obj,
       },
       {
         upsert: true,

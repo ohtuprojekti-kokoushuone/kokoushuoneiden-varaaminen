@@ -204,7 +204,7 @@ router.post('/:calendarUserId/reservations', async function (req, res) {
       return;
     }
 
-    console.log('BODY', req.body); // give organizer as an email address
+    console.log('BODY', req.body);
     if (req.body.subject && req.body.start && req.body.end) {
       // TODO check that exist and valid
       let reservation = {
@@ -212,8 +212,6 @@ router.post('/:calendarUserId/reservations', async function (req, res) {
         start: req.body.start,
         end: req.body.end,
         organizer: req.body.organizer,
-        roomCalendarId: req.params.calendarUserId,
-        body: req.body.body,
       };
 
       console.log('RESERVATION IN calendar.js', reservation);
