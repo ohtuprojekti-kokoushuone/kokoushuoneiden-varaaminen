@@ -14,6 +14,7 @@ const auth = require('../config/outlookAuthConfig');
 const ReservationHandler = require('../models/reservationModel_db');
 
 const ENDPOINT_URI = process.env.GRAPH_ENDPOINT + process.env.GRAPH_ENDPOINT_API_VERSION;
+const DOMAIN = process.env.DOMAIN;
 
 let authResponse = null;
 
@@ -21,7 +22,7 @@ async function getCalendar(calendarUserId) {
   let responseObject = {};
 
   try {
-    const uri = `${ENDPOINT_URI}/users/${calendarUserId}/calendar`;
+    const uri = `${ENDPOINT_URI}/users/${calendarUserId}@${DOMAIN}/calendar`;
     let response = await axios.default.get(uri, await getOptions());
 
     console.debug('Event Get RESPONSE', response.data);
@@ -58,7 +59,7 @@ async function getEvents(calendarUserId, todayOnly) {
 
       console.log('start', new Date().toISOString());
 
-      const uri = `${ENDPOINT_URI}/users/${calendarUserId}/calendar/calendarView?startDateTime=${startDate}&endDateTime=${endDate}&$top=100&$orderby=start/dateTime desc`;
+      const uri = `${ENDPOINT_URI}/users/${calendarUserId}@${DOMAIN}/calendar/calendarView?startDateTime=${startDate}&endDateTime=${endDate}&$top=100&$orderby=start/dateTime desc`;
       console.log('URI', uri);
 
       response = await axios.default.get(uri, await getOptions(), startDate, endDate);
@@ -66,7 +67,7 @@ async function getEvents(calendarUserId, todayOnly) {
       // Check for existing reservations and mark deleted events delete into the local db
       existingReservations = await ReservationHandler.findOverlappingReservations(calendarUserId, startDate, endDate);
     } else {
-      const uri = `${ENDPOINT_URI}/users/${calendarUserId}/calendar/events?$top=200&$orderby=start/dateTime desc`;
+      const uri = `${ENDPOINT_URI}/users/${calendarUserId}@${DOMAIN}/calendar/events?$top=200&$orderby=start/dateTime desc`;
       response = await axios.default.get(uri, await getOptions());
     }
 
@@ -87,7 +88,10 @@ async function getEvents(calendarUserId, todayOnly) {
         }
       }
 
-      existingReservations = await ReservationHandler.findAllReservationWithCalendarUserId(calendarUserId);
+      existingReservations = await ReservationHandler.findAllReservationWithCalendarUserId(
+        `${calendarUserId}@${DOMAIN}`
+      );
+      console.log('existing', existingReservations);
 
       const msCalendarEventsIDs = msCalendarEvents.map((o) => {
         return o.id;
@@ -114,7 +118,7 @@ async function getEvents(calendarUserId, todayOnly) {
 async function getEventById(calendarUserId, reservationId) {
   console.log(`GETTING EVENT: ${reservationId} FROM ${calendarUserId}`);
   try {
-    const uri = `${ENDPOINT_URI}/users/${calendarUserId}/events/${reservationId}`;
+    const uri = `${ENDPOINT_URI}/users/${calendarUserId}@${DOMAIN}/events/${reservationId}`;
     console.log('URI:', uri);
     const response = await axios.default.get(uri, await getOptions());
     console.log('GOT RESPONSE:', response.data);
@@ -142,7 +146,7 @@ async function checkAvailability(calendarUserId, start, end) {
   let existingReservations = [];
   let syncedReservations = [];
   try {
-    const uri = `${ENDPOINT_URI}/users/${calendarUserId}/calendar/calendarView?startDateTime=${start}&endDateTime=${end}&$top=100&$orderby=start/dateTime desc`;
+    const uri = `${ENDPOINT_URI}/users/${calendarUserId}@${DOMAIN}/calendar/calendarView?startDateTime=${start}&endDateTime=${end}&$top=100&$orderby=start/dateTime desc`;
 
     let response = await axios.default.get(uri, await getOptions(), start, end);
 
@@ -210,10 +214,6 @@ async function createEvent(calendarUserId, reservation) {
 
   const event = {
     subject: reservation.subject,
-    body: {
-      contentType: 'text',
-      content: reservation.body,
-    },
     start: {
       dateTime: reservation.start,
       timeZone: timeZone,
@@ -223,7 +223,7 @@ async function createEvent(calendarUserId, reservation) {
       timeZone: timeZone,
     },
     location: {
-      displayName: reservation.roomCalendarId,
+      displayName: `${calendarUserId}@${DOMAIN}`,
     },
     attendees: [reservation.organizer],
     allowNewTimeProposals: true,
@@ -232,7 +232,7 @@ async function createEvent(calendarUserId, reservation) {
 
   console.debug('event is:', event);
 
-  const uri = `${ENDPOINT_URI}/users/${reservation.roomCalendarId}/events`;
+  const uri = `${ENDPOINT_URI}/users/${calendarUserId}@${DOMAIN}/events`;
 
   try {
     const response = await axios.default.post(uri, event, await getOptions());
@@ -248,7 +248,7 @@ async function createEvent(calendarUserId, reservation) {
 }
 
 async function deleteEvent(calendarUserId, reservationId) {
-  const uri = `${ENDPOINT_URI}/users/${calendarUserId}/events/${reservationId}`;
+  const uri = `${ENDPOINT_URI}/users/${calendarUserId}@${DOMAIN}/events/${reservationId}`;
 
   try {
     const response = await axios.default.delete(uri, await getOptions());
@@ -299,7 +299,7 @@ async function updateEvent(calendarUserId, reservationId, reservation) {
     event['subject'] = reservation.subject;
   }
 
-  const uri = `${ENDPOINT_URI}/users/${calendarUserId}/events/${reservationId}`;
+  const uri = `${ENDPOINT_URI}/users/${calendarUserId}@${DOMAIN}/events/${reservationId}`;
 
   try {
     const response = await axios.default.patch(uri, event, await getOptions());
@@ -453,7 +453,7 @@ async function getDateTimesInUTC(reservation) {
 async function checkForOverlappingEvents(calendarUserId, reservation) {
   // Ensure there is no overlapping events
   try {
-    const uri = `${ENDPOINT_URI}/users/${calendarUserId}/calendar/calendarView?startDateTime=${reservation.start}&endDateTime=${reservation.end}&$top=100&$orderby=start/dateTime desc`;
+    const uri = `${ENDPOINT_URI}/users/${calendarUserId}@${DOMAIN}/calendar/calendarView?startDateTime=${reservation.start}&endDateTime=${reservation.end}&$top=100&$orderby=start/dateTime desc`;
     console.log('URI (for overlaps)', uri);
 
     let response = await axios.default.get(uri, await getOptions(), reservation.start, reservation.end);
