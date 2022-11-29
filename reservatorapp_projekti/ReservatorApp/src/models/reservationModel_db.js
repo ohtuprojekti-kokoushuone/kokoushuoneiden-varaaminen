@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const { DOMAIN } = require('../../../../channel/utils/config');
+
+const DOMAIN = process.env.DOMAIN;
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Cannot connect to mongodb:'));
