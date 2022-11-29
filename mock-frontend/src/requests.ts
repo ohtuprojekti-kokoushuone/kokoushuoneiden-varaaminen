@@ -1,11 +1,6 @@
 import { ReservationObject, Room } from './types/common';
 import api from './utils/api';
 
-export function setToken(newToken: any) {
-  const token = `bearer ${newToken}`;
-  return token;
-}
-
 export async function login(credentials: any) {
   const res = await api.post('/login', credentials);
   return res.data;
