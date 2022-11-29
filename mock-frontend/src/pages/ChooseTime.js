@@ -17,7 +17,8 @@ const ChooseTime = () => {
   const [rooms, setRooms] = useState([]);
   const [roomsToShow, setRoomsToShow] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date(startDate.getTime() + defaultDuration * 60 * 1000));
+  const [duration, setDuration] = useState(defaultDuration);
   const minSize = useRef();
   const { t, i18n } = useTranslation();
 
@@ -46,8 +47,15 @@ const ChooseTime = () => {
   };
 
   function changeEndDate(event, data) {
-    const newDate = new Date(startDate.getTime());
-    setEndDate(newDate.setMinutes(startDate.getMinutes() + data.value));
+    setDuration(data.value);
+    const newDate = new Date(startDate.getTime() + data.value * 60 * 1000);
+    setEndDate(newDate);
+  }
+
+  function handleStartDateChange(date) {
+    setStartDate(date);
+    let newDate = new Date(date.getTime() + duration * 60 * 1000);
+    setEndDate(newDate);
   }
 
   return (
@@ -57,7 +65,7 @@ const ChooseTime = () => {
       <DatePicker
         dateFormat="dd.MM.yyyy HH:mm"
         selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        onChange={(date) => handleStartDateChange(date)}
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
