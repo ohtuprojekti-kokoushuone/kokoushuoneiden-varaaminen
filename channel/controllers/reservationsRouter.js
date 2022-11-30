@@ -39,6 +39,9 @@ reservationsRouter.post('/:room', async (req, res, next) => {
         name: `${req.headers.givenname} ${req.headers.sn}`,
       },
     },
+    room: {
+      id: room,
+    },
   };
 
   try {

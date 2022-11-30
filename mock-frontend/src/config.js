@@ -11,3 +11,6 @@ export const inProduction = process.env.NODE_ENV === 'production';
 
 // eslint-disable-next-line no-undef
 export const testRun = process.env.NODE_ENV === 'test';
+
+//eslint-disable-next-line no-undef
+export const logoutPath = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_LOGOUT_URL : '/home';

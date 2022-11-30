@@ -1,13 +1,13 @@
 const axios = require('axios').default;
 const { AxiosError } = require('axios');
-const { BASE_URL, DOMAIN, TOKEN } = require('../utils/config');
+const { BASE_URL, TOKEN } = require('../utils/config');
 const { differenceInMinutes } = require('date-fns');
 const { log } = require('../utils/logger');
 
 async function getReservations(room, today = false) {
   log('GETTING RESERVATIONS FOR ROOM', room);
   try {
-    const response = await axios.get(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations?today=${today}`, {
+    const response = await axios.get(`${BASE_URL}/calendar/${room}/reservations?today=${today}`, {
       headers: {
         Authorization: TOKEN,
       },
@@ -23,7 +23,7 @@ async function getReservations(room, today = false) {
 async function getReservationById(room, reservationId) {
   log('GETTING RESERVATION BY ID', reservationId);
   try {
-    const response = await axios.get(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations/${reservationId}`, {
+    const response = await axios.get(`${BASE_URL}/calendar/${room}/reservations/${reservationId}`, {
       headers: {
         Authorization: TOKEN,
       },
@@ -51,7 +51,7 @@ async function reserveRoom(room, reservationObj) {
   }
   log('CREATING RESERVATION:', room, reservationObj);
   try {
-    const response = await axios.post(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations`, reservationObj, {
+    const response = await axios.post(`${BASE_URL}/calendar/${room}/reservations`, reservationObj, {
       headers: {
         Authorization: TOKEN,
       },
@@ -67,7 +67,7 @@ async function reserveRoom(room, reservationObj) {
 async function deleteReservation(room, id) {
   log('DELETING RESERVATION:', id);
   try {
-    const response = await axios.delete(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations/${id}`, {
+    const response = await axios.delete(`${BASE_URL}/calendar/${room}/reservations/${id}`, {
       headers: {
         Authorization: TOKEN,
       },
@@ -83,15 +83,11 @@ async function deleteReservation(room, id) {
 async function updateReservation(room, reservationId, updatedObj) {
   log('UPDATING RESERVATION:', reservationId);
   try {
-    const response = await axios.patch(
-      `${BASE_URL}/calendar/${room}@${DOMAIN}/reservations/${reservationId}`,
-      updatedObj,
-      {
-        headers: {
-          Authorization: TOKEN,
-        },
-      }
-    );
+    const response = await axios.patch(`${BASE_URL}/calendar/${room}/reservations/${reservationId}`, updatedObj, {
+      headers: {
+        Authorization: TOKEN,
+      },
+    });
     log('UPDATED!', response.data);
     return response.data;
   } catch (error) {
@@ -103,7 +99,7 @@ async function updateReservation(room, reservationId, updatedObj) {
 async function checkAvailability(room, start, end) {
   log(`CHECKING AVAILABILITY FOR: ${room} ${start} - ${end}`);
   try {
-    const response = await axios.get(`${BASE_URL}/calendar/${room}@${DOMAIN}/reservations/${start}/${end}`, {
+    const response = await axios.get(`${BASE_URL}/calendar/${room}/reservations/${start}/${end}`, {
       headers: {
         Authorization: TOKEN,
       },
@@ -115,6 +111,17 @@ async function checkAvailability(room, start, end) {
   }
 }
 
+async function getReservationsByOrganizer(email) {
+  log(`GETTING RESERVATIONS FOR ${email}`);
+  try {
+    const response = await axios.post(`${BASE_URL}/users/reservations`, { headers: { Authorization: TOKEN } });
+    return response.data;
+  } catch (error) {
+    log('ERROR IN GETTING RESERVATIONS:', error.response?.data);
+    throw error;
+  }
+}
+
 module.exports = {
   getReservations: getReservations,
   reserveRoom: reserveRoom,
@@ -122,4 +129,5 @@ module.exports = {
   updateReservation: updateReservation,
   checkAvailability: checkAvailability,
   getReservationById: getReservationById,
+  getReservationsByOrganizer: getReservationsByOrganizer,
 };

@@ -14,12 +14,7 @@ registerLocale('fi', fi);
 const defaultDuration = 60;
 const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
-const userDetails = JSON.parse(window.localStorage.getItem('loggedReservationsAppUser'));
-let defaultSubject = ' varaus';
-
-if (userDetails !== null) {
-  defaultSubject = userDetails.username + ' varaus';
-}
+let defaultSubject = 'varaus';
 
 const CreateReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -67,15 +62,9 @@ const CreateReservation = () => {
 
   function handleStartDateChange(date) {
     setStartDate(date);
-    if (endDate <= date) {
-      let newDate = new Date(date.getTime());
-      newDate.setMinutes(date.getMinutes() + defaultDuration);
-      setEndDate(newDate);
-    } else {
-      let newDate = new Date(date.getTime());
-      newDate.setMinutes(date.getMinutes() + duration);
-      setEndDate(newDate);
-    }
+    let newDate = new Date(date.getTime());
+    newDate.setMinutes(date.getMinutes() + duration);
+    setEndDate(newDate);
   }
 
   function changeEndDate(event, data) {
@@ -125,7 +114,7 @@ const CreateReservation = () => {
         ref={datePickerEnd}
         dateFormat="dd.MM.yyyy HH:mm"
         selected={endDate}
-        disabled
+        onChange={(date) => setEndDate(date)}
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={15}
