@@ -8,6 +8,7 @@ import { Grid, Button } from 'semantic-ui-react';
 import { yellowDurationMin } from '../components/RoomCard.js';
 import { useTranslation } from 'react-i18next';
 import { basePath } from '../config';
+import useFavourite from '../components/useFavourite.js';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -53,26 +54,77 @@ const Home = () => {
   arraySoonAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
   arrayNotAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
 
+  const [favourites, toggleItemInLocalStorage] = useFavourite();
+  const [showFavourite, setShowFavourite] = useState(false);
+
+  function filterFavourite(room) {
+    if (favourites.includes(room.id)) {
+      return true;
+    }
+    return false;
+  }
+  const arrayFavourites = rooms.filter(filterFavourite);
+
+  useEffect(() => {
+    setShowFavourite(true);
+  }, []);
+
+  function toggleFavouriteFilter(el) {
+    el.blur();
+    el.classList.toggle('filter-selected');
+    if (showFavourite === false) {
+      setShowFavourite(true);
+    } else {
+      setShowFavourite(false);
+    }
+    setFavouriteFilter();
+  }
+
+  function setFavouriteFilter() {
+    if (showFavourite === true) {
+      setRooms(arrayFavourites);
+    } else {
+      getRoomsInfo().then((res) => {
+        setRooms(res);
+      });
+    }
+  }
+
   return (
     <Container>
       <Filter />
+      <Button color="black" onClick={(el) => toggleFavouriteFilter(el.target)}>
+        {t('button.favourites')}
+      </Button>
       <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`}>
         {t('button.filter')}
       </Button>
       <Grid stackable columns={2}>
         {arrayAvailable.map((room) => (
           <Grid.Column key={room.id}>
-            <RoomCard room={room} />
+            <RoomCard
+              room={room}
+              onHeartClick={() => toggleItemInLocalStorage(room.id)}
+              getFavourite={() => favourites.includes(room.id)}
+            />
           </Grid.Column>
         ))}
         {arraySoonAvailable.map((room) => (
           <Grid.Column key={room.id}>
-            <RoomCard room={room} />
+            <RoomCard
+              room={room}
+              onHeartClick={() => toggleItemInLocalStorage(room.id)}
+              getFavourite={() => favourites.includes(room.id)}
+            />
           </Grid.Column>
         ))}
         {arrayNotAvailable.map((room) => (
           <Grid.Column key={room.id}>
-            <RoomCard room={room} />
+            <RoomCard
+              room={room}
+              onHeartClick={() => toggleItemInLocalStorage(room.id)}
+              getFavourite={() => favourites.includes(room.id)}
+            />
           </Grid.Column>
         ))}
       </Grid>

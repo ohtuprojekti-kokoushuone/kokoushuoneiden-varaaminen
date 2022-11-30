@@ -7,7 +7,8 @@
     "reserveRoom": "Reserve room",
     "returnToSearch": "Return to search",
     "login": "Log in",
-    "reserve": "Make a reservation"
+    "reserve": "Make a reservation",
+    "favourites": "Favourites"
   },
   "label": {
     "language": "Language",
