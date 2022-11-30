@@ -7,55 +7,33 @@ import { updateReservation } from '../requests.ts';
 import { t } from 'i18next';
 import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
 import DatePicker from 'react-datepicker';
+import { setDate } from 'date-fns';
 
 const defaultDuration = 60;
 const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
 const Reservation = ({ res }) => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [newStartDate, setNewStartDate] = useState(new Date());
   const [updatedReservation, setUpdatedReservation] = useState();
   const endtest = new Date();
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [endDate, setEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
   const [duration, setDuration] = useState(defaultDuration);
-  const [subject, setSubject] = useState();
+  const [newSubject, setNewSubject] = useState();
 
   const datePickerEnd = useRef();
 
-  function handleSubjectChange(event) {
-    event.preventDefault();
-    setSubject(event.target.value);
-  }
-
-  function changeEndDate(event, data) {
-    setDuration(data.value);
-    const newDate = new Date(startDate.getTime());
-    setEndDate(newDate.setMinutes(startDate.getMinutes() + data.value));
-  }
-
-  function handleStartDateChange(date) {
-    setStartDate(date);
-    if (endDate <= date) {
-      let newDate = new Date(date.getTime());
-      newDate.setMinutes(date.getMinutes() + defaultDuration);
-      setEndDate(newDate);
-    } else {
-      let newDate = new Date(date.getTime());
-      newDate.setMinutes(date.getMinutes() + duration);
-      setEndDate(newDate);
-    }
-  }
   function handleClick(reservation) {
-    if (endDate <= startDate) {
+    if (endDate <= newStartDate) {
       setShow(true);
       setErrorMessage('error.endBeforeStart');
       return;
     }
 
     const updatedReservation = {
-      subject: subject,
-      start: startDate,
+      subject: newSubject,
+      start: newStartDate,
       end: endDate,
       attendees: []
     };
@@ -66,6 +44,33 @@ const Reservation = ({ res }) => {
     setUpdatedReservation(updateCurrentReservation);
 
     updateReservation(reservation.id, updatedReservation).then(() => alert('Varaus on päivitetty'));
+  }
+
+  const handleEditSubject = (reservation) => {
+    const changedSubject = { ...reservation, subject: newSubject };
+
+    setNewSubject(changedSubject);
+  };
+
+  function handleEditStartDate(reservation, date) {
+    setNewStartDate(date);
+    if (endDate <= date) {
+      let newDate = new Date(date.getTime());
+      newDate.setMinutes(date.getMinutes() + defaultDuration);
+      setEndDate(newDate);
+    } else {
+      let newDate = new Date(date.getTime());
+      newDate.setMinutes(date.getMinutes() + duration);
+      setEndDate(newDate);
+    }
+    const changedStartDate = { ...reservation, startDate: newStartDate };
+
+    setDate(changedStartDate);
+  }
+  function changeEndDate(event, data) {
+    setDuration(data.value);
+    const newDate = new Date(newStartDate.getTime());
+    setEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
   }
 
   function handleDeleteReservation(reservation) {
@@ -126,10 +131,10 @@ const Reservation = ({ res }) => {
             </h3>{' '}
             <input
               type="text"
-              name="subject"
+              name="newSubject"
               placeholder={t('inputNewSubject')}
-              onChange={handleSubjectChange}
-              value={subject}
+              onChange={handleEditSubject(reservation)}
+              value={newSubject}
             />
             <p>
               {t('label.currentStartTime')}: {new Date(reservation.start.dateTime).toLocaleString('fi-FI')}
@@ -138,7 +143,7 @@ const Reservation = ({ res }) => {
             <DatePicker
               dateFormat="dd.MM.yyyy HH:mm"
               selected={new Date(reservation.start.dateTime)}
-              onChange={(date) => handleStartDateChange(date)}
+              onChange={(date) => handleEditStartDate(reservation, date)}
               showTimeSelect
               timeFormat="HH:mm"
               timeIntervals={15}
