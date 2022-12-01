@@ -143,7 +143,7 @@ const Reservation = ({ res }) => {
   return (
     <tr>
       <td>{res.subject}</td>
-      <td>{res.organizer.name}</td>
+      <td>{res.location.name}</td>
       <td>{start.toLocaleString('fi-FI', dateFormatOption)}</td>
       <td>{end.toLocaleString('fi-FI', dateFormatOption)}</td>
       <td>
