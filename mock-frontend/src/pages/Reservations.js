@@ -10,7 +10,7 @@ const Reservations = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    getReservations('testirakennus.2002', false).then((res) => {
+    getReservations('testirakennus.2001', false).then((res) => {
       setReservations(res.reservations);
     });
   }, []);
