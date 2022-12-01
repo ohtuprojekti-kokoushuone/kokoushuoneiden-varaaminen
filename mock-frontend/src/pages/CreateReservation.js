@@ -35,7 +35,7 @@ const CreateReservation = () => {
     getRoomById(id).then((res) => {
       setMaxDuration(res.maxTime);
     });
-  }, []);
+  }, [id]);
 
   function handleClick() {
     if (!subject) {
