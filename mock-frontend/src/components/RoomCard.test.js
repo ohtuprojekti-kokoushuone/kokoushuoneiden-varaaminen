@@ -6,6 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 describe('<RoomCard />', () => {
   let container;
+  const mockClickHeart = jest.fn();
+  const mockGetFavourite = jest.fn();
 
   beforeEach(() => {
     const testRoom = {
@@ -19,7 +21,7 @@ describe('<RoomCard />', () => {
 
     container = render(
       <BrowserRouter>
-        <RoomCard room={testRoom} />
+        <RoomCard room={testRoom} onHeartClick={mockClickHeart} getFavourite={mockGetFavourite} />
       </BrowserRouter>
     );
   });
@@ -46,7 +48,7 @@ describe('<RoomCard />', () => {
 
     const container2 = render(
       <BrowserRouter>
-        <RoomCard room={testRoom2} />
+        <RoomCard room={testRoom2} onHeartClick={mockClickHeart} getFavourite={mockGetFavourite} />
       </BrowserRouter>
     );
 

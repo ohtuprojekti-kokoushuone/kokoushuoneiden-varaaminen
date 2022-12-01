@@ -6,7 +6,7 @@
       "building": "Testirakennus",
       "groups": [],
       "size": 6,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Testirakennus, 2002, Kokoushuone 2",
@@ -14,7 +14,7 @@
       "building": "Testirakennus",
       "groups": [],
       "size": 6,
-      "maxTime": 2
+      "maxTime": 60
     },
     {
       "name": "Physicum, G237, Meeting room Ada",
@@ -22,7 +22,7 @@
       "building": "Physicum",
       "groups": ["allstaff"],
       "size": 6,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G238, Meeting room Basic",
@@ -30,7 +30,7 @@
       "building": "Physicum",
       "groups": ["allstaff"],
       "size": 6,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G239, Meeting room Cobol",
@@ -38,7 +38,7 @@
       "building": "Physicum",
       "groups": ["allstaff"],
       "size": 6,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G241, Group work room Dart",
@@ -46,7 +46,7 @@
       "building": "Physicum",
       "groups": ["allstaff"],
       "size": 2,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G243, Group work room Erlang",
@@ -54,7 +54,7 @@
       "building": "Physicum",
       "groups": ["allstaff"],
       "size": 2,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G247, Group work room Fortran",
@@ -62,7 +62,7 @@
       "building": "Physicum",
       "groups": ["allstaff"],
       "size": 2,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G226, Group work room Lisp",
@@ -70,7 +70,7 @@
       "building": "Physicum",
       "groups": ["students"],
       "size": 6,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G227, Group work room Modula",
@@ -78,7 +78,7 @@
       "building": "Physicum",
       "groups": ["students"],
       "size": 5,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G228, Group work room Neko",
@@ -86,7 +86,7 @@
       "building": "Physicum",
       "groups": ["students"],
       "size": 5,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G229, Group work room Octave",
@@ -94,7 +94,7 @@
       "building": "Physicum",
       "groups": ["students"],
       "size": 5,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G230, Group work room Python",
@@ -102,7 +102,7 @@
       "building": "Physicum",
       "groups": ["students"],
       "size": 4,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G231, Group work room Q",
@@ -110,7 +110,7 @@
       "building": "Physicum",
       "groups": ["students"],
       "size": 4,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G240, Group work room Idris",
@@ -118,7 +118,7 @@
       "building": "Physicum",
       "groups": ["students"],
       "size": 2,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G242, Group work room Haskell",
@@ -126,7 +126,7 @@
       "building": "Physicum",
       "groups": ["students"],
       "size": 2,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Physicum, G244, Group work room Go",
@@ -134,7 +134,7 @@
       "building": "Physicum",
       "groups": ["students"],
       "size": 2,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Kumpula Campus Library, G103c, Group Study Room 1 Castor",
@@ -142,7 +142,7 @@
       "building": "Kumpula Campus Library",
       "groups": [],
       "size": 3,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Kumpula Campus Library, G103e, Group Study Room 2 Enif",
@@ -150,7 +150,7 @@
       "building": "Kumpula Campus Library",
       "groups": [],
       "size": 3,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Kumpula Campus Library, G103g, Group Study Room 3 Hadar",
@@ -158,7 +158,7 @@
       "building": "Kumpula Campus Library",
       "groups": [],
       "size": 4,
-      "maxTime": 2
+      "maxTime": 120
     },
     {
       "name": "Kumpula Campus Library, G108a, Group Study Room 4 Polaris",
@@ -166,7 +166,7 @@
       "building": "Kumpula Campus Library",
       "groups": [],
       "size": 12,
-      "maxTime": 2
+      "maxTime": 120
     }
   ]
 }

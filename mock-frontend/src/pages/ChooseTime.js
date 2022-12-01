@@ -8,6 +8,7 @@ import RoomCard from '../components/RoomCard.js';
 import { Grid, Button, Dropdown } from 'semantic-ui-react';
 import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
 import { useTranslation } from 'react-i18next';
+import useFavourite from '../components/useFavourite.js';
 
 registerLocale('fi', fi);
 const defaultDuration = 60;
@@ -21,6 +22,7 @@ const ChooseTime = () => {
   const [duration, setDuration] = useState(defaultDuration);
   const minSize = useRef();
   const { t, i18n } = useTranslation();
+  const [favourites, toggleItemInLocalStorage] = useFavourite();
 
   useEffect(() => {
     getRoomsInfo().then((res) => setRooms(res));
@@ -111,7 +113,11 @@ const ChooseTime = () => {
         <Grid stackable columns={2}>
           {roomsToShow.map((room) => (
             <Grid.Column key={room.id}>
-              <RoomCard room={room} />
+              <RoomCard
+                room={room}
+                onHeartClick={() => toggleItemInLocalStorage(room.id)}
+                getFavourite={() => favourites.includes(room.id)}
+              />
             </Grid.Column>
           ))}
         </Grid>

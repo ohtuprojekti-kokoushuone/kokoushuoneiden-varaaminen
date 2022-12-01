@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import fi from 'date-fns/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
-import { makeReservation } from '../requests.ts';
+import { makeReservation, getRoomById } from '../requests.ts';
 import { useParams } from 'react-router-dom';
 import { Message, Button, Dropdown } from 'semantic-ui-react';
 import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
@@ -13,7 +13,7 @@ import { getCurrentUser } from '../requests';
 registerLocale('fi', fi);
 
 const defaultDuration = 60;
-const durations = [15, 30, 45, 60, 75, 90, 105, 120];
+const origDurations = [15, 30, 45, 60, 75, 90, 105, 120];
 
 let defaultSubject = 'varaus';
 
@@ -31,11 +31,18 @@ const CreateReservation = () => {
     });
     return;
   }, []);
+  const [maxDuration, setMaxDuration] = useState(defaultDuration);
 
   const datePickerEnd = useRef();
   const id = useParams().id;
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    getRoomById(id).then((res) => {
+      setMaxDuration(res.maxTime);
+    });
+  }, [id]);
 
   function handleClick() {
     if (!subject) {
@@ -83,6 +90,8 @@ const CreateReservation = () => {
     event.preventDefault();
     setSubject(event.target.value);
   }
+
+  const durations = origDurations.filter((dur) => dur <= maxDuration);
 
   return (
     <div className="container text-center">
