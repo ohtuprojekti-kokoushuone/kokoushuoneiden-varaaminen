@@ -8,6 +8,7 @@ import { Message, Button, Dropdown } from 'semantic-ui-react';
 import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
 import { useTranslation } from 'react-i18next';
 import { basePath } from '../config';
+import { getCurrentUser } from '../requests';
 
 registerLocale('fi', fi);
 
@@ -23,7 +24,13 @@ const CreateReservation = () => {
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [duration, setDuration] = useState(defaultDuration);
-  const [subject, setSubject] = useState(defaultSubject);
+  const [subject, setSubject] = useState('');
+  useEffect(() => {
+    getCurrentUser().then((data) => {
+      setSubject([data.givenName, data.sn, defaultSubject].join(' '));
+    });
+    return;
+  }, []);
   const [maxDuration, setMaxDuration] = useState(defaultDuration);
 
   const datePickerEnd = useRef();

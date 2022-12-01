@@ -131,13 +131,27 @@ async function getEventById(calendarUserId, reservationId) {
 }
 
 async function getEventsByOrganizerEmail(organizerEmail) {
+  let syncedReservations = [];
   console.log(`GETTING EVENTS WHERE ORGANIZER IS ${organizerEmail}`);
   try {
-    const response = await ReservationHandler.findAllReservationsWithOrganizer(organizerEmail);
-    console.log('LIST OF EVENTS:', response);
-    return response;
+    const mongoData = await ReservationHandler.findAllReservationsWithOrganizer(organizerEmail);
+    console.log('found ' + mongoData.length + ' reservations from Mongo');
+    for (let reservation of mongoData) {
+      try {
+        const uri = `${ENDPOINT_URI}/users/${reservation.calendarUserId}/events/${reservation.calendarEventId}`;
+        const response = await axios.default.get(uri, await getOptions());
+        // if reservation is found from graph api, it can be added to final data after updating possible changes to mongo
+        const updated = await ReservationHandler.upsertReservation(reservation.location.id, response.data);
+        syncedReservations.push(updated);
+      } catch {
+        // if reservation is not found from graph api, it has been deleted, and has to be deleted from mongo as well
+        reservation.delete();
+      }
+    }
+    console.log('final amount is', syncedReservations.length);
+    return syncedReservations;
   } catch (error) {
-    console.log('error in getting events', error);
+    //console.log('error in getting events', error);
     throw Error('Error in getting events: ' + error);
   }
 }
@@ -253,6 +267,7 @@ async function deleteEvent(calendarUserId, reservationId) {
   try {
     const response = await axios.default.delete(uri, await getOptions());
     console.debug('Event Delete RESPONSE', response.data);
+    await ReservationHandler.deleteReservation(reservationId);
     return response.data;
   } catch (error) {
     console.log('Error in deleting calendar event', error.response.data.error);

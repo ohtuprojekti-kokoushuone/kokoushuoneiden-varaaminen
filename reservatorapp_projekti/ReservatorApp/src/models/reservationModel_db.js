@@ -187,7 +187,7 @@ const ReservationHandler = {
     var obj = {
       _id: reservationObject.id,
       calendarEventId: reservationObject.id,
-      calendarUserId: `${calendarUserId}@${DOMAIN}`,
+      calendarUserId: calendarUserId.includes(DOMAIN) ? calendarUserId : `${calendarUserId}@${DOMAIN}`,
       subject: reservationObject.subject,
       start:
         reservationObject.start.timeZone === 'UTC'
@@ -211,7 +211,7 @@ const ReservationHandler = {
       location: {
         email: reservationObject.organizer.emailAddress.address,
         name: reservationObject.organizer.emailAddress.name,
-        id: calendarUserId,
+        id: calendarUserId.includes(DOMAIN) ? calendarUserId.replaceAll(`@${DOMAIN}`, '') : calendarUserId,
       },
       isCancelled: reservationObject.isCancelled,
       lastSeen: lastSeen,

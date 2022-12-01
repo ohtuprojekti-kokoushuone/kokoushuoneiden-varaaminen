@@ -114,7 +114,11 @@ async function checkAvailability(room, start, end) {
 async function getReservationsByOrganizer(email) {
   log(`GETTING RESERVATIONS FOR ${email}`);
   try {
-    const response = await axios.post(`${BASE_URL}/users/reservations`, { headers: { Authorization: TOKEN } });
+    const response = await axios.post(
+      `${BASE_URL}/users/reservations`,
+      { email: email },
+      { headers: { Authorization: TOKEN } }
+    );
     return response.data;
   } catch (error) {
     log('ERROR IN GETTING RESERVATIONS:', error.response?.data);

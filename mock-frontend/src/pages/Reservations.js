@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { getReservations } from '../requests.ts';
 import Reservation from '../components/Reservation.js';
 
 import { Table } from 'semantic-ui-react';
 import { useTranslation } from 'react-i18next';
+import { getOwnReservations } from '../requests';
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
   const { t } = useTranslation();
 
   useEffect(() => {
-    getReservations('testirakennus.2001', false).then((res) => {
-      setReservations(res.reservations);
+    getOwnReservations().then((data) => {
+      setReservations(data);
     });
   }, []);
 
