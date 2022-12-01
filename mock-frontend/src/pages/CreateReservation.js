@@ -1,7 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import DatePicker, { registerLocale } from 'react-datepicker';
-import fi from 'date-fns/locale/fi';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState, useEffect } from 'react';
 import { makeReservation, getRoomById } from '../requests.ts';
 import { useParams } from 'react-router-dom';
 import { Message, Button, Dropdown } from 'semantic-ui-react';
@@ -9,8 +6,7 @@ import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
 import { useTranslation } from 'react-i18next';
 import { basePath } from '../config';
 import { getCurrentUser } from '../requests';
-
-registerLocale('fi', fi);
+import ReservatorDatePicker from '../components/ReservatorDatePicker';
 
 const defaultDuration = 60;
 const origDurations = [15, 30, 45, 60, 75, 90, 105, 120];
@@ -33,10 +29,9 @@ const CreateReservation = () => {
   }, []);
   const [maxDuration, setMaxDuration] = useState(defaultDuration);
 
-  const datePickerEnd = useRef();
   const id = useParams().id;
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     getRoomById(id).then((res) => {
@@ -106,16 +101,12 @@ const CreateReservation = () => {
       <h3>{t('label.subject')}</h3>
       <input type="text" name="subject" onChange={handleSubjectChange} value={subject} />
       <h3>{t('chooseStart')}</h3>
-      <DatePicker
-        dateFormat="dd.MM.yyyy HH:mm"
+      <ReservatorDatePicker
         selected={startDate}
-        onChange={(date) => handleStartDateChange(date)}
-        showTimeSelect
-        timeFormat="HH:mm"
-        timeIntervals={15}
-        timeCaption={t('label.time')}
-        locale="fi"
-        customInput={<input data-testid="start-date-reservation" type="text" />}
+        onChange={handleStartDateChange}
+        dateTestId="start-date-reservation"
+        t={t}
+        i18n={i18n}
       />
       <h3>{t('chooseDuration')}</h3>
       <Dropdown
@@ -126,17 +117,12 @@ const CreateReservation = () => {
         defaultValue={defaultDuration}
       />
       <h3>{t('reservationEnd')}</h3>
-      <DatePicker
-        ref={datePickerEnd}
-        dateFormat="dd.MM.yyyy HH:mm"
+      <ReservatorDatePicker
         selected={endDate}
-        onChange={(date) => setEndDate(date)}
-        showTimeSelect
-        timeFormat="HH:mm"
-        timeIntervals={15}
-        timeCaption="Aika"
-        locale="fi"
-        customInput={<input data-testid="end-date-reservation" type="text" />}
+        onChange={setEndDate}
+        dateTestId="end-date-reservation"
+        t={t}
+        i18n={i18n}
       />
 
       <div className="col align-self-center">
