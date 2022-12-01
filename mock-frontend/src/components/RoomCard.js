@@ -4,15 +4,15 @@ import { Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { format } from 'date-fns';
-import Favourite from './Favourite';
 import 'semantic-ui-css/semantic.min.css';
 import { useTranslation } from 'react-i18next';
 import { basePath } from '../config';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 export const yellowDurationMin = 5;
 const yellowDurationReservedSoon = 15;
 
-const RoomCard = ({ room }) => {
+const RoomCard = ({ room, onHeartClick, getFavourite }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -39,13 +39,18 @@ const RoomCard = ({ room }) => {
       availableText += ' (' + diffInMinutes + ' min)';
     }
   }
+  const favouriteClass = 'favourite';
+  const isNotFavourite = <FaRegHeart className={favouriteClass} />;
+  const isFavourite = <FaHeart className={favouriteClass} />;
 
   return (
     <Card className={roomInfo.cardType} key={room.id} data-building={room.building}>
       <Card.Content>
         <div className="content">
           <span className="right floated">
-            <Favourite room={room} />
+            <Button size="medium" onClick={onHeartClick()} className={favouriteClass}>
+              {getFavourite() ? isFavourite : isNotFavourite}
+            </Button>
           </span>
         </div>
         <Card.Header>{room.name}</Card.Header>

@@ -7,7 +7,8 @@
     "reserveRoom": "Varaa huone",
     "returnToSearch": "Palaa hakutuloksiin",
     "login": "Kirjaudu",
-    "reserve": "Tee varaus"
+    "reserve": "Tee varaus",
+    "favourites": "Suosikit"
   },
   "label": {
     "language": "Kieli",
