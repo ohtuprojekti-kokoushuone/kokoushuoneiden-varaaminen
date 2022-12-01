@@ -1,7 +1,7 @@
 const mockUser = {
   uid: 'user2',
   mail: 'user2@example.com',
-  givenName: 'Marianna',
+  givenname: 'Marianna',
   sn: 'Ojanen',
   employeenumber: '222222'
 };

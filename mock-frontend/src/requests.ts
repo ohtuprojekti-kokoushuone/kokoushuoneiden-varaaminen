@@ -67,3 +67,10 @@ export function getOwnReservations() {
     return res.data;
   });
 }
+
+export function getCurrentUser() {
+  const req = api.get('/users/current');
+  return req.then((res) => {
+    return res.data;
+  });
+}

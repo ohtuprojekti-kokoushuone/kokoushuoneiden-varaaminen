@@ -18,10 +18,11 @@ usersRouter.get('/current', async (req, res, next) => {
     res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
   }
   try {
+    console.log(req.headers);
     const data = {
       uid: req.headers.uid,
       mail: req.headers.mail,
-      givenName: req.headers.givenName,
+      givenName: req.headers.givenname,
       sn: req.headers.sn,
     };
     res.status(200).end(JSON.stringify(data));
