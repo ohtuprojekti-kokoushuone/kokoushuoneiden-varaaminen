@@ -54,6 +54,15 @@ function parseDate(str) {
   return new Date(str);
 }
 
+function filterRoom(room, employeeNum) {
+  const isStudent = employeeNum.length === 0;
+  if (isStudent) {
+    return room.groups.includes('students') || room.groups.length === 0;
+  }
+  return true;
+}
+
 module.exports = {
   getAvailableTimeAfter: getAvailableTimeAfter,
+  filterRoom: filterRoom,
 };
