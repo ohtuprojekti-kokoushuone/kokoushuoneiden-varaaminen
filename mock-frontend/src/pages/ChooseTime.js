@@ -1,7 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import DatePicker, { registerLocale } from 'react-datepicker';
-import fi from 'date-fns/locale/fi';
-import 'react-datepicker/dist/react-datepicker.css';
 import { checkAvailability, getRoomsInfo } from '../requests';
 import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
@@ -9,8 +6,8 @@ import { Grid, Button, Dropdown } from 'semantic-ui-react';
 import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
 import { useTranslation } from 'react-i18next';
 import useFavourite from '../components/useFavourite.js';
+import ReservatorDatePicker from '../components/ReservatorDatePicker';
 
-registerLocale('fi', fi);
 const defaultDuration = 60;
 const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
@@ -64,16 +61,12 @@ const ChooseTime = () => {
     <div className="container text-center">
       <Filter />
       <h3>{t('chooseStart')}</h3>
-      <DatePicker
-        dateFormat="dd.MM.yyyy HH:mm"
+      <ReservatorDatePicker
         selected={startDate}
-        onChange={(date) => handleStartDateChange(date)}
-        showTimeSelect
-        timeFormat="HH:mm"
-        timeIntervals={15}
-        timeCaption={t('label.time')}
-        locale={i18n.language}
-        customInput={<input data-testid="start-date" type="text" />}
+        onChange={handleStartDateChange}
+        dateTestId="start-date"
+        t={t}
+        i18n={i18n}
       />
       <h3>{t('chooseDuration')}</h3>
       <Dropdown
@@ -84,17 +77,7 @@ const ChooseTime = () => {
         defaultValue={defaultDuration}
       />
       <h3>{t('chooseEnd')}</h3>
-      <DatePicker
-        dateFormat="dd.MM.yyyy HH:mm"
-        selected={endDate}
-        onChange={(date) => setEndDate(date)}
-        showTimeSelect
-        timeFormat="HH:mm"
-        timeIntervals={15}
-        timeCaption={t('label.time')}
-        locale={i18n.language}
-        customInput={<input data-testid="end-date" type="text" />}
-      />
+      <ReservatorDatePicker selected={endDate} onChange={setEndDate} dateTestId="end-date" t={t} i18n={i18n} />
       <h3>{t('label.size')}</h3>
       <div className="row justify-content-center">
         <select ref={minSize} className="form-select w-auto justify-content-center">

@@ -65,3 +65,17 @@ export function getRoomById(id: Room) {
     return res.data;
   });
 }
+
+export function getOwnReservations() {
+  const req = api.get('/users/reservations');
+  return req.then((res) => {
+    return res.data;
+  });
+}
+
+export function getCurrentUser() {
+  const req = api.get('/users/current');
+  return req.then((res) => {
+    return res.data;
+  });
+}

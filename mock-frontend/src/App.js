@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
 import Home from './pages/Home.js';
 import ChooseTime from './pages/ChooseTime.js';
 import Reservations from './pages/Reservations.js';

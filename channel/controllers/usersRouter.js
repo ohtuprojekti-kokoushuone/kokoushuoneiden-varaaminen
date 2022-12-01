@@ -1,11 +1,30 @@
 const usersRouter = require('express').Router();
 const calendarService = require('../services/calendarService');
 
-usersRouter.post('/reservations', async (req, res, next) => {
-  const { email } = req.body;
-
+usersRouter.get('/reservations', async (req, res, next) => {
+  if (!req.headers.mail) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
   try {
-    const data = await calendarService.getReservationsByOrganizer(email);
+    const data = await calendarService.getReservationsByOrganizer(req.headers.mail);
+    res.status(200).end(JSON.stringify(data));
+  } catch (error) {
+    next(error);
+  }
+});
+
+usersRouter.get('/current', async (req, res, next) => {
+  if (!req.headers.mail) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
+  try {
+    console.log(req.headers);
+    const data = {
+      uid: req.headers.uid,
+      mail: req.headers.mail,
+      givenName: req.headers.givenname,
+      sn: req.headers.sn,
+    };
     res.status(200).end(JSON.stringify(data));
   } catch (error) {
     next(error);
