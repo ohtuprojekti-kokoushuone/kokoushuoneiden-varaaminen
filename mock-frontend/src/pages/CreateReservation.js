@@ -24,11 +24,9 @@ const CreateReservation = () => {
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [duration, setDuration] = useState(defaultDuration);
-  const [user, setUser] = useState({});
   const [subject, setSubject] = useState('');
   useEffect(() => {
     getCurrentUser().then((data) => {
-      setUser(data);
       setSubject([data.givenName, data.sn, defaultSubject].join(' '));
     });
     return;
