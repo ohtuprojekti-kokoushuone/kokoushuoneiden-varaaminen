@@ -4,9 +4,9 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteReservation } from '../requests.ts';
 import { updateReservation } from '../requests.ts';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
-import DatePicker from 'react-datepicker';
+import ReservatorDatePicker from './ReservatorDatePicker';
 
 const defaultDuration = 60;
 const durations = [15, 30, 45, 60, 75, 90, 105, 120];
@@ -16,6 +16,8 @@ const Reservation = ({ res }) => {
   const endtest = new Date();
   const [endDate, setEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
   const [setDuration] = useState(defaultDuration);
+
+  const { t, i18n } = useTranslation();
 
   function changeEndDate(event, data) {
     setDuration(data.value);
@@ -88,16 +90,12 @@ const Reservation = ({ res }) => {
               {t('label.currentStartTime')}: {new Date(reservation.start.dateTime).toLocaleString('fi-FI')}
             </p>
             <h3>{t('editStartTime')}</h3>
-            <DatePicker
-              dateFormat="dd.MM.yyyy HH:mm"
+            <ReservatorDatePicker
               selected={startDate}
-              onChange={(date) => handleStartDateChange(date)}
-              showTimeSelect
-              timeFormat="HH:mm"
-              timeIntervals={15}
-              timeCaption={t('label.time')}
-              locale="fi"
-              customInput={<input data-testid="start-date-reservation" type="text" />}
+              onChange={handleStartDateChange}
+              dateTestId="start-date-reservation"
+              t={t}
+              i18n={i18n}
             />
             <h3>{t('editDuration')}</h3>
             <Dropdown

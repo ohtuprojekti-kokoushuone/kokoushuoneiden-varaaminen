@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
 import { getRoomsInfo } from '../requests';
 import { Container } from 'semantic-ui-react';
 import Filter from './Filter';
