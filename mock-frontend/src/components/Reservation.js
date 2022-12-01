@@ -18,23 +18,21 @@ const Reservation = ({ res }) => {
   const endtest = new Date();
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [endDate, setEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
+  const [newEndDate, setNewEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
   const [duration, setDuration] = useState(defaultDuration);
   const [newSubject, setNewSubject] = useState();
+  const [reservations, setReservations] = useState();
 
   const datePickerEnd = useRef();
 
-  function handleClick(reservation) {
-    if (endDate <= newStartDate) {
-      setShow(true);
-      setErrorMessage('error.endBeforeStart');
-      return;
-    }
+  const handleClick = (id) => {
+    const reservation = reservations.find((r) => r.id === id);
 
     const updatedReservation = {
+      ...reservation,
       subject: newSubject,
       start: newStartDate,
-      end: endDate,
+      end: newEndDate,
       attendees: []
     };
 
@@ -44,33 +42,40 @@ const Reservation = ({ res }) => {
     setUpdatedReservation(updateCurrentReservation);
 
     updateReservation(reservation.id, updatedReservation).then(() => alert('Varaus on päivitetty'));
-  }
+  };
 
-  const handleEditSubject = (reservation) => {
+  const handleEditSubject = (id) => {
+    const reservation = reservations.find((r) => r.id === id);
     const changedSubject = { ...reservation, subject: newSubject };
 
     setNewSubject(changedSubject);
   };
 
-  function handleEditStartDate(reservation, date) {
+  function handleEditStartDate(id, date) {
+    const reservation = reservations.find((r) => r.id === id);
     setNewStartDate(date);
-    if (endDate <= date) {
+    if (newEndDate <= date) {
       let newDate = new Date(date.getTime());
       newDate.setMinutes(date.getMinutes() + defaultDuration);
-      setEndDate(newDate);
+      setNewEndDate(newDate);
     } else {
       let newDate = new Date(date.getTime());
       newDate.setMinutes(date.getMinutes() + duration);
-      setEndDate(newDate);
+      setNewEndDate(newDate);
     }
     const changedStartDate = { ...reservation, startDate: newStartDate };
 
-    setDate(changedStartDate);
+    setNewStartDate(changedStartDate);
   }
-  function changeEndDate(event, data) {
+  function changeEndDate(id, event, data) {
+    const reservation = reservations.find((r) => r.id === id);
     setDuration(data.value);
     const newDate = new Date(newStartDate.getTime());
-    setEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
+    setNewEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
+
+    const changedEndDate = { ...reservation, endDate: newEndDate };
+
+    setNewEndDate(changedEndDate);
   }
 
   function handleDeleteReservation(reservation) {
@@ -133,7 +138,7 @@ const Reservation = ({ res }) => {
               type="text"
               name="newSubject"
               placeholder={t('inputNewSubject')}
-              onChange={handleEditSubject(reservation)}
+              onChange={handleEditSubject(reservation.id)}
               value={newSubject}
             />
             <p>
@@ -143,7 +148,7 @@ const Reservation = ({ res }) => {
             <DatePicker
               dateFormat="dd.MM.yyyy HH:mm"
               selected={new Date(reservation.start.dateTime)}
-              onChange={(date) => handleEditStartDate(reservation, date)}
+              onChange={(date) => handleEditStartDate(reservation.id, date)}
               showTimeSelect
               timeFormat="HH:mm"
               timeIntervals={15}
@@ -156,14 +161,14 @@ const Reservation = ({ res }) => {
               placeholder="Aseta aika"
               selection
               options={createDropdownDurationObject(durations)}
-              onChange={changeEndDate}
+              onChange={changeEndDate(reservation.id)}
               defaultValue={defaultDuration}
             />
             <h3>{t('reservationEnd')}</h3>
             <DatePicker
               ref={datePickerEnd}
               dateFormat="dd.MM.yyyy HH:mm"
-              selected={endDate}
+              selected={newEndDate}
               disabled
               showTimeSelect
               timeFormat="HH:mm"
