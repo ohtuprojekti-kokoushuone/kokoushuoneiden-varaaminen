@@ -4,6 +4,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteReservation } from '../requests.ts';
 import { updateReservation } from '../requests.ts';
+import { editReservation } from '../requests.ts';
 import { t } from 'i18next';
 import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
 import DatePicker from 'react-datepicker';
@@ -14,14 +15,13 @@ const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
 const Reservation = ({ res }) => {
   const [newStartDate, setNewStartDate] = useState(new Date());
-  const [updatedReservation, setUpdatedReservation] = useState();
   const endtest = new Date();
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [newEndDate, setNewEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
   const [duration, setDuration] = useState(defaultDuration);
   const [newSubject, setNewSubject] = useState();
-  const [reservations, setReservations] = useState();
+  const [reservations, setReservations] = useState([]);
 
   const datePickerEnd = useRef();
 
@@ -36,12 +36,9 @@ const Reservation = ({ res }) => {
       attendees: []
     };
 
-    const updateCurrentReservation = (reservation) =>
-      reservation.id === updatedReservation.id ? updatedReservation : reservation;
-
-    setUpdatedReservation(updateCurrentReservation);
-
-    updateReservation(reservation.id, updatedReservation).then(() => alert('Varaus on päivitetty'));
+    editReservation(id, updatedReservation).then((returnedReservation) => {
+      setReservations(reservations.map((reservation) => (reservation.id ? reservation : returnedReservation)));
+    });
   };
 
   const handleEditSubject = (id) => {
@@ -67,15 +64,10 @@ const Reservation = ({ res }) => {
 
     setNewStartDate(changedStartDate);
   }
-  function changeEndDate(id, event, data) {
-    const reservation = reservations.find((r) => r.id === id);
+  function changeEndDate(event, data) {
     setDuration(data.value);
     const newDate = new Date(newStartDate.getTime());
     setNewEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
-
-    const changedEndDate = { ...reservation, endDate: newEndDate };
-
-    setNewEndDate(changedEndDate);
   }
 
   function handleDeleteReservation(reservation) {
@@ -161,7 +153,7 @@ const Reservation = ({ res }) => {
               placeholder="Aseta aika"
               selection
               options={createDropdownDurationObject(durations)}
-              onChange={changeEndDate(reservation.id)}
+              onChange={changeEndDate}
               defaultValue={defaultDuration}
             />
             <h3>{t('reservationEnd')}</h3>
