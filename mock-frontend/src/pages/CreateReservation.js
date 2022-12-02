@@ -110,7 +110,6 @@ const CreateReservation = () => {
       />
       <h3>{t('chooseDuration')}</h3>
       <Dropdown
-        placeholder="Aseta aika"
         selection
         options={createDropdownDurationObject(durations)}
         onChange={changeEndDate}
@@ -126,7 +125,7 @@ const CreateReservation = () => {
       />
 
       <div className="col align-self-center">
-        <Button color="blue" onClick={handleClick}>
+        <Button color="blue" onClick={handleClick} className="confirm-button">
           {t('button.reserve')}
         </Button>
       </div>

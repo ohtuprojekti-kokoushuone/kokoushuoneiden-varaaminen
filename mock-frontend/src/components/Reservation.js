@@ -99,7 +99,6 @@ const Reservation = ({ res }) => {
             />
             <h3>{t('editDuration')}</h3>
             <Dropdown
-              placeholder="Aseta aika"
               selection
               options={createDropdownDurationObject(durations)}
               onChange={changeEndDate}

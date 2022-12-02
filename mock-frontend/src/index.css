@@ -46,6 +46,7 @@ body {
   box-shadow: 0 0 0 0;
   font-weight: bold;
 }
+
 .hidden {
   display: none !important;
 }
@@ -87,7 +88,24 @@ body {
   background-color: crimson;
 }
 
+.date-input {
+  width: 200px;
+}
+
+.ui.selection.dropdown {
+  width: 200px;
+}
+
+.form-select.w-auto.justify-content-center {
+  width: 200px !important;
+}
+
 .filter-component {
   overflow: auto;
   white-space: nowrap;
+}
+
+.ui.blue.button.confirm-button {
+  margin-top: 15px;
+  width: 200px;
 }
