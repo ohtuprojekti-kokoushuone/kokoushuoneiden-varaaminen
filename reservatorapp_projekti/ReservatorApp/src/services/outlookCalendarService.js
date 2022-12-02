@@ -179,7 +179,9 @@ async function checkAvailability(calendarUserId, start, end) {
         }
       }
 
-      existingReservations = await ReservationHandler.findAllReservationWithCalendarUserId(calendarUserId);
+      existingReservations = await ReservationHandler.findAllReservationWithCalendarUserId(
+        `${calendarUserId}@${DOMAIN}`
+      );
 
       const msCalendarEventsIDs = msCalendarEvents.map((o) => {
         return o.id;
