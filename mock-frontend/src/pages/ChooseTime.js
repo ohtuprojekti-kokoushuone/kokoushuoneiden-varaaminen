@@ -70,7 +70,6 @@ const ChooseTime = () => {
       />
       <h3>{t('chooseDuration')}</h3>
       <Dropdown
-        placeholder="Aseta aika"
         selection
         options={createDropdownDurationObject(durations)}
         onChange={changeEndDate}
@@ -88,7 +87,7 @@ const ChooseTime = () => {
         </select>
       </div>
       <div className="col align-self-center">
-        <Button color="blue" onClick={handleFilter}>
+        <Button color="blue" onClick={handleFilter} className="confirm-button">
           {t('button.show')}
         </Button>
       </div>
