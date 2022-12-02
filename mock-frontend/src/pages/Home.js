@@ -8,6 +8,7 @@ import { yellowDurationMin } from '../components/RoomCard.js';
 import { useTranslation } from 'react-i18next';
 import { basePath } from '../config';
 import useFavourite from '../components/useFavourite.js';
+import { FaHeart, FaFilter, FaRedo } from 'react-icons/fa';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
@@ -92,11 +93,14 @@ const Home = () => {
   return (
     <Container>
       <Filter />
-      <Button color="black" onClick={(el) => toggleFavouriteFilter(el.target)}>
-        {t('button.favourites')}
+      <Button className="btn-filter-favourite" color="blue" onClick={(el) => toggleFavouriteFilter(el.target)}>
+        <FaHeart />
       </Button>
       <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`}>
-        {t('button.filter')}
+        <FaFilter />
+      </Button>
+      <Button className="btn-choose" color="red">
+        <FaRedo />
       </Button>
       <Grid stackable columns={2}>
         {arrayAvailable.map((room) => (
