@@ -44,6 +44,10 @@ body {
 .ui.button.btn-filter-favourite {
   margin: 10px 10px 10px 7px;
 }
+.ui.button.btn-filter-favourite-selected {
+  box-shadow: 0 0 0 0.25rem rgb(255 216 0 / 65%) !important;
+  margin: 10px 10px 10px 7px;
+}
 
 .ui.button.filter:focus {
   box-shadow: 0 0 0 0;
@@ -114,5 +118,13 @@ body {
 }
 
 .ui.green.roomcard {
+  margin: auto;
+}
+
+.ui.yellow.roomcard {
+  margin: auto;
+}
+
+.ui.red.roomcard {
   margin: auto;
 }
