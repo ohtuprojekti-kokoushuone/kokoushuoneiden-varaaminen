@@ -91,15 +91,17 @@ const Home = () => {
   return (
     <Container>
       <Filter />
-      <Button className="btn-filter-favourite" color="blue" onClick={(el) => toggleFavouriteFilter(el.target)}>
-        <FaHeart />
-      </Button>
-      <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`} data-testid="filter-btn">
-        <FaFilter />
-      </Button>
-      <Button className="btn-choose" color="red">
-        <FaUndo />
-      </Button>
+      <div className="filter-container">
+        <Button className="btn-filter-favourite" color="blue" onClick={(el) => toggleFavouriteFilter(el.target)}>
+          <FaHeart />
+        </Button>
+        <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`} data-testid="filter-btn">
+          <FaFilter />
+        </Button>
+        <Button className="btn-choose" color="red">
+          <FaUndo />
+        </Button>
+      </div>
       <Grid stackable columns={2}>
         {arrayAvailable.map((room) => (
           <Grid.Column key={room.id}>

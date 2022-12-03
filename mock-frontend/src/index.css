@@ -42,7 +42,7 @@ body {
   margin: 10px;
 }
 .ui.button.btn-filter-favourite {
-  margin: 10px 10px 10px 20px;
+  margin: 10px 10px 10px 7px;
 }
 
 .ui.button.filter:focus {
@@ -111,4 +111,8 @@ body {
 .ui.blue.button.confirm-button {
   margin-top: 15px;
   width: 200px;
+}
+
+.ui.green.roomcard {
+  margin: auto;
 }
