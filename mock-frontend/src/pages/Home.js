@@ -54,6 +54,7 @@ const Home = () => {
 
   const [favourites, toggleItemInLocalStorage] = useFavourite();
   const [showFavourite, setShowFavourite] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   function filterFavourite(room) {
     if (favourites.includes(room.id)) {
@@ -67,13 +68,13 @@ const Home = () => {
     setShowFavourite(true);
   }, []);
 
-  function toggleFavouriteFilter(el) {
-    el.blur();
-    el.classList.toggle('filter-selected');
+  function toggleFavouriteFilter() {
     if (showFavourite === false) {
       setShowFavourite(true);
+      setIsActive(false);
     } else {
       setShowFavourite(false);
+      setIsActive(true);
     }
     setFavouriteFilter();
   }
@@ -92,7 +93,7 @@ const Home = () => {
     <Container>
       <Filter />
       <div className="filter-container">
-        <Button className="btn-filter-favourite" color="blue" onClick={(el) => toggleFavouriteFilter(el.target)}>
+        <Button className={isActive ? 'filter-selected' : ''} color="blue" onClick={() => toggleFavouriteFilter()}>
           <FaHeart />
         </Button>
         <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`} data-testid="filter-btn">
