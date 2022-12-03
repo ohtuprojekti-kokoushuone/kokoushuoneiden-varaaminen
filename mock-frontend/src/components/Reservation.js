@@ -140,7 +140,6 @@ const Reservation = ({ res }) => {
             />
             <h3>{t('editDuration')}</h3>
             <Dropdown
-              placeholder="Aseta aika"
               selection
               options={createDropdownDurationObject(durations)}
               onChange={handleEditEndDate}
@@ -181,7 +180,7 @@ const Reservation = ({ res }) => {
   return (
     <tr>
       <td>{res.subject}</td>
-      <td>{res.organizer.name}</td>
+      <td>{res.location.name}</td>
       <td>{start.toLocaleString('fi-FI', dateFormatOption)}</td>
       <td>{end.toLocaleString('fi-FI', dateFormatOption)}</td>
       <td>

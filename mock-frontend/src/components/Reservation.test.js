@@ -18,7 +18,8 @@ describe('<Reservation />', () => {
       id: 'test',
       organizer: { email: 'testirakennus.2001@helsinki.fi', name: 'Testirakennus, 2001, Kokoushuone 1' },
       start: { dateTime: '2022-11-11T00:00:00.000Z', timeZone: 'UTC' },
-      subject: 'test'
+      subject: 'test',
+      location: { name: 'Testirakennus, 2001, Kokoushuone 1' }
     };
     render(<Reservation res={res} />);
   });
@@ -36,8 +37,8 @@ describe('<Reservation />', () => {
     const subject = cells[0];
     expect(subject.textContent).toBe('test');
 
-    const organizer = cells[1];
-    expect(organizer.textContent).toBe('Testirakennus, 2001, Kokoushuone 1');
+    const roomName = cells[1];
+    expect(roomName.textContent).toBe('Testirakennus, 2001, Kokoushuone 1');
 
     const startDate = cells[2];
     expect(startDate.textContent).toBe(new Date(res.start.dateTime).toLocaleString('fi-FI', dateFormatOption));

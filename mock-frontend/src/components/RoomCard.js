@@ -44,7 +44,7 @@ const RoomCard = ({ room, onHeartClick, getFavourite }) => {
   const isFavourite = <FaHeart className={favouriteClass} />;
 
   return (
-    <Card className={roomInfo.cardType} key={room.id} data-building={room.building}>
+    <Card className={roomInfo.cardType + ' roomcard'} key={room.id} data-building={room.building}>
       <Card.Content>
         <div className="content">
           <span className="right floated">

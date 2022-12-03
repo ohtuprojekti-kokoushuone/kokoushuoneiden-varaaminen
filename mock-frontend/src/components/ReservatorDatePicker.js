@@ -14,7 +14,7 @@ const ReservatorDatePicker = ({ selected, onChange, dateTestId, t, i18n }) => (
     timeIntervals={15}
     timeCaption={t('label.time')}
     locale={i18n.language}
-    customInput={<input data-testid={dateTestId} type="text" />}
+    customInput={<input data-testid={dateTestId} type="text" className="date-input" />}
   />
 );
 

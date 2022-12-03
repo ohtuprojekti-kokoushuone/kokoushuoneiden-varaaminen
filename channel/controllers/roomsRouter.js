@@ -2,7 +2,7 @@ const roomsRouter = require('express').Router();
 const rooms = require('../resources/rooms.json').rooms;
 const buildings = require('../resources/buildings.json').buildings;
 const { checkAvailability } = require('../services/calendarService');
-const { getAvailableTimeAfter } = require('../services/functions');
+const { getAvailableTimeAfter, filterRoom } = require('../services/functions');
 
 roomsRouter.get('/', (req, res) => {
   res.json(rooms);
@@ -17,8 +17,10 @@ roomsRouter.get('/info', async (req, res) => {
   const end = new Date(start.getTime());
   end.setHours(start.getHours() + 2);
 
+  const filteredRooms = rooms.filter((room) => filterRoom(room, req.headers.employeenumber));
+
   const result = await Promise.all(
-    rooms.map(async (room) => {
+    filteredRooms.map(async (room) => {
       if (room.building !== 'Testirakennus') {
         const available = Math.random() < 0.7;
         return { ...room, available: available };

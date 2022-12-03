@@ -47,7 +47,7 @@ describe('<Home />', () => {
 
       render(<Home />, { wrapper: BrowserRouter });
 
-      button = await screen.findByRole('button', { name: 'button.filter' });
+      button = await screen.findByTestId('filter-btn');
     });
 
     test('Link button to /choosetime is rendered', async () => {

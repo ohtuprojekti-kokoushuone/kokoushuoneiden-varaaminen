@@ -5,13 +5,12 @@ import Filter from './Filter';
 import RoomCard from '../components/RoomCard.js';
 import { Grid, Button } from 'semantic-ui-react';
 import { yellowDurationMin } from '../components/RoomCard.js';
-import { useTranslation } from 'react-i18next';
 import { basePath } from '../config';
 import useFavourite from '../components/useFavourite.js';
+import { FaHeart, FaFilter, FaUndo } from 'react-icons/fa';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
-  const { t } = useTranslation();
 
   useEffect(() => {
     getRoomsInfo().then((res) => {
@@ -55,6 +54,7 @@ const Home = () => {
 
   const [favourites, toggleItemInLocalStorage] = useFavourite();
   const [showFavourite, setShowFavourite] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   function filterFavourite(room) {
     if (favourites.includes(room.id)) {
@@ -68,13 +68,13 @@ const Home = () => {
     setShowFavourite(true);
   }, []);
 
-  function toggleFavouriteFilter(el) {
-    el.blur();
-    el.classList.toggle('filter-selected');
+  function toggleFavouriteFilter() {
     if (showFavourite === false) {
       setShowFavourite(true);
+      setIsActive(false);
     } else {
       setShowFavourite(false);
+      setIsActive(true);
     }
     setFavouriteFilter();
   }
@@ -92,12 +92,21 @@ const Home = () => {
   return (
     <Container>
       <Filter />
-      <Button color="black" onClick={(el) => toggleFavouriteFilter(el.target)}>
-        {t('button.favourites')}
-      </Button>
-      <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`}>
-        {t('button.filter')}
-      </Button>
+      <div className="filter-container">
+        <Button
+          className={isActive ? 'btn-filter-favourite-selected' : 'btn-filter-favourite'}
+          color="blue"
+          onClick={() => toggleFavouriteFilter()}
+        >
+          <FaHeart />
+        </Button>
+        <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`} data-testid="filter-btn">
+          <FaFilter />
+        </Button>
+        <Button className="btn-choose" color="red">
+          <FaUndo />
+        </Button>
+      </div>
       <Grid stackable columns={2}>
         {arrayAvailable.map((room) => (
           <Grid.Column key={room.id}>
