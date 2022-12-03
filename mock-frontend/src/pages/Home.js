@@ -93,7 +93,11 @@ const Home = () => {
     <Container>
       <Filter />
       <div className="filter-container">
-        <Button className={isActive ? 'filter-selected' : ''} color="blue" onClick={() => toggleFavouriteFilter()}>
+        <Button
+          className={isActive ? 'btn-filter-favourite-selected' : 'btn-filter-favourite'}
+          color="blue"
+          onClick={() => toggleFavouriteFilter()}
+        >
           <FaHeart />
         </Button>
         <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`} data-testid="filter-btn">
