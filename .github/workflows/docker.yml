@@ -28,7 +28,7 @@ jobs:
           context: ./reservatorapp_projekti/ReservatorApp
           file: reservatorapp_projekti/ReservatorApp/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/reservator:backend
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/reservator-backend:latest
 
       - name: Setup node
         uses: actions/setup-node@v3
@@ -45,4 +45,4 @@ jobs:
           context: ./channel
           file: channel/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/reservator:channel
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/reservator:latest
