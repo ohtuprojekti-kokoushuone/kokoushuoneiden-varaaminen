@@ -22,19 +22,23 @@ const RoomInfo = () => {
 
   return (
     <div className="container text-center">
-      <div className="d-grid gap-3 col-8 mx-auto">
-        <Room room={room} key={room.id}></Room>
-        <Button
-          aria-label="Siirry varaussivulle"
-          color="blue"
-          onClick={() => navigate(`${basePath}/CreateReservation/${room.id}`)}
-        >
-          {t('button.reserveRoom')}
-        </Button>
-        <Button aria-label="palaa hakutuloksiin" color="blue" onClick={() => navigate(`${basePath}/home`)}>
-          {t('button.returnToSearch')}
-        </Button>
-      </div>
+      <Room room={room} key={room.id}></Room>
+      <Button
+        className="roominfo-button"
+        aria-label="Siirry varaussivulle"
+        color="blue"
+        onClick={() => navigate(`${basePath}/CreateReservation/${room.id}`)}
+      >
+        {t('button.reserveRoom')}
+      </Button>
+      <Button
+        className="roominfo-button"
+        aria-label="palaa hakutuloksiin"
+        color="blue"
+        onClick={() => navigate(`${basePath}/home`)}
+      >
+        {t('button.returnToSearch')}
+      </Button>
     </div>
   );
 };

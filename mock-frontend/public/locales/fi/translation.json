@@ -31,7 +31,10 @@
     "cancel": "Peruuta muutokset",
     "currentStartTime": "Tämän hetkinen aloitusaika",
     "availableSoon": "Vapautuu pian",
-    "reservedSoon": "Seuraava varaus pian"
+    "reservedSoon": "Seuraava varaus pian",
+    "maxtime": "Varauksen maksimikesto",
+    "usergroup": "Varauksen ryhmä",
+    "building": "Rakennus"
   },
   "error": {
     "endBeforeStart": "Virhe: Varauksen alkamisajan tulee olla ennen loppumisaikaa"

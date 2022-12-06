@@ -31,7 +31,10 @@
     "cancel": "Cancel changes",
     "currentStartTime": "Current starting time",
     "availableSoon": "Available soon",
-    "reservedSoon": "Reserved soon"
+    "reservedSoon": "Reserved soon",
+    "maxtime": "Maximun reservation time",
+    "usergroup": "Reservation available for",
+    "building": "Building"
   },
   "error": {
     "endBeforeStart": "Error: Starting time must be before ending time"
