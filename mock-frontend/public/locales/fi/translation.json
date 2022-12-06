@@ -33,7 +33,7 @@
     "availableSoon": "Vapautuu pian",
     "reservedSoon": "Seuraava varaus pian",
     "maxtime": "Varauksen maksimikesto",
-    "usergroup": "Varauksen ryhmä",
+    "usergroup": "Varaaminen mahdollista ryhmälle",
     "building": "Rakennus"
   },
   "error": {
