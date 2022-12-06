@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 
 var express = require('express');
+//const FavouriteHandler = require('../models/favouriteModel_db');
+const favouritesService = require('../services/favouritesService');
 const outlookCalendarService = require('../services/outlookCalendarService');
 var router = express.Router();
 
@@ -32,6 +34,60 @@ router.post('/reservations', async function (req, res) {
     return;
   }
 });
+
+router.post('/favourites', async function (req, res) {
+  try {
+    if (!(await isRequestAuthorized(req))) {
+      res.status(401);
+      const errorResponse = {
+        message: 'Unauthorized request: Check request_token authorization header.',
+      };
+      res.end(JSON.stringify(errorResponse, null, 4));
+      return;
+    }
+    console.log('adding favourites', req.body);
+    const data = await favouritesService.addFavourites(req.body);
+    res.json(data);
+  } catch (error) {
+    res.status(400);
+    const errorResponse = {
+      message: '' + error,
+    };
+    res.end(JSON.stringify(errorResponse, null, 4));
+    return;
+  }
+});
+
+router.get('/favourites', async function (req, res) {
+  try {
+    if (!(await isRequestAuthorized(req))) {
+      res.status(401);
+      const errorResponse = {
+        message: 'Unauthorized request: Check request_token authorization header.',
+      };
+      res.end(JSON.stringify(errorResponse, null, 4));
+      return;
+    }
+    console.log('getting favourites for ', req.query.uid);
+    const data = await favouritesService.getFavouritesByUid(req.query.uid);
+    res.json(data);
+  } catch (error) {
+    res.status(400);
+    const errorResponse = {
+      message: '' + error,
+    };
+    res.end(JSON.stringify(errorResponse, null, 4));
+    return;
+  }
+});
+
+/*
+router.get('/favourites/all', async function (req, res) {
+  const data = await FavouriteHandler.getAll();
+  console.log(data);
+  res.json(data);
+});
+*/
 
 module.exports = router;
 
