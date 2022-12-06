@@ -11,9 +11,9 @@ body {
   padding-bottom: 10px;
 }
 
-.room {
+.ui.room {
   padding-top: 15px;
-  font-size: 20px;
+  font-size: 40px;
 }
 .ui.button.btn {
   padding-top: 10px;
@@ -85,16 +85,6 @@ body {
   padding: 10px 10px;
 }
 
-.ui.green {
-  background-color: forestgreen;
-}
-.ui.yellow {
-  background-color: gold;
-}
-.ui.red {
-  background-color: crimson;
-}
-
 .date-input {
   width: 200px;
 }
@@ -116,15 +106,22 @@ body {
   margin-top: 15px;
   width: 200px;
 }
+.ui.button.roominfo-button {
+  margin-top: 15px;
+  width: 200px;
+}
 
 .ui.green.roomcard {
+  background-color: forestgreen;
   margin: auto;
 }
 
 .ui.yellow.roomcard {
+  background-color: gold;
   margin: auto;
 }
 
 .ui.red.roomcard {
+  background-color: crimson;
   margin: auto;
 }
