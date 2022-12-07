@@ -248,8 +248,6 @@ router.delete('/:calendarUserId/reservations/:reservationId', async function (re
       return;
     }
 
-    console.log('BODY', req.body);
-
     await outlookService.deleteEvent(req.params.calendarUserId, req.params.reservationId);
     const responseObject = {
       message: 'DELETED',

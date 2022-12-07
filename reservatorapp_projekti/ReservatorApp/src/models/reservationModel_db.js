@@ -64,8 +64,6 @@ const ReservationSchema = new mongoose.Schema(
       email: String,
       id: String,
     },
-
-    // If the event was not received from the Outlook anymore, mark it deleted
     isDeleted: Boolean,
 
     isCancelled: Boolean,

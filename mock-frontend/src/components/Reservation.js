@@ -75,8 +75,7 @@ const Reservation = ({ res }) => {
                 style={{ marginRight: '10px' }}
                 autoFocus
                 onClick={() => {
-                  const email = reservation.organizer.email;
-                  deleteReservation(email.substr(0, email.indexOf('@')), reservation.id).then(() => {
+                  deleteReservation(res.location.id, reservation.id).then(() => {
                     window.location.reload(true);
                   });
                   onClose();

@@ -1,5 +1,6 @@
 const usersRouter = require('express').Router();
 const calendarService = require('../services/calendarService');
+const favouritesService = require('../services/favouritesService');
 
 usersRouter.get('/reservations', async (req, res, next) => {
   if (!req.headers.mail) {
@@ -31,4 +32,33 @@ usersRouter.get('/current', async (req, res, next) => {
   }
 });
 
+usersRouter.get('/favourites', async (req, res, next) => {
+  if (!req.headers.uid) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
+  try {
+    const data = await favouritesService.getFavourites(req.headers.uid);
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+usersRouter.post('/favourites', async (req, res, next) => {
+  if (!req.headers.uid) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
+  try {
+    const favourites = req.body;
+    console.log(req.body);
+    const obj = {
+      uid: req.headers.uid,
+      favourites: favourites,
+    };
+    const data = await favouritesService.addFavourites(obj);
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = usersRouter;

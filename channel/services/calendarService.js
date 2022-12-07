@@ -65,7 +65,7 @@ async function reserveRoom(room, reservationObj) {
 }
 
 async function deleteReservation(room, id) {
-  log('DELETING RESERVATION:', id);
+  log('DELETING RESERVATION:', id, 'FOR ROOM', room);
   try {
     const response = await axios.delete(`${BASE_URL}/calendar/${room}/reservations/${id}`, {
       headers: {
