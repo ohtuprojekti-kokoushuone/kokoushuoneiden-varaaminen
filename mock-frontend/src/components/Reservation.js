@@ -19,44 +19,35 @@ const Reservation = ({ res }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [newEndDate, setNewEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
   const [duration, setDuration] = useState(defaultDuration);
-  const [newSubject, setNewSubject] = useState();
+  const [newSubject, setNewSubject] = useState('');
   const [reservations, setReservations] = useState([]);
 
   const { t, i18n } = useTranslation();
 
-  const handleClick = (id) => {
+  const handleEdit = (id) => {
     const reservation = reservations.find((r) => r.id === id);
 
     const updatedReservation = {
       ...reservation,
-      subject: newSubject,
-      start: newStartDate,
-      end: newEndDate,
-      attendees: []
+      subject: newSubject
     };
+    console.log(updatedReservation);
 
-    editReservation(id, updatedReservation).then((returnedReservation) => {
+    /*editReservation(id, updatedReservation).then((returnedReservation) => {
       setReservations(reservations.map((reservation) => (reservation.id ? reservation : returnedReservation)));
-    });
+    });*/
   };
 
-  const handleEditSubject = (id) => {
-    const reservation = reservations.find((r) => r.id === id);
-    const changedSubject = { ...reservation, subject: newSubject };
-
-    setNewSubject(changedSubject);
-  };
+  function handleEditSubject(event) {
+    event.preventDefault();
+    setNewSubject(event.target.value);
+  }
 
   function handleEditStartDate(id, date) {
-    const reservation = reservations.find((r) => r.id === id);
     setNewStartDate(date);
     let newDate = new Date(date.getTime());
     newDate.setMinutes(date.getMinutes() + duration);
     setNewEndDate(newDate);
-
-    const changedStartDate = { ...reservation, startDate: newStartDate };
-
-    setNewStartDate(changedStartDate);
   }
   function handleEditEndDate(event, data) {
     setDuration(data.value);
@@ -108,14 +99,6 @@ const Reservation = ({ res }) => {
       customUI: ({ onClose }) => {
         return (
           <div className="react-confirm-alert-body" style={{ width: '500px' }}>
-            {show ? (
-              <Message negative onDismiss={() => setShow(false)}>
-                {' '}
-                {t(errorMessage)}
-              </Message>
-            ) : (
-              <></>
-            )}
             <h1>{t('editConfirmation')}</h1>
             <h3 style={{ fontWeight: 'bold' }}>
               {t('currentSubject')}: {reservation.subject}
@@ -124,7 +107,7 @@ const Reservation = ({ res }) => {
               type="text"
               name="newSubject"
               placeholder={t('inputNewSubject')}
-              onChange={handleEditSubject(reservation.id)}
+              onChange={handleEditSubject}
               value={newSubject}
             />
             <p>
@@ -154,7 +137,7 @@ const Reservation = ({ res }) => {
               i18n={i18n}
             />
             <div>
-              <Button color="blue" style={{ marginRight: '10px' }} autoFocus onClick={handleClick(reservation)}>
+              <Button color="blue" style={{ marginRight: '10px' }} autoFocus onClick={handleEdit(reservation.id)}>
                 {t('label.save')}
               </Button>
               <Button color="red" onClick={onClose}>
