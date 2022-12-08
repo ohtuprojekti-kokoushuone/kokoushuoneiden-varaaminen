@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import Home from './Home';
 import { BrowserRouter } from 'react-router-dom';
-import { getBuildings, getRoomsInfo } from '../requests';
+import { getBuildings, getRoomsInfo, getFavourites } from '../requests';
 
 jest.mock('../requests');
 
@@ -44,6 +44,8 @@ describe('<Home />', () => {
           }
         ]
       });
+
+      getFavourites.mockResolvedValue([]);
 
       render(<Home />, { wrapper: BrowserRouter });
 

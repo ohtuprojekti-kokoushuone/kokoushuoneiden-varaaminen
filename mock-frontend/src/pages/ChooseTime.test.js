@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import { getCurrentDateStr, getDateStrInNMin } from '../tests/test_helper';
 import ChooseTime from './ChooseTime';
-import { getBuildings, getRoomsInfo } from '../requests';
+import { getBuildings, getRoomsInfo, getFavourites } from '../requests';
 
 jest.mock('../requests');
 
@@ -41,6 +41,8 @@ describe('<ChooseTime />', () => {
         }
       ]
     });
+
+    getFavourites.mockResolvedValue([]);
 
     render(<ChooseTime />);
 
