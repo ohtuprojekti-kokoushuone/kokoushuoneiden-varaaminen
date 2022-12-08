@@ -24,37 +24,6 @@ const Reservation = ({ res }) => {
 
   const { t, i18n } = useTranslation();
 
-  const handleEdit = (id) => {
-    const reservation = reservations.find((r) => r.id === id);
-
-    const updatedReservation = {
-      ...reservation,
-      subject: newSubject
-    };
-    console.log(updatedReservation);
-
-    /*editReservation(id, updatedReservation).then((returnedReservation) => {
-      setReservations(reservations.map((reservation) => (reservation.id ? reservation : returnedReservation)));
-    });*/
-  };
-
-  function handleEditSubject(event) {
-    event.preventDefault();
-    setNewSubject(event.target.value);
-  }
-
-  function handleEditStartDate(id, date) {
-    setNewStartDate(date);
-    let newDate = new Date(date.getTime());
-    newDate.setMinutes(date.getMinutes() + duration);
-    setNewEndDate(newDate);
-  }
-  function handleEditEndDate(event, data) {
-    setDuration(data.value);
-    const newDate = new Date(newStartDate.getTime());
-    setNewEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
-  }
-
   function handleDeleteReservation(reservation) {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -93,11 +62,50 @@ const Reservation = ({ res }) => {
     });
   }
 
-  function handleEditReservation(reservation) {
+  const EditReservation = (reservation) => {
     confirmAlert({
       customUI: ({ onClose }) => {
+        const handleEdit = (id) => {
+          const reservation = reservations.find((r) => r.id === id);
+
+          const updatedReservation = {
+            ...reservation,
+            subject: newSubject
+          };
+          console.log(updatedReservation);
+
+          editReservation(id, updatedReservation).then((returnedReservation) => {
+            setReservations(reservations.map((reservation) => (reservation.id ? reservation : returnedReservation)));
+          });
+        };
+
+        function handleEditSubject(event) {
+          event.preventDefault();
+          console.log(event.target.value);
+          setNewSubject(event.target.value);
+        }
+
+        function handleEditStartDate(id, date) {
+          setNewStartDate(date);
+          let newDate = new Date(date.getTime());
+          newDate.setMinutes(date.getMinutes() + duration);
+          setNewEndDate(newDate);
+        }
+        function handleEditEndDate(event, data) {
+          setDuration(data.value);
+          const newDate = new Date(newStartDate.getTime());
+          setNewEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
+        }
         return (
           <div className="react-confirm-alert-body" style={{ width: '500px' }}>
+            {show ? (
+              <Message negative onDismiss={() => setShow(false)}>
+                {' '}
+                {t(errorMessage)}
+              </Message>
+            ) : (
+              <></>
+            )}
             <h1>{t('editConfirmation')}</h1>
             <h3 style={{ fontWeight: 'bold' }}>
               {t('currentSubject')}: {reservation.subject}
@@ -147,7 +155,7 @@ const Reservation = ({ res }) => {
         );
       }
     });
-  }
+  };
 
   let start = new Date(res.start.dateTime);
   let end = new Date(res.end.dateTime);
@@ -166,7 +174,7 @@ const Reservation = ({ res }) => {
       <td>{start.toLocaleString('fi-FI', dateFormatOption)}</td>
       <td>{end.toLocaleString('fi-FI', dateFormatOption)}</td>
       <td>
-        <Button color="black" onClick={() => handleEditReservation(res)} icon>
+        <Button color="black" onClick={() => EditReservation(res)} icon>
           <Icon name="edit outline" aria-label={t('editReservation')} />
         </Button>
       </td>
