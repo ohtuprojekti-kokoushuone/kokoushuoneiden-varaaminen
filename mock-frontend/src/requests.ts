@@ -44,12 +44,16 @@ export function deleteReservation(room: Room, reservationId: string) {
 
 export function updateReservation(room: Room, reservationId: string, updatedObj: Record<any, any>) {
   const req = api.patch(`/reservations/${room}/${reservationId}`, updatedObj);
-  return req.then((res) => res.data);
+  return req.then((res) => res.data)
 }
 
-export function editReservation(room: Room, reservationId: string, updatedObj: ReservationObject) {
-  const req = api.put(`/reservations/${room}/${reservationId}`, updatedObj);
-  return req.then((res) => res.data);
+export function editReservation(room: Room, reservationId: string, reservation: ReservationObject) {
+  const req = api.put(`/reservations/${room}/${reservationId}`, reservation);
+  return req
+    .then((res) => res.data)
+    .catch((error) => {
+      throw new Error(error.response.data.message);
+    });
 }
 
 export function checkAvailability(room: Room, start: Date, end: Date) {

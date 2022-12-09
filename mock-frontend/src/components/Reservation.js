@@ -21,6 +21,7 @@ const Reservation = ({ res }) => {
   const [duration, setDuration] = useState(defaultDuration);
   const [newSubject, setNewSubject] = useState('');
   const [reservations, setReservations] = useState([]);
+  const [subject, setSubject] = useState('');
 
   const { t, i18n } = useTranslation();
 
@@ -62,40 +63,28 @@ const Reservation = ({ res }) => {
     });
   }
 
-  const EditReservation = (reservation) => {
+  function editChosenReservation(reservation) {
     confirmAlert({
       customUI: ({ onClose }) => {
-        const handleEdit = (id) => {
+        const toggleEditReservation = (id) => {
           const reservation = reservations.find((r) => r.id === id);
+          const changedReservation = { ...reservation, subject: 'newSubject' };
 
-          const updatedReservation = {
-            ...reservation,
-            subject: newSubject
-          };
-          console.log(updatedReservation);
-
-          editReservation(id, updatedReservation).then((returnedReservation) => {
-            setReservations(reservations.map((reservation) => (reservation.id ? reservation : returnedReservation)));
-          });
+          updateReservation(id, changedReservation)
+            .then((returnedReservation) => {
+              setReservations(
+                reservations.map((reservation) => (reservation.id !== id ? reservation : returnedReservation))
+              );
+            })
+            .catch((error) => {
+              alert('Some problem with axios');
+              setReservations(reservations.filter((r) => r.id !== id));
+            });
         };
-
-        function handleEditSubject(event) {
+        const handleSubjectChange = (event) => {
           event.preventDefault();
-          console.log(event.target.value);
-          setNewSubject(event.target.value);
-        }
-
-        function handleEditStartDate(id, date) {
-          setNewStartDate(date);
-          let newDate = new Date(date.getTime());
-          newDate.setMinutes(date.getMinutes() + duration);
-          setNewEndDate(newDate);
-        }
-        function handleEditEndDate(event, data) {
-          setDuration(data.value);
-          const newDate = new Date(newStartDate.getTime());
-          setNewEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
-        }
+          setSubject(event.target.value);
+        };
         return (
           <div className="react-confirm-alert-body" style={{ width: '500px' }}>
             {show ? (
@@ -114,37 +103,16 @@ const Reservation = ({ res }) => {
               type="text"
               name="newSubject"
               placeholder={t('inputNewSubject')}
-              onChange={handleEditSubject}
+              onChange={handleSubjectChange}
               value={newSubject}
             />
-            <p>
-              {t('label.currentStartTime')}: {new Date(reservation.start.dateTime).toLocaleString('fi-FI')}
-            </p>
-            <h3>{t('editStartTime')}</h3>
-            <ReservatorDatePicker
-              selected={reservation.startDate}
-              onChange={(date) => handleEditStartDate(reservation.id, date)}
-              dateTestId="start-date-reservation"
-              t={t}
-              i18n={i18n}
-            />
-            <h3>{t('editDuration')}</h3>
-            <Dropdown
-              selection
-              options={createDropdownDurationObject(durations)}
-              onChange={handleEditEndDate}
-              defaultValue={defaultDuration}
-            />
-            <h3>{t('reservationEnd')}</h3>
-            <ReservatorDatePicker
-              selected={reservation.endDate}
-              onChange={setNewEndDate}
-              dateTestId="end-date-reservation"
-              t={t}
-              i18n={i18n}
-            />
             <div>
-              <Button color="blue" style={{ marginRight: '10px' }} autoFocus onClick={handleEdit(reservation.id)}>
+              <Button
+                color="blue"
+                style={{ marginRight: '10px' }}
+                autoFocus
+                onClick={toggleEditReservation(reservation.id)}
+              >
                 {t('label.save')}
               </Button>
               <Button color="red" onClick={onClose}>
@@ -155,7 +123,7 @@ const Reservation = ({ res }) => {
         );
       }
     });
-  };
+  }
 
   let start = new Date(res.start.dateTime);
   let end = new Date(res.end.dateTime);
@@ -174,7 +142,7 @@ const Reservation = ({ res }) => {
       <td>{start.toLocaleString('fi-FI', dateFormatOption)}</td>
       <td>{end.toLocaleString('fi-FI', dateFormatOption)}</td>
       <td>
-        <Button color="black" onClick={() => EditReservation(res)} icon>
+        <Button color="black" onClick={() => editChosenReservation(res)} icon>
           <Icon name="edit outline" aria-label={t('editReservation')} />
         </Button>
       </td>
