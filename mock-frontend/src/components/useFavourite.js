@@ -1,22 +1,29 @@
 import { useEffect, useState } from 'react';
+import { getFavourites, updateFavourites } from '../requests';
 
 function useFavourites() {
-  const [favourites, setFavourites] = useState(() => JSON.parse(localStorage.getItem('favourites') || '[]'));
+  const [favourites, setFavourites] = useState([]);
 
-  const toggleItemInLocalStorage = (id) => () => {
+  const toggleFavourite = (id) => () => {
     const isFavourited = favourites.includes(id);
     if (isFavourited) {
-      setFavourites((favourites) => favourites.filter((savedId) => savedId !== id));
+      const removeFavourite = (favourites) => favourites.filter((savedId) => savedId !== id);
+      setFavourites(removeFavourite);
+      updateFavourites(removeFavourite(favourites));
     } else {
       const tempFavourites = [...favourites, id];
       setFavourites(tempFavourites);
+      updateFavourites(tempFavourites);
     }
   };
   useEffect(() => {
-    localStorage.setItem('favourites', JSON.stringify(favourites));
-  });
+    getFavourites().then((data) => {
+      setFavourites(data);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return [favourites, toggleItemInLocalStorage];
+  return [favourites, toggleFavourite];
 }
 
 export default useFavourites;

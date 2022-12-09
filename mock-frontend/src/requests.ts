@@ -83,3 +83,17 @@ export function getCurrentUser() {
     return res.data;
   });
 }
+
+export function getFavourites() {
+  const req = api.get('/users/favourites');
+  return req.then((res) => {
+    return res.data;
+  });
+}
+
+export function updateFavourites(favourites: Array<string>) {
+  const req = api.post('/users/favourites', favourites);
+  return req.then((res) => {
+    return res.data;
+  });
+}
