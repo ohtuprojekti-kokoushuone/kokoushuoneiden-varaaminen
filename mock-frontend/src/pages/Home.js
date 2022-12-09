@@ -52,7 +52,7 @@ const Home = () => {
   arraySoonAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
   arrayNotAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
 
-  const [favourites, toggleItemInLocalStorage] = useFavourite();
+  const [favourites, toggleFavourite] = useFavourite();
   const [showFavourite, setShowFavourite] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
@@ -112,7 +112,7 @@ const Home = () => {
           <Grid.Column key={room.id}>
             <RoomCard
               room={room}
-              onHeartClick={() => toggleItemInLocalStorage(room.id)}
+              onHeartClick={() => toggleFavourite(room.id)}
               getFavourite={() => favourites.includes(room.id)}
             />
           </Grid.Column>
@@ -121,7 +121,7 @@ const Home = () => {
           <Grid.Column key={room.id}>
             <RoomCard
               room={room}
-              onHeartClick={() => toggleItemInLocalStorage(room.id)}
+              onHeartClick={() => toggleFavourite(room.id)}
               getFavourite={() => favourites.includes(room.id)}
             />
           </Grid.Column>
@@ -130,7 +130,7 @@ const Home = () => {
           <Grid.Column key={room.id}>
             <RoomCard
               room={room}
-              onHeartClick={() => toggleItemInLocalStorage(room.id)}
+              onHeartClick={() => toggleFavourite(room.id)}
               getFavourite={() => favourites.includes(room.id)}
             />
           </Grid.Column>
