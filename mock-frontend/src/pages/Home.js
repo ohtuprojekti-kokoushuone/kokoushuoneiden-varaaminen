@@ -17,7 +17,6 @@ const Home = () => {
   useEffect(() => {
     getRoomsInfo().then((res) => {
       setRooms(res);
-      console.log(res);
     });
   }, []);
 
@@ -58,7 +57,6 @@ const Home = () => {
   const [favourites, toggleFavourite] = useFavourite();
   const [showFavourite, setShowFavourite] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  console.log('hep', showFavourite);
 
   function filterFavourite(room) {
     if (favourites.includes(room.id)) {
@@ -96,22 +94,15 @@ const Home = () => {
 
   function refetchRooms() {
     if (showFavourite === false) {
-      console.log('if (showFavourite === false)', showFavourite);
-      ////////////////HAE JA FILTTERÖI ERI FUNKTIOSSA????
       getRoomsInfo().then((res) => {
-        console.log(res);
         setRooms(res.filter(filterFavourite));
         return rooms;
       });
-
-      console.log('rooms:', rooms);
     } else {
-      console.log('else: ', showFavourite);
       getRoomsInfo().then((res) => {
         setRooms(res);
       });
     }
-    console.log('showFavourite: ', showFavourite);
   }
 
   return (
