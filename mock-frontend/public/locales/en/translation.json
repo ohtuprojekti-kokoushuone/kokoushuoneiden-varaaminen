@@ -1,14 +1,15 @@
 {
   "example": "Example text",
   "button": {
-    "filter": "Filter options",
+    "filter": "Filter",
     "logout": "Log out",
     "show": "Show available rooms",
     "reserveRoom": "Reserve room",
     "returnToSearch": "Return to search",
     "login": "Log in",
     "reserve": "Make a reservation",
-    "favourites": "Favourites"
+    "favourites": "Favourites",
+    "refresh": "Refresh"
   },
   "label": {
     "language": "Language",

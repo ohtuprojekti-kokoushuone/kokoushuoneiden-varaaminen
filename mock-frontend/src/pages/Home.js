@@ -8,13 +8,16 @@ import { yellowDurationMin } from '../components/RoomCard.js';
 import { basePath } from '../config';
 import useFavourite from '../components/useFavourite.js';
 import { FaHeart, FaFilter, FaUndo } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     getRoomsInfo().then((res) => {
       setRooms(res);
+      console.log(res);
     });
   }, []);
 
@@ -52,9 +55,10 @@ const Home = () => {
   arraySoonAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
   arrayNotAvailable.sort((a, b) => (a.size > b.size ? 1 : -1));
 
-  const [favourites, toggleItemInLocalStorage] = useFavourite();
+  const [favourites, toggleFavourite] = useFavourite();
   const [showFavourite, setShowFavourite] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  console.log('hep', showFavourite);
 
   function filterFavourite(room) {
     if (favourites.includes(room.id)) {
@@ -62,6 +66,7 @@ const Home = () => {
     }
     return false;
   }
+
   const arrayFavourites = rooms.filter(filterFavourite);
 
   useEffect(() => {
@@ -89,6 +94,26 @@ const Home = () => {
     }
   }
 
+  function refetchRooms() {
+    if (showFavourite === false) {
+      console.log('if (showFavourite === false)', showFavourite);
+      ////////////////HAE JA FILTTERÖI ERI FUNKTIOSSA????
+      getRoomsInfo().then((res) => {
+        console.log(res);
+        setRooms(res.filter(filterFavourite));
+        return rooms;
+      });
+
+      console.log('rooms:', rooms);
+    } else {
+      console.log('else: ', showFavourite);
+      getRoomsInfo().then((res) => {
+        setRooms(res);
+      });
+    }
+    console.log('showFavourite: ', showFavourite);
+  }
+
   return (
     <Container>
       <Filter />
@@ -98,12 +123,15 @@ const Home = () => {
           color="blue"
           onClick={() => toggleFavouriteFilter()}
         >
+          {t('button.favourites')}&nbsp;&nbsp;&nbsp;
           <FaHeart />
         </Button>
         <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`} data-testid="filter-btn">
+          {t('button.filter')}&nbsp;&nbsp;&nbsp;
           <FaFilter />
         </Button>
-        <Button className="btn-choose" color="red">
+        <Button className="btn-choose" color="red" onClick={() => refetchRooms(useState)}>
+          {t('button.refresh')}&nbsp;&nbsp;&nbsp;
           <FaUndo />
         </Button>
       </div>
@@ -112,7 +140,7 @@ const Home = () => {
           <Grid.Column key={room.id}>
             <RoomCard
               room={room}
-              onHeartClick={() => toggleItemInLocalStorage(room.id)}
+              onHeartClick={() => toggleFavourite(room.id)}
               getFavourite={() => favourites.includes(room.id)}
             />
           </Grid.Column>
@@ -121,7 +149,7 @@ const Home = () => {
           <Grid.Column key={room.id}>
             <RoomCard
               room={room}
-              onHeartClick={() => toggleItemInLocalStorage(room.id)}
+              onHeartClick={() => toggleFavourite(room.id)}
               getFavourite={() => favourites.includes(room.id)}
             />
           </Grid.Column>
@@ -130,7 +158,7 @@ const Home = () => {
           <Grid.Column key={room.id}>
             <RoomCard
               room={room}
-              onHeartClick={() => toggleItemInLocalStorage(room.id)}
+              onHeartClick={() => toggleFavourite(room.id)}
               getFavourite={() => favourites.includes(room.id)}
             />
           </Grid.Column>
