@@ -8,9 +8,11 @@ import { yellowDurationMin } from '../components/RoomCard.js';
 import { basePath } from '../config';
 import useFavourite from '../components/useFavourite.js';
 import { FaHeart, FaFilter, FaUndo } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     getRoomsInfo().then((res) => {
@@ -62,6 +64,7 @@ const Home = () => {
     }
     return false;
   }
+
   const arrayFavourites = rooms.filter(filterFavourite);
 
   useEffect(() => {
@@ -89,6 +92,19 @@ const Home = () => {
     }
   }
 
+  function refetchRooms() {
+    if (showFavourite === false) {
+      getRoomsInfo().then((res) => {
+        setRooms(res.filter(filterFavourite));
+        return rooms;
+      });
+    } else {
+      getRoomsInfo().then((res) => {
+        setRooms(res);
+      });
+    }
+  }
+
   return (
     <Container>
       <Filter />
@@ -98,12 +114,15 @@ const Home = () => {
           color="blue"
           onClick={() => toggleFavouriteFilter()}
         >
+          {t('button.favourites')}&nbsp;&nbsp;&nbsp;
           <FaHeart />
         </Button>
         <Button className="btn-choose" color="blue" href={`${basePath}/choosetime`} data-testid="filter-btn">
+          {t('button.filter')}&nbsp;&nbsp;&nbsp;
           <FaFilter />
         </Button>
-        <Button className="btn-choose" color="red">
+        <Button className="btn-choose" color="red" onClick={() => refetchRooms(useState)}>
+          {t('button.refresh')}&nbsp;&nbsp;&nbsp;
           <FaUndo />
         </Button>
       </div>
