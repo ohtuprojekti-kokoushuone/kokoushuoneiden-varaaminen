@@ -15,6 +15,10 @@ export function getBuildings() {
   const req = api.get('/rooms/buildings');
   return req.then((res) => res.data);
 }
+export function getCampuses() {
+  const req = api.get('/rooms/campuses');
+  return req.then((res) => res.data);
+}
 
 export function getRoomsInfo() {
   const req = api.get('/rooms/info');

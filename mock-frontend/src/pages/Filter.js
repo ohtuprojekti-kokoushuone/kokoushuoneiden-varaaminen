@@ -1,64 +1,92 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'semantic-ui-react';
-import { getBuildings } from '../requests';
+import { Accordion, Form, Segment } from 'semantic-ui-react';
+import { getBuildings, getCampuses } from '../requests';
 
 const Filter = () => {
-  const [filterList, setFilter] = useState([]);
+  const [buildingFilterList, setBuildingFilter] = useState([]);
   const [buildings, setBuildings] = useState([]);
+  const [campuses, setCampuses] = useState([]);
+  const [state, setState] = useState({ activeIndex: 4 });
 
   useEffect(() => {
     getBuildings().then((res) => setBuildings(res));
   }, []);
 
-  function toggleFilter(el, name) {
+  useEffect(() => {
+    getCampuses().then((res) => setCampuses(res));
+  }, []);
+
+  function toggleBuildingFilter(el, name) {
     el.blur();
     el.classList.toggle('filter-selected');
 
-    if (filterList.includes(name.toLowerCase())) {
-      const index = filterList.indexOf(name.toLowerCase());
+    if (buildingFilterList.includes(name.toLowerCase())) {
+      const index = buildingFilterList.indexOf(name.toLowerCase());
       if (index > -1) {
-        filterList.splice(index, 1);
+        buildingFilterList.splice(index, 1);
       }
     } else {
-      filterList.push(name.toLowerCase());
+      buildingFilterList.push(name.toLowerCase());
     }
 
-    setFilter(filterList);
-    filterRooms();
+    setBuildingFilter(buildingFilterList);
+    filterRoomsByBuilding();
   }
 
-  function filterRooms() {
+  function filterRoomsByBuilding() {
     const cardList = document.querySelectorAll('div[data-building]');
     for (const card of cardList) {
       card.parentElement.classList.remove('hidden');
     }
 
-    if (filterList.length === 0) {
+    if (buildingFilterList.length === 0) {
       return;
     }
 
     for (const card of cardList) {
       const building = card.getAttribute('data-building').toLowerCase();
-      if (!filterList.includes(building)) {
+      if (!buildingFilterList.includes(building)) {
         card.parentElement.classList.add('hidden');
       }
     }
   }
+  function handleClick(e, titleProps) {
+    const { index } = titleProps;
+    const { activeIndex } = state;
+    const newIndex = activeIndex === index ? -1 : index;
 
-  const buttonClass = 'ui filter mb-2 mx-2';
+    setState({ activeIndex: newIndex });
+  }
+
+  //const buttonClass = 'ui filter mb-2 mx-2';
+  const { activeIndex } = state;
 
   return (
-    <div className="filter-component">
-      {buildings.map((building) => (
-        <Button
-          key={building.name}
-          color="black"
-          className={buttonClass}
-          onClick={(el) => toggleFilter(el.target, building.name)}
-        >
-          {building.name}
-        </Button>
-      ))}
+    <div className="filter-component ">
+      <Segment inverted style={{ overflow: 'auto', maxHeight: 200 }}>
+        <div className="ui horizontal accordion menu inverted">
+          {campuses.map((campus, index) => (
+            <div className="item" key={campus.name}>
+              <Accordion.Title
+                active={activeIndex === index}
+                content={campus.name}
+                index={index}
+                onClick={handleClick}
+              />
+              {campus.buildings.map((building) => (
+                <Accordion.Content key={building.name} active={activeIndex === index}>
+                  <Form inverted>
+                    <Form.Checkbox
+                      label={building.name}
+                      onClick={(el) => toggleBuildingFilter(el.target, building.name)}
+                    ></Form.Checkbox>
+                  </Form>
+                </Accordion.Content>
+              ))}
+            </div>
+          ))}
+        </div>
+      </Segment>
     </div>
   );
 };
