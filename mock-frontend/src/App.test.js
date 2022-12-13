@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import { getRoomsInfo, getBuildings, getFavourites, getCampuses } from './requests';
+import { getRoomsInfo, getFavourites, getCampuses } from './requests';
 import App from './App';
 
 jest.mock('./requests');
