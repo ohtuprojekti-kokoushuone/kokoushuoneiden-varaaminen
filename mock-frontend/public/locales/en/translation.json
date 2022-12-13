@@ -60,5 +60,6 @@
   "inputNewSubject": "Choose new subject",
   "reservationEnd": "End time",
   "availableUntil": "Available until {{time}}",
-  "reservedUntil": "Reserved until {{time}}"
+  "reservedUntil": "Reserved until {{time}}",
+  "Error: Overlapping event": "Overlapping reservation"
 }
