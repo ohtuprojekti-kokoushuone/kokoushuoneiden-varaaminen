@@ -35,7 +35,8 @@
     "reservedSoon": "Seuraava varaus pian",
     "maxtime": "Varauksen maksimikesto",
     "usergroup": "Varaaminen mahdollista ryhmälle",
-    "building": "Rakennus"
+    "building": "Rakennus",
+    "privacyPolicy": "Tietosuoja"
   },
   "error": {
     "endBeforeStart": "Virhe: Varauksen alkamisajan tulee olla ennen loppumisaikaa"
