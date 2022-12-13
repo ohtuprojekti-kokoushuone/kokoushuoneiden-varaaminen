@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Accordion, Form, Segment } from 'semantic-ui-react';
-import { getBuildings, getCampuses } from '../requests';
+import { getCampuses } from '../requests';
 
 const Filter = () => {
   const [buildingFilterList, setBuildingFilter] = useState([]);
-  const [buildings, setBuildings] = useState([]);
   const [campuses, setCampuses] = useState([]);
   const [state, setState] = useState({ activeIndex: 4 });
-
-  useEffect(() => {
-    getBuildings().then((res) => setBuildings(res));
-  }, []);
 
   useEffect(() => {
     getCampuses().then((res) => setCampuses(res));
