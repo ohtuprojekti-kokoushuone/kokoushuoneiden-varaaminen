@@ -44,7 +44,7 @@ export function deleteReservation(room: Room, reservationId: string) {
 
 export function updateReservation(room: Room, reservationId: string, updatedObj: Record<any, any>) {
   const req = api.patch(`/reservations/${room}/${reservationId}`, updatedObj);
-  return req.then((res) => res.data)
+  return req.then((res) => res.data);
 }
 
 export function checkAvailability(room: Room, start: Date, end: Date) {
@@ -85,6 +85,14 @@ export function getFavourites() {
 export function updateFavourites(favourites: Array<string>) {
   const req = api.post('/users/favourites', favourites);
   return req.then((res) => {
+    return res.data;
+  });
+}
+
+export function getReservationById(roomId: string, reservationId: string) {
+  const req = api.get(`/reservations/${roomId}/${reservationId}`);
+  return req.then((res) => {
+    console.log(res.data);
     return res.data;
   });
 }
