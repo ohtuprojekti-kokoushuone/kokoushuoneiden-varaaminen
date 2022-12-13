@@ -5,16 +5,13 @@ import { getCampuses } from '../requests';
 const Filter = () => {
   const [buildingFilterList, setBuildingFilter] = useState([]);
   const [campuses, setCampuses] = useState([]);
-  const [state, setState] = useState({ activeIndex: 4 });
+  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     getCampuses().then((res) => setCampuses(res));
   }, []);
 
   function toggleBuildingFilter(el, name) {
-    el.blur();
-    el.classList.toggle('filter-selected');
-
     if (buildingFilterList.includes(name.toLowerCase())) {
       const index = buildingFilterList.indexOf(name.toLowerCase());
       if (index > -1) {
@@ -47,14 +44,13 @@ const Filter = () => {
   }
   function handleClick(e, titleProps) {
     const { index } = titleProps;
-    const { activeIndex } = state;
+    const { activeIndex } = activeTab;
     const newIndex = activeIndex === index ? -1 : index;
 
-    setState({ activeIndex: newIndex });
+    setActiveTab({ activeIndex: newIndex });
   }
 
-  //const buttonClass = 'ui filter mb-2 mx-2';
-  const { activeIndex } = state;
+  const { activeIndex } = activeTab;
 
   return (
     <div className="filter-component ">
@@ -63,7 +59,7 @@ const Filter = () => {
           {campuses.map((campus, index) => (
             <div className="item" key={campus.name}>
               <Accordion.Title
-                active={activeIndex === index}
+                active={activeIndex === index + 1}
                 content={campus.name}
                 index={index}
                 onClick={handleClick}
