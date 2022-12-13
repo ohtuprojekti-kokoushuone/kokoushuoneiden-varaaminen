@@ -92,7 +92,6 @@ export function updateFavourites(favourites: Array<string>) {
 export function getReservationById(roomId: string, reservationId: string) {
   const req = api.get(`/reservations/${roomId}/${reservationId}`);
   return req.then((res) => {
-    console.log(res.data);
     return res.data;
   });
 }
