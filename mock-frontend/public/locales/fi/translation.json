@@ -1,14 +1,15 @@
 {
   "example": "Esimerkkiteksti",
   "button": {
-    "filter": "Rajaa tarkemmin",
+    "filter": "Rajaa",
     "logout": "Kirjaudu ulos",
     "show": "Näytä vapaat kokoushuoneet",
     "reserveRoom": "Varaa huone",
     "returnToSearch": "Palaa hakutuloksiin",
     "login": "Kirjaudu",
     "reserve": "Tee varaus",
-    "favourites": "Suosikit"
+    "favourites": "Suosikit",
+    "refresh": "Päivitä"
   },
   "label": {
     "language": "Kieli",
