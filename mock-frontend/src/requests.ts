@@ -47,15 +47,6 @@ export function updateReservation(room: Room, reservationId: string, updatedObj:
   return req.then((res) => res.data)
 }
 
-export function editReservation(room: Room, reservationId: string, reservation: ReservationObject) {
-  const req = api.put(`/reservations/${room}/${reservationId}`, reservation);
-  return req
-    .then((res) => res.data)
-    .catch((error) => {
-      throw new Error(error.response.data.message);
-    });
-}
-
 export function checkAvailability(room: Room, start: Date, end: Date) {
   const req = api.post(`/reservations/${room}/availability`, { start: start, end: end });
   return req.then((res) => {
