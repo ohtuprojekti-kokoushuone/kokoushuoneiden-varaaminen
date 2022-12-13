@@ -35,7 +35,8 @@
     "reservedSoon": "Reserved soon",
     "maxtime": "Maximun reservation time",
     "usergroup": "Reservation available for",
-    "building": "Building"
+    "building": "Building",
+    "privacyPolicy": "Privacy policy"
   },
   "error": {
     "endBeforeStart": "Error: Starting time must be before ending time"
