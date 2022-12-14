@@ -8,7 +8,7 @@ import { basePath } from '../config';
 import { useTranslation } from 'react-i18next';
 
 const Reservation = ({ res }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   let navigate = useNavigate();
 
   function handleDeleteReservation(reservation) {
