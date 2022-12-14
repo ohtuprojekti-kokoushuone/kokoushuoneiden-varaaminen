@@ -3,6 +3,9 @@ const calendarService = require('../services/calendarService');
 const { log } = require('../utils/logger');
 
 reservationsRouter.get('/:room', async (req, res, next) => {
+  if (!req.headers.uid) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
   const room = req.params.room;
   const today = req.query.today;
   try {
@@ -15,9 +18,15 @@ reservationsRouter.get('/:room', async (req, res, next) => {
 });
 
 reservationsRouter.get('/:room/:reservationId', async (req, res, next) => {
+  if (!req.headers.uid) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
   const { room, reservationId } = req.params;
   try {
     const data = await calendarService.getReservationById(room, reservationId);
+    if (data && data.organizer && data.organizer.email !== req.headers.mail) {
+      res.status(401).end(JSON.stringify('Unauthorised'));
+    }
     res.end(JSON.stringify(data));
   } catch (error) {
     next(error);
@@ -25,6 +34,9 @@ reservationsRouter.get('/:room/:reservationId', async (req, res, next) => {
 });
 
 reservationsRouter.post('/:room', async (req, res, next) => {
+  if (!req.headers.uid) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
   const room = req.params.room;
   log('BODY:', req.body);
   const body = req.body;
@@ -53,6 +65,9 @@ reservationsRouter.post('/:room', async (req, res, next) => {
 });
 
 reservationsRouter.delete('/:room/:reservation', async (req, res, next) => {
+  if (!req.headers.uid) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
   const room = req.params.room;
   const reservation = req.params.reservation;
   try {
@@ -64,6 +79,9 @@ reservationsRouter.delete('/:room/:reservation', async (req, res, next) => {
 });
 
 reservationsRouter.patch('/:room/:reservation', async (req, res, next) => {
+  if (!req.headers.uid) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
   const { room, reservation } = req.params;
   const obj = req.body;
   log('BODY:', obj);
@@ -76,6 +94,9 @@ reservationsRouter.patch('/:room/:reservation', async (req, res, next) => {
 });
 
 reservationsRouter.post('/:room/availability', async (req, res, next) => {
+  if (!req.headers.uid) {
+    res.status(401).end(JSON.stringify('Unauthorised!!!!!'));
+  }
   const { room } = req.params;
   log('BODY:', req.body);
   const { start, end } = req.body;

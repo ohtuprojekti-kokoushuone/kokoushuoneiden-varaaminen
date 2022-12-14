@@ -35,7 +35,8 @@
     "reservedSoon": "Seuraava varaus pian",
     "maxtime": "Varauksen maksimikesto",
     "usergroup": "Varaaminen mahdollista ryhmälle",
-    "building": "Rakennus"
+    "building": "Rakennus",
+    "privacyPolicy": "Tietosuoja"
   },
   "error": {
     "endBeforeStart": "Virhe: Varauksen alkamisajan tulee olla ennen loppumisaikaa"
@@ -59,5 +60,6 @@
   "reservedUntil": "Huone vapautuu {{time}}",
   "editDuration": "Muokkaa kestoa",
   "editStartTime": "Muokkaa aloitusta",
-  "currentSubject": "Nykyinen aihe"
+  "currentSubject": "Nykyinen aihe",
+  "Error: Overlapping event": "Päällekkäinen varaus"
 }

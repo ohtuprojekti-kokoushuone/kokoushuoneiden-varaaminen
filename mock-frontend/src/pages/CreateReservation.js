@@ -92,7 +92,6 @@ const CreateReservation = () => {
     <div className="container text-center">
       {show ? (
         <Message negative onDismiss={() => setShow(false)}>
-          {' '}
           {t(errorMessage)}
         </Message>
       ) : (

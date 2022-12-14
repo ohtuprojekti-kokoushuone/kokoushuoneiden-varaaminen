@@ -495,17 +495,7 @@ async function checkForOverlappingEvents(calendarUserId, reservation) {
           console.log('MySelf ID: ' + reservation.calendarEventId);
           console.log('Overlapping event ID: ' + clendarEvent.id);
 
-          throw new Error(
-            'Overlapping event: (' +
-              reservation.start +
-              ' - ' +
-              reservation.end +
-              ') vs. (' +
-              clendarEvent.start.dateTime +
-              ' - ' +
-              clendarEvent.end.dateTime +
-              ').'
-          );
+          throw new Error('Overlapping event');
         }
       }
     } else {
