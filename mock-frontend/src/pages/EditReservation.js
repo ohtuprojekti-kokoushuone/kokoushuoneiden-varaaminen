@@ -33,7 +33,7 @@ const EditReservation = () => {
       setCurrentStartDate(res.start.dateTime);
       setCurrentEndDate(res.end.dateTime);
     });
-  }, [id]);
+  }, [roomId, id]);
 
   function handleEdit() {
     const updatedReservation = {
