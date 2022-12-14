@@ -1,8 +1,22 @@
 const roomsRouter = require('express').Router();
-const rooms = require('../resources/rooms.json').rooms;
-const buildings = require('../resources/buildings.json').buildings;
+const campuses = require('../resources/campuses.json').campuses;
 const { checkAvailability } = require('../services/calendarService');
 const { getAvailableTimeAfter, filterRoom } = require('../services/functions');
+
+const buildings = [];
+const rooms = [];
+
+campuses.forEach((campus) => {
+  campus.buildings.forEach((building) => {
+    buildings.push(building);
+  });
+});
+
+buildings.forEach((building) => {
+  building.rooms.forEach((room) => {
+    rooms.push(room);
+  });
+});
 
 roomsRouter.get('/', (req, res) => {
   res.json(rooms);
@@ -10,6 +24,10 @@ roomsRouter.get('/', (req, res) => {
 
 roomsRouter.get('/buildings', (req, res) => {
   res.json(buildings);
+});
+
+roomsRouter.get('/campuses', (req, res) => {
+  res.json(campuses);
 });
 
 roomsRouter.get('/info', async (req, res) => {
@@ -25,6 +43,7 @@ roomsRouter.get('/info', async (req, res) => {
         const available = Math.random() < 0.7;
         return { ...room, available: available };
       }
+
       const copied = Object.assign({}, room);
       const data = await checkAvailability(copied.id, start.toISOString(), end.toISOString());
       copied.available = true;

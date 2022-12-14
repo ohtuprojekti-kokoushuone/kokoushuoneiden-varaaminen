@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import { getRoomsInfo, getBuildings, getFavourites } from './requests';
+import { getRoomsInfo, getFavourites, getCampuses } from './requests';
 import App from './App';
 
 jest.mock('./requests');
@@ -20,8 +20,8 @@ describe('App component', () => {
         }
       ]
     });
-    getBuildings.mockResolvedValue({
-      data: ['physicum', 'exactum']
+    getCampuses.mockResolvedValue({
+      data: ['Kumpula', 'Keskusta']
     });
     getFavourites.mockResolvedValue([]);
     expect(() => render(<App />)).not.toThrow();
