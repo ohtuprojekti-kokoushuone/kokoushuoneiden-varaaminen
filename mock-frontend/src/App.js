@@ -25,7 +25,7 @@ const App = () => {
         <Route path={`${basePath}/timeOptions`} element={<TimeOptions />} />
         <Route path={`${basePath}/createReservation/:id`} element={<CreateReservation />} />
         <Route path={`${basePath}/privacyPolicy`} element={<PrivacyPolicy />} />
-        <Route path={`${basePath}/editReservation/:id`} element={<EditReservation />} />
+        <Route path={`${basePath}/editReservation/:roomId/:id`} element={<EditReservation />} />
         <Route path="*" element={<Navigate to={`${basePath}/home`} />} />
       </Routes>
 

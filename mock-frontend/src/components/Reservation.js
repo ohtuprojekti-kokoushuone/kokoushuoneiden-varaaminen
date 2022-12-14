@@ -50,7 +50,7 @@ const Reservation = ({ res }) => {
   }
 
   function handleEditReservation(reservation) {
-    navigate(`${basePath}/EditReservation/${reservation.id}`);
+    navigate(`${basePath}/EditReservation/${reservation.location.id}/${reservation.id}`);
   }
 
   let start = new Date(res.start.dateTime);

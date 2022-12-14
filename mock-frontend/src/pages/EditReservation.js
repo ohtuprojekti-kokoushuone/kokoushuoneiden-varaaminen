@@ -23,11 +23,12 @@ const EditReservation = () => {
   const [currentStartDate, setCurrentStartDate] = useState(new Date());
   const [currentEndDate, setCurrentEndDate] = useState(new Date());
   const id = useParams().id;
+  const roomId = useParams().roomId;
   const { t, i18n } = useTranslation();
   let navigate = useNavigate();
 
   useEffect(() => {
-    getReservationById('testirakennus.2002', id).then((res) => {
+    getReservationById(roomId, id).then((res) => {
       setReservation(res);
       setCurrentStartDate(res.start.dateTime);
       setCurrentEndDate(res.end.dateTime);
