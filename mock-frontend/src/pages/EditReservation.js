@@ -20,7 +20,8 @@ const EditReservation = () => {
   const [duration, setDuration] = useState(defaultDuration);
   const end = new Date();
   const [newEndDate, setNewEndDate] = useState(end.getTime() + defaultDuration * 60 * 1000);
-
+  const [currentStartDate, setCurrentStartDate] = useState(new Date());
+  const [currentEndDate, setCurrentEndDate] = useState(new Date());
   const id = useParams().id;
   const { t, i18n } = useTranslation();
   let navigate = useNavigate();
@@ -28,12 +29,10 @@ const EditReservation = () => {
   useEffect(() => {
     getReservationById('testirakennus.2002', id).then((res) => {
       setReservation(res);
+      setCurrentStartDate(res.start.dateTime);
+      setCurrentEndDate(res.end.dateTime);
     });
   }, []);
-  console.log(reservation);
-  console.log(reservation.subject);
-  console.log(reservation.location);
-  console.log(reservation.start);
 
   function handleEdit() {
     const updatedReservation = {
@@ -87,7 +86,13 @@ const EditReservation = () => {
         <></>
       )}
       <h1>{t('editConfirmation')}</h1>
-      <h2 style={{ fontWeight: 'bold' }}>{reservation.subject}</h2>
+      <p style={{ fontWeight: 'bold' }}>{reservation.subject}</p>
+      <p>
+        {t('label.startTime')}: {new Date(currentStartDate).toLocaleString('fi-FI')}
+      </p>
+      <p>
+        {t('label.endTime')}: {new Date(currentEndDate).toLocaleString('fi-FI')}
+      </p>
       <input
         type="text"
         name="newSubject"
