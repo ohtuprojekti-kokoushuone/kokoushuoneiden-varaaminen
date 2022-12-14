@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Reservation from '../components/Reservation.js';
-import { getOwnReservations, updateReservation } from '../requests';
+import { getOwnReservations, getReservationById, updateReservation } from '../requests';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Message, Button, Icon, Dropdown } from 'semantic-ui-react';
@@ -14,6 +14,7 @@ const durations = [15, 30, 45, 60, 75, 90, 105, 120];
 
 const EditReservation = () => {
   const [reservations, setReservations] = useState([]);
+  const [reservation, setReservation] = useState([]);
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [newSubject, setNewSubject] = useState('');
@@ -26,7 +27,7 @@ const EditReservation = () => {
   const { t, i18n } = useTranslation();
   let navigate = useNavigate();
 
-  useEffect(() => {
+  /*useEffect(() => {
     getOwnReservations().then((data) => {
       setReservations(data);
     });
@@ -36,6 +37,13 @@ const EditReservation = () => {
   const reservationToEdit = reservations.find((r) => r.id === id);
   console.log(reservationToEdit);
   const reservation = { ...reservationToEdit };
+  console.log(reservation);*/
+
+  useEffect(() => {
+    getReservationById('testirakennus.2002', id).then((res) => {
+      setReservation(res);
+    });
+  }, []);
   console.log(reservation);
 
   function handleEditSubject(event) {
@@ -44,16 +52,14 @@ const EditReservation = () => {
     setNewSubject(event.target.value);
   }
 
-  function handleEdit(id) {
-    const reservation = reservations.find((r) => r.id === id);
-
+  function handleEdit() {
     const updatedReservation = {
       ...reservation,
       subject: newSubject
     };
     console.log(updatedReservation);
 
-    updateReservation(id, updatedReservation).then((returnedReservation) => {
+    updateReservation('testirakennus.2002', id, updatedReservation).then((returnedReservation) => {
       setReservations(reservations.map((reservation) => (reservation.id ? reservation : returnedReservation)));
     });
   }
@@ -84,7 +90,7 @@ const EditReservation = () => {
         value={newSubject}
       />
       <div>
-        <Button color="blue" style={{ marginRight: '10px' }} autoFocus onClick={handleEdit(reservation.id)}>
+        <Button color="blue" style={{ marginRight: '10px' }} autoFocus onClick={handleEdit}>
           {t('label.save')}
         </Button>
         <Button color="red" onClick={handleReturn}>
