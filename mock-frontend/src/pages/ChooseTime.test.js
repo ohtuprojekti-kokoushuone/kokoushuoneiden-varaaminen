@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import { getCurrentDateStr, getDateStrInNMin } from '../tests/test_helper';
 import ChooseTime from './ChooseTime';
-import { getBuildings, getRoomsInfo, getFavourites } from '../requests';
+import { getCampuses, getRoomsInfo, getFavourites } from '../requests';
 
 jest.mock('../requests');
 
@@ -22,22 +22,19 @@ describe('<ChooseTime />', () => {
       ]
     });
 
-    getBuildings.mockResolvedValue({
+    getCampuses.mockResolvedValue({
       data: [
         {
-          name: 'Testirakennus'
+          name: 'Kumpula'
         },
         {
-          name: 'Exactum'
+          name: 'Keskusta'
         },
         {
-          name: 'Physicum'
+          name: 'Viikki'
         },
         {
-          name: 'Chemicum'
-        },
-        {
-          name: 'Kumpula Campus Library'
+          name: 'Meilahti'
         }
       ]
     });
