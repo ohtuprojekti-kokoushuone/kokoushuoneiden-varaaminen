@@ -157,9 +157,9 @@ body {
   display: block;
   flex-direction: column;
 }
-.ui.wrapped {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  overflow-y: scroll;
+
+.checkbox {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
 }
