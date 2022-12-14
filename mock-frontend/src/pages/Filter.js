@@ -1,64 +1,83 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'semantic-ui-react';
-import { getBuildings } from '../requests';
+import { Accordion, Form, Segment } from 'semantic-ui-react';
+import { getCampuses } from '../requests';
 
 const Filter = () => {
-  const [filterList, setFilter] = useState([]);
-  const [buildings, setBuildings] = useState([]);
+  const [buildingFilterList, setBuildingFilter] = useState([]);
+  const [campuses, setCampuses] = useState([]);
+  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-    getBuildings().then((res) => setBuildings(res));
+    getCampuses().then((res) => setCampuses(res));
   }, []);
 
-  function toggleFilter(el, name) {
-    el.blur();
-    el.classList.toggle('filter-selected');
-
-    if (filterList.includes(name.toLowerCase())) {
-      const index = filterList.indexOf(name.toLowerCase());
+  function toggleBuildingFilter(el, name) {
+    if (buildingFilterList.includes(name.toLowerCase())) {
+      const index = buildingFilterList.indexOf(name.toLowerCase());
       if (index > -1) {
-        filterList.splice(index, 1);
+        buildingFilterList.splice(index, 1);
       }
     } else {
-      filterList.push(name.toLowerCase());
+      buildingFilterList.push(name.toLowerCase());
     }
 
-    setFilter(filterList);
-    filterRooms();
+    setBuildingFilter(buildingFilterList);
+    filterRoomsByBuilding();
   }
 
-  function filterRooms() {
+  function filterRoomsByBuilding() {
     const cardList = document.querySelectorAll('div[data-building]');
     for (const card of cardList) {
       card.parentElement.classList.remove('hidden');
     }
 
-    if (filterList.length === 0) {
+    if (buildingFilterList.length === 0) {
       return;
     }
 
     for (const card of cardList) {
       const building = card.getAttribute('data-building').toLowerCase();
-      if (!filterList.includes(building)) {
+      if (!buildingFilterList.includes(building)) {
         card.parentElement.classList.add('hidden');
       }
     }
   }
+  function handleClick(e, titleProps) {
+    const { index } = titleProps;
+    const { activeIndex } = activeTab;
+    const newIndex = activeIndex === index ? -1 : index;
 
-  const buttonClass = 'ui filter mb-2 mx-2';
+    setActiveTab({ activeIndex: newIndex });
+  }
+
+  const { activeIndex } = activeTab;
 
   return (
-    <div className="filter-component">
-      {buildings.map((building) => (
-        <Button
-          key={building.name}
-          color="black"
-          className={buttonClass}
-          onClick={(el) => toggleFilter(el.target, building.name)}
-        >
-          {building.name}
-        </Button>
-      ))}
+    <div className="filter-component ">
+      <Segment inverted style={{ overflow: 'auto', maxHeight: 200 }}>
+        <div className="ui horizontal accordion menu inverted">
+          {campuses.map((campus, index) => (
+            <div className="item" key={campus.name}>
+              <Accordion.Title
+                active={activeIndex === index + 1}
+                content={campus.name}
+                index={index}
+                onClick={handleClick}
+              />
+              {campus.buildings.map((building) => (
+                <Accordion.Content key={building.name} active={activeIndex === index}>
+                  <Form inverted>
+                    <Form.Checkbox
+                      label={building.name}
+                      onClick={(el) => toggleBuildingFilter(el.target, building.name)}
+                    ></Form.Checkbox>
+                  </Form>
+                </Accordion.Content>
+              ))}
+            </div>
+          ))}
+        </div>
+      </Segment>
     </div>
   );
 };

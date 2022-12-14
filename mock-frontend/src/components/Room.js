@@ -6,6 +6,7 @@ const Room = ({ room }) => {
   return (
     <div>
       <h3>{room.name}</h3>
+
       <p>
         {t('label.building') + ':'} {room.building}
       </p>

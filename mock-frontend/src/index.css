@@ -153,3 +153,13 @@ body {
 .footer .links {
   text-align: right;
 }
+.ui.horizontal.accordion.menu > .item {
+  display: block;
+  flex-direction: column;
+}
+.ui.wrapped {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
