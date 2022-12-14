@@ -8,9 +8,7 @@ Sovelluksen avulla käyttäjä voi selata vapaita kokoushuoneita sekä varata ni
 
 ## Dokumentaatio
 
-[Asennusohje](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/asennusohje.md)
-
-[Käyttöohje](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/kayttoohje.md)
+[Asennus- ja käyttöohje](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/instructions.md)
 
 [Definition of Done](https://docs.google.com/document/d/15tPTE1_v-ni-WlXxEmTRogPBGrpMMk_8MhwXXvJ0bs8/edit)
 
