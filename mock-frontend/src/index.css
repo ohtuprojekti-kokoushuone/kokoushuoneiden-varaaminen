@@ -125,3 +125,31 @@ body {
   background-color: crimson;
   margin: auto;
 }
+
+.footer {
+  background-color: black;
+  color: white;
+  font-size: smaller;
+  bottom: 0;
+  height: max-content;
+  margin-top: 20px;
+  padding: 10px;
+  display: flex;
+}
+
+.footer a {
+  color: lightgrey;
+  text-decoration: underline;
+}
+
+.footer div {
+  flex-basis: 33.33333%;
+}
+
+.footer .logo {
+  text-align: center;
+}
+
+.footer .links {
+  text-align: right;
+}

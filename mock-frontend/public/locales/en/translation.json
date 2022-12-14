@@ -35,7 +35,8 @@
     "reservedSoon": "Reserved soon",
     "maxtime": "Maximun reservation time",
     "usergroup": "Reservation available for",
-    "building": "Building"
+    "building": "Building",
+    "privacyPolicy": "Privacy policy"
   },
   "error": {
     "endBeforeStart": "Error: Starting time must be before ending time"
@@ -60,5 +61,6 @@
   "inputNewSubject": "Choose new subject",
   "reservationEnd": "End time",
   "availableUntil": "Available until {{time}}",
-  "reservedUntil": "Reserved until {{time}}"
+  "reservedUntil": "Reserved until {{time}}",
+  "Error: Overlapping event": "Overlapping reservation"
 }

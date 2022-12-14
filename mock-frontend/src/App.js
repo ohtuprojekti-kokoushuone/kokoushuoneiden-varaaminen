@@ -9,6 +9,8 @@ import CreateReservation from './pages/CreateReservation.js';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar.js';
 import { basePath } from './config';
+import Footer from './components/Footer.js';
+import PrivacyPolicy from './pages/PrivacyPolicy.js';
 
 const App = () => {
   return (
@@ -22,9 +24,12 @@ const App = () => {
         <Route path={`${basePath}/roomlist/:id`} element={<RoomInfo />} />
         <Route path={`${basePath}/timeOptions`} element={<TimeOptions />} />
         <Route path={`${basePath}/createReservation/:id`} element={<CreateReservation />} />
+        <Route path={`${basePath}/privacyPolicy`} element={<PrivacyPolicy />} />
         <Route path={`${basePath}/editReservation/:id`} element={<EditReservation />} />
         <Route path="*" element={<Navigate to={`${basePath}/home`} />} />
       </Routes>
+
+      <Footer />
     </Router>
   );
 };
