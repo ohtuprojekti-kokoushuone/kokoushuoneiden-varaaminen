@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Accordion, Form, Segment } from 'semantic-ui-react';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemPanel,
+  AccordionItemButton
+} from 'react-accessible-accordion';
 import { getCampuses } from '../requests';
 
 const Filter = () => {
   const [buildingFilterList, setBuildingFilter] = useState([]);
   const [campuses, setCampuses] = useState([]);
-  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     getCampuses().then((res) => setCampuses(res));
@@ -42,43 +47,38 @@ const Filter = () => {
       }
     }
   }
-  function handleClick(e, titleProps) {
-    const { index } = titleProps;
-    const { activeIndex } = activeTab;
-    const newIndex = activeIndex === index ? -1 : index;
 
-    setActiveTab({ activeIndex: newIndex });
-  }
-
-  const { activeIndex } = activeTab;
+  const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <div className="filter-component ">
-      <Segment inverted style={{ overflow: 'auto', maxHeight: 200 }}>
-        <div className="ui horizontal accordion menu inverted">
-          {campuses.map((campus, index) => (
-            <div className="item" key={campus.name}>
-              <Accordion.Title
-                active={activeIndex === index + 1}
-                content={campus.name}
-                index={index}
-                onClick={handleClick}
-              />
+    <Accordion allowZeroExpanded>
+      <div className="ui horizontal accordion menu inverted" style={{ overflow: 'auto', maxHeight: 200 }}>
+        {campuses.map((campus) => (
+          <div className="item" key={campus.name}>
+            <AccordionItem>
+              <AccordionItemHeading>
+                <AccordionItemButton>{campus.name}</AccordionItemButton>
+              </AccordionItemHeading>
               {campus.buildings.map((building) => (
-                <Accordion.Content key={building.name} active={activeIndex === index}>
-                  <Form inverted>
-                    <Form.Checkbox
-                      label={building.name}
+                <AccordionItemPanel key={building.name}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      onChange={() => {
+                        setIsChecked(!isChecked);
+                      }}
                       onClick={(el) => toggleBuildingFilter(el.target, building.name)}
-                    ></Form.Checkbox>
-                  </Form>
-                </Accordion.Content>
+                    />
+                    <span className={`checkbox ${isChecked ? 'checkbox--active' : ''}`} aria-hidden="true" />
+                    {building.name}
+                  </label>
+                </AccordionItemPanel>
               ))}
-            </div>
-          ))}
-        </div>
-      </Segment>
-    </div>
+            </AccordionItem>
+          </div>
+        ))}
+      </div>
+    </Accordion>
   );
 };
 
