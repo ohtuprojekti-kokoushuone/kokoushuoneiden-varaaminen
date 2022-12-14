@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Reservation from '../components/Reservation.js';
-import { getOwnReservations, getReservationById, updateReservation } from '../requests';
+import { getReservationById, updateReservation } from '../requests';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Message, Button, Icon, Dropdown } from 'semantic-ui-react';
+import { Message, Button, Dropdown } from 'semantic-ui-react';
 import { createDropdownDurationObject } from '../utils/dropdownOptionsUtil';
-import { Table } from 'semantic-ui-react';
 import ReservatorDatePicker from '../components/ReservatorDatePicker';
 import { basePath } from '../config';
 
@@ -20,24 +18,12 @@ const EditReservation = () => {
   const [newSubject, setNewSubject] = useState('');
   const [newStartDate, setNewStartDate] = useState(new Date());
   const [duration, setDuration] = useState(defaultDuration);
-  const endtest = new Date();
-  const [newEndDate, setNewEndDate] = useState(endtest.getTime() + defaultDuration * 60 * 1000);
+  const end = new Date();
+  const [newEndDate, setNewEndDate] = useState(end.getTime() + defaultDuration * 60 * 1000);
 
   const id = useParams().id;
   const { t, i18n } = useTranslation();
   let navigate = useNavigate();
-
-  /*useEffect(() => {
-    getOwnReservations().then((data) => {
-      setReservations(data);
-    });
-  }, []);
-  console.log(reservations);
-
-  const reservationToEdit = reservations.find((r) => r.id === id);
-  console.log(reservationToEdit);
-  const reservation = { ...reservationToEdit };
-  console.log(reservation);*/
 
   useEffect(() => {
     getReservationById('testirakennus.2002', id).then((res) => {
@@ -45,23 +31,45 @@ const EditReservation = () => {
     });
   }, []);
   console.log(reservation);
-
-  function handleEditSubject(event) {
-    event.preventDefault();
-    console.log(event.target.value);
-    setNewSubject(event.target.value);
-  }
+  console.log(reservation.subject);
+  console.log(reservation.location);
+  console.log(reservation.start);
 
   function handleEdit() {
     const updatedReservation = {
       ...reservation,
-      subject: newSubject
+      subject: newSubject,
+      start: newStartDate,
+      end: newEndDate,
+      attendees: []
     };
-    console.log(updatedReservation);
 
-    updateReservation('testirakennus.2002', id, updatedReservation).then((returnedReservation) => {
-      setReservations(reservations.map((reservation) => (reservation.id ? reservation : returnedReservation)));
-    });
+    updateReservation(updatedReservation.location.id, id, updatedReservation)
+      .then((returnedReservation) => {
+        setReservations(reservations.map((reservation) => (reservation.id ? reservation : returnedReservation)));
+        window.location.href = `${basePath}/reservations`;
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+        setShow(true);
+      });
+  }
+
+  function handleEditSubject(event) {
+    event.preventDefault();
+    setNewSubject(event.target.value);
+  }
+  function handleEditStartDate(date) {
+    setNewStartDate(date);
+    let newDate = new Date(date.getTime());
+    newDate.setMinutes(date.getMinutes() + duration);
+    setNewEndDate(newDate);
+  }
+
+  function handleEditEndDate(event, data) {
+    setDuration(data.value);
+    const newDate = new Date(newStartDate.getTime());
+    setNewEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
   }
 
   function handleReturn() {
@@ -79,9 +87,7 @@ const EditReservation = () => {
         <></>
       )}
       <h1>{t('editConfirmation')}</h1>
-      <h3 style={{ fontWeight: 'bold' }}>
-        {t('currentSubject')}: {reservation.subject}
-      </h3>{' '}
+      <h2 style={{ fontWeight: 'bold' }}>{reservation.subject}</h2>
       <input
         type="text"
         name="newSubject"
@@ -89,7 +95,30 @@ const EditReservation = () => {
         onChange={handleEditSubject}
         value={newSubject}
       />
-      <div>
+      <h3>{t('editStartTime')}</h3>
+      <ReservatorDatePicker
+        selected={newStartDate}
+        onChange={handleEditStartDate}
+        dateTestId="start-date-reservation"
+        t={t}
+        i18n={i18n}
+      />
+      <h3>{t('editDuration')}</h3>
+      <Dropdown
+        selection
+        options={createDropdownDurationObject(durations)}
+        onChange={handleEditEndDate}
+        defaultValue={defaultDuration}
+      />
+      <h3>{t('editEnd')}</h3>
+      <ReservatorDatePicker
+        selected={newEndDate}
+        onChange={setNewEndDate}
+        dateTestId="end-date-reservation"
+        t={t}
+        i18n={i18n}
+      />
+      <div className="col align-self-center">
         <Button color="blue" style={{ marginRight: '10px' }} autoFocus onClick={handleEdit}>
           {t('label.save')}
         </Button>
