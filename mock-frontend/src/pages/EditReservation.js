@@ -95,7 +95,7 @@ const EditReservation = () => {
       <input
         type="text"
         name="newSubject"
-        placeholder={t('inputNewSubject')}
+        placeholder={reservation.subject}
         onChange={handleEditSubject}
         value={newSubject}
       />
