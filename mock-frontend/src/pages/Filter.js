@@ -6,9 +6,11 @@ import {
   AccordionItemPanel,
   AccordionItemButton
 } from 'react-accessible-accordion';
+import { useTranslation } from 'react-i18next';
 import { getCampuses } from '../requests';
 
 const Filter = () => {
+  const { t } = useTranslation();
   const [buildingFilterList, setBuildingFilter] = useState([]);
   const [campuses, setCampuses] = useState([]);
 
@@ -51,7 +53,7 @@ const Filter = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <Accordion allowZeroExpanded>
+    <Accordion allowZeroExpanded aria-label={t('chooseCampus')}>
       <div className="ui horizontal accordion menu inverted" style={{ overflow: 'auto', maxHeight: 200 }}>
         {campuses.map((campus) => (
           <div className="item" key={campus.name}>
