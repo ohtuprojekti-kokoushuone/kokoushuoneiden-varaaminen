@@ -16,12 +16,10 @@ const EditReservation = () => {
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [newSubject, setNewSubject] = useState('');
-  const [newStartDate, setNewStartDate] = useState(new Date());
   const [duration, setDuration] = useState(defaultDuration);
   const end = new Date();
-  const [newEndDate, setNewEndDate] = useState(end.getTime() + defaultDuration * 60 * 1000);
   const [currentStartDate, setCurrentStartDate] = useState(new Date());
-  const [currentEndDate, setCurrentEndDate] = useState(new Date());
+  const [currentEndDate, setCurrentEndDate] = useState(end.getTime() + defaultDuration * 60 * 1000);
   const id = useParams().id;
   const roomId = useParams().roomId;
   const { t, i18n } = useTranslation();
@@ -30,8 +28,8 @@ const EditReservation = () => {
   useEffect(() => {
     getReservationById(roomId, id).then((res) => {
       setReservation(res);
-      setCurrentStartDate(res.start.dateTime);
-      setCurrentEndDate(res.end.dateTime);
+      setCurrentStartDate(new Date(res.start.dateTime));
+      setCurrentEndDate(new Date(res.end.dateTime));
     });
   }, [roomId, id]);
 
@@ -39,8 +37,8 @@ const EditReservation = () => {
     const updatedReservation = {
       ...reservation,
       subject: newSubject,
-      start: newStartDate,
-      end: newEndDate,
+      start: currentStartDate,
+      end: currentEndDate,
       attendees: []
     };
 
@@ -60,16 +58,16 @@ const EditReservation = () => {
     setNewSubject(event.target.value);
   }
   function handleEditStartDate(date) {
-    setNewStartDate(date);
+    setCurrentStartDate(date);
     let newDate = new Date(date.getTime());
     newDate.setMinutes(date.getMinutes() + duration);
-    setNewEndDate(newDate);
+    setCurrentEndDate(newDate);
   }
 
   function handleEditEndDate(event, data) {
     setDuration(data.value);
-    const newDate = new Date(newStartDate.getTime());
-    setNewEndDate(newDate.setMinutes(newStartDate.getMinutes() + data.value));
+    const newDate = new Date(currentStartDate.getTime());
+    setCurrentEndDate(newDate.setMinutes(currentStartDate.getMinutes() + data.value));
   }
 
   function handleReturn() {
@@ -103,7 +101,7 @@ const EditReservation = () => {
       />
       <h3>{t('editStartTime')}</h3>
       <ReservatorDatePicker
-        selected={newStartDate}
+        selected={currentStartDate}
         onChange={handleEditStartDate}
         dateTestId="start-date-reservation"
         t={t}
@@ -118,8 +116,8 @@ const EditReservation = () => {
       />
       <h3>{t('editEnd')}</h3>
       <ReservatorDatePicker
-        selected={newEndDate}
-        onChange={setNewEndDate}
+        selected={currentEndDate}
+        onChange={setCurrentEndDate}
         dateTestId="end-date-reservation"
         t={t}
         i18n={i18n}
