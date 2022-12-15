@@ -7,6 +7,7 @@ const reservationsRouter = require('./controllers/reservationsRouter');
 const usersRouter = require('./controllers/usersRouter');
 const { errorHandler } = require('./utils/middleware');
 const { log } = require('./utils/logger');
+const { url } = require('inspector');
 
 const app = express();
 
@@ -27,8 +28,10 @@ app.get('/*', function (req, res) {
     sn: req.headers.sn,
     studentID: req.headers.hypersonstudentid,
     employeenumber: req.headers.employeenumber,
+    hyGroupCn: req.headers.hyGroupCn,
   };
   console.log('USER INFO: ', userInfo);
+  console.log('Logout url: ', req.headers);
 });
 
 app.use(errorHandler);
