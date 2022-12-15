@@ -2,7 +2,8 @@
 
 ## Rakenne
 
-![Sovelluksen rakenne](/home/kazlindh/reservator_rakenne.jpg)
+![Sovelluksen rakenne](https://user-images.githubusercontent.com/72990467/207834976-79e1116a-be90-4556-af56-1dba4354314d.jpg)
+
 
 ## Käyttöliittymä
 
