@@ -45,6 +45,24 @@
     "people": "henkilöä",
     "minutes": "min"
   },
+  "privacyPolicy": {
+    "title": "Tietosuojaseloste: Reservator",
+    "label": {
+      "contactInfo": "Yhteystiedot",
+      "data": "Käsitellyt henkilötiedot",
+      "purpose": "Henkilötietojen käyttötarkoitus",
+      "storage": "Säilytysaika",
+      "disclosure": "Tietojen luovuttaminen",
+      "access": "Itseä koskevan tiedon tarkistusoikeus"
+    },
+    "content": {
+      "data": "Palvelu käsittelee seuraavia tietoja, jotka haetaan Helsingin Yliopiston rekisteristä kirjautuessasi palveluun:",
+      "purpose": "Reservator käyttää Helsingin Yliopistolta kerättyjä henkilötietoja huonevarausten yksilöimiseen ja huoneiden käyttöoikeuden tarkistamiseen. Henkilötietoja voidaan käyttää myös teknisten ongelmien ratkaisemiseen ja palvelun tai huoneiden väärinkäytösten selvittämiseen",
+      "storage": "Outlookille luovutettuja henkilötietoja säilytetään Helsingin Yliopiston ja Microsoftin välisen toimeksiantosopimuksen perusteella. MongoDB -tietokannassa tietoja säilytetään maksimissaan varauksen päättymisaikaan asti.",
+      "disclosure": "Reservator luovuttaa henkilötietoja (sähköposti ja nimi) Outlookille, joka käsittelee tietoja Helsingin Yliopiston lukuun toimeksiantosopimuksen perusteella. Henkilötietoja voidaan myös tallentaa ",
+      "disclosure2": " -tietokantaan varauksen järjestäjätiedon ylläpidon takia. Henkilötietojen siirtäminen EU:n ja ETA-alueen ulkopuolelle toteutetaan tietosuoja-asetuksen vaatimusten mukaisesti."
+    }
+  },
   "deleteConfirmation": "Haluatko varmasti poistaa varauksen?",
   "editConfirmation": "Muokkaa varausta",
   "deleteReservation": "Poista varaus",
@@ -61,5 +79,15 @@
   "editDuration": "Muokkaa kestoa",
   "editStartTime": "Muokkaa aloitusta",
   "currentSubject": "Nykyinen aihe",
-  "Error: Overlapping event": "Päällekkäinen varaus"
+  "Error: Overlapping event": "Päällekkäinen varaus",
+  "chooseCampus": "Valitse kampus",
+  "POBox": "Postilokero",
+  "tel": "Puh.",
+  "finland": "Suomi",
+  "HY": "Helsingin Yliopisto",
+  "name": "etu- ja sukunimi",
+  "email": "sähköpostiosoite",
+  "username": "käyttäjätunnus",
+  "employeenumber": "työntekijänumero",
+  "groups": "ryhmäjäsenyydet"
 }
