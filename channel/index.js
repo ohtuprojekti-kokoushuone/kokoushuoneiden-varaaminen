@@ -28,10 +28,10 @@ app.get('/*', function (req, res) {
     sn: req.headers.sn,
     studentID: req.headers.hypersonstudentid,
     employeenumber: req.headers.employeenumber,
-    hyGroupCn: req.headers.hyGroupCn,
+    hyGroupCn: req.headers.hygroupcn,
   };
   console.log('USER INFO: ', userInfo);
-  console.log('Logout url: ', req.headers);
+  console.log('SHIBBOLETH HEADERS: ', req.headers);
 });
 
 app.use(errorHandler);
