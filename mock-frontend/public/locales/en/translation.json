@@ -57,6 +57,7 @@
   "chooseDuration": "Choose duration",
   "editDuration": "Edit duration",
   "editStartTime": "Edit start",
+  "editEnd": "Edit end",
   "currentSubject": "Current subject",
   "inputNewSubject": "Choose new subject",
   "reservationEnd": "End time",

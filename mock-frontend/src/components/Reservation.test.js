@@ -3,6 +3,12 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import Reservation from './Reservation';
 
+jest.mock('react-router-dom', () => {
+  return {
+    useNavigate: jest.fn()
+  };
+});
+
 describe('<Reservation />', () => {
   let res;
 

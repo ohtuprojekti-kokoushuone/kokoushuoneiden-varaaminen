@@ -92,3 +92,10 @@ export function updateFavourites(favourites: Array<string>) {
     return res.data;
   });
 }
+
+export function getReservationById(roomId: string, reservationId: string) {
+  const req = api.get(`/reservations/${roomId}/${reservationId}`);
+  return req.then((res) => {
+    return res.data;
+  });
+}
