@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import Home from './Home';
 import { BrowserRouter } from 'react-router-dom';
-import { getBuildings, getRoomsInfo, getFavourites } from '../requests';
+import { getCampuses, getRoomsInfo, getFavourites } from '../requests';
 
 jest.mock('../requests');
 
@@ -25,22 +25,19 @@ describe('<Home />', () => {
         ]
       });
 
-      getBuildings.mockResolvedValue({
+      getCampuses.mockResolvedValue({
         data: [
           {
-            name: 'Testirakennus'
+            name: 'Kumpula'
           },
           {
-            name: 'Exactum'
+            name: 'Keskusta'
           },
           {
-            name: 'Physicum'
+            name: 'Viikki'
           },
           {
-            name: 'Chemicum'
-          },
-          {
-            name: 'Kumpula Campus Library'
+            name: 'Meilahti'
           }
         ]
       });
