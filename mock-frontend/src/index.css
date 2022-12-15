@@ -1,7 +1,8 @@
-body {
+/*body {
   padding-top: 80px;
   padding-bottom: 20px;
 }
+*/
 .ui.h1 {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -132,9 +133,9 @@ body {
   font-size: smaller;
   bottom: 0;
   height: max-content;
-  margin-top: 20px;
   padding: 10px;
   display: flex;
+  position: absolute;
 }
 
 .footer a {
@@ -162,4 +163,11 @@ body {
   display: inline-block;
   height: 20px;
   width: 20px;
+}
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }

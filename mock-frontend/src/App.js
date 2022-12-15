@@ -13,22 +13,24 @@ import PrivacyPolicy from './pages/PrivacyPolicy.js';
 
 const App = () => {
   return (
-    <Router>
-      <NavigationBar />
+    <div className="page-container">
+      <Router>
+        <NavigationBar />
 
-      <Routes>
-        <Route path={`${basePath}/home`} element={<Home />} />
-        <Route path={`${basePath}/reservations`} element={<Reservations />} />
-        <Route path={`${basePath}/choosetime`} element={<ChooseTime />} />
-        <Route path={`${basePath}/roomlist/:id`} element={<RoomInfo />} />
-        <Route path={`${basePath}/timeOptions`} element={<TimeOptions />} />
-        <Route path={`${basePath}/createReservation/:id`} element={<CreateReservation />} />
-        <Route path={`${basePath}/privacyPolicy`} element={<PrivacyPolicy />} />
-        <Route path="*" element={<Navigate to={`${basePath}/home`} />} />
-      </Routes>
+        <Routes>
+          <Route path={`${basePath}/home`} element={<Home />} />
+          <Route path={`${basePath}/reservations`} element={<Reservations />} />
+          <Route path={`${basePath}/choosetime`} element={<ChooseTime />} />
+          <Route path={`${basePath}/roomlist/:id`} element={<RoomInfo />} />
+          <Route path={`${basePath}/timeOptions`} element={<TimeOptions />} />
+          <Route path={`${basePath}/createReservation/:id`} element={<CreateReservation />} />
+          <Route path={`${basePath}/privacyPolicy`} element={<PrivacyPolicy />} />
+          <Route path="*" element={<Navigate to={`${basePath}/home`} />} />
+        </Routes>
 
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
+    </div>
   );
 };
 
