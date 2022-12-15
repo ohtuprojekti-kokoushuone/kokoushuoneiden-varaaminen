@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const formatISO9075 = require('date-fns/formatISO9075');
 const addDays = require('date-fns/addDays');
-const { differenceInMinutes } = require('date-fns');
+const { differenceInMinutes, isAfter, isBefore } = require('date-fns');
 
 require('dotenv').config();
 const auth = require('../config/outlookAuthConfig');
@@ -82,7 +82,10 @@ async function getEvents(calendarUserId, todayOnly) {
 
       for (let clendarEvent of msCalendarEvents) {
         try {
-          await ReservationHandler.upsertReservation(calendarUserId, clendarEvent);
+          // don't upsert if occurs in the past
+          if (isAfter(new Date(clendarEvent.end.dateTime + 'Z'), new Date())) {
+            await ReservationHandler.upsertReservation(calendarUserId, clendarEvent);
+          }
         } catch (error) {
           console.log('Possible duplicate');
         }
@@ -141,8 +144,11 @@ async function getEventsByOrganizerEmail(organizerEmail) {
         const uri = `${ENDPOINT_URI}/users/${reservation.calendarUserId}/events/${reservation.calendarEventId}`;
         const response = await axios.default.get(uri, await getOptions());
         // if reservation is found from graph api, it can be added to final data after updating possible changes to mongo
-        const updated = await ReservationHandler.upsertReservation(reservation.location.id, response.data);
-        syncedReservations.push(updated);
+        // don't upsert if occurs in the past
+        if (isAfter(new Date(reservation.end), new Date())) {
+          const updated = await ReservationHandler.upsertReservation(reservation.location.id, response.data);
+          syncedReservations.push(updated);
+        }
       } catch {
         // if reservation is not found from graph api, it has been deleted, and has to be deleted from mongo as well
         reservation.delete();
@@ -173,7 +179,9 @@ async function checkAvailability(calendarUserId, start, end) {
 
       for (let clendarEvent of msCalendarEvents) {
         try {
-          await ReservationHandler.upsertReservation(calendarUserId, clendarEvent);
+          if (isAfter(new Date(clendarEvent.end.dateTime + 'Z'), new Date())) {
+            await ReservationHandler.upsertReservation(calendarUserId, clendarEvent);
+          }
         } catch (error) {
           console.log('Possible duplicate');
         }
@@ -218,6 +226,9 @@ async function createEvent(calendarUserId, reservation) {
   reservation.start = adjustedDatetimes.start;
   reservation.end = adjustedDatetimes.end;
 
+  if (isBefore(new Date(reservation.end), new Date())) {
+    throw new Error('End time is in the past');
+  }
   // Before making the reservation, check that there are no overlapping meetings. Throws an error in case there are any.
   await checkForOverlappingEvents(calendarUserId, reservation);
 
@@ -253,7 +264,6 @@ async function createEvent(calendarUserId, reservation) {
   try {
     const response = await axios.default.post(uri, event, await getOptions());
     console.debug('Event Create RESPONSE', response.data);
-
     let localReservation = await ReservationHandler.upsertReservation(calendarUserId, response.data);
     console.debug('mongo reservation:', localReservation);
     return localReservation;
@@ -288,6 +298,11 @@ async function updateEvent(calendarUserId, reservationId, reservation) {
       const adjustedDatetimes = await getDateTimesInUTC(reservation);
       reservation.start = adjustedDatetimes.start;
       reservation.end = adjustedDatetimes.end;
+
+      if (isBefore(new Date(reservation.end), new Date())) {
+        // eslint-disable-next-line quotes
+        throw new Error("Can't update past event");
+      }
 
       // Before making the reservation, check that there are no overlapping meetings. Throws an error in case there are any.
       await checkForOverlappingEvents(calendarUserId, reservation);
@@ -432,8 +447,18 @@ async function getDateTimesInUTC(reservation) {
       throw new Error('Both, start and end datetimes must be given!');
     }
 
-    let startOrig = new Date(reservation.start);
-    let endOrig = new Date(reservation.end);
+    console.log(reservation);
+
+    let startOrig;
+    let endOrig;
+
+    if (reservation.start.dateTime && reservation.end.dateTime) {
+      startOrig = new Date(reservation.start.dateTime);
+      endOrig = new Date(reservation.end.dateTime);
+    } else {
+      startOrig = new Date(reservation.start);
+      endOrig = new Date(reservation.end);
+    }
 
     console.log(`Orig event Start: ${startOrig}`);
     console.log(`Orig event End: ${endOrig}`);
