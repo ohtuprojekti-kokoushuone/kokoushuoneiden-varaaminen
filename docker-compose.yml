@@ -11,7 +11,7 @@ services:
       - ./mongo_data:/data/db
 
   reservator-backend:
-    image: "ojanenma/kokoushuone-app:backend"
+    image: "ojanenma/reservator-backend:latest"
     restart: "unless-stopped"
     build:
       context: ./reservatorapp_projekti/ReservatorApp
@@ -23,7 +23,7 @@ services:
       - reservator-mongo
 
   reservator:
-    image: "ojanenma/kokoushuone-app:channel"
+    image: "ojanenma/reservator:latest"
     restart: "unless-stopped"
     build:
       context: ./channel
