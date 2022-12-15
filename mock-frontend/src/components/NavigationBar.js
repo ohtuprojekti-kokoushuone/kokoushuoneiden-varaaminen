@@ -9,10 +9,6 @@ import { basePath, logoutPath } from '../config';
 const NavigationBar = () => {
   const { t } = useTranslation();
 
-  const handleLogout = () => {
-    window.location.href = logoutPath;
-  };
-
   return (
     <div className="ui grid">
       <div className="tablet mobile only row">
@@ -30,7 +26,7 @@ const NavigationBar = () => {
               <Dropdown.Menu>
                 <Menu.Item href={`${basePath}/reservations`}>{t('label.reservations')}</Menu.Item>
                 <Menu.Item href={`${basePath}/choosetime`}>{t('label.chooseTime')}</Menu.Item>
-                <Menu.Item onClick={handleLogout}>{t('button.logout')}</Menu.Item>
+                <Menu.Item href={logoutPath}>{t('button.logout')}</Menu.Item>
                 <Menu.Item
                   onClick={() => {
                     i18next.changeLanguage('en');
@@ -66,7 +62,7 @@ const NavigationBar = () => {
           <Menu.Menu position="right">
             <Menu.Item href={`${basePath}/reservations`}>{t('label.reservations')}</Menu.Item>
             <Menu.Item href={`${basePath}/choosetime`}>{t('label.chooseTime')}</Menu.Item>
-            <Menu.Item onClick={handleLogout}>{t('button.logout')}</Menu.Item>
+            <Menu.Item href={logoutPath}>{t('button.logout')}</Menu.Item>
             <Menu.Item>
               <div className="ui buttons">
                 <Button
