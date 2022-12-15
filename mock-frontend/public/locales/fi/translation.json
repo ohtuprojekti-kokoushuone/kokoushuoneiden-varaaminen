@@ -54,7 +54,7 @@
   "chooseDuration": "Valitse kesto",
   "loginTitle": "Kirjaudu sisään",
   "inputSubject": "Syötä aihe",
-  "inputNewSubject": "Syötä uusi aihe",
+  "inputNewSubject": "Muokkaa aihetta",
   "reservationEnd": "Varauksen loppuaika",
   "availableUntil": "Huone on vapaa {{time}} asti",
   "reservedUntil": "Huone vapautuu {{time}}",
