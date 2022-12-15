@@ -43,7 +43,11 @@ const ReservationSchema = new mongoose.Schema(
     end: {
       type: Date,
       required: [true, 'Please enter end date'],
-      index: true,
+    },
+
+    expireAt: {
+      type: Date,
+      expires: 0,
     },
 
     organizer: {
@@ -192,6 +196,10 @@ const ReservationHandler = {
           ? reservationObject.start.dateTime + 'Z'
           : reservationObject.start.dateTime,
       end:
+        reservationObject.end.timeZone === 'UTC'
+          ? reservationObject.end.dateTime + 'Z'
+          : reservationObject.end.dateTime,
+      expireAt:
         reservationObject.end.timeZone === 'UTC'
           ? reservationObject.end.dateTime + 'Z'
           : reservationObject.end.dateTime,

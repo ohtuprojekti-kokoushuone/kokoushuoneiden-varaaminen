@@ -26,6 +26,7 @@ reservationsRouter.get('/:room/:reservationId', async (req, res, next) => {
     const data = await calendarService.getReservationById(room, reservationId);
     if (data && data.organizer && data.organizer.email !== req.headers.mail) {
       res.status(401).end(JSON.stringify('Unauthorised'));
+      return;
     }
     res.end(JSON.stringify(data));
   } catch (error) {
