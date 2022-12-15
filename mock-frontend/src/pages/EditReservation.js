@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getReservationById, updateReservation } from '../requests';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -23,13 +23,19 @@ const EditReservation = () => {
   const id = useParams().id;
   const roomId = useParams().roomId;
   const { t, i18n } = useTranslation();
+  const durationRef = useRef(0);
   let navigate = useNavigate();
 
   useEffect(() => {
     getReservationById(roomId, id).then((res) => {
       setReservation(res);
-      setCurrentStartDate(new Date(res.start.dateTime));
-      setCurrentEndDate(new Date(res.end.dateTime));
+      const start = new Date(res.start.dateTime);
+      const end = new Date(res.end.dateTime);
+      setCurrentStartDate(start);
+      setCurrentEndDate(end);
+      const dur = (end - start) / 1000 / 60;
+      setDuration(dur);
+      durationRef.current.value = dur;
     });
   }, [roomId, id]);
 
@@ -92,6 +98,7 @@ const EditReservation = () => {
       <p>
         {t('label.endTime')}: {new Date(currentEndDate).toLocaleString('fi-FI')}
       </p>
+      <h3>{t('inputNewSubject')}</h3>
       <input
         type="text"
         name="newSubject"
@@ -109,10 +116,11 @@ const EditReservation = () => {
       />
       <h3>{t('editDuration')}</h3>
       <Dropdown
+        ref={durationRef}
         selection
         options={createDropdownDurationObject(durations)}
         onChange={handleEditEndDate}
-        defaultValue={defaultDuration}
+        defaultValue={duration}
       />
       <h3>{t('editEnd')}</h3>
       <ReservatorDatePicker
