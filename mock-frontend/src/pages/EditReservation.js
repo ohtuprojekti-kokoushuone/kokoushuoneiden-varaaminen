@@ -18,6 +18,9 @@ const EditReservation = () => {
   const [newSubject, setNewSubject] = useState('');
   const [duration, setDuration] = useState(defaultDuration);
   const end = new Date();
+  const [originalStartDate, setOriginalStartDate] = useState(new Date());
+  const [originalEndDate, setOriginalEndDate] = useState(end.getTime() + defaultDuration * 60 * 1000);
+
   const [currentStartDate, setCurrentStartDate] = useState(new Date());
   const [currentEndDate, setCurrentEndDate] = useState(end.getTime() + defaultDuration * 60 * 1000);
   const id = useParams().id;
@@ -31,11 +34,13 @@ const EditReservation = () => {
       setReservation(res);
       const start = new Date(res.start.dateTime);
       const end = new Date(res.end.dateTime);
+      setOriginalStartDate(start);
+      setOriginalEndDate(end);
       setCurrentStartDate(start);
       setCurrentEndDate(end);
       const dur = (end - start) / 1000 / 60;
       setDuration(dur);
-      durationRef.current.value = dur;
+      durationRef.current.state.value = dur;
     });
   }, [roomId, id]);
 
@@ -90,14 +95,16 @@ const EditReservation = () => {
       ) : (
         <></>
       )}
+
       <h1>{t('editConfirmation')}</h1>
       <p style={{ fontWeight: 'bold' }}>{reservation.subject}</p>
       <p>
-        {t('label.startTime')}: {new Date(currentStartDate).toLocaleString('fi-FI')}
+        {t('label.startTime')}: {new Date(originalStartDate).toLocaleString('fi-FI')}
       </p>
       <p>
-        {t('label.endTime')}: {new Date(currentEndDate).toLocaleString('fi-FI')}
+        {t('label.endTime')}: {new Date(originalEndDate).toLocaleString('fi-FI')}
       </p>
+
       <h3>{t('inputNewSubject')}</h3>
       <input
         type="text"
@@ -106,6 +113,7 @@ const EditReservation = () => {
         onChange={handleEditSubject}
         value={newSubject}
       />
+
       <h3>{t('editStartTime')}</h3>
       <ReservatorDatePicker
         selected={currentStartDate}
@@ -114,6 +122,7 @@ const EditReservation = () => {
         t={t}
         i18n={i18n}
       />
+      
       <h3>{t('editDuration')}</h3>
       <Dropdown
         ref={durationRef}
@@ -122,6 +131,7 @@ const EditReservation = () => {
         onChange={handleEditEndDate}
         defaultValue={duration}
       />
+
       <h3>{t('editEnd')}</h3>
       <ReservatorDatePicker
         selected={currentEndDate}
@@ -130,6 +140,7 @@ const EditReservation = () => {
         t={t}
         i18n={i18n}
       />
+
       <div className="col align-self-center">
         <Button color="blue" style={{ marginRight: '10px' }} autoFocus onClick={handleEdit}>
           {t('label.save')}
