@@ -122,7 +122,7 @@ const EditReservation = () => {
         t={t}
         i18n={i18n}
       />
-      
+
       <h3>{t('editDuration')}</h3>
       <Dropdown
         ref={durationRef}
