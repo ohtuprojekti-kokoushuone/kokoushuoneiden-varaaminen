@@ -8,6 +8,6 @@
 ## Käyttöliittymä
 
 ![Käyttöliittymän flowchart](https://user-images.githubusercontent.com/72990467/208013530-6fea5a64-07e5-49b3-b48c-5cbb3079d1bf.jpg)
-)
+
 
 ## Sovelluslogiikka
