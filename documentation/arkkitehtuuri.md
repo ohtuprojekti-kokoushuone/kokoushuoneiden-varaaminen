@@ -11,3 +11,5 @@
 
 
 ## Sovelluslogiikka
+
+![Yleisen tason sekvenssikaavio](https://user-images.githubusercontent.com/72990467/208028076-51c33e57-cbaa-4f77-a148-eeecaddb90b5.jpg)
