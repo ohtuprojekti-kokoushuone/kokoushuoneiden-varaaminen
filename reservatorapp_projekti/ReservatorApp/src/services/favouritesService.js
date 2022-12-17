@@ -16,6 +16,10 @@ async function getFavouritesByUid(uid) {
 }
 
 async function addFavourites(obj) {
+  if (obj.favourites.length === 0) {
+    await FavouriteHandler.deleteFavourite(obj.uid);
+    return [];
+  }
   try {
     let data = await FavouriteHandler.addFavourites(obj);
     try {
