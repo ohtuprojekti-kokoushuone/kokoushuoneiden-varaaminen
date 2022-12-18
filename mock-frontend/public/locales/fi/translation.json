@@ -57,10 +57,10 @@
     },
     "content": {
       "data": "Palvelu käsittelee seuraavia tietoja, jotka haetaan Helsingin Yliopiston rekisteristä kirjautuessasi palveluun:",
-      "purpose": "Reservator käyttää Helsingin Yliopistolta kerättyjä henkilötietoja huonevarausten yksilöimiseen ja huoneiden käyttöoikeuden tarkistamiseen. Henkilötietoja voidaan käyttää myös teknisten ongelmien ratkaisemiseen ja palvelun tai huoneiden väärinkäytösten selvittämiseen",
-      "storage": "Outlookille luovutettuja henkilötietoja säilytetään Helsingin Yliopiston ja Microsoftin välisen toimeksiantosopimuksen perusteella. MongoDB -tietokannassa tietoja säilytetään maksimissaan varauksen päättymisaikaan asti.",
+      "purpose": "Reservator käyttää Helsingin Yliopistolta kerättyjä henkilötietoja huonevarausten ja suosikkien yksilöimiseen, sekä huoneiden käyttöoikeuden tarkistamiseen. Henkilötietoja voidaan käyttää myös teknisten ongelmien ratkaisemiseen ja palvelun tai huoneiden väärinkäytösten selvittämiseen",
+      "storage": "Outlookille luovutettuja henkilötietoja säilytetään Helsingin Yliopiston ja Microsoftin välisen toimeksiantosopimuksen perusteella. MongoDB -tietokannassa tietoja säilytetään maksimissaan varauksen päättymisaikaan asti tai kunnes käyttäjällä ei ole yhtäkään suosikkihuonetta.",
       "disclosure": "Reservator luovuttaa henkilötietoja (sähköposti ja nimi) Outlookille, joka käsittelee tietoja Helsingin Yliopiston lukuun toimeksiantosopimuksen perusteella. Henkilötietoja voidaan myös tallentaa ",
-      "disclosure2": " -tietokantaan varauksen järjestäjätiedon ylläpidon takia. Henkilötietojen siirtäminen EU:n ja ETA-alueen ulkopuolelle toteutetaan tietosuoja-asetuksen vaatimusten mukaisesti."
+      "disclosure2": " -tietokantaan varauksen järjestäjätiedon ylläpidon takia ja suosikkihuoneita tallentaessa. Henkilötietojen siirtäminen EU:n ja ETA-alueen ulkopuolelle toteutetaan tietosuoja-asetuksen vaatimusten mukaisesti."
     }
   },
   "deleteConfirmation": "Haluatko varmasti poistaa varauksen?",
