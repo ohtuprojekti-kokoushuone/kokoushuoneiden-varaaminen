@@ -48,12 +48,7 @@ const RoomCard = ({ room, onHeartClick, getFavourite }) => {
       <Card.Content>
         <div className="content">
           <span className="right floated">
-            <Button
-              size="medium"
-              onClick={onHeartClick()}
-              className={favouriteClass}
-              aria-label={t('addFav', { room: room.id })}
-            >
+            <Button size="medium" onClick={onHeartClick()} className={favouriteClass}>
               {getFavourite() ? isFavourite : isNotFavourite}
             </Button>
           </span>
@@ -62,7 +57,7 @@ const RoomCard = ({ room, onHeartClick, getFavourite }) => {
         <Card.Meta>{roomInfo.availability}</Card.Meta>
         <Card.Description>{availableText}</Card.Description>
         <Card.Content extra href={`${basePath}/roomlist/${room.id}`}>
-          <Icon link name="info circle" color="black" aria-label={t('moreInfo', { room: room.id })} />
+          <Icon link name="info circle" color="black" aria-label={t('button.roomInfo')} />
         </Card.Content>
         <Card.Content extra>
           <span className="right floated">
@@ -72,7 +67,7 @@ const RoomCard = ({ room, onHeartClick, getFavourite }) => {
         </Card.Content>
       </Card.Content>
       <Button
-        aria-label={t('moveToReserveRoom', { room: room.id })}
+        aria-label={t('button.reserveRoom')}
         color="blue"
         onClick={() => navigate(`${basePath}/CreateReservation/${room.id}`)}
       >

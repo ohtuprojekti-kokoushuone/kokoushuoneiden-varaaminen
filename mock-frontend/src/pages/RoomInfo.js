@@ -26,7 +26,7 @@ const RoomInfo = () => {
         <Room room={room} key={room.id}></Room>
         <Button
           className="roominfo-button"
-          aria-label="Siirry varaussivulle"
+          aria-label={t('button.reserveRoom')}
           color="blue"
           onClick={() => navigate(`${basePath}/CreateReservation/${room.id}`)}
         >
