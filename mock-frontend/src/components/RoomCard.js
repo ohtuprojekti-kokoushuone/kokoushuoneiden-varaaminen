@@ -48,7 +48,12 @@ const RoomCard = ({ room, onHeartClick, getFavourite }) => {
       <Card.Content>
         <div className="content">
           <span className="right floated">
-            <Button size="medium" onClick={onHeartClick()} className={favouriteClass}>
+            <Button
+              size="medium"
+              onClick={onHeartClick()}
+              className={favouriteClass}
+              aria-label={t('addFav', { room: room.id })}
+            >
               {getFavourite() ? isFavourite : isNotFavourite}
             </Button>
           </span>
