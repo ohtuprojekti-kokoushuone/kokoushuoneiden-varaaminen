@@ -59,7 +59,7 @@ const Filter = () => {
           <div className="item" key={campus.name}>
             <AccordionItem>
               <AccordionItemHeading>
-                <AccordionItemButton>{campus.name}</AccordionItemButton>
+                <AccordionItemButton>{t(campus.name)}</AccordionItemButton>
               </AccordionItemHeading>
               {campus.buildings.map((building) => (
                 <AccordionItemPanel key={building.name}>
@@ -72,7 +72,7 @@ const Filter = () => {
                       onClick={(el) => toggleBuildingFilter(el.target, building.name)}
                     />
                     <span className={`checkbox ${isChecked ? 'checkbox--active' : ''}`} aria-hidden="true" />
-                    {building.name}
+                    {t(building.name.replaceAll(' ', ''))}
                   </label>
                 </AccordionItemPanel>
               ))}

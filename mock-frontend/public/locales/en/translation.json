@@ -9,7 +9,8 @@
     "login": "Log in",
     "reserve": "Make a reservation",
     "favourites": "Favourites",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "roomInfo": "Room Info"
   },
   "label": {
     "language": "Language",
@@ -59,10 +60,10 @@
     },
     "content": {
       "data": "This service processes the following data, which is retrieved from the University of Helsinki when you log into the service:",
-      "purpose": "Reservator uses personal information retrieved from the University of Helsinki to individualise reservations and to check the user's access to rooms. Personal information can also be used to solve technical problems and investigate possible exploitation of Reservator or the meeting rooms.",
-      "storage": "Personal data transferred to Outlook is stored according to the mandate between the University of Helsinki and Microsoft. Data stored in a MongoDB database is deleted at latest at the time that the reservation ends.",
+      "purpose": "Reservator uses personal information retrieved from the University of Helsinki to individualise reservations and favourites, and to check the user's access to rooms. Personal information can also be used to solve technical problems and investigate possible exploitation of Reservator or the meeting rooms.",
+      "storage": "Personal data transferred to Outlook is stored according to the mandate between the University of Helsinki and Microsoft. Data stored in a MongoDB database is deleted at latest at the time that the reservation ends, or when the user has no longer has favourite rooms.",
       "disclosure": "Reservator transfers data (email and name) to Outlook. Outlook processes data on behalf of the University of Helsinki on the basis of a mandate. Personal information can also be stored in a ",
-      "disclosure2": " database to maintain reservation organiser information. The transfer of personal data outside the EU or the EEA is carried out in compliance with the requirements of the GDPR."
+      "disclosure2": " database to maintain reservation organiser information and to store favourite rooms. The transfer of personal data outside the EU or the EEA is carried out in compliance with the requirements of the GDPR."
     }
   },
   "deleteConfirmation": "Are you sure you want to delete this reservation?",
@@ -90,5 +91,29 @@
   "email": "email address",
   "username": "username",
   "employeenumber": "employee number",
-  "groups": "group memberships"
+  "groups": "group memberships",
+  "moreInfo": "More information on room {{room}}",
+  "addFav": "Add room {{room}} to favourites",
+  "Kumpula": "Kumpula",
+  "Keskusta": "City centre",
+  "Viikki": "Viikki",
+  "Meilahti": "Meilahti",
+  "Chemicum": "Chemicum",
+  "Exactum": "Exactum",
+  "Testirakennus": "Test building",
+  "Physicum": "Physicum",
+  "KumpulaCampusLibrary": "Kumpula Campus Library",
+  "Porthania": "Porthania",
+  "Metsätalo": "Metsätalo",
+  "Aleksandria": "Aleksandria",
+  "Päärakennus": "Main Building",
+  "Aurora": "Aurora",
+  "Biokeskus1": "Biocentre 1",
+  "Biokeskus2": "Biocentre 2",
+  "Biokeskus3": "Biocentre 3",
+  "C-rakennus": "Building C",
+  "Biomedicum2U": "Biomedicum 2U",
+  "Biomedicum": "Biomedicum",
+  "Haartman-instituutti": "Haartman Institute",
+  "moveToReserveRoom": "Reserve room {{room}}"
 }

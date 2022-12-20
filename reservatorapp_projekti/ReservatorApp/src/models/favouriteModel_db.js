@@ -42,12 +42,12 @@ const FavouriteHandler = {
       { new: true, upsert: true }
     );
   },
+  deleteFavourite: async function (uid) {
+    return favouriteModel.deleteOne({ uid: uid });
+  },
   // these are for testing purposes
   getAll: async function () {
     return favouriteModel.find();
-  },
-  deleteFavourite: async function (uid) {
-    return favouriteModel.deleteOne({ uid: uid });
   },
 };
 

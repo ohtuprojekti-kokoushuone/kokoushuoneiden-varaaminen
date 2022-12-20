@@ -1,21 +1,31 @@
-# Helsingin Yliopiston Ohjelmistotuotantoprojekti
+# University of Helsinki software production project
 
 ![main](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/actions/workflows/main.yml/badge.svg)
 
-Sovellus Helsingin Yliopiston tietojenkäsittelytieteen osaston kokoushuoneiden varaamiseen (Web/Mobiili)
+An application (web/mobile) for reserving meeting rooms on the Kumpula campus.
 
-Sovelluksen avulla käyttäjä voi selata vapaita kokoushuoneita sekä varata niitä
+## Application
 
-## Dokumentaatio
+* [Frontend Github](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/tree/main/mock-frontend)
 
-[Asennus- ja käyttöohje](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/instructions.md)
+* [Channel Github](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/tree/main/channel)
 
-[Definition of Done](https://docs.google.com/document/d/15tPTE1_v-ni-WlXxEmTRogPBGrpMMk_8MhwXXvJ0bs8/edit)
+* [Backend Github](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/tree/main/reservatorapp_projekti/ReservatorApp)
 
-[Arkkitehtuuri](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/arkkitehtuuri.md)
+* [Production](https://reservator.ubikampus.net)
 
-## Projectin eteneminen
+## Documentation
 
-[Product Backlog](https://docs.google.com/spreadsheets/d/1FGeKQlvT8PPFWxfDfxmccjPt_a6O4TcFm0E6Ge-Brv8/edit#gid=0)
+* [User manual](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/instructions.md)
 
-[Sprint 4 Backlog](https://trello.com/b/LoMfUOk2/ohtuprojekti-backlog)
+* [Definition of Done](https://docs.google.com/document/d/15tPTE1_v-ni-WlXxEmTRogPBGrpMMk_8MhwXXvJ0bs8/edit)
+
+* [Architecture](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/arkkitehtuuri.md)
+
+## Project progress
+
+* [Product Backlog](https://docs.google.com/spreadsheets/d/1FGeKQlvT8PPFWxfDfxmccjPt_a6O4TcFm0E6Ge-Brv8/edit#gid=0)
+
+* [Definition of done](https://docs.google.com/document/d/15tPTE1_v-ni-WlXxEmTRogPBGrpMMk_8MhwXXvJ0bs8/edit)
+
+* [Sprint 4 Backlog](https://trello.com/b/LoMfUOk2/ohtuprojekti-backlog)
