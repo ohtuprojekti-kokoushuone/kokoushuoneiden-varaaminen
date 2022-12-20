@@ -9,7 +9,8 @@
     "login": "Log in",
     "reserve": "Make a reservation",
     "favourites": "Favourites",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "roomInfo": "Room Info"
   },
   "label": {
     "language": "Language",

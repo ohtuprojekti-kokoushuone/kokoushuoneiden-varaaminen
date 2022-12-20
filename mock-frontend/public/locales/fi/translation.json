@@ -5,11 +5,12 @@
     "logout": "Kirjaudu ulos",
     "show": "Näytä vapaat kokoushuoneet",
     "reserveRoom": "Varaa huone",
-    "returnToSearch": "Palaa hakutuloksiin",
+    "returnToSearch": "Palaa hakuun",
     "login": "Kirjaudu",
     "reserve": "Tee varaus",
     "favourites": "Suosikit",
-    "refresh": "Päivitä"
+    "refresh": "Päivitä",
+    "roomInfo": "Lisätietoa huoneesta"
   },
   "label": {
     "language": "Kieli",
