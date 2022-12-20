@@ -39,11 +39,6 @@ roomsRouter.get('/info', async (req, res) => {
 
   const result = await Promise.all(
     filteredRooms.map(async (room) => {
-      if (room.building !== 'Testirakennus') {
-        const available = Math.random() < 0.7;
-        return { ...room, available: available };
-      }
-
       const copied = Object.assign({}, room);
       const data = await checkAvailability(copied.id, start.toISOString(), end.toISOString());
       copied.available = true;
