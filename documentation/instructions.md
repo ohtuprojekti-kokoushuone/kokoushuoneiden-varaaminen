@@ -60,7 +60,7 @@ Lastly, to run the frontend:
 
 ## Production
 
-Production version of the app is running on https://reservator.ubikampus.net
+Production version of the app is [here](https://reservator.ubikampus.net).
 
 ### Setting up the production environment
 
