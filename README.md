@@ -16,7 +16,7 @@ An application (web/mobile) for reserving meeting rooms on the Kumpula campus.
 
 ## Documentation
 
-* [User manual](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/instructions.md)
+* [Installation and usage](https://github.com/ohtuprojekti-kokoushuone/kokoushuoneiden-varaaminen/blob/main/documentation/instructions.md)
 
 * [Definition of Done](https://docs.google.com/document/d/15tPTE1_v-ni-WlXxEmTRogPBGrpMMk_8MhwXXvJ0bs8/edit)
 
