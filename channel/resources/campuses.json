@@ -21,46 +21,6 @@
               "groups": ["allstaff"],
               "size": 6,
               "maxTime": 120
-            },
-            {
-              "name": "Physicum, G238, Meeting room Basic",
-              "id": "physicum.g238",
-              "building": "Physicum",
-              "groups": ["allstaff"],
-              "size": 6,
-              "maxTime": 120
-            },
-            {
-              "name": "Physicum, G239, Meeting room Cobol",
-              "id": "physicum.g239",
-              "building": "Physicum",
-              "groups": ["allstaff"],
-              "size": 6,
-              "maxTime": 120
-            },
-            {
-              "name": "Physicum, G241, Group work room Dart",
-              "id": "physicum.g241",
-              "building": "Physicum",
-              "groups": ["allstaff"],
-              "size": 2,
-              "maxTime": 120
-            },
-            {
-              "name": "Physicum, G243, Group work room Erlang",
-              "id": "physicum.g243",
-              "building": "Physicum",
-              "groups": ["allstaff"],
-              "size": 2,
-              "maxTime": 120
-            },
-            {
-              "name": "Physicum, G247, Group work room Fortran",
-              "id": "physicum.g247",
-              "building": "Physicum",
-              "groups": ["allstaff"],
-              "size": 2,
-              "maxTime": 120
             }
           ]
         },
