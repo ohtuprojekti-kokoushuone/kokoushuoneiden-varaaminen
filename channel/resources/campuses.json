@@ -12,26 +12,6 @@
           "rooms": []
         },
         {
-          "name": "Testirakennus",
-          "rooms": [
-            {
-              "name": "Testirakennus, 2001, Kokoushuone 1",
-              "id": "testirakennus.2001",
-              "building": "Testirakennus",
-              "groups": [],
-              "size": 6,
-              "maxTime": 120
-            },
-            {
-              "name": "Testirakennus, 2002, Kokoushuone 2",
-              "id": "testirakennus.2002",
-              "building": "Testirakennus",
-              "groups": [],
-              "size": 6,
-              "maxTime": 60
-            }
-          ]
-        },{
           "name": "Physicum",
           "rooms": [
             {
