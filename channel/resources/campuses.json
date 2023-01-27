@@ -37,7 +37,7 @@
             {
               "name": "Physicum, G237, Meeting room Ada",
               "id": "physicum.g237",
-              "building": "Physicum",
+              "building": "Ubikampus",
               "groups": ["allstaff"],
               "size": 6,
               "maxTime": 120
