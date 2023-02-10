@@ -74,28 +74,28 @@
     "size": 1,
     "maxTime": 90
 },{
-    "name": "Exactum, A235, Phone booth (1)",
+    "name": "Exactum, A235, Phone booth (3)",
     "id": "exactum.a235",
     "building": "Exactum",
     "groups": ["allstaff"],
     "size": 3,
     "maxTime": 90
 },{
-    "name": "Exactum, D244, Phone booth (1)",
+    "name": "Exactum, D244, Phone booth (3)",
     "id": "exactum.d244",
     "building": "Exactum",
     "groups": ["allstaff"],
     "size": 3,
     "maxTime": 90
 },{
-    "name": "Exactum, A335, Phone booth (1)",
+    "name": "Exactum, A335, Phone booth (3)",
     "id": "exactum.a335",
     "building": "Exactum",
     "groups": ["allstaff"],
     "size": 3,
     "maxTime": 90
 },{
-    "name": "Exactum, A329, Phone booth (1)",
+    "name": "Exactum, A329, Phone booth (3)",
     "id": "exactum.a329",
     "building": "Exactum",
     "groups": ["allstaff"],
