@@ -15,28 +15,28 @@
     "id": "exactum.d234",
     "building": "Exactum",
     "groups": ["allstaff"],
-    "size": 1,
+    "size": 12,
     "maxTime": 120
 },{
     "name": "Exactum, A318, HIIT Meeting room (11)",
     "id": "exactum.a318",
     "building": "Exactum",
     "groups": ["allstaff"],
-    "size": 1,
+    "size": 11,
     "maxTime": 120
 },{
     "name": "Exactum, A319, Meeting room (14)",
     "id": "exactum.a319",
     "building": "Exactum",
     "groups": ["allstaff"],
-    "size": 1,
+    "size": 14,
     "maxTime": 120
 },{
     "name": "Exactum, A307, Meeting room (8)",
     "id": "exactum.a307",
     "building": "Exactum",
     "groups": ["allstaff"],
-    "size": 1,
+    "size": 8,
     "maxTime": 120
 },{
     "name": "Exactum, B228, Phone booth (1)",
@@ -78,28 +78,28 @@
     "id": "exactum.a235",
     "building": "Exactum",
     "groups": ["allstaff"],
-    "size": 1,
+    "size": 3,
     "maxTime": 90
 },{
     "name": "Exactum, D244, Phone booth (1)",
     "id": "exactum.d244",
     "building": "Exactum",
     "groups": ["allstaff"],
-    "size": 1,
+    "size": 3,
     "maxTime": 90
 },{
     "name": "Exactum, A335, Phone booth (1)",
     "id": "exactum.a335",
     "building": "Exactum",
     "groups": ["allstaff"],
-    "size": 1,
+    "size": 3,
     "maxTime": 90
 },{
     "name": "Exactum, A329, Phone booth (1)",
     "id": "exactum.a329",
     "building": "Exactum",
     "groups": ["allstaff"],
-    "size": 1,
+    "size": 3,
     "maxTime": 90
 }
           ]
